@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  
+  /* Color System - Tech-focused with vibrant accents */
+  --color-background: #0a0a0f;
+  --color-foreground: #f5f5f7;
+  
+  --color-card: #13131a;
+  --color-card-foreground: #f5f5f7;
+  
+  --color-popover: #13131a;
+  --color-popover-foreground: #f5f5f7;
+  
+  --color-primary: #6366f1;
+  --color-primary-foreground: #ffffff;
+  
+  --color-secondary: #1e1e2e;
+  --color-secondary-foreground: #f5f5f7;
+  
+  --color-muted: #1e1e2e;
+  --color-muted-foreground: #a1a1aa;
+  
+  --color-accent: #ec4899;
+  --color-accent-foreground: #ffffff;
+  
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  
+  --color-border: #27272a;
+  --color-input: #27272a;
+  --color-ring: #6366f1;
+  
+  --radius: 0.75rem;
+}

@@ -1,3 +1,128 @@
-[00:00:01.811] Server  LOG      ✓ Ready in 1140ms
-[00:00:10.100] Server  LOG      ○ Compiling / ...
-[00:00:11.655] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:25:31.905] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.092] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.102] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.105] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.107] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.112] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.139] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.143] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.145] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.157] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/client/components/builtin/global-not-found'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.171] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.176] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.178] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.183] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.188] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.190] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.198] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.207] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.216] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.224] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.236] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.242] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.247] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.253] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.261] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.267] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.275] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.282] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.287] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.292] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.301] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.306] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.310] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.315] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.321] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.325] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.328] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.331] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.338] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.342] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.395] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.398] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.401] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.405] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.407] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.409] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.410] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.413] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.417] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.421] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/client/components/builtin/global-not-found'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.429] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.433] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.438] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.447] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.452] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.457] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.461] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.464] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.465] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.467] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.471] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.473] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.474] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.475] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.476] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.477] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.478] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.480] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.481] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.482] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
+[00:25:32.486] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.488] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.489] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.497] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.500] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\dev-bundler-service.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.502] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.509] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.512] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.517] Server  ERROR   C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:25:32.519] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\on-demand-entry-handler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\dev\hot-reloader-turbopack.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\router-server.js
+- C:\qr-ecell\codered_qr\node_modules\next\dist\server\lib\start-server.js
