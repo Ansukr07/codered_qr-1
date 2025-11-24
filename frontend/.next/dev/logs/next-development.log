@@ -1710,3 +1710,192 @@ Parsing ecmascript source code failed
 
 Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
 [01:17:58.723] Server  LOG      ✓ Compiled in 162ms
+[01:23:10.914] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:23:10.916] Server  ERROR   Error: socket hang up
+[01:23:11.972] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:23:11.973] Server  ERROR   Error: socket hang up
+[01:23:33.263] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:23:33.264] Server  ERROR   Error: socket hang up
+[01:23:33.267] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:23:33.269] Server  ERROR   Error: socket hang up
+[01:23:38.249] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:23:38.251] Server  ERROR   Error: socket hang up
+[01:23:38.254] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:23:38.255] Server  ERROR   Error: socket hang up
+[01:23:40.939] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:23:40.941] Server  ERROR   Error: socket hang up
+[01:23:41.995] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:23:41.996] Server  ERROR   Error: socket hang up
+[01:24:03.302] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:24:03.304] Server  ERROR   Error: socket hang up
+[01:24:03.307] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:24:03.308] Server  ERROR   Error: socket hang up
+[01:24:08.293] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:24:08.294] Server  ERROR   Error: socket hang up
+[01:24:08.297] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:24:08.298] Server  ERROR   Error: socket hang up
+[01:24:10.960] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:24:10.961] Server  ERROR   Error: socket hang up
+[01:24:12.021] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:24:12.023] Server  ERROR   Error: socket hang up
+[01:24:33.355] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:24:33.357] Server  ERROR   Error: socket hang up
+[01:24:33.360] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:24:33.361] Server  ERROR   Error: socket hang up
+[01:24:38.344] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:24:38.346] Server  ERROR   Error: socket hang up
+[01:24:38.349] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:24:38.350] Server  ERROR   Error: socket hang up
+[01:24:40.988] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:24:40.990] Server  ERROR   Error: socket hang up
+[01:24:42.049] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:24:42.050] Server  ERROR   Error: socket hang up
+[01:25:03.401] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:25:03.402] Server  ERROR   Error: socket hang up
+[01:25:03.405] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:25:03.406] Server  ERROR   Error: socket hang up
+[01:25:08.383] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:25:08.384] Server  ERROR   Error: socket hang up
+[01:25:08.387] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:25:08.388] Server  ERROR   Error: socket hang up
+[01:25:11.012] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:25:11.013] Server  ERROR   Error: socket hang up
+[01:25:12.069] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:25:12.070] Server  ERROR   Error: socket hang up
+[01:25:33.450] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:25:33.451] Server  ERROR   Error: socket hang up
+[01:25:33.454] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:25:33.455] Server  ERROR   Error: socket hang up
+[01:25:38.232] Server  LOG      ✓ Compiled in 190ms
+[01:25:38.419] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:25:38.421] Server  ERROR   Error: socket hang up
+[01:25:38.424] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:25:38.425] Server  ERROR   Error: socket hang up
+[01:25:41.036] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:25:41.038] Server  ERROR   Error: socket hang up
+[01:25:42.097] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:25:42.099] Server  ERROR   Error: socket hang up
+[01:26:03.491] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:26:03.493] Server  ERROR   Error: socket hang up
+[01:26:03.496] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:26:03.497] Server  ERROR   Error: socket hang up
+[01:26:08.459] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:26:08.461] Server  ERROR   Error: socket hang up
+[01:26:08.466] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:26:08.468] Server  ERROR   Error: socket hang up
+[01:26:11.061] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions Error: socket hang up
+[01:26:11.063] Server  ERROR   Error: socket hang up
+[01:26:12.118] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests Error: socket hang up
+[01:26:12.120] Server  ERROR   Error: socket hang up
+[01:26:17.185] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.185] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.185] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.185] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.185] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.185] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.185] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.185] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.185] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.185] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.185] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.185] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:26:17.186] Browser ERROR   Failed to fetch transactions: {}
+[01:26:17.186] Browser ERROR   Failed to fetch help requests: {}
+[01:27:19.069] Server  LOG      ✓ Compiled in 129ms
+[01:27:19.172] Browser ERROR   ./app/participant/page.tsx:335:1
+Parsing ecmascript source code failed
+  333 |             </div>
+  334 |             )
+> 335 | }
+      | ^
+  336 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:27:19.172] Browser ERROR   ./app/participant/page.tsx:335:1
+Parsing ecmascript source code failed
+  333 |             </div>
+  334 |             )
+> 335 | }
+      | ^
+  336 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:27:23.514] Browser ERROR   ./app/participant/page.tsx:335:1
+Parsing ecmascript source code failed
+  333 |             </div>
+  334 |             )
+> 335 | }
+      | ^
+  336 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:27:23.514] Browser ERROR   ./app/participant/page.tsx:335:1
+Parsing ecmascript source code failed
+  333 |             </div>
+  334 |             )
+> 335 | }
+      | ^
+  336 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:28:05.130] Server  LOG      ✓ Compiled in 171ms
+[01:28:19.795] Server  LOG      ✓ Compiled in 126ms
+[01:29:07.068] Server  LOG      ✓ Compiled in 138ms

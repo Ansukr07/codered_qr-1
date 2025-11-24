@@ -1775,6 +1775,10 @@
     border-color: #0000;
   }
 
+  .border-white {
+    border-color: var(--color-white);
+  }
+
   .border-t-transparent {
     border-top-color: #0000;
   }
