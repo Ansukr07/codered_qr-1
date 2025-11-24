@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight } from 'lucide-react'
+import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface Resource {
@@ -20,6 +21,7 @@ export default function VolunteerDashboard() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const [resources, setResources] = useState<Resource[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     if (!loading && (!user || (user.role !== 'volunteer' && user.role !== 'admin'))) {
@@ -59,6 +61,29 @@ export default function VolunteerDashboard() {
   const totalBags = bagResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalChill = chillResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalHelp = helpResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
+
+  // Deduplicate and aggregate resources by name
+  const uniqueResourcesMap = new Map<string, Resource>()
+
+  resources.forEach(r => {
+    const existing = uniqueResourcesMap.get(r.name)
+    if (existing) {
+      uniqueResourcesMap.set(r.name, {
+        ...existing,
+        totalQuantity: existing.totalQuantity + r.totalQuantity,
+        distributedQuantity: existing.distributedQuantity + r.distributedQuantity
+      })
+    } else {
+      uniqueResourcesMap.set(r.name, { ...r })
+    }
+  })
+
+  const uniqueResources = Array.from(uniqueResourcesMap.values())
+
+  const filteredResources = uniqueResources.filter(resource =>
+    resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    resource.type.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   const scanOptions = [
     {
@@ -177,34 +202,62 @@ export default function VolunteerDashboard() {
       {resources.length > 0 && (
         <Card className="bg-card/50 backdrop-blur border-border/50">
           <CardHeader>
-            <CardTitle>All Resources</CardTitle>
-            <CardDescription>Current inventory status</CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>All Resources</CardTitle>
+                <CardDescription>Current inventory status</CardDescription>
+              </div>
+              <div className="relative w-64">
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search resources..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-8"
+                />
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {resources.map((resource) => (
-                <div key={resource._id} className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
-                  <div className="flex-1">
-                    <p className="font-medium text-card-foreground">{resource.name}</p>
-                    <p className="text-xs text-muted-foreground capitalize">{resource.type}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-foreground">
-                        {resource.distributedQuantity}/{resource.totalQuantity}
-                      </p>
-                      <div className="w-24 bg-secondary rounded-full h-1.5 mt-1">
-                        <div
-                          className="bg-primary h-1.5 rounded-full transition-all"
-                          style={{
-                            width: `${Math.min((resource.distributedQuantity / resource.totalQuantity) * 100, 100)}%`,
-                          }}
-                        />
+              {filteredResources.map((resource) => {
+                let href = '/volunteer'
+                const name = resource.name.toLowerCase()
+                if (name.includes('lunch') || name.includes('dinner') || name.includes('breakfast') || name.includes('food')) href = '/volunteer/scan-food'
+                else if (name.includes('bag') || name.includes('sleep')) href = '/volunteer/scan-bag'
+                else if (name.includes('chill')) href = '/volunteer/scan-chill'
+                else if (name.includes('help')) href = '/volunteer/help'
+
+                return (
+                  <Link key={resource._id} href={href}>
+                    <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors cursor-pointer mb-3">
+                      <div className="flex-1">
+                        <p className="font-medium text-card-foreground">{resource.name}</p>
+                        <p className="text-xs text-muted-foreground capitalize">{resource.type}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-right">
+                          <p className="text-sm font-medium text-foreground">
+                            {resource.distributedQuantity}/{resource.totalQuantity}
+                          </p>
+                          <div className="w-24 bg-secondary rounded-full h-1.5 mt-1">
+                            <div
+                              className="bg-primary h-1.5 rounded-full transition-all"
+                              style={{
+                                width: `${Math.min((resource.distributedQuantity / resource.totalQuantity) * 100, 100)}%`,
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </Link>
+                )
+              })}
+              {filteredResources.length === 0 && (
+                <p className="text-center text-muted-foreground py-4">No resources found</p>
+              )}
             </div>
           </CardContent>
         </Card>

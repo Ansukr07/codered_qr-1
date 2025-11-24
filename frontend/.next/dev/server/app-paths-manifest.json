@@ -7,5 +7,7 @@
   "/admin/participants/detail/page": "app/admin/participants/detail/page.js",
   "/admin/participants/page": "app/admin/participants/page.js",
   "/admin/users/page": "app/admin/users/page.js",
-  "/login/page": "app/login/page.js"
+  "/login/page": "app/login/page.js",
+  "/volunteer/help/page": "app/volunteer/help/page.js",
+  "/volunteer/page": "app/volunteer/page.js"
 }
