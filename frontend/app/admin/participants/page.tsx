@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
+import Link from 'next/link'
 import {
   Table,
   TableBody,
@@ -81,7 +82,7 @@ export default function ParticipantsPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-64 text-white">
         <p>Loading participants...</p>
       </div>
     )
@@ -90,8 +91,8 @@ export default function ParticipantsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Participant Management</h1>
-        <Button variant="outline" className="gap-2" onClick={exportToCSV}>
+        <h1 className="text-3xl font-bold text-primary">Participant Management</h1>
+        <Button variant="default" className="gap-2" onClick={exportToCSV}>
           <Download className="h-4 w-4" />
           Export CSV
         </Button>
@@ -128,8 +129,14 @@ export default function ParticipantsPage() {
             </TableHeader>
             <TableBody>
               {filteredParticipants.map((participant) => (
-                <TableRow key={participant._id}>
-                  <TableCell className="font-medium text-card-foreground">{participant.name}</TableCell>
+                <TableRow
+                  key={participant._id}
+                  className="cursor-pointer hover:bg-secondary/50 transition-colors"
+                  onClick={() => window.location.href = `/admin/participants/detail?id=${participant._id}`}
+                >
+                  <TableCell className="font-medium text-card-foreground">
+                    {participant.name}
+                  </TableCell>
                   <TableCell className="text-sm text-muted-foreground">{participant.email}</TableCell>
                   <TableCell>
                     {participant.teamId ? (

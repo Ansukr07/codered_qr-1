@@ -14,9 +14,7 @@ export default function VolunteerLayout({
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent text-accent-foreground">
-                <Code2 className="w-6 h-6" />
-              </div>
+              <img src="/logo.png" alt="Codered Logo" className="w-10 h-10 object-contain" />
               <div>
                 <h1 className="text-xl font-bold">Codered 3.0</h1>
                 <p className="text-xs text-muted-foreground">Volunteer Portal</p>

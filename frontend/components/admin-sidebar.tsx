@@ -46,13 +46,11 @@ export function AdminSidebar() {
     <div className="flex h-screen w-64 flex-col border-r border-border/40 bg-card/50 backdrop-blur-xl fixed left-0 top-0 z-30">
       <div className="flex h-16 items-center border-b border-border/40 px-6">
         <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-primary-foreground">
-            <Code2 className="w-5 h-5" />
-          </div>
-          <span className="font-bold text-lg">Codered 3.0</span>
+          <img src="/logo.png" alt="Codered Logo" className="w-8 h-8 object-contain" />
+          <span className="font-bold text-lg text-primary">Codered 3.0</span>
         </div>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="grid gap-1 px-2">
           {sidebarItems.map((item) => {
@@ -63,8 +61,8 @@ export function AdminSidebar() {
                 href={item.href}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all hover:text-primary",
-                  isActive 
-                    ? "bg-primary/10 text-primary" 
+                  isActive
+                    ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:bg-secondary/50"
                 )}
               >
@@ -76,14 +74,7 @@ export function AdminSidebar() {
         </nav>
       </div>
 
-      <div className="border-t border-border/40 p-4">
-        <Link href="/login">
-          <Button variant="ghost" className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10">
-            <LogOut className="h-4 w-4" />
-            Logout
-          </Button>
-        </Link>
-      </div>
+
     </div>
   )
 }

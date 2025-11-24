@@ -152,4 +152,60 @@ router.get('/users', verifyAdmin, async (req, res) => {
     }
 });
 
+// Get single participant by ID
+router.get('/participants/:id', verifyAdmin, async (req, res) => {
+    try {
+        const participant = await User.findById(req.params.id)
+            .select('-password');
+
+        if (!participant || participant.role !== 'participant') {
+            return res.status(404).json({ message: 'Participant not found' });
+        }
+
+        const transactionCount = await Transaction.countDocuments({ userId: participant._id });
+
+        res.json({
+            participant: {
+                _id: participant._id,
+                name: participant.name,
+                email: participant.email,
+                teamId: participant.teamId,
+                qrCode: participant.qrCode,
+                resourcesClaimed: transactionCount,
+                createdAt: participant.createdAt
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get participant transactions
+router.get('/participants/:id/transactions', verifyAdmin, async (req, res) => {
+    try {
+        const transactions = await Transaction.find({ userId: req.params.id })
+            .populate('resourceId', 'name type')
+            .populate('volunteerId', 'name')
+            .sort({ timestamp: -1 });
+
+        res.json({ transactions });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get participant help requests
+router.get('/participants/:id/help-requests', verifyAdmin, async (req, res) => {
+    try {
+        const HelpRequest = require('../models/HelpRequest');
+        const helpRequests = await HelpRequest.find({ userId: req.params.id })
+            .populate('resolvedBy', 'name')
+            .sort({ createdAt: -1 });
+
+        res.json({ helpRequests });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router;

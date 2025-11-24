@@ -9,3 +9,191 @@
 [00:01:36.082] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:02:04.455] Server  LOG      ✓ Compiled in 333ms
 [00:02:43.732] Server  LOG      ✓ Compiled in 216ms
+[00:08:13.082] Server  LOG      ✓ Compiled in 209ms
+[00:08:32.028] Server  LOG      ✓ Compiled in 220ms
+[00:10:02.583] Server  LOG      ✓ Compiled in 152ms
+[00:10:52.639] Server  LOG      ✓ Compiled in 131ms
+[00:10:56.280] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:59.053] Server  LOG      ✓ Compiled in 197ms
+[00:11:10.213] Browser ERROR   uncaughtError: ReferenceError: Link is not defined
+[00:11:51.334] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:11:51.827] Server  LOG      ✓ Compiled in 147ms
+[00:11:52.064] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:15:35.113] Server  LOG      ✓ Compiled in 140ms
+[00:15:52.568] Server  LOG      ✓ Compiled in 213ms
+[00:15:52.682] Browser ERROR   ./app/admin/participants/detail/page.tsx:120:14
+Parsing ecmascript source code failed
+  118 |     const chillTransactions = transactions.filter(t =>
+  119 |         t.resourceId.name.toLowerCase().includes('chill')
+> 120 |             </div >
+      |              ^^^^^^
+  121 |
+  122 |         {/* Participant Info Card */ }
+  123 |         < Card >
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/participants/detail/page.tsx [Client Component Browser]
+    ./app/admin/participants/detail/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/participants/detail/page.tsx [Client Component SSR]
+    ./app/admin/participants/detail/page.tsx [Server Component]
+[00:15:52.683] Browser ERROR   ./app/admin/participants/detail/page.tsx:120:14
+Parsing ecmascript source code failed
+  118 |     const chillTransactions = transactions.filter(t =>
+  119 |         t.resourceId.name.toLowerCase().includes('chill')
+> 120 |             </div >
+      |              ^^^^^^
+  121 |
+  122 |         {/* Participant Info Card */ }
+  123 |         < Card >
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/participants/detail/page.tsx [Client Component Browser]
+    ./app/admin/participants/detail/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/participants/detail/page.tsx [Client Component SSR]
+    ./app/admin/participants/detail/page.tsx [Server Component]
+[00:17:00.172] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:17:03.004] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.018] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.024] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.032] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.035] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.036] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.039] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.041] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.045] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:03.053] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.054] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.056] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.057] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.058] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.059] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.060] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.060] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:03.063] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.521] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.523] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.524] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.525] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.527] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.528] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.529] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.530] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.530] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.537] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.538] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.540] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.541] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.542] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.542] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.543] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.544] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.546] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.613] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.614] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.616] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.617] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.618] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.619] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.620] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.621] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.622] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.628] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.629] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.630] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.631] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.633] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.634] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.635] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.636] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.637] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.749] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.750] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.751] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.752] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.753] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.754] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.755] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.756] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.757] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.760] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.762] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.763] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.763] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.764] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.765] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.766] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.767] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.768] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.831] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.832] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.834] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.835] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.836] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.837] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.838] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.839] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.840] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.845] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.846] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.848] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.851] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.854] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.856] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.857] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.858] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.860] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.986] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.987] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.988] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.989] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.991] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.991] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.992] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.993] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.994] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:05.997] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:05.998] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.000] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.001] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.002] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.003] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.005] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.006] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.007] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:06.129] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.130] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.132] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.133] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.134] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.135] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.136] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.136] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.137] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:06.143] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.144] Server  ERROR   C:\qr-ecell\codered_qr\frontend\.next\dev\server\chunks\ssr\node_modules_next_dist_497449d6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.145] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.146] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.147] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.148] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.150] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.151] Server  ERROR   C:\qr-ecell\codered_qr\frontend\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:17:06.153] Server  ERROR    ⨯ Error: The default export is not a React Component in "/admin/participants/detail/page"
+[00:17:06.602] Server  LOG      ✓ Compiled in 188ms
+[00:17:09.334] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:17:18.355] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:22:54.509] Server  LOG      ✓ Compiled in 290ms
+[00:22:55.239] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:22:55.450] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:26:57.444] Server  LOG      ✓ Compiled in 354ms
+[00:28:28.717] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:28.944] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

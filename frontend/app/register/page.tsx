@@ -118,9 +118,7 @@ export default function RegisterPage() {
             <Card className="w-full max-w-md relative z-10 border-border/50 bg-card/80 backdrop-blur-xl shadow-2xl">
                 <CardHeader className="space-y-1 text-center">
                     <div className="flex justify-center mb-4">
-                        <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary text-primary-foreground">
-                            <Code2 className="w-7 h-7" />
-                        </div>
+                        <img src="/logo.png" alt="Codered Logo" className="w-12 h-12 object-contain" />
                     </div>
                     <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
                     <CardDescription>
