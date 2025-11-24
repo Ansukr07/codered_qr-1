@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -17,30 +17,16 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Megaphone, Clock, Calendar } from 'lucide-react'
+import { toast } from 'sonner'
 
-const announcements = [
-  {
-    id: 1,
-    title: "Hackathon Kickoff",
-    message: "Welcome to Code Red 3.0! The hackathon officially begins now. Good luck to all teams!",
-    time: "2 hours ago",
-    priority: "high"
-  },
-  {
-    id: 2,
-    title: "Lunch is Ready",
-    message: "Lunch is now being served in the main hall. Please collect your meals using your QR codes.",
-    time: "4 hours ago",
-    priority: "medium"
-  },
-  {
-    id: 3,
-    title: "Workshop at 3 PM",
-    message: "Join us for a workshop on AI/ML at 3 PM in Room 201. Don't miss it!",
-    time: "6 hours ago",
-    priority: "low"
-  },
-]
+interface Announcement {
+  _id: string
+  title: string
+  message: string
+  priority: string
+  audience: string
+  createdAt: string
+}
 
 const schedule = [
   { time: "09:00 AM", event: "Registration & Check-in", status: "completed" },
@@ -54,6 +40,60 @@ const schedule = [
 
 export default function AnnouncementsPage() {
   const [open, setOpen] = useState(false)
+  const [title, setTitle] = useState('')
+  const [message, setMessage] = useState('')
+  const [priority, setPriority] = useState('medium')
+  const [audience, setAudience] = useState('all')
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
+
+  useEffect(() => {
+    fetchAnnouncements()
+
+    // Poll for new announcements every 5 seconds
+    const interval = setInterval(() => {
+      fetchAnnouncements()
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const fetchAnnouncements = async () => {
+    try {
+      const res = await fetch('/api/announcements')
+      if (res.ok) {
+        const data = await res.json()
+        setAnnouncements(data.announcements)
+      }
+    } catch (error) {
+      console.error('Failed to fetch announcements:', error)
+    }
+  }
+
+  const handleSendAnnouncement = async () => {
+    try {
+      const res = await fetch('/api/announcements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, message, priority, audience })
+      })
+      if (res.ok) {
+        toast.success('Announcement sent successfully!')
+        setOpen(false)
+        setTitle('')
+        setMessage('')
+        setPriority('medium')
+        setAudience('all')
+        // Refresh announcements list
+        fetchAnnouncements()
+      } else {
+        const data = await res.json()
+        toast.error(data.message || 'Failed to send announcement')
+      }
+    } catch (error) {
+      console.error('Failed to send announcement:', error)
+      toast.error('Failed to send announcement')
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -68,39 +108,56 @@ export default function AnnouncementsPage() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[525px] bg-card border-border/50">
             <DialogHeader>
-              <DialogTitle>Create Announcement</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-primary">Create Announcement</DialogTitle>
+              <DialogDescription className="text-red-500">
                 Send a new announcement to all participants.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="title">Title</Label>
-                <Input id="title" placeholder="Announcement title" className="bg-secondary/50" />
+                <Label htmlFor="title" className="text-red-500">Title</Label>
+                <Input id="title" placeholder="Announcement title" className="bg-secondary/50 text-white" value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="message">Message</Label>
+                <Label htmlFor="message" className="text-red-500">Message</Label>
                 <Textarea
                   id="message"
                   placeholder="Type your announcement here..."
-                  className="bg-secondary/50 min-h-[120px]"
+                  className="bg-secondary/50 min-h-[120px] text-white"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="priority">Priority</Label>
+                <Label htmlFor="priority" className="text-red-500">Priority</Label>
                 <select
                   id="priority"
-                  className="flex h-10 w-full rounded-md border border-input bg-secondary/50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-full rounded-md border border-input bg-secondary/50 px-3 py-2 text-sm text-white ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={priority}
+                  onChange={(e) => setPriority(e.target.value)}
                 >
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
                   <option value="high">High</option>
                 </select>
               </div>
+              <div className="grid gap-2">
+                <Label htmlFor="audience" className="text-red-500">Audience</Label>
+                <select
+                  id="audience"
+                  className="flex h-10 w-full rounded-md border border-input bg-secondary/50 px-3 py-2 text-sm text-white ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={audience}
+                  onChange={(e) => setAudience(e.target.value)}
+                >
+                  <option value="all">All (Volunteers & Participants)</option>
+                  <option value="volunteers">Volunteers Only</option>
+                  <option value="participants">Participants Only</option>
+                </select>
+              </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-              <Button onClick={() => setOpen(false)}>Send Announcement</Button>
+              <Button variant="outline" onClick={() => setOpen(false)} className="text-white">Cancel</Button>
+              <Button onClick={handleSendAnnouncement}>Send Announcement</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -116,30 +173,41 @@ export default function AnnouncementsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {announcements.map((announcement) => (
-              <div
-                key={announcement.id}
-                className="p-4 rounded-lg bg-secondary/30 border border-border/30 space-y-2"
-              >
-                <div className="flex items-start justify-between">
-                  <h3 className="font-semibold">{announcement.title}</h3>
-                  <Badge
-                    variant={
-                      announcement.priority === "high" ? "destructive" :
-                        announcement.priority === "medium" ? "warning" :
-                          "secondary"
-                    }
-                  >
-                    {announcement.priority}
-                  </Badge>
+            {announcements.length === 0 ? (
+              <p className="text-center text-muted-foreground py-8">
+                No announcements yet. Create one to get started!
+              </p>
+            ) : (
+              announcements.map((announcement) => (
+                <div
+                  key={announcement._id}
+                  className="p-4 rounded-lg bg-secondary/30 border border-border/30 space-y-2"
+                >
+                  <div className="flex items-start justify-between">
+                    <h3 className="font-semibold">{announcement.title}</h3>
+                    <Badge
+                      variant={
+                        announcement.priority === "high" ? "destructive" :
+                          announcement.priority === "medium" ? "default" :
+                            "secondary"
+                      }
+                    >
+                      {announcement.priority}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{announcement.message}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Clock className="h-3 w-3" />
+                      {new Date(announcement.createdAt).toLocaleString()}
+                    </div>
+                    <Badge variant="outline" className="text-xs capitalize">
+                      {announcement.audience}
+                    </Badge>
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">{announcement.message}</p>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <Clock className="h-3 w-3" />
-                  {announcement.time}
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </CardContent>
         </Card>
 

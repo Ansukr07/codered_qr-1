@@ -94,7 +94,7 @@ export default function HelpPage() {
     <div className="max-w-5xl mx-auto space-y-6">
       <div className="flex items-center gap-4">
         <Link href="/volunteer">
-          <Button variant="ghost" size="sm" className="gap-2">
+          <Button variant="outline" size="sm" className="gap-2 text-foreground">
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>

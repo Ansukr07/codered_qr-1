@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { QrCode, LogOut, Package, History, HelpCircle, Send } from 'lucide-react'
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
@@ -30,6 +30,15 @@ interface HelpRequest {
     resolvedBy?: { name: string }
 }
 
+interface Announcement {
+    _id: string
+    title: string
+    message: string
+    priority: string
+    audience: string
+    createdAt: string
+}
+
 export default function ParticipantDashboard() {
     const { user, logout, loading } = useAuth()
     const router = useRouter()
@@ -40,6 +49,7 @@ export default function ParticipantDashboard() {
     const [helpCategory, setHelpCategory] = useState('general')
     const [helpPriority, setHelpPriority] = useState('medium')
     const [submitting, setSubmitting] = useState(false)
+    const [announcements, setAnnouncements] = useState<Announcement[]>([])
 
     useEffect(() => {
         if (!loading && (!user || user.role !== 'participant')) {
@@ -85,15 +95,29 @@ export default function ParticipantDashboard() {
             }
         }
 
+        const fetchAnnouncements = async () => {
+            try {
+                const res = await fetch('/api/announcements')
+                if (res.ok) {
+                    const data = await res.json()
+                    setAnnouncements(data.announcements)
+                }
+            } catch (error) {
+                console.error('Failed to fetch announcements:', error)
+            }
+        }
+
         if (user) {
             fetchUserData()
             fetchTransactions()
             fetchHelpRequests()
+            fetchAnnouncements()
 
             // Poll for new transactions every 5 seconds
             const interval = setInterval(() => {
                 fetchTransactions()
                 fetchHelpRequests()
+                fetchAnnouncements()
             }, 5000)
             return () => clearInterval(interval)
         }
@@ -252,6 +276,40 @@ export default function ParticipantDashboard() {
                             </CardContent>
                         </Card>
                     </div>
+
+                    {/* Announcements */}
+                    {announcements.length > 0 && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center">
+                                    <Megaphone className="mr-2 h-5 w-5" />
+                                    Announcements
+                                </CardTitle>
+                                <CardDescription>
+                                    Latest updates from organizers
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-2">
+                                    {announcements.slice(0, 5).map((announcement) => (
+                                        <div key={announcement._id} className="flex justify-between items-start p-3 bg-secondary/50 rounded-lg">
+                                            <div className="flex-1">
+                                                <p className="font-medium text-card-foreground">{announcement.title}</p>
+                                                <p className="text-sm text-muted-foreground mt-1">{announcement.message}</p>
+                                                <p className="text-xs text-muted-foreground mt-1">
+                                                    {new Date(announcement.createdAt).toLocaleString()}
+                                                </p>
+                                            </div>
+                                            <Badge variant={announcement.priority === 'high' ? 'destructive' : announcement.priority === 'medium' ? 'default' : 'secondary'}>
+                                                {announcement.priority}
+                                            </Badge>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
 
                     {/* Help Request History */}
                     {helpRequests.length > 0 && (

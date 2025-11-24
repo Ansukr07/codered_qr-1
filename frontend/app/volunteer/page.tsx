@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search } from 'lucide-react'
+import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -17,11 +17,27 @@ interface Resource {
   type: string
 }
 
+interface HelpRequest {
+  _id: string
+  status: string
+}
+
+interface Announcement {
+  _id: string
+  title: string
+  message: string
+  priority: string
+  audience: string
+  createdAt: string
+}
+
 export default function VolunteerDashboard() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const [resources, setResources] = useState<Resource[]>([])
   const [searchQuery, setSearchQuery] = useState('')
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
+  const [helpRequests, setHelpRequests] = useState<HelpRequest[]>([])
 
   useEffect(() => {
     if (!loading && (!user || (user.role !== 'volunteer' && user.role !== 'admin'))) {
@@ -31,6 +47,8 @@ export default function VolunteerDashboard() {
 
   useEffect(() => {
     fetchResources()
+    fetchAnnouncements()
+    fetchHelpRequests()
   }, [])
 
   const fetchResources = async () => {
@@ -40,6 +58,30 @@ export default function VolunteerDashboard() {
       setResources(data.resources)
     } catch (error) {
       console.error('Failed to fetch resources:', error)
+    }
+  }
+
+  const fetchAnnouncements = async () => {
+    try {
+      const res = await fetch('/api/announcements')
+      if (res.ok) {
+        const data = await res.json()
+        setAnnouncements(data.announcements)
+      }
+    } catch (error) {
+      console.error('Failed to fetch announcements:', error)
+    }
+  }
+
+  const fetchHelpRequests = async () => {
+    try {
+      const res = await fetch('/api/help-requests')
+      if (res.ok) {
+        const data = await res.json()
+        setHelpRequests(data.helpRequests)
+      }
+    } catch (error) {
+      console.error('Failed to fetch help requests:', error)
     }
   }
 
@@ -55,12 +97,11 @@ export default function VolunteerDashboard() {
   const foodResources = resources.filter(r => r.name.toLowerCase().includes('lunch') || r.name.toLowerCase().includes('dinner') || r.name.toLowerCase().includes('breakfast') || r.name.toLowerCase().includes('food'))
   const bagResources = resources.filter(r => r.name.toLowerCase().includes('bag') || r.name.toLowerCase().includes('sleep'))
   const chillResources = resources.filter(r => r.name.toLowerCase().includes('chill'))
-  const helpResources = resources.filter(r => r.name.toLowerCase().includes('help'))
 
   const totalFood = foodResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalBags = bagResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalChill = chillResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
-  const totalHelp = helpResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
+  const totalHelp = helpRequests.length
 
   // Deduplicate and aggregate resources by name
   const uniqueResourcesMap = new Map<string, Resource>()
@@ -124,7 +165,7 @@ export default function VolunteerDashboard() {
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
       count: totalHelp,
-      resources: helpResources
+      resources: [] // Help requests are not resources
     },
   ]
 
@@ -258,6 +299,37 @@ export default function VolunteerDashboard() {
               {filteredResources.length === 0 && (
                 <p className="text-center text-muted-foreground py-4">No resources found</p>
               )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Announcements */}
+      {announcements.length > 0 && (
+        <Card className="bg-card/50 backdrop-blur border-border/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Megaphone className="h-5 w-5" />
+              Announcements
+            </CardTitle>
+            <CardDescription>Latest updates from organizers</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {announcements.slice(0, 5).map((announcement) => (
+                <div key={announcement._id} className="flex justify-between items-start p-3 bg-secondary/50 rounded-lg">
+                  <div className="flex-1">
+                    <p className="font-medium text-card-foreground">{announcement.title}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{announcement.message}</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {new Date(announcement.createdAt).toLocaleString()}
+                    </p>
+                  </div>
+                  <Badge variant={announcement.priority === 'high' ? 'destructive' : announcement.priority === 'medium' ? 'default' : 'secondary'}>
+                    {announcement.priority}
+                  </Badge>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>

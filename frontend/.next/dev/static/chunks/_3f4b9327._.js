@@ -309,6 +309,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$history$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__History$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/history.js [app-client] (ecmascript) <export default as History>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$help$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HelpCircle$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-help.js [app-client] (ecmascript) <export default as HelpCircle>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$send$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Send$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/send.js [app-client] (ecmascript) <export default as Send>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$megaphone$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Megaphone$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/megaphone.js [app-client] (ecmascript) <export default as Megaphone>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/card.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/contexts/AuthContext.tsx [app-client] (ecmascript)");
@@ -342,6 +343,7 @@ function ParticipantDashboard() {
     const [helpCategory, setHelpCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('general');
     const [helpPriority, setHelpPriority] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('medium');
     const [submitting, setSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [announcements, setAnnouncements] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ParticipantDashboard.useEffect": ()=>{
             if (!loading && (!user || user.role !== 'participant')) {
@@ -395,15 +397,30 @@ function ParticipantDashboard() {
                     }
                 }
             }["ParticipantDashboard.useEffect.fetchHelpRequests"];
+            const fetchAnnouncements = {
+                "ParticipantDashboard.useEffect.fetchAnnouncements": async ()=>{
+                    try {
+                        const res = await fetch('/api/announcements');
+                        if (res.ok) {
+                            const data = await res.json();
+                            setAnnouncements(data.announcements);
+                        }
+                    } catch (error) {
+                        console.error('Failed to fetch announcements:', error);
+                    }
+                }
+            }["ParticipantDashboard.useEffect.fetchAnnouncements"];
             if (user) {
                 fetchUserData();
                 fetchTransactions();
                 fetchHelpRequests();
+                fetchAnnouncements();
                 // Poll for new transactions every 5 seconds
                 const interval = setInterval({
                     "ParticipantDashboard.useEffect.interval": ()=>{
                         fetchTransactions();
                         fetchHelpRequests();
+                        fetchAnnouncements();
                     }
                 }["ParticipantDashboard.useEffect.interval"], 5000);
                 return ({
@@ -458,12 +475,12 @@ function ParticipantDashboard() {
                 children: "Loading..."
             }, void 0, false, {
                 fileName: "[project]/app/participant/page.tsx",
-                lineNumber: 144,
+                lineNumber: 168,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/participant/page.tsx",
-            lineNumber: 143,
+            lineNumber: 167,
             columnNumber: 13
         }, this);
     }
@@ -474,7 +491,7 @@ function ParticipantDashboard() {
                 className: "absolute inset-0 bg-[linear-gradient(to_right,#4a1f1f_1px,transparent_1px),linear-gradient(to_bottom,#4a1f1f_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50 pointer-events-none"
             }, void 0, false, {
                 fileName: "[project]/app/participant/page.tsx",
-                lineNumber: 152,
+                lineNumber: 176,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -492,7 +509,7 @@ function ParticipantDashboard() {
                                             children: "Participant Dashboard"
                                         }, void 0, false, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 159,
+                                            lineNumber: 183,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -503,13 +520,13 @@ function ParticipantDashboard() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 160,
+                                            lineNumber: 184,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 182,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -521,20 +538,20 @@ function ParticipantDashboard() {
                                             className: "mr-2 h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 163,
+                                            lineNumber: 187,
                                             columnNumber: 29
                                         }, this),
                                         "Logout"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 162,
+                                    lineNumber: 186,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/participant/page.tsx",
-                            lineNumber: 157,
+                            lineNumber: 181,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -551,27 +568,27 @@ function ParticipantDashboard() {
                                                             className: "mr-2 h-5 w-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/participant/page.tsx",
-                                                            lineNumber: 173,
+                                                            lineNumber: 197,
                                                             columnNumber: 37
                                                         }, this),
                                                         "Your QR Code"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/participant/page.tsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 196,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                                     children: "Show this QR code to volunteers to claim resources"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/participant/page.tsx",
-                                                    lineNumber: 176,
+                                                    lineNumber: 200,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 171,
+                                            lineNumber: 195,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -586,12 +603,12 @@ function ParticipantDashboard() {
                                                             level: "H"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/participant/page.tsx",
-                                                            lineNumber: 184,
+                                                            lineNumber: 208,
                                                             columnNumber: 45
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 183,
+                                                        lineNumber: 207,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -599,7 +616,7 @@ function ParticipantDashboard() {
                                                         children: qrCode
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 186,
+                                                        lineNumber: 210,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
@@ -608,18 +625,18 @@ function ParticipantDashboard() {
                                                 children: "Loading QR code..."
                                             }, void 0, false, {
                                                 fileName: "[project]/app/participant/page.tsx",
-                                                lineNumber: 189,
+                                                lineNumber: 213,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 180,
+                                            lineNumber: 204,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 170,
+                                    lineNumber: 194,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -633,27 +650,27 @@ function ParticipantDashboard() {
                                                             className: "mr-2 h-5 w-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/participant/page.tsx",
-                                                            lineNumber: 198,
+                                                            lineNumber: 222,
                                                             columnNumber: 37
                                                         }, this),
                                                         "Request Help"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/participant/page.tsx",
-                                                    lineNumber: 197,
+                                                    lineNumber: 221,
                                                     columnNumber: 33
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                                     children: "Submit a help request to volunteers"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/participant/page.tsx",
-                                                    lineNumber: 201,
+                                                    lineNumber: 225,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 196,
+                                            lineNumber: 220,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -669,7 +686,7 @@ function ParticipantDashboard() {
                                                                 children: "Description"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 208,
+                                                                lineNumber: 232,
                                                                 columnNumber: 41
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -681,13 +698,13 @@ function ParticipantDashboard() {
                                                                 className: "min-h-[80px] border-white"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 209,
+                                                                lineNumber: 233,
                                                                 columnNumber: 41
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 207,
+                                                        lineNumber: 231,
                                                         columnNumber: 37
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -701,7 +718,7 @@ function ParticipantDashboard() {
                                                                         children: "Category"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/participant/page.tsx",
-                                                                        lineNumber: 220,
+                                                                        lineNumber: 244,
                                                                         columnNumber: 45
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -715,7 +732,7 @@ function ParticipantDashboard() {
                                                                                 children: "General"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 227,
+                                                                                lineNumber: 251,
                                                                                 columnNumber: 49
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -723,7 +740,7 @@ function ParticipantDashboard() {
                                                                                 children: "Technical"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 228,
+                                                                                lineNumber: 252,
                                                                                 columnNumber: 49
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -731,7 +748,7 @@ function ParticipantDashboard() {
                                                                                 children: "Food"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 229,
+                                                                                lineNumber: 253,
                                                                                 columnNumber: 49
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -739,19 +756,19 @@ function ParticipantDashboard() {
                                                                                 children: "Supplies"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 230,
+                                                                                lineNumber: 254,
                                                                                 columnNumber: 49
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/participant/page.tsx",
-                                                                        lineNumber: 221,
+                                                                        lineNumber: 245,
                                                                         columnNumber: 45
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 219,
+                                                                lineNumber: 243,
                                                                 columnNumber: 41
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -762,7 +779,7 @@ function ParticipantDashboard() {
                                                                         children: "Priority"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/participant/page.tsx",
-                                                                        lineNumber: 234,
+                                                                        lineNumber: 258,
                                                                         columnNumber: 45
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -776,7 +793,7 @@ function ParticipantDashboard() {
                                                                                 children: "Low"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 241,
+                                                                                lineNumber: 265,
                                                                                 columnNumber: 49
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -784,7 +801,7 @@ function ParticipantDashboard() {
                                                                                 children: "Medium"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 242,
+                                                                                lineNumber: 266,
                                                                                 columnNumber: 49
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -792,25 +809,25 @@ function ParticipantDashboard() {
                                                                                 children: "High"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                                lineNumber: 243,
+                                                                                lineNumber: 267,
                                                                                 columnNumber: 49
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/participant/page.tsx",
-                                                                        lineNumber: 235,
+                                                                        lineNumber: 259,
                                                                         columnNumber: 45
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 233,
+                                                                lineNumber: 257,
                                                                 columnNumber: 41
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 218,
+                                                        lineNumber: 242,
                                                         columnNumber: 37
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -822,38 +839,141 @@ function ParticipantDashboard() {
                                                                 className: "mr-2 h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 248,
+                                                                lineNumber: 272,
                                                                 columnNumber: 41
                                                             }, this),
                                                             submitting ? 'Submitting...' : 'Submit Request'
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 247,
+                                                        lineNumber: 271,
                                                         columnNumber: 37
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/participant/page.tsx",
-                                                lineNumber: 206,
+                                                lineNumber: 230,
                                                 columnNumber: 33
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 205,
+                                            lineNumber: 229,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 195,
+                                    lineNumber: 219,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/participant/page.tsx",
-                            lineNumber: 168,
+                            lineNumber: 192,
                             columnNumber: 21
+                        }, this),
+                        announcements.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardHeader"], {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {
+                                            className: "flex items-center",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$megaphone$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Megaphone$3e$__["Megaphone"], {
+                                                    className: "mr-2 h-5 w-5"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/participant/page.tsx",
+                                                    lineNumber: 285,
+                                                    columnNumber: 37
+                                                }, this),
+                                                "Announcements"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/participant/page.tsx",
+                                            lineNumber: 284,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
+                                            children: "Latest updates from organizers"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/participant/page.tsx",
+                                            lineNumber: 288,
+                                            columnNumber: 33
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/participant/page.tsx",
+                                    lineNumber: 283,
+                                    columnNumber: 29
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "space-y-2",
+                                        children: announcements.slice(0, 5).map((announcement)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex justify-between items-start p-3 bg-secondary/50 rounded-lg",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "flex-1",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                className: "font-medium text-card-foreground",
+                                                                children: announcement.title
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/participant/page.tsx",
+                                                                lineNumber: 297,
+                                                                columnNumber: 49
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                className: "text-sm text-muted-foreground mt-1",
+                                                                children: announcement.message
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/participant/page.tsx",
+                                                                lineNumber: 298,
+                                                                columnNumber: 49
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                className: "text-xs text-muted-foreground mt-1",
+                                                                children: new Date(announcement.createdAt).toLocaleString()
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/participant/page.tsx",
+                                                                lineNumber: 299,
+                                                                columnNumber: 49
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/app/participant/page.tsx",
+                                                        lineNumber: 296,
+                                                        columnNumber: 45
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
+                                                        variant: announcement.priority === 'high' ? 'destructive' : announcement.priority === 'medium' ? 'default' : 'secondary',
+                                                        children: announcement.priority
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/app/participant/page.tsx",
+                                                        lineNumber: 303,
+                                                        columnNumber: 45
+                                                    }, this)
+                                                ]
+                                            }, announcement._id, true, {
+                                                fileName: "[project]/app/participant/page.tsx",
+                                                lineNumber: 295,
+                                                columnNumber: 41
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/participant/page.tsx",
+                                        lineNumber: 293,
+                                        columnNumber: 33
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/participant/page.tsx",
+                                    lineNumber: 292,
+                                    columnNumber: 29
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/participant/page.tsx",
+                            lineNumber: 282,
+                            columnNumber: 25
                         }, this),
                         helpRequests.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
                             children: [
@@ -866,27 +986,27 @@ function ParticipantDashboard() {
                                                     className: "mr-2 h-5 w-5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/participant/page.tsx",
-                                                    lineNumber: 261,
+                                                    lineNumber: 319,
                                                     columnNumber: 37
                                                 }, this),
                                                 "My Help Requests"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 260,
+                                            lineNumber: 318,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                             children: "Your help request history"
                                         }, void 0, false, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 264,
+                                            lineNumber: 322,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 259,
+                                    lineNumber: 317,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -903,7 +1023,7 @@ function ParticipantDashboard() {
                                                                 children: req.description
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 273,
+                                                                lineNumber: 331,
                                                                 columnNumber: 49
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -915,7 +1035,7 @@ function ParticipantDashboard() {
                                                                         children: req.category
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/participant/page.tsx",
-                                                                        lineNumber: 275,
+                                                                        lineNumber: 333,
                                                                         columnNumber: 53
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -924,13 +1044,13 @@ function ParticipantDashboard() {
                                                                         children: req.priority
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/participant/page.tsx",
-                                                                        lineNumber: 276,
+                                                                        lineNumber: 334,
                                                                         columnNumber: 53
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 274,
+                                                                lineNumber: 332,
                                                                 columnNumber: 49
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -938,7 +1058,7 @@ function ParticipantDashboard() {
                                                                 children: new Date(req.createdAt).toLocaleString()
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 278,
+                                                                lineNumber: 336,
                                                                 columnNumber: 49
                                                             }, this),
                                                             req.status === 'resolved' && req.resolvedBy && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -949,13 +1069,13 @@ function ParticipantDashboard() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 282,
+                                                                lineNumber: 340,
                                                                 columnNumber: 53
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 272,
+                                                        lineNumber: 330,
                                                         columnNumber: 45
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -963,29 +1083,29 @@ function ParticipantDashboard() {
                                                         children: req.status
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 287,
+                                                        lineNumber: 345,
                                                         columnNumber: 45
                                                     }, this)
                                                 ]
                                             }, req._id, true, {
                                                 fileName: "[project]/app/participant/page.tsx",
-                                                lineNumber: 271,
+                                                lineNumber: 329,
                                                 columnNumber: 41
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/participant/page.tsx",
-                                        lineNumber: 269,
+                                        lineNumber: 327,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 268,
+                                    lineNumber: 326,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/participant/page.tsx",
-                            lineNumber: 258,
+                            lineNumber: 316,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -999,27 +1119,27 @@ function ParticipantDashboard() {
                                                     className: "mr-2 h-5 w-5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/participant/page.tsx",
-                                                    lineNumber: 301,
+                                                    lineNumber: 359,
                                                     columnNumber: 33
                                                 }, this),
                                                 "Recent Activity"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 300,
+                                            lineNumber: 358,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                             children: "Your resource claim history"
                                         }, void 0, false, {
                                             fileName: "[project]/app/participant/page.tsx",
-                                            lineNumber: 304,
+                                            lineNumber: 362,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 299,
+                                    lineNumber: 357,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -1028,7 +1148,7 @@ function ParticipantDashboard() {
                                         children: "No activity yet. Claim resources to see them here."
                                     }, void 0, false, {
                                         fileName: "[project]/app/participant/page.tsx",
-                                        lineNumber: 310,
+                                        lineNumber: 368,
                                         columnNumber: 33
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "space-y-2",
@@ -1042,7 +1162,7 @@ function ParticipantDashboard() {
                                                                 children: tx.resourceId.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 318,
+                                                                lineNumber: 376,
                                                                 columnNumber: 49
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1050,13 +1170,13 @@ function ParticipantDashboard() {
                                                                 children: new Date(tx.timestamp).toLocaleString()
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/participant/page.tsx",
-                                                                lineNumber: 319,
+                                                                lineNumber: 377,
                                                                 columnNumber: 49
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 317,
+                                                        lineNumber: 375,
                                                         columnNumber: 45
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1064,50 +1184,50 @@ function ParticipantDashboard() {
                                                         children: tx.action
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/participant/page.tsx",
-                                                        lineNumber: 323,
+                                                        lineNumber: 381,
                                                         columnNumber: 45
                                                     }, this)
                                                 ]
                                             }, tx._id, true, {
                                                 fileName: "[project]/app/participant/page.tsx",
-                                                lineNumber: 316,
+                                                lineNumber: 374,
                                                 columnNumber: 41
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/participant/page.tsx",
-                                        lineNumber: 314,
+                                        lineNumber: 372,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/participant/page.tsx",
-                                    lineNumber: 308,
+                                    lineNumber: 366,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/participant/page.tsx",
-                            lineNumber: 298,
+                            lineNumber: 356,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/participant/page.tsx",
-                    lineNumber: 155,
+                    lineNumber: 179,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/participant/page.tsx",
-                lineNumber: 154,
+                lineNumber: 178,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/participant/page.tsx",
-        lineNumber: 150,
+        lineNumber: 174,
         columnNumber: 9
     }, this);
 }
-_s(ParticipantDashboard, "oiLwRxa/W7VHgBky6y5mYgPUBIo=", false, function() {
+_s(ParticipantDashboard, "tT0OdfYsuIrPj5Mg82L4tB3nNJQ=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]

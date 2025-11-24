@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Table,
   TableBody,
@@ -30,17 +30,81 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { UserPlus, Trash2 } from 'lucide-react'
+import { UserPlus } from 'lucide-react'
+import { toast } from 'sonner'
 
-const users = [
-  { id: "U001", name: "John Admin", email: "john@ecell.com", role: "Admin", status: "Active" },
-  { id: "U002", name: "Sarah Volunteer", email: "sarah@ecell.com", role: "Volunteer", status: "Active" },
-  { id: "U003", name: "Team Alpha", email: "alpha@team.com", role: "Team", status: "Active" },
-  { id: "U004", name: "Mike Volunteer", email: "mike@ecell.com", role: "Volunteer", status: "Inactive" },
-]
+interface User {
+  _id: string
+  name: string
+  email: string
+  role: string
+  qrCode: string
+  createdAt: string
+}
 
 export default function UsersPage() {
   const [open, setOpen] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [role, setRole] = useState('')
+  const [users, setUsers] = useState<User[]>([])
+  const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch('/api/admin/users')
+      if (res.ok) {
+        const data = await res.json()
+        // Filter to only show admin and volunteer roles
+        const filteredUsers = data.users.filter((u: User) =>
+          u.role === 'admin' || u.role === 'volunteer'
+        )
+        setUsers(filteredUsers)
+      }
+    } catch (error) {
+      console.error('Failed to fetch users:', error)
+    }
+  }
+
+  const handleCreateUser = async () => {
+    if (!name || !email || !password || !role) {
+      toast.error('Please fill in all fields')
+      return
+    }
+
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/admin/create-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role })
+      })
+
+      const data = await res.json()
+
+      if (res.ok) {
+        toast.success('User created successfully!')
+        setOpen(false)
+        setName('')
+        setEmail('')
+        setPassword('')
+        setRole('')
+        fetchUsers() // Refresh the list
+      } else {
+        toast.error(data.message || 'Failed to create user')
+      }
+    } catch (error) {
+      console.error('Create user error:', error)
+      toast.error('Failed to create user')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -55,41 +119,62 @@ export default function UsersPage() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] bg-card border-border/50">
             <DialogHeader>
-              <DialogTitle>Add New User</DialogTitle>
-              <DialogDescription>
-                Create a new user account for the hackathon platform.
+              <DialogTitle className="text-foreground">Add New User</DialogTitle>
+              <DialogDescription className="text-muted-foreground">
+                Create a new admin or volunteer account.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter full name" className="bg-secondary/50" />
+                <Label htmlFor="name" className="text-foreground">Full Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Enter full name"
+                  className="bg-secondary/50 text-white"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="user@example.com" className="bg-secondary/50" />
+                <Label htmlFor="email" className="text-foreground">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="user@example.com"
+                  className="bg-secondary/50 text-white"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="role">Role</Label>
-                <Select>
-                  <SelectTrigger className="bg-secondary/50">
+                <Label htmlFor="password" className="text-foreground">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  className="bg-secondary/50 text-white"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="role" className="text-foreground">Role</Label>
+                <Select value={role} onValueChange={setRole}>
+                  <SelectTrigger className="bg-secondary/50 text-white">
                     <SelectValue placeholder="Select role" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="admin">Admin</SelectItem>
                     <SelectItem value="volunteer">Volunteer</SelectItem>
-                    <SelectItem value="team">Team</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" placeholder="••••••••" className="bg-secondary/50" />
-              </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-              <Button onClick={() => setOpen(false)}>Create User</Button>
+              <Button variant="outline" onClick={() => setOpen(false)} className="text-foreground">Cancel</Button>
+              <Button onClick={handleCreateUser} disabled={submitting}>
+                {submitting ? 'Creating...' : 'Create User'}
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -97,54 +182,49 @@ export default function UsersPage() {
 
       <Card className="bg-card/50 backdrop-blur border-border/50">
         <CardHeader>
-          <CardTitle>All Users</CardTitle>
+          <CardTitle>Admin & Volunteer Accounts</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell className="font-mono text-xs">{user.id}</TableCell>
-                  <TableCell className="font-medium">{user.name}</TableCell>
-                  <TableCell className="text-muted-foreground">{user.email}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        user.role === "Admin" ? "default" :
-                          user.role === "Volunteer" ? "secondary" :
-                            "outline"
-                      }
-                    >
-                      {user.role}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={user.status === "Active" ? "success" : "secondary"}>
-                      {user.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <Button variant="ghost" size="sm">Edit</Button>
-                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
+          {users.length === 0 ? (
+            <p className="text-center text-muted-foreground py-8">
+              No users found. Create one to get started!
+            </p>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead>Role</TableHead>
+                  <TableHead>QR Code</TableHead>
+                  <TableHead>Created</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {users.map((user) => (
+                  <TableRow key={user._id}>
+                    <TableCell className="font-medium">{user.name}</TableCell>
+                    <TableCell className="text-muted-foreground">{user.email}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          user.role === "admin" ? "default" :
+                            user.role === "volunteer" ? "secondary" :
+                              "outline"
+                        }
+                      >
+                        {user.role}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-mono text-xs text-muted-foreground">{user.qrCode}</TableCell>
+                    <TableCell className="text-muted-foreground text-sm">
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </CardContent>
       </Card>
     </div>

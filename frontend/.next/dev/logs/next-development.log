@@ -1899,3 +1899,132 @@ Import traces:
 [01:28:05.130] Server  LOG      ✓ Compiled in 171ms
 [01:28:19.795] Server  LOG      ✓ Compiled in 126ms
 [01:29:07.068] Server  LOG      ✓ Compiled in 138ms
+[01:30:19.497] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:40:23.165] Server  LOG      ✓ Compiled in 199ms
+[01:40:54.787] Server  LOG      ✓ Compiled in 153ms
+[01:41:28.243] Server  LOG      ✓ Compiled in 139ms
+[01:41:28.360] Browser ERROR   ./app/participant/page.tsx:122:10
+Parsing ecmascript source code failed
+  120 |                 fetchAnnouncements()
+  121 |             }, 5000)
+> 122 |         }, 5000)
+      |          ^
+  123 |     return () => clearInterval(interval)
+  124 | }
+  125 |     }, [user])
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:41:28.360] Browser ERROR   ./app/participant/page.tsx:122:10
+Parsing ecmascript source code failed
+  120 |                 fetchAnnouncements()
+  121 |             }, 5000)
+> 122 |         }, 5000)
+      |          ^
+  123 |     return () => clearInterval(interval)
+  124 | }
+  125 |     }, [user])
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:42:39.272] Server  LOG      ✓ Compiled in 140ms
+[01:43:23.589] Server  LOG      ✓ Compiled in 187ms
+[01:48:28.616] Server  LOG      ✓ Compiled in 185ms
+[01:49:29.001] Server  LOG      ✓ Compiled in 150ms
+[01:51:02.420] Server  LOG      ✓ Compiled in 156ms
+[01:54:40.648] Server  LOG      ✓ Compiled in 186ms
+[01:54:40.912] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `CardContent`.  It was passed a child from AnnouncementsPage.
+[01:54:42.376] Server  LOG      ✓ Compiled in 188ms
+[01:55:04.513] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:00:48.845] Server  LOG      ✓ Compiled in 127ms
+[02:00:51.579] Server  LOG      ✓ Compiled in 136ms
+[02:01:12.182] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:01:12.481] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/volunteer" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <head>
+                          <body
++                           className="font-sans antialiased"
+-                           className="font-sans antialiased antigravity-scroll-lock"
+                          >
+                  ...
+
+[02:05:24.867] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:05:24.869] Server  ERROR   AggregateError
+[02:07:29.858] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:29.860] Server  ERROR   AggregateError
+[02:07:34.854] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:34.856] Server  ERROR   AggregateError
+[02:07:39.851] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:39.852] Server  ERROR   AggregateError
+[02:07:44.850] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:44.852] Server  ERROR   AggregateError
+[02:07:49.854] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:49.856] Server  ERROR   AggregateError
+[02:07:54.850] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:54.851] Server  ERROR   AggregateError
+[02:07:59.850] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:07:59.851] Server  ERROR   AggregateError
+[02:08:04.864] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:08:04.866] Server  ERROR   AggregateError
+[02:08:09.863] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:08:09.864] Server  ERROR   AggregateError
+[02:08:14.854] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:08:14.855] Server  ERROR   AggregateError
+[02:08:55.893] Server  LOG      ✓ Compiled in 206ms
+[02:09:30.792] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:10:16.815] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:17:39.721] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[02:17:39.723] Server  ERROR   AggregateError
+[02:18:28.668] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:18:39.943] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:19:54.729] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements Error: socket hang up
+[02:19:54.730] Server  ERROR   Error: socket hang up
+[02:20:34.726] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements Error: socket hang up
+[02:20:34.727] Server  ERROR   Error: socket hang up
