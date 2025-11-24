@@ -5,29 +5,14 @@ const User = require('../models/User');
 const Resource = require('../models/Resource');
 const Transaction = require('../models/Transaction');
 
+// Import centralized authentication middleware
+const { requireAuth } = require('../middleware/auth');
+const { requireRole } = require('../middleware/rbac');
+
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-// Middleware to verify admin access
-const verifyAdmin = (req, res, next) => {
-    const token = req.cookies.token;
-    if (!token) {
-        return res.status(401).json({ message: 'Not authenticated' });
-    }
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        if (decoded.role !== 'admin') {
-            return res.status(403).json({ message: 'Not authorized' });
-        }
-        req.user = decoded;
-        next();
-    } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
-};
-
 // Get overall statistics
-router.get('/stats', verifyAdmin, async (req, res) => {
+router.get('/stats', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const resources = await Resource.find({});
         const participants = await User.find({ role: 'participant' });
@@ -56,7 +41,7 @@ router.get('/stats', verifyAdmin, async (req, res) => {
 });
 
 // Get participants for a specific resource
-router.get('/resource/:id/participants', verifyAdmin, async (req, res) => {
+router.get('/resource/:id/participants', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const resourceId = req.params.id;
         const resource = await Resource.findById(resourceId);
@@ -108,7 +93,7 @@ router.get('/resource/:id/participants', verifyAdmin, async (req, res) => {
 });
 
 // Get all participants
-router.get('/participants', verifyAdmin, async (req, res) => {
+router.get('/participants', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const participants = await User.find({ role: 'participant' })
             .select('-password')
@@ -137,7 +122,7 @@ router.get('/participants', verifyAdmin, async (req, res) => {
 });
 
 // Get all users (with optional role filter)
-router.get('/users', verifyAdmin, async (req, res) => {
+router.get('/users', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const { role } = req.query;
         const filter = role ? { role } : {};
@@ -153,7 +138,7 @@ router.get('/users', verifyAdmin, async (req, res) => {
 });
 
 // Create User (Admin only) - for creating admin and volunteer accounts
-router.post('/create-user', verifyAdmin, async (req, res) => {
+router.post('/create-user', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const bcrypt = require('bcryptjs');
         const { v4: uuidv4 } = require('uuid');
@@ -207,7 +192,7 @@ router.post('/create-user', verifyAdmin, async (req, res) => {
 });
 
 // Get single participant by ID
-router.get('/participants/:id', verifyAdmin, async (req, res) => {
+router.get('/participants/:id', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const participant = await User.findById(req.params.id)
             .select('-password');
@@ -235,7 +220,7 @@ router.get('/participants/:id', verifyAdmin, async (req, res) => {
 });
 
 // Get participant transactions
-router.get('/participants/:id/transactions', verifyAdmin, async (req, res) => {
+router.get('/participants/:id/transactions', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const transactions = await Transaction.find({ userId: req.params.id })
             .populate('resourceId', 'name type')
@@ -249,7 +234,7 @@ router.get('/participants/:id/transactions', verifyAdmin, async (req, res) => {
 });
 
 // Get participant help requests
-router.get('/participants/:id/help-requests', verifyAdmin, async (req, res) => {
+router.get('/participants/:id/help-requests', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const HelpRequest = require('../models/HelpRequest');
         const helpRequests = await HelpRequest.find({ userId: req.params.id })

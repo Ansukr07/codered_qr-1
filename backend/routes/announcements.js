@@ -1,38 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const Announcement = require('../models/Announcement');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-
-// Middleware to verify token and get user role
-const verifyToken = (req, res, next) => {
-    const token = req.cookies.token;
-    if (!token) {
-        return res.status(401).json({ message: 'Not authenticated' });
-    }
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = decoded;
-        next();
-    } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
-};
-
-// Middleware to verify admin access
-const verifyAdmin = (req, res, next) => {
-    verifyToken(req, res, () => {
-        if (req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Not authorized' });
-        }
-        next();
-    });
-};
+// Import centralized authentication middleware
+const { requireAuth } = require('../middleware/auth');
+const { requireRole } = require('../middleware/rbac');
 
 // Create Announcement (Admin only)
-router.post('/', verifyAdmin, async (req, res) => {
+router.post('/', requireAuth, requireRole('admin'), async (req, res) => {
     try {
         const { title, message, priority, audience } = req.body;
         const announcement = await Announcement.create({
@@ -47,8 +22,8 @@ router.post('/', verifyAdmin, async (req, res) => {
     }
 });
 
-// Get Announcements (Filtered by audience)
-router.get('/', verifyToken, async (req, res) => {
+// Get Announcements (Filtered by audience) - All authenticated users
+router.get('/', requireAuth, async (req, res) => {
     try {
         const { role } = req.user;
         let query = {};

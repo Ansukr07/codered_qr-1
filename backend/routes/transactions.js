@@ -1,19 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const Transaction = require('../models/Transaction');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+// Import centralized authentication middleware
+const { requireAuth } = require('../middleware/auth');
 
-router.get('/', async (req, res) => {
+// Get user's transactions - Authenticated users only
+router.get('/', requireAuth, async (req, res) => {
     try {
-        const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({ message: 'Not authenticated' });
-        }
-
-        const decoded = jwt.verify(token, JWT_SECRET);
-        const userId = decoded.userId;
+        const userId = req.user.userId; // Set by requireAuth middleware
 
         const transactions = await Transaction.find({ userId })
             .populate('resourceId', 'name')

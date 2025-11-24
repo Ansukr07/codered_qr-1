@@ -1,45 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const HelpRequest = require('../models/HelpRequest');
 const User = require('../models/User');
 
-// Auth middleware
-const auth = async (req, res, next) => {
-    try {
-        const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({ message: 'Authentication required' });
-        }
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.userId);
-        if (!user) {
-            return res.status(401).json({ message: 'User not found' });
-        }
-
-        req.user = user;
-        next();
-    } catch (error) {
-        res.status(401).json({ message: 'Invalid token' });
-    }
-};
+// Import centralized authentication middleware
+const { requireAuth } = require('../middleware/auth');
+const { requireRole } = require('../middleware/rbac');
 
 // Create help request (participant only)
-router.post('/', auth, async (req, res) => {
+router.post('/', requireAuth, requireRole('participant'), async (req, res) => {
     try {
-        if (req.user.role !== 'participant') {
-            return res.status(403).json({ message: 'Only participants can create help requests' });
-        }
-
         const { description, category, priority } = req.body;
 
         if (!description) {
             return res.status(400).json({ message: 'Description is required' });
         }
 
+        // req.user is set by requireAuth middleware (contains userId from JWT)
+        const user = await User.findById(req.user.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
         const helpRequest = new HelpRequest({
-            userId: req.user._id,
+            userId: user._id,
             description,
             category: category || 'general',
             priority: priority || 'medium'
@@ -61,12 +45,8 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Get all help requests (volunteer/admin only)
-router.get('/', auth, async (req, res) => {
+router.get('/', requireAuth, requireRole('volunteer', 'admin'), async (req, res) => {
     try {
-        if (req.user.role !== 'volunteer' && req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Access denied' });
-        }
-
         const helpRequests = await HelpRequest.find()
             .populate('userId', 'name email teamId qrCode')
             .populate('resolvedBy', 'name')
@@ -80,13 +60,14 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get user's own help requests (participant only)
-router.get('/my-requests', auth, async (req, res) => {
+router.get('/my-requests', requireAuth, requireRole('participant'), async (req, res) => {
     try {
-        if (req.user.role !== 'participant') {
-            return res.status(403).json({ message: 'Only participants can view their requests' });
+        const user = await User.findById(req.user.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        const helpRequests = await HelpRequest.find({ userId: req.user._id })
+        const helpRequests = await HelpRequest.find({ userId: user._id })
             .populate('resolvedBy', 'name')
             .sort({ createdAt: -1 });
 
@@ -98,12 +79,8 @@ router.get('/my-requests', auth, async (req, res) => {
 });
 
 // Resolve help request (volunteer/admin only)
-router.patch('/:id/resolve', auth, async (req, res) => {
+router.patch('/:id/resolve', requireAuth, requireRole('volunteer', 'admin'), async (req, res) => {
     try {
-        if (req.user.role !== 'volunteer' && req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Access denied' });
-        }
-
         const helpRequest = await HelpRequest.findById(req.params.id);
 
         if (!helpRequest) {
@@ -115,7 +92,7 @@ router.patch('/:id/resolve', auth, async (req, res) => {
         }
 
         helpRequest.status = 'resolved';
-        helpRequest.resolvedBy = req.user._id;
+        helpRequest.resolvedBy = req.user.userId;
         helpRequest.resolvedAt = new Date();
 
         await helpRequest.save();

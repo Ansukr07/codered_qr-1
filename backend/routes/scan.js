@@ -1,24 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Resource = require('../models/Resource');
 const Transaction = require('../models/Transaction');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+// Import centralized authentication middleware
+const { requireAuth } = require('../middleware/auth');
+const { requireRole } = require('../middleware/rbac');
 
-router.post('/', async (req, res) => {
+router.post('/', requireAuth, requireRole('volunteer', 'admin'), async (req, res) => {
     try {
-        const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({ message: 'Not authenticated' });
-        }
-
-        const decoded = jwt.verify(token, JWT_SECRET);
-        if (decoded.role !== 'volunteer' && decoded.role !== 'admin') {
-            return res.status(403).json({ message: 'Not authorized' });
-        }
-
         const { qr_code, resource_id } = req.body;
 
         const user = await User.findOne({ qrCode: qr_code });
@@ -52,7 +43,7 @@ router.post('/', async (req, res) => {
         const transaction = await Transaction.create({
             userId: user._id,
             resourceId: resource._id,
-            volunteerId: decoded.userId,
+            volunteerId: req.user.userId, // req.user is set by requireAuth middleware
             action: 'claim',
         });
 
