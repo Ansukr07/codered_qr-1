@@ -22,7 +22,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-3">
                   <img src="/logo.png" alt="Codered Logo" className="w-10 h-10 object-contain" />
                   <div>
-                    <h1 className="text-xl font-bold text-foreground">Codered 3.0</h1>
+                    <h1 className="text-xl font-bold text-foreground">Code Red 3.0</h1>
                     <p className="text-xs text-muted-foreground">by E-Cell BMSIT</p>
                   </div>
                 </div>
@@ -41,7 +41,7 @@ export default function HomePage() {
               <h1 className="text-5xl md:text-7xl font-bold text-balance">
                 Welcome to{' '}
                 <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  Codered 3.0
+                  Code Red 3.0
                 </span>
               </h1>
               <div className="pt-4">
@@ -62,7 +62,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Codered 3.0</span>
+              About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Code Red 3.0</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               A QR-based resource tracking platform powered by E-Cell BMSIT.

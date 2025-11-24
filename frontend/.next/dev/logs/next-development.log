@@ -1591,3 +1591,122 @@ https://nextjs.org/docs/messages/module-not-found
 [00:58:20.783] Server  LOG      ✓ Compiled in 155ms
 [00:58:21.179] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:01:21.718] Server  LOG      ✓ Compiled in 126ms
+[01:03:50.591] Server  LOG      ✓ Compiled in 124ms
+[01:04:12.669] Server  LOG      ✓ Compiled in 115ms
+[01:04:26.217] Server  LOG      ✓ Compiled in 131ms
+[01:06:22.403] Server  LOG      ✓ Compiled in 197ms
+[01:07:54.263] Server  LOG      ✓ Compiled in 166ms
+[01:07:59.853] Server  LOG      ✓ Compiled in 430ms
+[01:12:21.954] Server  LOG      ✓ Compiled in 260ms
+[01:12:22.057] Browser ERROR   uncaughtError: ReferenceError: motion is not defined
+[01:12:26.191] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:12:26.202] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
+[01:12:26.204] Server  ERROR   AggregateError
+[01:13:33.207] Server  LOG      ✓ Compiled in 165ms
+[01:13:33.427] Browser ERROR   uncaughtError: ReferenceError: motion is not defined
+[01:13:33.503] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:13:33.519] Server  LOG      ✓ Compiled in 128ms
+[01:13:34.111] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:13:34.192] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
+[01:13:34.195] Server  ERROR   AggregateError
+[01:13:54.065] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:54.066] Server  ERROR   AggregateError
+[01:13:58.120] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:58.122] Server  ERROR   AggregateError
+[01:13:58.832] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:58.833] Server  ERROR   AggregateError
+[01:13:59.044] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:59.046] Server  ERROR   AggregateError
+[01:13:59.207] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:59.209] Server  ERROR   AggregateError
+[01:13:59.347] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:59.348] Server  ERROR   AggregateError
+[01:13:59.484] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:59.485] Server  ERROR   AggregateError
+[01:13:59.690] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:59.692] Server  ERROR   AggregateError
+[01:13:59.852] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:13:59.853] Server  ERROR   AggregateError
+[01:14:00.006] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:00.009] Server  ERROR   AggregateError
+[01:14:00.176] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:00.178] Server  ERROR   AggregateError
+[01:14:00.323] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:00.325] Server  ERROR   AggregateError
+[01:14:00.478] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:00.479] Server  ERROR   AggregateError
+[01:14:00.705] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:00.706] Server  ERROR   AggregateError
+[01:14:00.979] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:00.982] Server  ERROR   AggregateError
+[01:14:01.107] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:01.109] Server  ERROR   AggregateError
+[01:14:01.231] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:01.232] Server  ERROR   AggregateError
+[01:14:01.419] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:01.420] Server  ERROR   AggregateError
+[01:14:01.542] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:01.545] Server  ERROR   AggregateError
+[01:14:01.747] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:01.749] Server  ERROR   AggregateError
+[01:14:03.487] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:03.553] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
+[01:14:03.555] Server  ERROR   AggregateError
+[01:14:15.946] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:15.948] Server  ERROR   AggregateError
+[01:14:17.176] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:17.178] Server  ERROR   AggregateError
+[01:14:17.336] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:17.337] Server  ERROR   AggregateError
+[01:14:17.498] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:17.499] Server  ERROR   AggregateError
+[01:14:17.719] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:17.720] Server  ERROR   AggregateError
+[01:14:19.510] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:19.568] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
+[01:14:19.571] Server  ERROR   AggregateError
+[01:14:30.473] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:30.475] Server  ERROR   AggregateError
+[01:14:32.587] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:32.589] Server  ERROR   AggregateError
+[01:14:33.271] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:33.273] Server  ERROR   AggregateError
+[01:14:33.858] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:33.860] Server  ERROR   AggregateError
+[01:14:34.024] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:34.026] Server  ERROR   AggregateError
+[01:14:34.165] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:34.166] Server  ERROR   AggregateError
+[01:14:34.395] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:34.396] Server  ERROR   AggregateError
+[01:14:34.852] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:34.854] Server  ERROR   AggregateError
+[01:14:35.014] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:35.016] Server  ERROR   AggregateError
+[01:14:35.191] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:35.193] Server  ERROR   AggregateError
+[01:14:35.337] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:35.339] Server  ERROR   AggregateError
+[01:14:35.485] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:35.486] Server  ERROR   AggregateError
+[01:14:35.702] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
+[01:14:35.704] Server  ERROR   AggregateError
+[01:15:35.143] Browser ERROR   ./app/volunteer/layout.tsx:41:1
+Parsing ecmascript source code failed
+  39 |       </div>
+  40 |       )
+> 41 | }
+     | ^
+  42 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:15:35.143] Browser ERROR   ./app/volunteer/layout.tsx:41:1
+Parsing ecmascript source code failed
+  39 |       </div>
+  40 |       )
+> 41 | }
+     | ^
+  42 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:17:58.723] Server  LOG      ✓ Compiled in 162ms

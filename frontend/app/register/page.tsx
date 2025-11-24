@@ -122,7 +122,7 @@ export default function RegisterPage() {
                     </div>
                     <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
                     <CardDescription>
-                        Register for Codered 3.0
+                        Register for Code Red 3.0
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

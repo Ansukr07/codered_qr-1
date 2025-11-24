@@ -58,7 +58,7 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
           <CardDescription>
-            Sign in to Codered 3.0 Dashboard
+            Sign in to Code Red 3.0 Dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -100,7 +100,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => setRole('volunteer')}
                     className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'volunteer'
-                      ? 'bg-accent/10 border-accent text-accent'
+                      ? 'bg-red-500/10 border-red-500 text-red-500'
                       : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
                       }`}
                   >
@@ -111,7 +111,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => setRole('admin')}
                     className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'admin'
-                      ? 'bg-indigo-500/10 border-indigo-500 text-indigo-500'
+                      ? 'bg-red-500/10 border-red-500 text-red-500'
                       : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
                       }`}
                   >
@@ -198,12 +198,12 @@ export default function LoginPage() {
             <p className="text-xs text-muted-foreground mb-2">Demo Credentials</p>
             <div className="grid grid-cols-3 gap-2 text-xs">
               <div className="p-2 rounded bg-secondary/50 border border-border/50">
-                <p className="font-semibold text-indigo-400">Admin</p>
+                <p className="font-semibold text-red-400">Admin</p>
                 <p className="text-muted-foreground mt-1">demo@admin.com</p>
                 <p className="text-muted-foreground">admin123</p>
               </div>
               <div className="p-2 rounded bg-secondary/50 border border-border/50">
-                <p className="font-semibold text-pink-400">Volunteer</p>
+                <p className="font-semibold text-red-400">Volunteer</p>
                 <p className="text-muted-foreground mt-1">volunteer@demo.com</p>
                 <p className="text-muted-foreground">volunteer123</p>
               </div>

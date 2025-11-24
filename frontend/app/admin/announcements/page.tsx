@@ -22,7 +22,7 @@ const announcements = [
   {
     id: 1,
     title: "Hackathon Kickoff",
-    message: "Welcome to Codered 3.0! The hackathon officially begins now. Good luck to all teams!",
+    message: "Welcome to Code Red 3.0! The hackathon officially begins now. Good luck to all teams!",
     time: "2 hours ago",
     priority: "high"
   },
@@ -157,8 +157,8 @@ export default function AnnouncementsPage() {
                 <div key={index} className="flex items-start gap-4">
                   <div className="flex flex-col items-center">
                     <div className={`w-3 h-3 rounded-full ${item.status === "completed" ? "bg-green-500" :
-                        item.status === "ongoing" ? "bg-primary animate-pulse" :
-                          "bg-muted"
+                      item.status === "ongoing" ? "bg-primary animate-pulse" :
+                        "bg-muted"
                       }`} />
                     {index < schedule.length - 1 && (
                       <div className="w-0.5 h-12 bg-border/50 my-1" />

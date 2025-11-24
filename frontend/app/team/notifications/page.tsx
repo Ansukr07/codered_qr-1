@@ -33,7 +33,7 @@ const notifications = [
   },
   {
     id: 4,
-    title: "Welcome to Codered 3.0",
+    title: "Welcome to Code Red 3.0",
     message: "Thanks for checking in! Your team table is #42.",
     time: "5 hours ago",
     read: true,
@@ -69,13 +69,12 @@ export default function NotificationsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {notifications.map((notification) => (
-            <div 
-              key={notification.id} 
-              className={`p-4 rounded-lg border transition-all ${
-                notification.read 
-                  ? "bg-secondary/20 border-border/30 opacity-70" 
+            <div
+              key={notification.id}
+              className={`p-4 rounded-lg border transition-all ${notification.read
+                  ? "bg-secondary/20 border-border/30 opacity-70"
                   : "bg-secondary/50 border-primary/30 shadow-sm"
-              }`}
+                }`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1">

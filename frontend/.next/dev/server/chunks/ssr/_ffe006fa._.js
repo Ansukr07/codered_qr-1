@@ -317,7 +317,7 @@ function LoginPage() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
-                                children: "Sign in to Codered 3.0 Dashboard"
+                                children: "Sign in to Code Red 3.0 Dashboard"
                             }, void 0, false, {
                                 fileName: "[project]/app/login/page.tsx",
                                 lineNumber: 60,
@@ -404,7 +404,7 @@ function LoginPage() {
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     type: "button",
                                                     onClick: ()=>setRole('volunteer'),
-                                                    className: `flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'volunteer' ? 'bg-accent/10 border-accent text-accent' : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'}`,
+                                                    className: `flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'volunteer' ? 'bg-red-500/10 border-red-500 text-red-500' : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'}`,
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$qr$2d$code$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__QrCode$3e$__["QrCode"], {
                                                             className: "w-5 h-5 mb-1"
@@ -430,7 +430,7 @@ function LoginPage() {
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     type: "button",
                                                     onClick: ()=>setRole('admin'),
-                                                    className: `flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'admin' ? 'bg-indigo-500/10 border-indigo-500 text-indigo-500' : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'}`,
+                                                    className: `flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'admin' ? 'bg-red-500/10 border-red-500 text-red-500' : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'}`,
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Shield$3e$__["Shield"], {
                                                             className: "w-5 h-5 mb-1"
@@ -650,7 +650,7 @@ function LoginPage() {
                                             className: "p-2 rounded bg-secondary/50 border border-border/50",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "font-semibold text-indigo-400",
+                                                    className: "font-semibold text-red-400",
                                                     children: "Admin"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/login/page.tsx",
@@ -683,7 +683,7 @@ function LoginPage() {
                                             className: "p-2 rounded bg-secondary/50 border border-border/50",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "font-semibold text-pink-400",
+                                                    className: "font-semibold text-red-400",
                                                     children: "Volunteer"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/login/page.tsx",

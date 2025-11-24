@@ -47,7 +47,7 @@ export function AdminSidebar() {
       <div className="flex h-16 items-center border-b border-border/40 px-6">
         <div className="flex items-center gap-2">
           <img src="/logo.png" alt="Codered Logo" className="w-8 h-8 object-contain" />
-          <span className="font-bold text-lg text-primary">Codered 3.0</span>
+          <span className="font-bold text-lg text-primary">Code Red 3.0</span>
         </div>
       </div>
 

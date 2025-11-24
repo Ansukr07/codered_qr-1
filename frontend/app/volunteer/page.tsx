@@ -169,7 +169,7 @@ export default function VolunteerDashboard() {
       <div className="grid md:grid-cols-2 gap-4">
         {scanOptions.map((option) => (
           <Link key={option.href} href={option.href}>
-            <Card className="bg-card/50 backdrop-blur border-border/50 hover:border-primary/50 transition-all cursor-pointer group">
+            <Card className="bg-card/50 backdrop-blur border-border/50 hover:border-primary/50 transition-all cursor-pointer group h-full">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-4">

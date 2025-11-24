@@ -7,16 +7,16 @@ import { Utensils, BedDouble, Coffee, Github, Megaphone, Calendar, Clock, Extern
 import Link from 'next/link'
 
 const announcements = [
-  { 
-    id: 1, 
-    title: "Hackathon Kickoff", 
-    message: "Welcome to Codered 3.0! The hackathon officially begins now.",
+  {
+    id: 1,
+    title: "Hackathon Kickoff",
+    message: "Welcome to Code Red 3.0! The hackathon officially begins now.",
     time: "2 hours ago",
     priority: "high"
   },
-  { 
-    id: 2, 
-    title: "Lunch is Ready", 
+  {
+    id: 2,
+    title: "Lunch is Ready",
     message: "Lunch is now being served in the main hall.",
     time: "4 hours ago",
     priority: "medium"
@@ -138,17 +138,17 @@ export default function TeamPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               {announcements.map((announcement) => (
-                <div 
-                  key={announcement.id} 
+                <div
+                  key={announcement.id}
                   className="p-4 rounded-lg bg-secondary/30 border border-border/30 space-y-2"
                 >
                   <div className="flex items-start justify-between">
                     <h3 className="font-semibold">{announcement.title}</h3>
-                    <Badge 
+                    <Badge
                       variant={
                         announcement.priority === "high" ? "destructive" :
-                        announcement.priority === "medium" ? "warning" :
-                        "secondary"
+                          announcement.priority === "medium" ? "warning" :
+                            "secondary"
                       }
                       className="text-xs"
                     >
@@ -184,10 +184,9 @@ export default function TeamPage() {
                 {schedule.map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div className="flex flex-col items-center">
-                      <div className={`w-3 h-3 rounded-full ${
-                        item.status === "ongoing" ? "bg-primary animate-pulse" :
-                        "bg-muted"
-                      }`} />
+                      <div className={`w-3 h-3 rounded-full ${item.status === "ongoing" ? "bg-primary animate-pulse" :
+                          "bg-muted"
+                        }`} />
                       {index < schedule.length - 1 && (
                         <div className="w-0.5 h-12 bg-border/50 my-1" />
                       )}
@@ -195,10 +194,10 @@ export default function TeamPage() {
                     <div className="flex-1 pb-4">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-sm font-medium">{item.time}</span>
-                        <Badge 
+                        <Badge
                           variant={
                             item.status === "ongoing" ? "default" :
-                            "outline"
+                              "outline"
                           }
                           className="text-xs"
                         >

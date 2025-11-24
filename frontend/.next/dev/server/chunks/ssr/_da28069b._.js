@@ -98,7 +98,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$toaster$
 ;
 ;
 const metadata = {
-    title: 'Codered 3.0 - Hackathon Platform',
+    title: 'Code Red 3.0 - Hackathon Platform',
     description: 'Hackathon management platform with QR-based resource tracking'
 };
 function RootLayout({ children }) {

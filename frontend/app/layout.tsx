@@ -4,7 +4,7 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
-  title: 'Codered 3.0 - Hackathon Platform',
+  title: 'Code Red 3.0 - Hackathon Platform',
   description: 'Hackathon management platform with QR-based resource tracking',
 }
 
