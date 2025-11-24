@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { 
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -19,23 +19,23 @@ import { Badge } from "@/components/ui/badge"
 import { Megaphone, Clock, Calendar } from 'lucide-react'
 
 const announcements = [
-  { 
-    id: 1, 
-    title: "Hackathon Kickoff", 
+  {
+    id: 1,
+    title: "Hackathon Kickoff",
     message: "Welcome to Codered 3.0! The hackathon officially begins now. Good luck to all teams!",
     time: "2 hours ago",
     priority: "high"
   },
-  { 
-    id: 2, 
-    title: "Lunch is Ready", 
+  {
+    id: 2,
+    title: "Lunch is Ready",
     message: "Lunch is now being served in the main hall. Please collect your meals using your QR codes.",
     time: "4 hours ago",
     priority: "medium"
   },
-  { 
-    id: 3, 
-    title: "Workshop at 3 PM", 
+  {
+    id: 3,
+    title: "Workshop at 3 PM",
     message: "Join us for a workshop on AI/ML at 3 PM in Room 201. Don't miss it!",
     time: "6 hours ago",
     priority: "low"
@@ -58,7 +58,7 @@ export default function AnnouncementsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Announcements & Schedule</h1>
+        <h1 className="text-3xl font-bold text-primary">Announcements & Schedule</h1>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button className="gap-2">
@@ -80,16 +80,16 @@ export default function AnnouncementsPage() {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="message">Message</Label>
-                <Textarea 
-                  id="message" 
-                  placeholder="Type your announcement here..." 
+                <Textarea
+                  id="message"
+                  placeholder="Type your announcement here..."
                   className="bg-secondary/50 min-h-[120px]"
                 />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="priority">Priority</Label>
-                <select 
-                  id="priority" 
+                <select
+                  id="priority"
                   className="flex h-10 w-full rounded-md border border-input bg-secondary/50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="low">Low</option>
@@ -117,17 +117,17 @@ export default function AnnouncementsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {announcements.map((announcement) => (
-              <div 
-                key={announcement.id} 
+              <div
+                key={announcement.id}
                 className="p-4 rounded-lg bg-secondary/30 border border-border/30 space-y-2"
               >
                 <div className="flex items-start justify-between">
                   <h3 className="font-semibold">{announcement.title}</h3>
-                  <Badge 
+                  <Badge
                     variant={
                       announcement.priority === "high" ? "destructive" :
-                      announcement.priority === "medium" ? "warning" :
-                      "secondary"
+                        announcement.priority === "medium" ? "warning" :
+                          "secondary"
                     }
                   >
                     {announcement.priority}
@@ -156,11 +156,10 @@ export default function AnnouncementsPage() {
               {schedule.map((item, index) => (
                 <div key={index} className="flex items-start gap-4">
                   <div className="flex flex-col items-center">
-                    <div className={`w-3 h-3 rounded-full ${
-                      item.status === "completed" ? "bg-green-500" :
-                      item.status === "ongoing" ? "bg-primary animate-pulse" :
-                      "bg-muted"
-                    }`} />
+                    <div className={`w-3 h-3 rounded-full ${item.status === "completed" ? "bg-green-500" :
+                        item.status === "ongoing" ? "bg-primary animate-pulse" :
+                          "bg-muted"
+                      }`} />
                     {index < schedule.length - 1 && (
                       <div className="w-0.5 h-12 bg-border/50 my-1" />
                     )}
@@ -168,11 +167,11 @@ export default function AnnouncementsPage() {
                   <div className="flex-1 pb-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm font-medium">{item.time}</span>
-                      <Badge 
+                      <Badge
                         variant={
                           item.status === "completed" ? "success" :
-                          item.status === "ongoing" ? "default" :
-                          "outline"
+                            item.status === "ongoing" ? "default" :
+                              "outline"
                         }
                         className="text-xs"
                       >

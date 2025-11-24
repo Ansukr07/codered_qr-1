@@ -7,32 +7,32 @@ import { Button } from "@/components/ui/button"
 import { Github, GitCommit, Star, GitBranch, Clock, ExternalLink } from 'lucide-react'
 
 const teams = [
-  { 
-    name: "Code Ninjas", 
+  {
+    name: "Code Ninjas",
     repo: "github.com/codeninja/hackathon-project",
     commits: 45,
     lastPush: "2 mins ago",
     stars: 3,
     status: "active"
   },
-  { 
-    name: "Pixel Perfect", 
+  {
+    name: "Pixel Perfect",
     repo: "github.com/pixelperfect/design-tool",
     commits: 32,
     lastPush: "15 mins ago",
     stars: 5,
     status: "active"
   },
-  { 
-    name: "Data Dynamos", 
+  {
+    name: "Data Dynamos",
     repo: "github.com/datadynamos/ml-platform",
     commits: 28,
     lastPush: "1 hour ago",
     stars: 2,
     status: "active"
   },
-  { 
-    name: "Bug Hunters", 
+  {
+    name: "Bug Hunters",
     repo: "Not linked",
     commits: 0,
     lastPush: "N/A",
@@ -45,7 +45,7 @@ export default function GitHubPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">GitHub Project Status</h1>
+        <h1 className="text-3xl font-bold text-primary">GitHub Project Status</h1>
         <Badge variant="outline" className="gap-2">
           <Github className="h-4 w-4" />
           3/4 Teams Connected
@@ -54,11 +54,10 @@ export default function GitHubPage() {
 
       <div className="grid gap-4">
         {teams.map((team, index) => (
-          <Card 
-            key={index} 
-            className={`bg-card/50 backdrop-blur border-border/50 ${
-              team.status === "inactive" ? "opacity-60" : ""
-            }`}
+          <Card
+            key={index}
+            className={`bg-card/50 backdrop-blur border-border/50 ${team.status === "inactive" ? "opacity-60" : ""
+              }`}
           >
             <CardHeader>
               <div className="flex items-start justify-between">

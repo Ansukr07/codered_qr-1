@@ -92,7 +92,7 @@ export default function HelpPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-foreground">Help Requests</h1>
+        <h1 className="text-3xl font-bold text-primary">Help Requests</h1>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-orange-500" />

@@ -74,7 +74,14 @@ export function AdminSidebar() {
         </nav>
       </div>
 
-
+      <div className="border-t border-border/40 p-4">
+        <Link href="/login">
+          <Button variant="ghost" className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10">
+            <LogOut className="h-4 w-4" />
+            Logout
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

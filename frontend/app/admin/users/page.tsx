@@ -1,18 +1,18 @@
 'use client'
 
 import { useState } from "react"
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { 
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -45,7 +45,7 @@ export default function UsersPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">User Management</h1>
+        <h1 className="text-3xl font-bold text-primary">User Management</h1>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button className="gap-2">
@@ -118,11 +118,11 @@ export default function UsersPage() {
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell className="text-muted-foreground">{user.email}</TableCell>
                   <TableCell>
-                    <Badge 
+                    <Badge
                       variant={
-                        user.role === "Admin" ? "default" : 
-                        user.role === "Volunteer" ? "secondary" : 
-                        "outline"
+                        user.role === "Admin" ? "default" :
+                          user.role === "Volunteer" ? "secondary" :
+                            "outline"
                       }
                     >
                       {user.role}

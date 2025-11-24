@@ -1,6 +1,7 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/admin/announcements/page": "app/admin/announcements/page.js",
+  "/admin/github/page": "app/admin/github/page.js",
   "/admin/help/page": "app/admin/help/page.js",
   "/admin/page": "app/admin/page.js",
   "/admin/participants/detail/page": "app/admin/participants/detail/page.js",

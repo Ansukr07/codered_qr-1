@@ -150,7 +150,7 @@
     --default-font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     --default-mono-font-family: "JetBrains Mono", ui-monospace, monospace;
     --radius: .75rem;
-    --color-border: #27272a;
+    --color-border: #4a1f1f;
   }
 
   @supports (color: lab(0% 0 0)) {
@@ -1698,22 +1698,22 @@
   }
 
   .border-border {
-    border-color: #27272a;
+    border-color: #4a1f1f;
   }
 
   .border-border\/30 {
-    border-color: #27272a4d;
-    border-color: lab(15.728% .557795 -1.982 / .3);
+    border-color: #4a1f1f4d;
+    border-color: lab(18.3162% 20.8781 10.2545 / .3);
   }
 
   .border-border\/40 {
-    border-color: #27272a66;
-    border-color: lab(15.728% .557795 -1.982 / .4);
+    border-color: #4a1f1f66;
+    border-color: lab(18.3162% 20.8781 10.2545 / .4);
   }
 
   .border-border\/50 {
-    border-color: #27272a80;
-    border-color: lab(15.728% .557795 -1.982 / .5);
+    border-color: #4a1f1f80;
+    border-color: lab(18.3162% 20.8781 10.2545 / .5);
   }
 
   .border-destructive {
@@ -1745,7 +1745,7 @@
   }
 
   .border-input {
-    border-color: #27272a;
+    border-color: #4a1f1f;
   }
 
   .border-primary {
@@ -1844,12 +1844,12 @@
   }
 
   .bg-border {
-    background-color: #27272a;
+    background-color: #4a1f1f;
   }
 
   .bg-border\/50 {
-    background-color: #27272a80;
-    background-color: lab(15.728% .557795 -1.982 / .5);
+    background-color: #4a1f1f80;
+    background-color: lab(18.3162% 20.8781 10.2545 / .5);
   }
 
   .bg-card {
@@ -1922,7 +1922,7 @@
   }
 
   .bg-input {
-    background-color: #27272a;
+    background-color: #4a1f1f;
   }
 
   .bg-muted {
@@ -2047,6 +2047,10 @@
   .bg-gradient-to-r {
     --tw-gradient-position: to right in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+
+  .bg-\[linear-gradient\(to_right\,\#4a1f1f_1px\,transparent_1px\)\,linear-gradient\(to_bottom\,\#4a1f1f_1px\,transparent_1px\)\] {
+    background-image: linear-gradient(to right, #4a1f1f 1px, #0000 1px), linear-gradient(#4a1f1f 1px, #0000 1px);
   }
 
   .bg-\[linear-gradient\(to_right\,\#27272a_1px\,transparent_1px\)\,linear-gradient\(to_bottom\,\#27272a_1px\,transparent_1px\)\] {
@@ -2624,6 +2628,10 @@
 
   .opacity-0 {
     opacity: 0;
+  }
+
+  .opacity-30 {
+    opacity: .3;
   }
 
   .opacity-50 {
@@ -4125,7 +4133,7 @@
   }
 
   .data-\[state\=unchecked\]\:bg-input[data-state="unchecked"] {
-    background-color: #27272a;
+    background-color: #4a1f1f;
   }
 
   .data-\[swipe\=cancel\]\:translate-x-0[data-swipe="cancel"] {
@@ -4596,8 +4604,8 @@
 
   @media (prefers-color-scheme: dark) {
     .dark\:bg-input\/30 {
-      background-color: #27272a4d;
-      background-color: lab(15.728% .557795 -1.982 / .3);
+      background-color: #4a1f1f4d;
+      background-color: lab(18.3162% 20.8781 10.2545 / .3);
     }
   }
 
@@ -4666,14 +4674,14 @@
 
   @media (prefers-color-scheme: dark) {
     .dark\:data-\[state\=active\]\:border-input[data-state="active"] {
-      border-color: #27272a;
+      border-color: #4a1f1f;
     }
   }
 
   @media (prefers-color-scheme: dark) {
     .dark\:data-\[state\=active\]\:bg-input\/30[data-state="active"] {
-      background-color: #27272a4d;
-      background-color: lab(15.728% .557795 -1.982 / .3);
+      background-color: #4a1f1f4d;
+      background-color: lab(18.3162% 20.8781 10.2545 / .3);
     }
   }
 
@@ -4703,8 +4711,8 @@
 
   @media (prefers-color-scheme: dark) {
     .dark\:data-\[state\=unchecked\]\:bg-input\/80[data-state="unchecked"] {
-      background-color: #27272acc;
-      background-color: lab(15.728% .557795 -1.982 / .8);
+      background-color: #4a1f1fcc;
+      background-color: lab(18.3162% 20.8781 10.2545 / .8);
     }
   }
 
@@ -4720,12 +4728,12 @@
   }
 
   .\[\&_\.recharts-cartesian-grid_line\[stroke\=\'\#ccc\'\]\]\:stroke-border\/50 .recharts-cartesian-grid line[stroke="#ccc"] {
-    stroke: #27272a80;
-    stroke: lab(15.728% .557795 -1.982 / .5);
+    stroke: #4a1f1f80;
+    stroke: lab(18.3162% 20.8781 10.2545 / .5);
   }
 
   .\[\&_\.recharts-curve\.recharts-tooltip-cursor\]\:stroke-border .recharts-curve.recharts-tooltip-cursor {
-    stroke: #27272a;
+    stroke: #4a1f1f;
   }
 
   .\[\&_\.recharts-dot\[stroke\=\'\#fff\'\]\]\:stroke-transparent .recharts-dot[stroke="#fff"] {
@@ -4745,7 +4753,7 @@
   }
 
   .\[\&_\.recharts-polar-grid_\[stroke\=\'\#ccc\'\]\]\:stroke-border .recharts-polar-grid [stroke="#ccc"] {
-    stroke: #27272a;
+    stroke: #4a1f1f;
   }
 
   .\[\&_\.recharts-radial-bar-background-sector\]\:fill-muted .recharts-radial-bar-background-sector {
@@ -4757,7 +4765,7 @@
   }
 
   .\[\&_\.recharts-reference-line_\[stroke\=\'\#ccc\'\]\]\:stroke-border .recharts-reference-line [stroke="#ccc"] {
-    stroke: #27272a;
+    stroke: #4a1f1f;
   }
 
   .\[\&_\.recharts-sector\]\:outline-hidden .recharts-sector {

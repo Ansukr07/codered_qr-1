@@ -451,7 +451,7 @@ function AnnouncementsPage() {
                 className: "flex items-center justify-between",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "text-3xl font-bold",
+                        className: "text-3xl font-bold text-primary",
                         children: "Announcements & Schedule"
                     }, void 0, false, {
                         fileName: "[project]/app/admin/announcements/page.tsx",
@@ -813,7 +813,7 @@ function AnnouncementsPage() {
                                                             className: "w-0.5 h-12 bg-border/50 my-1"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/announcements/page.tsx",
-                                                            lineNumber: 165,
+                                                            lineNumber: 164,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
@@ -833,7 +833,7 @@ function AnnouncementsPage() {
                                                                     children: item.time
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/admin/announcements/page.tsx",
-                                                                    lineNumber: 170,
+                                                                    lineNumber: 169,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -842,13 +842,13 @@ function AnnouncementsPage() {
                                                                     children: item.status
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/admin/announcements/page.tsx",
-                                                                    lineNumber: 171,
+                                                                    lineNumber: 170,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/admin/announcements/page.tsx",
-                                                            lineNumber: 169,
+                                                            lineNumber: 168,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -856,13 +856,13 @@ function AnnouncementsPage() {
                                                             children: item.event
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/announcements/page.tsx",
-                                                            lineNumber: 182,
+                                                            lineNumber: 181,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/announcements/page.tsx",
-                                                    lineNumber: 168,
+                                                    lineNumber: 167,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
