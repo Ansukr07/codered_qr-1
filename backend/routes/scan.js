@@ -57,4 +57,54 @@ router.post('/', requireAuth, requireRole('volunteer', 'admin'), async (req, res
     }
 });
 
+router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (req, res) => {
+    try {
+        const { qr_code, resource_id } = req.body;
+
+        const user = await User.findOne({ qrCode: qr_code });
+        if (!user) {
+            return res.status(404).json({ message: 'Invalid QR Code' });
+        }
+
+        const resource = await Resource.findById(resource_id);
+        if (!resource) {
+            return res.status(404).json({ message: 'Resource not found' });
+        }
+
+        const existingTransaction = await Transaction.findOne({
+            userId: user._id,
+            resourceId: resource._id,
+        }).populate('volunteerId', 'name');
+
+        if (existingTransaction) {
+            return res.status(200).json({
+                status: 'claimed',
+                message: `Already claimed: ${resource.name}`,
+                member: {
+                    name: user.name,
+                    teamId: user.teamId,
+                    email: user.email
+                },
+                transaction: {
+                    timestamp: existingTransaction.timestamp,
+                    volunteerName: existingTransaction.volunteerId ? existingTransaction.volunteerId.name : 'Unknown'
+                }
+            });
+        }
+
+        return res.status(200).json({
+            status: 'allowed',
+            message: 'Ready to claim',
+            member: {
+                name: user.name,
+                teamId: user.teamId,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router;

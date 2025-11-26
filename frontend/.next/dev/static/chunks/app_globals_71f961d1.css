@@ -1816,6 +1816,16 @@
     border-color: #4a1f1f;
   }
 
+  .border-orange-500\/20 {
+    border-color: #fe6e0033;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-orange-500\/20 {
+      border-color: color-mix(in oklab, var(--color-orange-500) 20%, transparent);
+    }
+  }
+
   .border-orange-500\/50 {
     border-color: #fe6e0080;
   }
@@ -4662,6 +4672,12 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:max-w-md {
+      max-width: var(--container-md);
+    }
+  }
+
+  @media (min-width: 40rem) {
     .sm\:max-w-sm {
       max-width: var(--container-sm);
     }
@@ -4676,6 +4692,12 @@
   @media (min-width: 40rem) {
     .sm\:flex-row {
       flex-direction: row;
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:justify-between {
+      justify-content: space-between;
     }
   }
 

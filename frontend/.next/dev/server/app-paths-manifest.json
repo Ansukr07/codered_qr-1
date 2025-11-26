@@ -9,6 +9,9 @@
   "/participant/qr/page": "app/participant/qr/page.js",
   "/participant/seating/page": "app/participant/seating/page.js",
   "/volunteer/page": "app/volunteer/page.js",
+  "/volunteer/scan-bag/page": "app/volunteer/scan-bag/page.js",
+  "/volunteer/scan-chill/page": "app/volunteer/scan-chill/page.js",
+  "/volunteer/scan-food/page": "app/volunteer/scan-food/page.js",
   "/volunteer/scan/[resourceId]/page": "app/volunteer/scan/[resourceId]/page.js",
   "/volunteer/seating/page": "app/volunteer/seating/page.js"
 }
