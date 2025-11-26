@@ -2051,6 +2051,10 @@
     background-image: linear-gradient(to right, #27272a 1px, #0000 1px), linear-gradient(#27272a 1px, #0000 1px);
   }
 
+  .bg-\[linear-gradient\(to_right\,\#ffffff_1px\,transparent_1px\)\,linear-gradient\(to_bottom\,\#ffffff_1px\,transparent_1px\)\] {
+    background-image: linear-gradient(to right, #fff 1px, #0000 1px), linear-gradient(#fff 1px, #0000 1px);
+  }
+
   .from-indigo-500\/10 {
     --tw-gradient-from: #625fff1a;
   }
@@ -2622,6 +2626,10 @@
 
   .opacity-0 {
     opacity: 0;
+  }
+
+  .opacity-20 {
+    opacity: .2;
   }
 
   .opacity-30 {

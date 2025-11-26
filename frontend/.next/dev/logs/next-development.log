@@ -1,5 +1,13 @@
-[00:00:03.965] Server  LOG      ✓ Ready in 2.6s
-[00:01:51.567] Server  LOG      ○ Compiling /login ...
-[00:01:55.787] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:56.040] Server  ERROR   (node:21400) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:02.832] Server  LOG      ✓ Ready in 1709ms
+[00:00:19.003] Server  LOG      ○ Compiling / ...
+[00:00:21.304] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:21.404] Server  ERROR   (node:18912) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
+[00:03:36.918] Browser ERROR   uncaughtError: TypeError: Cannot read properties of null (reading 'name')
+[00:05:09.692] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:56.919] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:19.067] Server  LOG      ✓ Compiled in 361ms
+[00:19:33.131] Server  LOG      ✓ Compiled in 149ms
+[00:20:03.830] Server  LOG      ✓ Compiled in 285ms
+[00:21:22.146] Server  LOG      ✓ Compiled in 165ms
+[00:22:48.804] Server  LOG      ✓ Compiled in 164ms

@@ -14,7 +14,7 @@ import { toast } from 'sonner'
 
 interface Transaction {
     _id: string
-    resourceId: { name: string }
+    resourceId: { name: string } | null
     action: string
     timestamp: string
 }
@@ -172,8 +172,8 @@ export default function ParticipantDashboard() {
 
     return (
         <div className="min-h-screen bg-background relative">
-            {/* Red Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4a1f1f_1px,transparent_1px),linear-gradient(to_bottom,#4a1f1f_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50 pointer-events-none" />
+            {/* White Grid Background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-80 pointer-events-none" />
 
             <div className="relative z-10 p-6">
                 <div className="max-w-7xl mx-auto space-y-6">
@@ -204,7 +204,7 @@ export default function ParticipantDashboard() {
                             <CardContent className="flex flex-col items-center space-y-4">
                                 {qrCode ? (
                                     <>
-                                        <div className="p-4 bg-white rounded-lg">
+                                        <div className="p-4 bg-white  ">
                                             <QRCodeSVG value={qrCode} size={200} level="H" />
                                         </div>
                                         <p className="text-xs text-muted-foreground font-mono">{qrCode}</p>
@@ -292,7 +292,7 @@ export default function ParticipantDashboard() {
                             <CardContent>
                                 <div className="space-y-2">
                                     {announcements.slice(0, 5).map((announcement) => (
-                                        <div key={announcement._id} className="flex justify-between items-start p-3 bg-secondary/50 rounded-lg">
+                                        <div key={announcement._id} className="flex justify-between items-start p-3 bg-secondary/50  ">
                                             <div className="flex-1">
                                                 <p className="font-medium text-card-foreground">{announcement.title}</p>
                                                 <p className="text-sm text-muted-foreground mt-1">{announcement.message}</p>
@@ -326,7 +326,7 @@ export default function ParticipantDashboard() {
                             <CardContent>
                                 <div className="space-y-2">
                                     {helpRequests.map((req) => (
-                                        <div key={req._id} className="flex justify-between items-start p-3 bg-secondary/50 rounded-lg">
+                                        <div key={req._id} className="flex justify-between items-start p-3 bg-secondary/50  ">
                                             <div className="flex-1">
                                                 <p className="font-medium text-card-foreground">{req.description}</p>
                                                 <div className="flex gap-2 mt-1">
@@ -371,9 +371,11 @@ export default function ParticipantDashboard() {
                             ) : (
                                 <div className="space-y-2">
                                     {transactions.map((tx) => (
-                                        <div key={tx._id} className="flex justify-between items-center p-3 bg-secondary/50 rounded-lg">
+                                        <div key={tx._id} className="flex justify-between items-center p-3 bg-secondary/50  ">
                                             <div>
-                                                <p className="font-medium text-card-foreground">{tx.resourceId.name}</p>
+                                                <p className="font-medium text-card-foreground">
+                                                    {tx.resourceId?.name || 'Resource Unavailable'}
+                                                </p>
                                                 <p className="text-xs text-muted-foreground">
                                                     {new Date(tx.timestamp).toLocaleString()}
                                                 </p>
