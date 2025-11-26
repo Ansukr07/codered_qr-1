@@ -1,15 +1,10 @@
 {
-  "/admin/announcements/page": "app/admin/announcements/page.js",
-  "/admin/github/page": "app/admin/github/page.js",
-  "/admin/help/page": "app/admin/help/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/admin/participants/page": "app/admin/participants/page.js",
-  "/admin/users/page": "app/admin/users/page.js",
   "/login/page": "app/login/page.js",
-  "/page": "app/page.js",
-  "/participant/page": "app/participant/page.js",
+  "/volunteer/help/page": "app/volunteer/help/page.js",
   "/volunteer/page": "app/volunteer/page.js",
+  "/volunteer/resource-tracking/page": "app/volunteer/resource-tracking/page.js",
   "/volunteer/scan-bag/page": "app/volunteer/scan-bag/page.js",
   "/volunteer/scan-chill/page": "app/volunteer/scan-chill/page.js",
-  "/volunteer/scan-food/page": "app/volunteer/scan-food/page.js"
+  "/volunteer/scan-food/page": "app/volunteer/scan-food/page.js",
+  "/volunteer/scan/[resourceId]/page": "app/volunteer/scan/[resourceId]/page.js"
 }

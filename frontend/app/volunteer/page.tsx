@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone } from 'lucide-react'
+import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone, ClipboardList } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -167,6 +167,16 @@ export default function VolunteerDashboard() {
       count: totalHelp,
       resources: [] // Help requests are not resources
     },
+    {
+      title: 'Resource Tracking',
+      description: 'View distribution status',
+      icon: ClipboardList,
+      href: '/volunteer/resource-tracking',
+      color: 'text-teal-500',
+      bgColor: 'bg-teal-500/10',
+      count: resources.length,
+      resources: [] // Navigation only
+    },
   ]
 
   return (
@@ -261,41 +271,33 @@ export default function VolunteerDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {filteredResources.map((resource) => {
-                let href = '/volunteer'
-                const name = resource.name.toLowerCase()
-                if (name.includes('lunch') || name.includes('dinner') || name.includes('breakfast') || name.includes('food')) href = '/volunteer/scan-food'
-                else if (name.includes('bag') || name.includes('sleep')) href = '/volunteer/scan-bag'
-                else if (name.includes('chill')) href = '/volunteer/scan-chill'
-                else if (name.includes('help')) href = '/volunteer/help'
-
-                return (
-                  <Link key={resource._id} href={href}>
-                    <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors cursor-pointer mb-3">
-                      <div className="flex-1">
-                        <p className="font-medium text-card-foreground">{resource.name}</p>
-                        <p className="text-xs text-muted-foreground capitalize">{resource.type}</p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-foreground">
-                            {resource.distributedQuantity}/{resource.totalQuantity}
-                          </p>
-                          <div className="w-24 bg-secondary rounded-full h-1.5 mt-1">
-                            <div
-                              className="bg-primary h-1.5 rounded-full transition-all"
-                              style={{
-                                width: `${Math.min((resource.distributedQuantity / resource.totalQuantity) * 100, 100)}%`,
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                      </div>
+              {filteredResources.map((resource) => (
+                <Link key={resource._id} href={`/volunteer/scan/${resource._id}`}>
+                  <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors cursor-pointer mb-3">
+                    <div className="flex-1">
+                      <p className="font-medium text-card-foreground">{resource.name}</p>
+                      <p className="text-xs text-muted-foreground capitalize">{resource.type}</p>
                     </div>
-                  </Link>
-                )
-              })}
+                    <div className="flex items-center gap-3">
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-foreground">
+                          {resource.distributedQuantity}/{resource.totalQuantity}
+                        </p>
+                        <div className="w-24 bg-secondary rounded-full h-1.5 mt-1">
+                          <div
+                            className="bg-primary h-1.5 rounded-full transition-all"
+                            style={{
+                              width: `${Math.min((resource.distributedQuantity / resource.totalQuantity) * 100, 100)}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                </Link>
+              )
+              )}
               {filteredResources.length === 0 && (
                 <p className="text-center text-muted-foreground py-4">No resources found</p>
               )}

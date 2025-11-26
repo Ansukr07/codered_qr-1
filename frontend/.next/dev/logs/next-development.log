@@ -1,13 +1,258 @@
-[00:00:02.832] Server  LOG      ✓ Ready in 1709ms
-[00:00:19.003] Server  LOG      ○ Compiling / ...
-[00:00:21.304] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:21.404] Server  ERROR   (node:18912) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:02.968] Server  LOG      ✓ Ready in 1986ms
+[00:00:06.043] Server  LOG      ○ Compiling /login ...
+[00:00:07.682] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:07.832] Server  ERROR   (node:25020) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[00:03:36.918] Browser ERROR   uncaughtError: TypeError: Cannot read properties of null (reading 'name')
-[00:05:09.692] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:09:56.919] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:19:19.067] Server  LOG      ✓ Compiled in 361ms
-[00:19:33.131] Server  LOG      ✓ Compiled in 149ms
-[00:20:03.830] Server  LOG      ✓ Compiled in 285ms
-[00:21:22.146] Server  LOG      ✓ Compiled in 165ms
-[00:22:48.804] Server  LOG      ✓ Compiled in 164ms
+[00:04:03.681] Server  LOG      ✓ Compiled in 333ms
+[00:05:34.029] Server  LOG      ✓ Compiled in 203ms
+[00:05:36.007] Server  LOG      ✓ Compiled in 134ms
+[00:07:14.410] Server  LOG      ✓ Compiled in 146ms
+[00:07:35.498] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:35.899] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:07:35.899] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:07:35.899] Browser LOG     Response status: 403
+[00:07:35.899] Browser ERROR   Failed to fetch resources, status: 403
+[00:07:35.899] Browser LOG     Response status: 403
+[00:07:35.899] Browser ERROR   Failed to fetch resources, status: 403
+[00:07:35.899] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
+[00:07:35.899] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
+[00:09:24.811] Server  LOG      ✓ Compiled in 122ms
+[00:09:31.231] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:09:31.231] Browser LOG     Resource status response status: 403
+[00:09:31.231] Browser ERROR   Failed to fetch resource status, status: 403
+[00:09:31.231] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:09:36.238] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:09:36.238] Browser LOG     Resource status response status: 403
+[00:09:36.238] Browser ERROR   Failed to fetch resource status, status: 403
+[00:09:36.238] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:09:41.221] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:09:41.221] Browser LOG     Resource status response status: 403
+[00:09:41.221] Browser ERROR   Failed to fetch resource status, status: 403
+[00:09:41.221] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:09:47.978] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:09:47.978] Browser LOG     Resource status response status: 403
+[00:09:47.978] Browser ERROR   Failed to fetch resource status, status: 403
+[00:09:47.978] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:09:51.926] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:09:51.926] Browser LOG     Resource status response status: 403
+[00:09:51.926] Browser ERROR   Failed to fetch resource status, status: 403
+[00:09:51.926] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:10:23.229] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:10:23.229] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:10:23.229] Browser LOG     Response status: 403
+[00:10:23.229] Browser ERROR   Failed to fetch resources, status: 403
+[00:10:23.229] Browser LOG     Response status: 403
+[00:10:23.229] Browser ERROR   Failed to fetch resources, status: 403
+[00:10:23.229] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
+[00:10:23.229] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
+[00:10:25.457] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1a
+[00:10:25.457] Browser LOG     Resource status response status: 403
+[00:10:25.457] Browser ERROR   Failed to fetch resource status, status: 403
+[00:10:25.457] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:10:30.385] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e18
+[00:10:30.385] Browser LOG     Resource status response status: 403
+[00:10:30.385] Browser ERROR   Failed to fetch resource status, status: 403
+[00:10:30.385] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:10:33.933] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1c
+[00:10:33.933] Browser LOG     Resource status response status: 403
+[00:10:33.933] Browser ERROR   Failed to fetch resource status, status: 403
+[00:10:33.933] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:03.450] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:11:03.450] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:11:03.450] Browser LOG     Response status: 403
+[00:11:03.450] Browser ERROR   Failed to fetch resources, status: 403
+[00:11:03.450] Browser LOG     Response status: 403
+[00:11:03.450] Browser ERROR   Failed to fetch resources, status: 403
+[00:11:03.450] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
+[00:11:03.450] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
+[00:11:07.562] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:07.562] Browser LOG     Resource status response status: 403
+[00:11:07.562] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:07.562] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:12.570] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:12.570] Browser LOG     Resource status response status: 403
+[00:11:12.570] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:12.570] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:17.558] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:17.558] Browser LOG     Resource status response status: 403
+[00:11:17.558] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:17.558] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:22.570] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:22.570] Browser LOG     Resource status response status: 403
+[00:11:22.570] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:22.570] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:27.985] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:27.985] Browser LOG     Resource status response status: 403
+[00:11:27.985] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:27.985] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:33.978] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:33.978] Browser LOG     Resource status response status: 403
+[00:11:33.979] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:33.979] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:38.975] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:38.975] Browser LOG     Resource status response status: 403
+[00:11:38.975] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:38.975] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:43.974] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:43.974] Browser LOG     Resource status response status: 403
+[00:11:43.974] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:43.974] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:48.978] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:48.978] Browser LOG     Resource status response status: 403
+[00:11:48.979] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:48.979] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:53.982] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:53.982] Browser LOG     Resource status response status: 403
+[00:11:53.982] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:53.982] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:11:58.983] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:11:58.983] Browser LOG     Resource status response status: 403
+[00:11:58.983] Browser ERROR   Failed to fetch resource status, status: 403
+[00:11:58.983] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
+[00:12:03.976] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:12:06.065] Browser LOG     Resource status response status: 200
+[00:12:06.065] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-24T14:02:45.748Z","volunteer":"Demo Volunteer"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","teamId":"Demo10","timestamp":"2025-11-24T14:17:16.734Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},"stats":{"completed":2,"pending":6,"total":8}}
+[00:12:06.065] Browser LOG     Stats: {"completed":2,"pending":6,"total":8}
+[00:12:06.065] Browser LOG     Completed count: 2
+[00:12:06.065] Browser LOG     Pending count: 6
+[00:12:07.538] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:12:07.697] Browser LOG     Resource status response status: 200
+[00:12:07.697] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-24T14:02:45.748Z","volunteer":"Demo Volunteer"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","teamId":"Demo10","timestamp":"2025-11-24T14:17:16.734Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},"stats":{"completed":2,"pending":6,"total":8}}
+[00:12:07.697] Browser LOG     Stats: {"completed":2,"pending":6,"total":8}
+[00:12:07.697] Browser LOG     Completed count: 2
+[00:12:07.697] Browser LOG     Pending count: 6
+[00:12:12.536] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
+[00:12:12.731] Browser LOG     Resource status response status: 200
+[00:12:12.731] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-24T14:02:45.748Z","volunteer":"Demo Volunteer"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","teamId":"Demo10","timestamp":"2025-11-24T14:17:16.734Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},"stats":{"completed":2,"pending":6,"total":8}}
+[00:12:12.731] Browser LOG     Stats: {"completed":2,"pending":6,"total":8}
+[00:12:12.731] Browser LOG     Completed count: 2
+[00:12:12.731] Browser LOG     Pending count: 6
+[00:12:17.974] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e15
+[00:12:19.365] Browser LOG     Resource status response status: 200
+[00:12:19.365] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-26T10:20:31.616Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","qrCode":"d0fbf5ee-f35a-4947-9355-261b5e28b5b7","teamId":"Demo10"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},"stats":{"completed":1,"pending":7,"total":8}}
+[00:12:19.365] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
+[00:12:19.365] Browser LOG     Completed count: 1
+[00:12:19.365] Browser LOG     Pending count: 7
+[00:12:53.345] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:12:53.345] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:12:53.345] Browser LOG     Response status: 200
+[00:12:53.345] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
+[00:12:53.345] Browser LOG     Response status: 200
+[00:12:53.345] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
+[00:14:08.890] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:14:08.890] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:14:08.890] Browser LOG     Response status: 200
+[00:14:08.890] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
+[00:14:08.890] Browser LOG     Response status: 200
+[00:14:08.890] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
+[00:14:54.320] Server  LOG      ✓ Compiled in 142ms
+[00:15:16.694] Server  LOG      ✓ Compiled in 206ms
+[00:15:16.975] Browser ERROR   ./app/volunteer/resource-tracking/page.tsx:227:51
+Parsing ecmascript source code failed
+  225 |                                                 <CardContent className="p-6">
+  226 |                             )}
+> 227 |                                                 </>
+      |                                                   ^
+  228 |                     )}
+  229 |
+  230 |                                                 {/* Participant Tracking View (when resource selected) */}
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/resource-tracking/page.tsx [Client Component Browser]
+    ./app/volunteer/resource-tracking/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/resource-tracking/page.tsx [Client Component SSR]
+    ./app/volunteer/resource-tracking/page.tsx [Server Component]
+[00:15:16.975] Browser ERROR   ./app/volunteer/resource-tracking/page.tsx:226:30
+Parsing ecmascript source code failed
+  224 |                                             >
+  225 |                                                 <CardContent className="p-6">
+> 226 |                             )}
+      |                              ^
+  227 |                                                 </>
+  228 |                     )}
+  229 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/resource-tracking/page.tsx [Client Component Browser]
+    ./app/volunteer/resource-tracking/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/resource-tracking/page.tsx [Client Component SSR]
+    ./app/volunteer/resource-tracking/page.tsx [Server Component]
+[00:16:12.966] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:13.465] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:16:13.465] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:16:15.121] Browser LOG     Response status: 200
+[00:16:15.122] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0}]
+[00:16:15.796] Browser LOG     Response status: 200
+[00:16:15.796] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0}]
+[00:17:08.866] Server  LOG      ✓ Compiled in 158ms
+[00:17:10.515] Server  LOG      ✓ Compiled in 115ms
+[00:35:36.729] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:37.234] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:35:37.234] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:35:38.819] Browser LOG     Response status: 200
+[00:35:38.819] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalParticipants":8},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalParticipants":8}]
+[00:35:39.705] Browser LOG     Response status: 200
+[00:35:39.706] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalParticipants":8},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalParticipants":8}]
+[00:37:20.330] Server  LOG      ✓ Compiled in 119ms
+[00:38:50.168] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:52.419] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:38:52.419] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:38:57.968] Browser LOG     Response status: 200
+[00:38:57.968] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:38:59.248] Browser LOG     Response status: 200
+[00:38:59.248] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:39:37.685] Server  LOG      ✓ Compiled in 137ms
+[00:40:23.917] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:40:24.109] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:40:24.109] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:40:24.847] Browser LOG     Response status: 200
+[00:40:24.847] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:40:24.847] Browser LOG     Response status: 200
+[00:40:24.847] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:41:55.666] Server  LOG      ✓ Compiled in 123ms
+[00:42:14.601] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:42:16.988] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:42:16.988] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:42:18.428] Browser LOG     Response status: 200
+[00:42:18.429] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:42:20.982] Browser LOG     Response status: 200
+[00:42:20.982] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:43:20.843] Server  LOG      ✓ Compiled in 174ms
+[00:43:22.406] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:43:22.406] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:43:23.529] Browser LOG     Response status: 200
+[00:43:23.529] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:43:24.121] Browser LOG     Response status: 200
+[00:43:24.121] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:44:53.859] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:45:16.189] Server  LOG      ✓ Compiled in 125ms
+[00:49:13.032] Server  LOG      ✓ Compiled in 212ms
+[00:49:38.942] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:49:38.942] Browser LOG     Fetching resources from /api/volunteers/resources
+[00:49:39.129] Browser LOG     Response status: 200
+[00:49:39.129] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:49:39.676] Browser LOG     Response status: 200
+[00:49:39.676] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
+[00:49:46.354] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1a
+[00:49:46.577] Browser LOG     Resource status response status: 200
+[00:49:46.577] Browser LOG     Resource status data received: {"completed":[{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","teamId":"Demo","timestamp":"2025-11-26T10:57:52.681Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3"},{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","qrCode":"d0fbf5ee-f35a-4947-9355-261b5e28b5b7","teamId":"Demo10"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"}],"resource":{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},"stats":{"completed":1,"pending":7,"total":8}}
+[00:49:46.577] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
+[00:49:46.577] Browser LOG     Completed count: 1
+[00:49:46.577] Browser LOG     Pending count: 7
+[00:49:47.765] Server  LOG      ✓ Compiled in 158ms
+[00:49:51.359] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1a
+[00:50:04.578] Browser LOG     Resource status response status: 200
+[00:50:04.578] Browser LOG     Resource status data received: {"completed":[{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","teamId":"Demo","timestamp":"2025-11-26T10:57:52.681Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3"},{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","qrCode":"d0fbf5ee-f35a-4947-9355-261b5e28b5b7","teamId":"Demo10"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"}],"resource":{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},"stats":{"completed":1,"pending":7,"total":8}}
+[00:50:04.578] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
+[00:50:04.578] Browser LOG     Completed count: 1
+[00:50:04.578] Browser LOG     Pending count: 7

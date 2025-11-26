@@ -138,9 +138,8 @@ export default function ScanFoodPage() {
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-4">
         <Link href="/volunteer">
-          <Button variant="ghost" size="sm" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back
+          <Button variant="default" size="icon">
+            <ArrowLeft className="h-4 w-4 text-white" />
           </Button>
         </Link>
         <div>

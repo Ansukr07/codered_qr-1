@@ -20,6 +20,7 @@ app.use('/api/resources', require('./routes/resources'));
 app.use('/api/scan', require('./routes/scan'));
 app.use('/api/transactions', require('./routes/transactions'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/volunteers', require('./routes/volunteers'));
 app.use('/api/help-requests', require('./routes/helpRequests'));
 app.use('/api/announcements', require('./routes/announcements'));
 
