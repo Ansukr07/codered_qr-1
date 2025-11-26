@@ -6,5 +6,7 @@
   "/login/page": "app/login/page.js",
   "/page": "app/page.js",
   "/participant/page": "app/participant/page.js",
-  "/participant/seating/page": "app/participant/seating/page.js"
+  "/participant/seating/page": "app/participant/seating/page.js",
+  "/volunteer/page": "app/volunteer/page.js",
+  "/volunteer/seating/page": "app/volunteer/seating/page.js"
 }

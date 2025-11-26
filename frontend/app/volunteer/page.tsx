@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone, ClipboardList } from 'lucide-react'
+import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone, ClipboardList, MapPin } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -176,6 +176,16 @@ export default function VolunteerDashboard() {
       bgColor: 'bg-teal-500/10',
       count: resources.length,
       resources: [] // Navigation only
+    },
+    {
+      title: 'Seating Management',
+      description: 'Find seats & teams',
+      icon: MapPin,
+      href: '/volunteer/seating',
+      color: 'text-indigo-500',
+      bgColor: 'bg-indigo-500/10',
+      count: 0,
+      resources: []
     },
   ]
 

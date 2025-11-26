@@ -162,8 +162,8 @@ router.post('/generate', requireAuth, requireRole('admin'), async (req, res) => 
     }
 });
 
-// Get all seating arrangements (Admin only)
-router.get('/all', requireAuth, requireRole('admin'), async (req, res) => {
+// Get all seating arrangements (Admin and Volunteer)
+router.get('/all', requireAuth, requireRole('admin', 'volunteer'), async (req, res) => {
     try {
         const seating = await Seating.find({}).sort({ section: 1 });
 
@@ -279,6 +279,77 @@ router.get('/my-seat', requireAuth, async (req, res) => {
         res.json(response);
     } catch (error) {
         console.error('🪑 Error in my-seat:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get team details by teamId (for clicking on a seat)
+router.get('/team/:teamId', requireAuth, async (req, res) => {
+    try {
+        const { teamId } = req.params;
+
+        // Get team members
+        const members = await User.find({ teamId, role: 'participant' })
+            .select('name email phone collegeId teamId');
+
+        if (!members || members.length === 0) {
+            return res.status(404).json({ message: 'Team not found' });
+        }
+
+        // Get seating info
+        const seating = await Seating.findOne({ teamId });
+
+        res.json({
+            teamId,
+            members,
+            seating
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Search participants (for volunteer dashboard)
+router.get('/search', requireAuth, async (req, res) => {
+    try {
+        const { query } = req.query;
+        if (!query || query.length < 2) {
+            return res.status(400).json({ message: 'Search query must be at least 2 characters' });
+        }
+
+        // Find participants matching name or email
+        const participants = await User.find({
+            role: 'participant',
+            $or: [
+                { name: { $regex: query, $options: 'i' } },
+                { email: { $regex: query, $options: 'i' } },
+                { teamId: { $regex: query, $options: 'i' } }
+            ]
+        }).select('name email teamId');
+
+        if (participants.length === 0) {
+            return res.json([]);
+        }
+
+        // Get seating for these teams
+        const teamIds = [...new Set(participants.map(p => p.teamId).filter(id => id))];
+        const seatings = await Seating.find({ teamId: { $in: teamIds } });
+
+        // Combine data
+        const results = participants.map(p => {
+            const teamSeating = seatings.find(s => s.teamId === p.teamId);
+            return {
+                participant: p,
+                seating: teamSeating ? {
+                    section: teamSeating.section,
+                    seats: teamSeating.seats,
+                    labName: teamSeating.labName
+                } : null
+            };
+        }).filter(r => r.seating); // Only return if they have seating
+
+        res.json(results);
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
