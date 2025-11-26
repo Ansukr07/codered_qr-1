@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone } from 'lucide-react'
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
@@ -107,19 +108,11 @@ export default function ParticipantDashboard() {
             }
         }
 
-        if (user) {
+        if (user && user.role === 'participant') {
             fetchUserData()
             fetchTransactions()
             fetchHelpRequests()
             fetchAnnouncements()
-
-            // Poll for new transactions every 5 seconds
-            const interval = setInterval(() => {
-                fetchTransactions()
-                fetchHelpRequests()
-                fetchAnnouncements()
-            }, 5000)
-            return () => clearInterval(interval)
         }
     }, [user])
 
@@ -311,6 +304,25 @@ export default function ParticipantDashboard() {
                     )}
 
 
+                    {/* View Seating Button */}
+                    <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30 hover:border-primary/50 transition-all cursor-pointer">
+                        <Link href="/participant/seating">
+                            <CardContent className="p-6">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-3 bg-primary/20 rounded-full">
+                                            <MapPin className="h-6 w-6 text-primary" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-bold text-card-foreground">View My Seating Assignment</h3>
+                                            <p className="text-sm text-muted-foreground">Check your team's assigned seats in the lab</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-muted-foreground text-2xl">→</div>
+                                </div>
+                            </CardContent>
+                        </Link>
+                    </Card>
                     {/* Help Request History */}
                     {helpRequests.length > 0 && (
                         <Card>

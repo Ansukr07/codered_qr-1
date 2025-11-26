@@ -1,266 +1,443 @@
-[00:00:02.968] Server  LOG      ✓ Ready in 1986ms
-[00:00:06.043] Server  LOG      ○ Compiling /login ...
-[00:00:07.682] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:07.832] Server  ERROR   (node:25020) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:02.144] Server  LOG      ✓ Ready in 1378ms
+[00:00:05.210] Server  LOG      ○ Compiling /admin/seating ...
+[00:00:06.740] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:06.899] Server  ERROR   (node:19612) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[00:04:03.681] Server  LOG      ✓ Compiled in 333ms
-[00:05:34.029] Server  LOG      ✓ Compiled in 203ms
-[00:05:36.007] Server  LOG      ✓ Compiled in 134ms
-[00:07:14.410] Server  LOG      ✓ Compiled in 146ms
-[00:07:35.498] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:07:35.899] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:07:35.899] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:07:35.899] Browser LOG     Response status: 403
-[00:07:35.899] Browser ERROR   Failed to fetch resources, status: 403
-[00:07:35.899] Browser LOG     Response status: 403
-[00:07:35.899] Browser ERROR   Failed to fetch resources, status: 403
-[00:07:35.899] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
-[00:07:35.899] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
-[00:09:24.811] Server  LOG      ✓ Compiled in 122ms
-[00:09:31.231] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:09:31.231] Browser LOG     Resource status response status: 403
-[00:09:31.231] Browser ERROR   Failed to fetch resource status, status: 403
-[00:09:31.231] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:09:36.238] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:09:36.238] Browser LOG     Resource status response status: 403
-[00:09:36.238] Browser ERROR   Failed to fetch resource status, status: 403
-[00:09:36.238] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:09:41.221] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:09:41.221] Browser LOG     Resource status response status: 403
-[00:09:41.221] Browser ERROR   Failed to fetch resource status, status: 403
-[00:09:41.221] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:09:47.978] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:09:47.978] Browser LOG     Resource status response status: 403
-[00:09:47.978] Browser ERROR   Failed to fetch resource status, status: 403
-[00:09:47.978] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:09:51.926] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:09:51.926] Browser LOG     Resource status response status: 403
-[00:09:51.926] Browser ERROR   Failed to fetch resource status, status: 403
-[00:09:51.926] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:10:23.229] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:10:23.229] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:10:23.229] Browser LOG     Response status: 403
-[00:10:23.229] Browser ERROR   Failed to fetch resources, status: 403
-[00:10:23.229] Browser LOG     Response status: 403
-[00:10:23.229] Browser ERROR   Failed to fetch resources, status: 403
-[00:10:23.229] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
-[00:10:23.229] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
-[00:10:25.457] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1a
-[00:10:25.457] Browser LOG     Resource status response status: 403
-[00:10:25.457] Browser ERROR   Failed to fetch resource status, status: 403
-[00:10:25.457] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:10:30.385] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e18
-[00:10:30.385] Browser LOG     Resource status response status: 403
-[00:10:30.385] Browser ERROR   Failed to fetch resource status, status: 403
-[00:10:30.385] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:10:33.933] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1c
-[00:10:33.933] Browser LOG     Resource status response status: 403
-[00:10:33.933] Browser ERROR   Failed to fetch resource status, status: 403
-[00:10:33.933] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:03.450] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:11:03.450] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:11:03.450] Browser LOG     Response status: 403
-[00:11:03.450] Browser ERROR   Failed to fetch resources, status: 403
-[00:11:03.450] Browser LOG     Response status: 403
-[00:11:03.450] Browser ERROR   Failed to fetch resources, status: 403
-[00:11:03.450] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
-[00:11:03.450] Browser LOG     Fallback resources: [{"__v":0,"_id":"691e1c80f78d7e5e4acf8e13","category":"other","createdAt":"2025-11-19T19:37:36.246Z","distributedQuantity":2,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c80f78d7e5e4acf8e15","category":"other","createdAt":"2025-11-19T19:37:36.367Z","distributedQuantity":1,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e18","category":"other","createdAt":"2025-11-19T19:37:59.710Z","distributedQuantity":4,"name":"Breakfast","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","createdAt":"2025-11-19T19:37:59.905Z","distributedQuantity":1,"name":"Lunch","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","createdAt":"2025-11-19T19:37:59.957Z","distributedQuantity":1,"name":"Dinner","totalQuantity":200,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","createdAt":"2025-11-19T19:38:00.042Z","distributedQuantity":0,"name":"Sleeping Bag","totalQuantity":50,"type":"returnable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e20","category":"other","createdAt":"2025-11-19T19:38:00.099Z","distributedQuantity":0,"name":"Chill Room Access","totalQuantity":20,"type":"consumable"},{"__v":0,"_id":"691e1c98f78d7e5e4acf8e22","category":"other","createdAt":"2025-11-19T19:38:00.285Z","distributedQuantity":0,"name":"Swag Kit","totalQuantity":150,"type":"consumable"}]
-[00:11:07.562] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:07.562] Browser LOG     Resource status response status: 403
-[00:11:07.562] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:07.562] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:12.570] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:12.570] Browser LOG     Resource status response status: 403
-[00:11:12.570] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:12.570] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:17.558] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:17.558] Browser LOG     Resource status response status: 403
-[00:11:17.558] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:17.558] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:22.570] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:22.570] Browser LOG     Resource status response status: 403
-[00:11:22.570] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:22.570] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:27.985] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:27.985] Browser LOG     Resource status response status: 403
-[00:11:27.985] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:27.985] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:33.978] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:33.978] Browser LOG     Resource status response status: 403
-[00:11:33.979] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:33.979] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:38.975] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:38.975] Browser LOG     Resource status response status: 403
-[00:11:38.975] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:38.975] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:43.974] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:43.974] Browser LOG     Resource status response status: 403
-[00:11:43.974] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:43.974] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:48.978] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:48.978] Browser LOG     Resource status response status: 403
-[00:11:48.979] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:48.979] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:53.982] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:53.982] Browser LOG     Resource status response status: 403
-[00:11:53.982] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:53.982] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:11:58.983] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:11:58.983] Browser LOG     Resource status response status: 403
-[00:11:58.983] Browser ERROR   Failed to fetch resource status, status: 403
-[00:11:58.983] Browser ERROR   Error response: {"message":"Forbidden. Insufficient permissions to access this resource.","requiredRole":["volunteer","admin"],"yourRole":"volunteer"}
-[00:12:03.976] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:12:06.065] Browser LOG     Resource status response status: 200
-[00:12:06.065] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-24T14:02:45.748Z","volunteer":"Demo Volunteer"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","teamId":"Demo10","timestamp":"2025-11-24T14:17:16.734Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},"stats":{"completed":2,"pending":6,"total":8}}
-[00:12:06.065] Browser LOG     Stats: {"completed":2,"pending":6,"total":8}
-[00:12:06.065] Browser LOG     Completed count: 2
-[00:12:06.065] Browser LOG     Pending count: 6
-[00:12:07.538] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:12:07.697] Browser LOG     Resource status response status: 200
-[00:12:07.697] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-24T14:02:45.748Z","volunteer":"Demo Volunteer"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","teamId":"Demo10","timestamp":"2025-11-24T14:17:16.734Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},"stats":{"completed":2,"pending":6,"total":8}}
-[00:12:07.697] Browser LOG     Stats: {"completed":2,"pending":6,"total":8}
-[00:12:07.697] Browser LOG     Completed count: 2
-[00:12:07.697] Browser LOG     Pending count: 6
-[00:12:12.536] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e13
-[00:12:12.731] Browser LOG     Resource status response status: 200
-[00:12:12.731] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-24T14:02:45.748Z","volunteer":"Demo Volunteer"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","teamId":"Demo10","timestamp":"2025-11-24T14:17:16.734Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},"stats":{"completed":2,"pending":6,"total":8}}
-[00:12:12.731] Browser LOG     Stats: {"completed":2,"pending":6,"total":8}
-[00:12:12.731] Browser LOG     Completed count: 2
-[00:12:12.731] Browser LOG     Pending count: 6
-[00:12:17.974] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c80f78d7e5e4acf8e15
-[00:12:19.365] Browser LOG     Resource status response status: 200
-[00:12:19.365] Browser LOG     Resource status data received: {"completed":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","timestamp":"2025-11-26T10:20:31.616Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","qrCode":"d0fbf5ee-f35a-4947-9355-261b5e28b5b7","teamId":"Demo10"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"},{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","qrCode":"5c564739-0bd2-470f-b9c6-66749da99314","teamId":"Demo"}],"resource":{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},"stats":{"completed":1,"pending":7,"total":8}}
-[00:12:19.365] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
-[00:12:19.365] Browser LOG     Completed count: 1
-[00:12:19.365] Browser LOG     Pending count: 7
-[00:12:53.345] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:12:53.345] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:12:53.345] Browser LOG     Response status: 200
-[00:12:53.345] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
-[00:12:53.345] Browser LOG     Response status: 200
-[00:12:53.345] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
-[00:14:08.890] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:14:08.890] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:14:08.890] Browser LOG     Response status: 200
-[00:14:08.890] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
-[00:14:08.890] Browser LOG     Response status: 200
-[00:14:08.890] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag"},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access"},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast"},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner"},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag"},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access"},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit"}]
-[00:14:54.320] Server  LOG      ✓ Compiled in 142ms
-[00:15:16.694] Server  LOG      ✓ Compiled in 206ms
-[00:15:16.975] Browser ERROR   ./app/volunteer/resource-tracking/page.tsx:227:51
+[00:01:16.566] Browser LOG     🪑 Fetching seating data...
+[00:01:16.566] Browser LOG     🪑 Fetching seating data...
+[00:01:16.766] Browser LOG     🪑 Seating response status: 404
+[00:01:16.766] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:01:16.766] Browser LOG     🪑 Seating response status: 404
+[00:01:16.766] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:01:45.663] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:49.771] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:54.055] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:16.080] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:27.336] Browser LOG     🪑 Fetching seating data...
+[00:02:27.336] Browser LOG     🪑 Fetching seating data...
+[00:02:27.527] Browser LOG     🪑 Seating response status: 404
+[00:02:27.527] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:02:27.527] Browser LOG     🪑 Seating response status: 404
+[00:02:27.527] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:02:30.076] Server  LOG      ✓ Compiled in 268ms
+[00:02:30.301] Browser LOG     🪑 Fetching seating data...
+[00:02:30.301] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:02:30.301] Browser LOG     🪑 Seating state updated: null
+[00:02:30.301] Browser LOG     🪑 Seating response status: 404
+[00:02:30.301] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:02:35.192] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:02:40.191] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:02:47.004] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:02:51.996] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:02:55.186] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:02:57.705] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:57.830] Browser LOG     🪑 Seating state updated: null
+[00:02:58.206] Browser LOG     🪑 Fetching seating data...
+[00:02:58.206] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:02:58.798] Browser LOG     🪑 Seating response status: 404
+[00:02:58.798] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:03:03.642] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:08.215] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:13.213] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:14.271] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:14.714] Browser LOG     🪑 Seating state updated: null
+[00:03:14.714] Browser LOG     🪑 Fetching seating data...
+[00:03:14.714] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:03:14.714] Browser LOG     🪑 Seating response status: 404
+[00:03:14.714] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:03:19.609] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:24.615] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:29.626] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:34.622] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:39.624] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:45.995] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:50.997] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:03:54.616] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:00.996] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:05.996] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:11.001] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:16.006] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:20.994] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:26.007] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:29.624] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:31.310] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:31.552] Browser LOG     🪑 Seating state updated: null
+[00:04:31.735] Browser LOG     🪑 Fetching seating data...
+[00:04:31.735] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:04:32.333] Browser LOG     🪑 Seating response status: 404
+[00:04:32.333] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:04:36.719] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:41.733] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:42.340] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:42.799] Browser LOG     🪑 Seating state updated: null
+[00:04:42.799] Browser LOG     🪑 Fetching seating data...
+[00:04:42.799] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:04:42.799] Browser LOG     🪑 Seating response status: 404
+[00:04:42.799] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:04:49.010] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:54.003] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:04:58.999] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:04.005] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:08.996] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:14.007] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:19.001] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:24.007] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:28.998] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:34.001] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:38.996] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:05:44.008] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:06:50.705] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:06:50.810] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:06:52.711] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:06:53.253] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:53.475] Browser LOG     🪑 Seating state updated: null
+[00:06:53.833] Browser LOG     🪑 Fetching seating data...
+[00:06:53.833] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:06:54.176] Browser LOG     🪑 Seating response status: 404
+[00:06:54.176] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:06:58.853] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:03.847] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:08.998] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:15.008] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:19.995] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:25.008] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:30.001] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:35.003] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:40.007] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:44.998] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:50.007] Browser ERROR   uncaughtError: ReferenceError: fetchTransactions is not defined
+[00:07:50.242] Server  LOG      ✓ Compiled in 171ms
+[00:07:51.007] Browser LOG     🪑 Fetching seating data...
+[00:07:51.007] Browser LOG     👤 Current user: {"email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3","role":"participant","userId":"691e1238f78d7e5e4acf8d5f"}
+[00:07:51.007] Browser LOG     🪑 Seating state updated: null
+[00:07:51.007] Browser LOG     🪑 Seating response status: 404
+[00:07:51.007] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:08:13.347] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login Error: read ECONNRESET
+[00:08:13.349] Server  ERROR   Error: read ECONNRESET
+[00:08:16.801] Browser LOG     🪑 Fetching seating data...
+[00:08:16.801] Browser LOG     👤 Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[00:08:16.801] Browser LOG     🪑 Seating state updated: null
+[00:08:16.801] Browser LOG     🪑 Fetching seating data...
+[00:08:16.801] Browser LOG     👤 Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[00:08:16.801] Browser LOG     🪑 Seating state updated: null
+[00:08:17.148] Browser LOG     🪑 Seating response status: 200
+[00:08:17.148] Browser LOG     🪑 Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"692725fdfebff6ca7c89ed84","column":1,"row":1,"seatNumber":1}],"section":"right","sectionLayout":{"columns":2,"rows":1},"teamId":"Seat","teamSize":1}
+[00:08:17.148] Browser LOG     🪑 Seating state updated: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"692725fdfebff6ca7c89ed84","column":1,"row":1,"seatNumber":1}],"section":"right","sectionLayout":{"columns":2,"rows":1},"teamId":"Seat","teamSize":1}
+[00:08:17.148] Browser LOG     🪑 Seating response status: 200
+[00:08:17.148] Browser LOG     🪑 Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"692725fdfebff6ca7c89ed84","column":1,"row":1,"seatNumber":1}],"section":"right","sectionLayout":{"columns":2,"rows":1},"teamId":"Seat","teamSize":1}
+[00:08:17.148] Browser LOG     🪑 Seating state updated: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"692725fdfebff6ca7c89ed84","column":1,"row":1,"seatNumber":1}],"section":"right","sectionLayout":{"columns":2,"rows":1},"teamId":"Seat","teamSize":1}
+[00:10:03.103] Server  LOG      ✓ Compiled in 298ms
+[00:10:31.409] Server  LOG      ✓ Compiled in 144ms
+[00:10:43.823] Server  LOG      ✓ Compiled in 166ms
+[00:10:58.861] Server  LOG      ✓ Compiled in 121ms
+[00:11:18.550] Server  LOG      ✓ Compiled in 143ms
+[00:11:20.833] Server  LOG      ✓ Compiled in 126ms
+[00:11:36.669] Server  LOG      ✓ Compiled in 172ms
+[00:11:49.740] Browser LOG     🪑 Fetching seating data...
+[00:11:49.740] Browser LOG     🪑 Fetching seating data...
+[00:11:49.917] Browser LOG     🪑 Seating response status: 404
+[00:11:49.917] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:49.917] Browser LOG     🪑 Seating response status: 404
+[00:11:49.917] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:51.754] Browser LOG     🪑 Fetching seating data...
+[00:11:52.156] Browser LOG     🪑 Seating response status: 404
+[00:11:52.156] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:52.907] Browser LOG     🪑 Fetching seating data...
+[00:11:52.907] Browser LOG     🪑 Seating response status: 404
+[00:11:52.907] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:53.690] Browser LOG     🪑 Fetching seating data...
+[00:11:53.690] Browser LOG     🪑 Seating response status: 404
+[00:11:53.690] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:54.306] Browser LOG     🪑 Fetching seating data...
+[00:11:54.457] Browser LOG     🪑 Seating response status: 404
+[00:11:54.457] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:55.287] Browser LOG     🪑 Fetching seating data...
+[00:11:55.287] Browser LOG     🪑 Seating response status: 404
+[00:11:55.287] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:58.800] Browser LOG     🪑 Fetching seating data...
+[00:11:58.800] Browser LOG     🪑 Fetching seating data...
+[00:11:59.076] Browser LOG     🪑 Seating response status: 404
+[00:11:59.076] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:11:59.376] Browser LOG     🪑 Seating response status: 404
+[00:11:59.376] Browser LOG     🪑 Seating fetch failed: {"message":"No team assigned to your account"}
+[00:12:15.588] Browser LOG     🪑 Fetching seating data...
+[00:12:15.588] Browser LOG     🪑 Fetching seating data...
+[00:12:15.850] Browser LOG     🪑 Seating response status: 200
+[00:12:15.850] Browser LOG     🪑 Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69272882fb55c78f8877c688","column":6,"row":1,"seatNumber":6}],"section":"left","sectionLayout":{"columns":7,"rows":1},"teamId":"Seat","teamSize":1}
+[00:12:15.850] Browser LOG     🪑 Seating response status: 200
+[00:12:15.850] Browser LOG     🪑 Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69272882fb55c78f8877c688","column":6,"row":1,"seatNumber":6}],"section":"left","sectionLayout":{"columns":7,"rows":1},"teamId":"Seat","teamSize":1}
+[00:17:05.883] Server  LOG      ✓ Compiled in 214ms
+[00:17:20.923] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:17:24.937] Server  LOG      ✓ Compiled in 211ms
+[00:19:36.951] Server  LOG      ✓ Compiled in 172ms
+[00:19:38.002] Browser ERROR   ./app/admin/seating/preview/page.tsx:1:13
 Parsing ecmascript source code failed
-  225 |                                                 <CardContent className="p-6">
-  226 |                             )}
-> 227 |                                                 </>
-      |                                                   ^
-  228 |                     )}
-  229 |
-  230 |                                                 {/* Participant Tracking View (when resource selected) */}
+> 1 |             </div >
+    |             ^
+  2 |         </div >
+  3 |     )
+  4 | }
 
 Expression expected
 
 Import traces:
   Client Component Browser:
-    ./app/volunteer/resource-tracking/page.tsx [Client Component Browser]
-    ./app/volunteer/resource-tracking/page.tsx [Server Component]
+    ./app/admin/seating/preview/page.tsx [Client Component Browser]
+    ./app/admin/seating/preview/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/volunteer/resource-tracking/page.tsx [Client Component SSR]
-    ./app/volunteer/resource-tracking/page.tsx [Server Component]
-[00:15:16.975] Browser ERROR   ./app/volunteer/resource-tracking/page.tsx:226:30
+    ./app/admin/seating/preview/page.tsx [Client Component SSR]
+    ./app/admin/seating/preview/page.tsx [Server Component]
+[00:19:38.002] Browser ERROR   ./app/admin/seating/preview/page.tsx:1:14
 Parsing ecmascript source code failed
-  224 |                                             >
-  225 |                                                 <CardContent className="p-6">
-> 226 |                             )}
-      |                              ^
-  227 |                                                 </>
-  228 |                     )}
-  229 |
+> 1 |             </div >
+    |              ^^^^^^
+  2 |         </div >
+  3 |     )
+  4 | }
 
-Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./app/volunteer/resource-tracking/page.tsx [Client Component Browser]
-    ./app/volunteer/resource-tracking/page.tsx [Server Component]
+    ./app/admin/seating/preview/page.tsx [Client Component Browser]
+    ./app/admin/seating/preview/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/volunteer/resource-tracking/page.tsx [Client Component SSR]
-    ./app/volunteer/resource-tracking/page.tsx [Server Component]
-[00:16:12.966] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:16:13.465] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:16:13.465] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:16:15.121] Browser LOG     Response status: 200
-[00:16:15.122] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0}]
-[00:16:15.796] Browser LOG     Response status: 200
-[00:16:15.796] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0}]
-[00:17:08.866] Server  LOG      ✓ Compiled in 158ms
-[00:17:10.515] Server  LOG      ✓ Compiled in 115ms
-[00:35:36.729] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:35:37.234] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:35:37.234] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:35:38.819] Browser LOG     Response status: 200
-[00:35:38.819] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalParticipants":8},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalParticipants":8}]
-[00:35:39.705] Browser LOG     Response status: 200
-[00:35:39.706] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalParticipants":8},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalParticipants":8},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalParticipants":8},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalParticipants":8}]
-[00:37:20.330] Server  LOG      ✓ Compiled in 119ms
-[00:38:50.168] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:38:52.419] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:38:52.419] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:38:57.968] Browser LOG     Response status: 200
-[00:38:57.968] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:38:59.248] Browser LOG     Response status: 200
-[00:38:59.248] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:39:37.685] Server  LOG      ✓ Compiled in 137ms
-[00:40:23.917] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:40:24.109] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:40:24.109] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:40:24.847] Browser LOG     Response status: 200
-[00:40:24.847] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:40:24.847] Browser LOG     Response status: 200
-[00:40:24.847] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:41:55.666] Server  LOG      ✓ Compiled in 123ms
-[00:42:14.601] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:42:16.988] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:42:16.988] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:42:18.428] Browser LOG     Response status: 200
-[00:42:18.429] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:42:20.982] Browser LOG     Response status: 200
-[00:42:20.982] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:43:20.843] Server  LOG      ✓ Compiled in 174ms
-[00:43:22.406] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:43:22.406] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:43:23.529] Browser LOG     Response status: 200
-[00:43:23.529] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:43:24.121] Browser LOG     Response status: 200
-[00:43:24.121] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:44:53.859] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:45:16.189] Server  LOG      ✓ Compiled in 125ms
-[00:49:13.032] Server  LOG      ✓ Compiled in 212ms
-[00:49:38.942] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:49:38.942] Browser LOG     Fetching resources from /api/volunteers/resources
-[00:49:39.129] Browser LOG     Response status: 200
-[00:49:39.129] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:49:39.676] Browser LOG     Response status: 200
-[00:49:39.676] Browser LOG     Resources fetched from volunteers endpoint: [{"_id":"691e1c80f78d7e5e4acf8e13","category":"other","name":"Sleeping Bag","participantCount":2,"totalQuantity":50},{"_id":"691e1c80f78d7e5e4acf8e15","category":"other","name":"Chill Room Access","participantCount":1,"totalQuantity":20},{"_id":"691e1c97f78d7e5e4acf8e18","category":"other","name":"Breakfast","participantCount":4,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch","participantCount":1,"totalQuantity":200},{"_id":"691e1c97f78d7e5e4acf8e1c","category":"other","name":"Dinner","participantCount":1,"totalQuantity":200},{"_id":"691e1c98f78d7e5e4acf8e1e","category":"other","name":"Sleeping Bag","participantCount":0,"totalQuantity":50},{"_id":"691e1c98f78d7e5e4acf8e20","category":"other","name":"Chill Room Access","participantCount":0,"totalQuantity":20},{"_id":"691e1c98f78d7e5e4acf8e22","category":"other","name":"Swag Kit","participantCount":0,"totalQuantity":150}]
-[00:49:46.354] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1a
-[00:49:46.577] Browser LOG     Resource status response status: 200
-[00:49:46.577] Browser LOG     Resource status data received: {"completed":[{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","teamId":"Demo","timestamp":"2025-11-26T10:57:52.681Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3"},{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","qrCode":"d0fbf5ee-f35a-4947-9355-261b5e28b5b7","teamId":"Demo10"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"}],"resource":{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},"stats":{"completed":1,"pending":7,"total":8}}
-[00:49:46.577] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
-[00:49:46.577] Browser LOG     Completed count: 1
-[00:49:46.577] Browser LOG     Pending count: 7
-[00:49:47.765] Server  LOG      ✓ Compiled in 158ms
-[00:49:51.359] Browser LOG     Fetching resource status from: /api/volunteers/resource-status/691e1c97f78d7e5e4acf8e1a
-[00:50:04.578] Browser LOG     Resource status response status: 200
-[00:50:04.578] Browser LOG     Resource status data received: {"completed":[{"_id":"6926dc7e19656828aa73e021","email":"maxson@gmail.com","name":"Maxson","teamId":"Demo","timestamp":"2025-11-26T10:57:52.681Z","volunteer":"Demo Volunteer"}],"pending":[{"_id":"691e1238f78d7e5e4acf8d5f","email":"participant@test.com","name":"Participant User","qrCode":"dd2823aa-db79-478b-a322-0bd68cc7a2e3"},{"_id":"691e15e2f78d7e5e4acf8d7b","email":"demo@participant.com","name":"Demo Participant","qrCode":"406253d2-605d-4cf6-8194-4e976036c8aa"},{"_id":"6924679c91967c87d253f82e","email":"ansu@gmail.com","name":"Test User","qrCode":"bf6fe855-9f9e-45d5-9556-66e96d510a93","teamId":"Test Team"},{"_id":"6924689991967c87d253f837","email":"ansukr@gmail.com","name":"Aryan","qrCode":"d0fbf5ee-f35a-4947-9355-261b5e28b5b7","teamId":"Demo10"},{"_id":"6924721c0f4b08b063e0dea9","email":"ansukumar2111@gmail.com","name":"Ansu kumar","qrCode":"9cbd8b9a-7bc7-4610-8571-585d10bdb24f","teamId":"Demo10"},{"_id":"69249be1bf185b5e1c74ca72","email":"ansukumar211@gmail.com","name":"Ansu2","qrCode":"91d8d0ad-a630-4929-aad1-d184600c6890","teamId":"Coke"},{"_id":"6926d51e19656828aa73df4e","email":"krish@gmail.com","name":"Krish","qrCode":"78bb7e5b-7d72-4034-b36a-92225bc6e9c2","teamId":"KrishTeam"}],"resource":{"_id":"691e1c97f78d7e5e4acf8e1a","category":"other","name":"Lunch"},"stats":{"completed":1,"pending":7,"total":8}}
-[00:50:04.578] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
-[00:50:04.578] Browser LOG     Completed count: 1
-[00:50:04.578] Browser LOG     Pending count: 7
-[00:58:29.913] Server  LOG      ✓ Compiled in 157ms
-[00:59:46.822] Server  LOG      ✓ Compiled in 129ms
-[01:00:23.082] Server  ERROR   Failed to proxy http://localhost:5000/api/resources Error: read ECONNRESET
-[01:00:23.084] Server  ERROR   Error: read ECONNRESET
-[01:00:24.991] Browser ERROR   Failed to create resource: {}
-[01:00:41.175] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:01:26.209] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:05:56.448] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+    ./app/admin/seating/preview/page.tsx [Client Component SSR]
+    ./app/admin/seating/preview/page.tsx [Server Component]
+[00:50:42.622] Server  LOG      ✓ Compiled in 156ms
+[00:50:43.003] Browser ERROR   ./app/admin/seating/preview/page.tsx:235:6
+Parsing ecmascript source code failed
+  233 |             </div>
+  234 |         )
+> 235 |     }
+      |      ^
+  236 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/seating/preview/page.tsx [Client Component Browser]
+    ./app/admin/seating/preview/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/seating/preview/page.tsx [Client Component SSR]
+    ./app/admin/seating/preview/page.tsx [Server Component]
+[00:50:43.003] Browser ERROR   ./app/admin/seating/preview/page.tsx:58:5
+Parsing ecmascript source code failed
+  56 |         }
+  57 |
+> 58 |     const getRowLabel = (rowNum: number) => String.fromCharCode(64 + rowNum)
+     |     ^
+  59 |
+  60 |         const renderSection = (sectionName: 'left' | 'right') => {
+  61 |             const sectionSeats = seatingData.filter(s => s.section === sectionName)
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/seating/preview/page.tsx [Client Component Browser]
+    ./app/admin/seating/preview/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/seating/preview/page.tsx [Client Component SSR]
+    ./app/admin/seating/preview/page.tsx [Server Component]
+[00:52:58.317] Browser LOG     🪑 Fetching seating data...
+[00:52:58.317] Browser LOG     🪑 Fetching seating data...
+[00:52:58.628] Browser LOG     🪑 Seating response status: 200
+[00:52:58.628] Browser LOG     🪑 Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[00:52:58.755] Browser LOG     🪑 Seating response status: 200
+[00:52:58.755] Browser LOG     🪑 Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[00:54:33.933] Server  LOG      ✓ Compiled in 147ms
+[00:54:35.003] Browser ERROR   ./app/participant/seating/page.tsx:45:14
+Parsing ecmascript source code failed
+  43 |         if (user && user.role === 'participant') {
+  44 |             <p>Loading...</p>
+> 45 |             </div >
+     |              ^^^^^^
+  46 |         )
+  47 | }
+  48 |
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/seating/page.tsx [Client Component Browser]
+    ./app/participant/seating/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/seating/page.tsx [Client Component SSR]
+    ./app/participant/seating/page.tsx [Server Component]
+[00:56:29.814] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[00:56:29.814] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[00:56:29.814] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[00:56:29.814] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[00:56:30.280] Browser LOG     🪑 [Participant Seating] Response status: 200
+[00:56:30.280] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[00:56:30.498] Browser LOG     🪑 [Participant Seating] Response status: 200
+[00:56:30.498] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[00:59:16.315] Server  LOG      ✓ Compiled in 277ms
+[00:59:58.050] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[00:59:58.051] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[00:59:58.051] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[00:59:58.051] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[00:59:58.191] Browser LOG     🪑 [Participant Seating] Response status: 200
+[00:59:58.191] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[00:59:58.316] Browser LOG     🪑 [Participant Seating] Response status: 200
+[00:59:58.316] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[01:00:10.244] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:00:10.483] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:00:10.483] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:00:10.608] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:00:10.609] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[01:02:30.948] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:31.198] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:02:31.198] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:02:31.415] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:02:31.415] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[01:03:53.049] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
+[01:03:53.051] Server  ERROR   AggregateError
+[01:03:53.056] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions AggregateError
+[01:03:53.058] Server  ERROR   AggregateError
+[01:03:53.063] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests AggregateError
+[01:03:53.064] Server  ERROR   AggregateError
+[01:03:53.071] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[01:03:53.073] Server  ERROR   AggregateError
+[01:03:53.242] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
+[01:03:53.244] Server  ERROR   AggregateError
+[01:03:53.248] Server  ERROR   Failed to proxy http://localhost:5000/api/transactions AggregateError
+[01:03:53.250] Server  ERROR   AggregateError
+[01:03:53.253] Server  ERROR   Failed to proxy http://localhost:5000/api/help-requests/my-requests AggregateError
+[01:03:53.254] Server  ERROR   AggregateError
+[01:03:53.261] Server  ERROR   Failed to proxy http://localhost:5000/api/announcements AggregateError
+[01:03:53.262] Server  ERROR   AggregateError
+[01:03:54.330] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:54.332] Server  ERROR   AggregateError
+[01:03:54.363] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:54.365] Server  ERROR   AggregateError
+[01:03:54.478] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:54.478] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:54.478] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:54.478] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:54.478] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:54.478] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:54.478] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:54.478] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:55.994] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:55.996] Server  ERROR   AggregateError
+[01:03:56.105] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:56.105] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:56.105] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:56.105] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:56.638] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:56.639] Server  ERROR   AggregateError
+[01:03:56.742] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:56.742] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:56.742] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:56.742] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:56.862] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:56.863] Server  ERROR   AggregateError
+[01:03:56.979] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:56.979] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:56.979] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:56.979] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:57.137] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:57.138] Server  ERROR   AggregateError
+[01:03:57.242] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:57.242] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:57.242] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:57.242] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:57.321] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:57.322] Server  ERROR   AggregateError
+[01:03:57.430] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:57.430] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:57.430] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:57.430] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:57.495] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:57.498] Server  ERROR   AggregateError
+[01:03:57.600] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:57.600] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:57.600] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:57.600] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:57.657] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:57.666] Server  ERROR   AggregateError
+[01:03:57.764] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:57.764] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:57.764] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:57.764] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:57.834] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:57.836] Server  ERROR   AggregateError
+[01:03:57.942] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:57.942] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:57.943] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:57.943] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:03:58.060] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:03:58.062] Server  ERROR   AggregateError
+[01:03:58.164] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:03:58.164] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:03:58.164] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:03:58.164] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:07:23.954] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:07:23.956] Server  ERROR   AggregateError
+[01:07:24.064] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:07:24.064] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:07:24.064] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:07:24.064] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:07:24.662] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:07:24.664] Server  ERROR   AggregateError
+[01:07:24.765] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:07:24.766] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:07:24.766] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:07:24.766] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:07:24.862] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:07:24.863] Server  ERROR   AggregateError
+[01:07:24.966] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:07:24.966] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:07:24.966] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:07:24.966] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:07:25.074] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:07:25.077] Server  ERROR   AggregateError
+[01:07:25.182] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:07:25.182] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:07:25.182] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:07:25.182] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:07:25.220] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:07:25.222] Server  ERROR   AggregateError
+[01:07:25.329] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:07:25.329] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:07:25.329] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:07:25.329] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:07:25.451] Server  ERROR   Failed to proxy http://localhost:5000/api/seating/my-seat AggregateError
+[01:07:25.453] Server  ERROR   AggregateError
+[01:07:25.561] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:07:25.562] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:07:25.562] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:07:25.562] Browser ERROR   🪑 [Participant Seating] Fetch error: {}
+[01:08:15.184] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:08:15.184] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:08:26.002] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:08:26.002] Browser LOG     🪑 [Participant Seating] Error response: {"message":"Operation `users.findOne()` buffering timed out after 10000ms"}
+[01:08:30.709] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:08:30.709] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:08:40.740] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:08:40.740] Browser LOG     🪑 [Participant Seating] Error response: {"message":"Operation `users.findOne()` buffering timed out after 10000ms"}
+[01:08:48.004] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:08:48.004] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:08:59.004] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:08:59.004] Browser LOG     🪑 [Participant Seating] Error response: {"message":"Operation `users.findOne()` buffering timed out after 10000ms"}
+[01:09:12.508] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:09:12.508] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:09:22.555] Browser LOG     🪑 [Participant Seating] Response status: 500
+[01:09:22.555] Browser LOG     🪑 [Participant Seating] Error response: {"message":"Operation `users.findOne()` buffering timed out after 10000ms"}
+[01:09:23.644] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:09:23.644] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:09:23.644] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:09:23.644] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:09:25.014] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:09:25.015] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[01:09:25.128] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:09:25.128] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}

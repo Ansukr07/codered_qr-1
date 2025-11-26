@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { LogOut, Package, Users, TrendingUp, Plus, Eye, UserCog, HandHelping } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -242,6 +243,26 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Seating Arrangement Quick Access */}
+        <Link href="/admin/seating">
+          <Card className="hover:border-primary/50 transition-all cursor-pointer">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-purple-500/10 rounded-lg">
+                    <Package className="h-6 w-6 text-purple-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg text-card-foreground">Seating Arrangement</h3>
+                    <p className="text-sm text-muted-foreground">Manage seating for APJ Abdul Kalam Lab</p>
+                  </div>
+                </div>
+                <div className="text-muted-foreground">→</div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         <Tabs defaultValue="resources" className="space-y-4">
           <TabsList>
