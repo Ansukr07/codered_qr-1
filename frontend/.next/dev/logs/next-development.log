@@ -441,3 +441,67 @@ Import traces:
 [01:09:25.015] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
 [01:09:25.128] Browser LOG     🪑 [Participant Seating] Response status: 200
 [01:09:25.128] Browser LOG     🪑 [Participant Seating] Seating data received: {"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","sectionLayout":{"columns":3,"rows":1},"teamId":"Seat","teamSize":1}
+[01:14:14.627] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:14.910] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:14:14.910] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:14:15.021] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:14:15.021] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:14:21.157] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:14:21.157] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:14:21.157] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:14:21.157] Browser LOG     🪑 [Participant Seating] Current user: {"email":"seat@gmail.com","name":"Seat1","qrCode":"26ad3295-b0ec-471f-a550-c9e5de8fb744","role":"participant","teamId":"Seat","userId":"69272227177002d08bca7de8"}
+[01:14:21.312] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:14:21.312] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:14:21.452] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:14:21.452] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:14:43.167] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login Error: read ECONNRESET
+[01:14:43.168] Server  ERROR   Error: read ECONNRESET
+[01:15:05.722] Server  LOG      ✓ Compiled in 149ms
+[01:17:11.208] Server  LOG      ✓ Compiled in 168ms
+[01:17:11.997] Browser ERROR   ./app/participant/seating/page.tsx:7:17
+Parsing ecmascript source code failed
+   5 | import { ArrowLeft, MapPin } from 'lucide-react'
+   6 | import Link from 'next/link'
+>  7 |                 </div >
+     |                 ^
+   8 |             </div >
+   9 |         </div >
+  10 |     )
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/seating/page.tsx [Client Component Browser]
+    ./app/participant/seating/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/seating/page.tsx [Client Component SSR]
+    ./app/participant/seating/page.tsx [Server Component]
+[01:17:11.997] Browser ERROR   ./app/participant/seating/page.tsx:7:18
+Parsing ecmascript source code failed
+   5 | import { ArrowLeft, MapPin } from 'lucide-react'
+   6 | import Link from 'next/link'
+>  7 |                 </div >
+     |                  ^^^^^^
+   8 |             </div >
+   9 |         </div >
+  10 |     )
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/seating/page.tsx [Client Component Browser]
+    ./app/participant/seating/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/seating/page.tsx [Client Component SSR]
+    ./app/participant/seating/page.tsx [Server Component]
+[01:17:51.042] Server  LOG      ✓ Compiled in 140ms
+[01:18:14.633] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:18:14.633] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:18:14.746] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:18:14.746] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:18:14.851] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:18:14.851] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}

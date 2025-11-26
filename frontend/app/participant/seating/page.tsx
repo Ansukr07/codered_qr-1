@@ -10,26 +10,34 @@ import { Badge } from '@/components/ui/badge'
 import { useAuth } from '@/contexts/AuthContext'
 import SeatingMap from '@/components/SeatingMap'
 
+interface SeatInfo {
+    seatNumber: number
+    row: number
+    column: number
+    section?: 'left' | 'right'
+}
+
 interface SeatingData {
     teamId: string
     section: 'left' | 'right'
     teamSize: number
-    seats: Array<{
-        seatNumber: number
-        row: number
-        column: number
-    }>
+    seats: SeatInfo[]
     labName: string
+}
+
+interface PageData {
+    mySeating: SeatingData
+    allOccupiedSeats: SeatInfo[]
     sectionLayout: {
-        rows: number
-        columns: number
+        left: { rows: number, columns: number }
+        right: { rows: number, columns: number }
     }
 }
 
 export default function ParticipantSeatingPage() {
     const { user, loading } = useAuth()
     const router = useRouter()
-    const [seating, setSeating] = useState<SeatingData | null>(null)
+    const [pageData, setPageData] = useState<PageData | null>(null)
     const [loadingSeating, setLoadingSeating] = useState(true)
     const [error, setError] = useState<string>('')
 
@@ -49,7 +57,6 @@ export default function ParticipantSeatingPage() {
         try {
             setLoadingSeating(true)
             console.log('🪑 [Participant Seating] Fetching seating data...')
-            console.log('🪑 [Participant Seating] Current user:', user)
 
             const res = await fetch('/api/seating/my-seat')
             console.log('🪑 [Participant Seating] Response status:', res.status)
@@ -57,7 +64,7 @@ export default function ParticipantSeatingPage() {
             if (res.ok) {
                 const data = await res.json()
                 console.log('🪑 [Participant Seating] Seating data received:', data)
-                setSeating(data)
+                setPageData(data)
                 setError('')
             } else {
                 const errorData = await res.json()
@@ -121,7 +128,7 @@ export default function ParticipantSeatingPage() {
                         </Card>
                     )}
 
-                    {!loadingSeating && seating && seating.seats && (
+                    {!loadingSeating && pageData && (
                         <div className="space-y-4">
                             <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30">
                                 <CardContent className="p-6">
@@ -134,28 +141,28 @@ export default function ParticipantSeatingPage() {
                                                 <h3 className="text-xl font-bold text-card-foreground">
                                                     Your Team Seats Assigned
                                                 </h3>
-                                                <p className="text-sm text-muted-foreground">{seating.labName}</p>
+                                                <p className="text-sm text-muted-foreground">{pageData.mySeating.labName}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4">
                                             <div className="text-center">
                                                 <p className="text-xs text-muted-foreground">Section</p>
                                                 <Badge
-                                                    className={`mt-1 ${seating.section === 'left' ? 'bg-blue-500' : 'bg-orange-500'} text-white`}
+                                                    className={`mt-1 ${pageData.mySeating.section === 'left' ? 'bg-blue-500' : 'bg-orange-500'} text-white`}
                                                 >
-                                                    {seating.section === 'left' ? 'Left' : 'Right'}
+                                                    {pageData.mySeating.section === 'left' ? 'Left' : 'Right'}
                                                 </Badge>
                                             </div>
                                             <div className="text-center px-4 border-x border-border">
                                                 <p className="text-xs text-muted-foreground">Team Size</p>
                                                 <p className="text-2xl font-bold text-foreground mt-1">
-                                                    {seating.teamSize}
+                                                    {pageData.mySeating.teamSize}
                                                 </p>
                                             </div>
                                             <div className="text-center">
                                                 <p className="text-xs text-muted-foreground">Seats</p>
                                                 <p className="text-sm font-semibold text-foreground mt-1">
-                                                    {seating.seats.map(s =>
+                                                    {pageData.mySeating.seats.map(s =>
                                                         `${String.fromCharCode(64 + s.row)}${s.column}`
                                                     ).join(', ')}
                                                 </p>
@@ -165,20 +172,21 @@ export default function ParticipantSeatingPage() {
                                 </CardContent>
                             </Card>
 
-                            {seating.sectionLayout && (
+                            {pageData.sectionLayout && (
                                 <SeatingMap
-                                    section={seating.section}
-                                    teamSeats={seating.seats}
-                                    totalRows={seating.sectionLayout.rows}
-                                    totalColumns={seating.sectionLayout.columns}
-                                    labName={seating.labName}
+                                    section={pageData.mySeating.section}
+                                    teamSeats={pageData.mySeating.seats}
+                                    allOccupiedSeats={pageData.allOccupiedSeats}
+                                    totalRows={Math.max(pageData.sectionLayout.left.rows, pageData.sectionLayout.right.rows)}
+                                    totalColumns={Math.max(pageData.sectionLayout.left.columns, pageData.sectionLayout.right.columns)}
+                                    labName={pageData.mySeating.labName}
                                 />
                             )}
 
                             <Card className="bg-card/50">
                                 <CardContent className="p-4">
                                     <p className="text-sm text-muted-foreground text-center">
-                                        💡 <strong>Note:</strong> All {seating.teamSize} seats highlighted in green are assigned to your team.
+                                        💡 <strong>Note:</strong> All {pageData.mySeating.teamSize} seats highlighted in green are assigned to your team.
                                         Please ensure all team members sit in their designated seats.
                                     </p>
                                 </CardContent>

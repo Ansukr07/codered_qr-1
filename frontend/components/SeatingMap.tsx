@@ -2,14 +2,16 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 interface SeatInfo {
-    seatNumber: number
+    seatNumber?: number
     row: number
     column: number
+    section?: 'left' | 'right'
 }
 
 interface SeatingMapProps {
     section: 'left' | 'right'
-    teamSeats: SeatInfo[]  // All seats for the team
+    teamSeats: SeatInfo[]  // User's team seats
+    allOccupiedSeats?: SeatInfo[] // All occupied seats in the lab
     totalRows: number
     totalColumns: number
     labName: string
@@ -18,6 +20,7 @@ interface SeatingMapProps {
 export default function SeatingMap({
     section,
     teamSeats,
+    allOccupiedSeats = [],
     totalRows,
     totalColumns,
     labName
@@ -32,6 +35,15 @@ export default function SeatingMap({
         return teamSeats.some(seat => seat.row === row && seat.column === col)
     }
 
+    // Check if a seat is occupied by ANY team
+    const isOccupied = (row: number, col: number, sectionName: 'left' | 'right') => {
+        return allOccupiedSeats.some(seat =>
+            seat.row === row &&
+            seat.column === col &&
+            seat.section === sectionName
+        )
+    }
+
     // Generate seats for a section
     const generateSeats = (sectionName: 'left' | 'right') => {
         const seats = []
@@ -39,13 +51,15 @@ export default function SeatingMap({
             const rowSeats = []
             for (let c = 1; c <= totalColumns; c++) {
                 const isUserTeamSeat = sectionName === section && isTeamSeat(r, c)
+                const isSeatOccupied = isOccupied(r, c, sectionName)
                 const seatNum = (r - 1) * totalColumns + c
 
                 rowSeats.push({
                     row: r,
                     col: c,
                     num: seatNum,
-                    isTeamSeat: isUserTeamSeat
+                    isTeamSeat: isUserTeamSeat,
+                    isOccupied: isSeatOccupied
                 })
             }
             seats.push({ rowLabel: getRowLabel(r), seats: rowSeats })
@@ -66,7 +80,7 @@ export default function SeatingMap({
 
                 {/* Seats Grid with Row Labels */}
                 <div className="space-y-1">
-                    {seats.map((rowData, idx) => (
+                    {seats.map((rowData: any, idx: number) => (
                         <div key={idx} className="flex items-center gap-2">
                             {/* Row Label */}
                             <div className="w-4 text-xs font-bold text-muted-foreground text-center">
@@ -75,21 +89,34 @@ export default function SeatingMap({
 
                             {/* Seats in Row */}
                             <div className="flex gap-1">
-                                {rowData.seats.map((seat: any) => (
-                                    <div
-                                        key={`${seat.row}-${seat.col}`}
-                                        className={`
-                      w-7 h-7 rounded-sm flex items-center justify-center text-[10px] font-medium
-                      border transition-all
-                      ${seat.isTeamSeat
-                                                ? 'bg-green-500 border-green-600 text-white shadow-md'
-                                                : 'bg-secondary/30 border-border text-muted-foreground'}
-                    `}
-                                        title={seat.isTeamSeat ? 'Your Team Seat' : `Seat ${seat.col}`}
-                                    >
-                                        {seat.col}
-                                    </div>
-                                ))}
+                                {rowData.seats.map((seat: any) => {
+                                    // Determine styling based on seat state
+                                    let seatStyle = 'bg-secondary/30 border-border text-muted-foreground' // Default empty
+                                    let title = `Seat ${seat.col}`
+
+                                    if (seat.isTeamSeat) {
+                                        // User's team seat - GREEN
+                                        seatStyle = 'bg-green-500 border-green-600 text-white shadow-md font-bold'
+                                        title = 'Your Team Seat'
+                                    } else if (seat.isOccupied) {
+                                        // Occupied by another team - PRIMARY COLOR (Neutral)
+                                        seatStyle = 'bg-primary/20 border-primary text-primary font-medium'
+                                        title = 'Occupied'
+                                    }
+
+                                    return (
+                                        <div
+                                            key={`${seat.row}-${seat.col}`}
+                                            className={`
+                                                w-7 h-7 rounded-sm flex items-center justify-center text-[10px]
+                                                border transition-all ${seatStyle}
+                                            `}
+                                            title={title}
+                                        >
+                                            {seat.col}
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                     ))}
@@ -130,6 +157,10 @@ export default function SeatingMap({
                             <div className="flex items-center gap-2">
                                 <div className="w-5 h-5 bg-secondary/30 border border-border rounded-sm"></div>
                                 <span className="text-muted-foreground">Available</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-5 h-5 bg-primary/20 border border-primary rounded-sm"></div>
+                                <span className="text-muted-foreground">Occupied</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="w-5 h-5 bg-green-500 border border-green-600 rounded-sm"></div>
