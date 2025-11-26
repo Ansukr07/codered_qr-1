@@ -168,78 +168,117 @@ export default function ParticipantDashboard() {
             {/* White Grid Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-80 pointer-events-none" />
 
-            <div className="relative z-10 p-6">
-                <div className="max-w-7xl mx-auto space-y-6">
+            <div className="relative z-10 p-4 md:p-6">
+                <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
                     {/* Header */}
                     <div className="flex justify-between items-center">
                         <div>
-                            <h1 className="text-3xl font-bold text-foreground">Participant Dashboard</h1>
-                            <p className="text-muted-foreground">Welcome, {user.name}</p>
+                            <h1 className="text-2xl md:text-3xl font-bold text-foreground">Participant Dashboard</h1>
+                            <p className="text-xs md:text-sm text-muted-foreground">Welcome, {user.name}</p>
                         </div>
-                        <Button onClick={logout} variant="outline" className="text-foreground">
-                            <LogOut className="mr-2 h-4 w-4" />
-                            Logout
-                        </Button>
+                        <div className="flex gap-2">
+                            <Link href="/participant/qr">
+                                <Button variant="secondary" size="sm" className="h-9 md:h-10">
+                                    <QrCode className="mr-2 h-4 w-4" />
+                                    <span className="hidden md:inline">View QR</span>
+                                    <span className="md:hidden">QR</span>
+                                </Button>
+                            </Link>
+                            <Button onClick={logout} variant="outline" size="sm" className="text-foreground h-9 md:h-10">
+                                <LogOut className="mr-2 h-4 w-4" />
+                                <span className="hidden md:inline">Logout</span>
+                            </Button>
+                        </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {/* QR Code Card */}
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center">
-                                    <QrCode className="mr-2 h-5 w-5" />
-                                    Your QR Code
+                    {/* Seating Assignment - Priority Display */}
+                    <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30 hover:border-primary/50 transition-all cursor-pointer">
+                        <Link href="/participant/seating">
+                            <CardContent className="p-4 md:p-6">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3 md:gap-4">
+                                        <div className="p-2 md:p-3 bg-primary/20 rounded-full">
+                                            <MapPin className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg md:text-xl font-bold text-card-foreground">View My Seating Assignment</h3>
+                                            <p className="text-xs md:text-sm text-muted-foreground">Check your team's assigned seats in the lab</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-muted-foreground text-xl md:text-2xl">→</div>
+                                </div>
+                            </CardContent>
+                        </Link>
+                    </Card>
+
+                    <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+                        {/* Announcements */}
+                        <Card className="h-full">
+                            <CardHeader className="p-4 md:p-6">
+                                <CardTitle className="flex items-center text-lg md:text-xl">
+                                    <Megaphone className="mr-2 h-5 w-5" />
+                                    Announcements
                                 </CardTitle>
-                                <CardDescription>
-                                    Show this QR code to volunteers to claim resources
+                                <CardDescription className="text-xs md:text-sm">
+                                    Latest updates from organizers
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="flex flex-col items-center space-y-4">
-                                {qrCode ? (
-                                    <>
-                                        <div className="p-4 bg-white  ">
-                                            <QRCodeSVG value={qrCode} size={200} level="H" />
-                                        </div>
-                                        <p className="text-xs text-muted-foreground font-mono">{qrCode}</p>
-                                    </>
+                            <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
+                                {announcements.length > 0 ? (
+                                    <div className="space-y-2">
+                                        {announcements.slice(0, 5).map((announcement) => (
+                                            <div key={announcement._id} className="flex justify-between items-start p-3 bg-secondary/50 rounded-md">
+                                                <div className="flex-1">
+                                                    <p className="font-medium text-sm md:text-base text-card-foreground">{announcement.title}</p>
+                                                    <p className="text-xs md:text-sm text-muted-foreground mt-1">{announcement.message}</p>
+                                                    <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
+                                                        {new Date(announcement.createdAt).toLocaleString()}
+                                                    </p>
+                                                </div>
+                                                <Badge variant={announcement.priority === 'high' ? 'destructive' : announcement.priority === 'medium' ? 'default' : 'secondary'} className="text-[10px] md:text-xs">
+                                                    {announcement.priority}
+                                                </Badge>
+                                            </div>
+                                        ))}
+                                    </div>
                                 ) : (
-                                    <p className="text-muted-foreground">Loading QR code...</p>
+                                    <p className="text-muted-foreground text-center py-4 text-sm">No announcements yet.</p>
                                 )}
                             </CardContent>
                         </Card>
 
                         {/* Help Request Form */}
                         <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center">
+                            <CardHeader className="p-4 md:p-6">
+                                <CardTitle className="flex items-center text-lg md:text-xl">
                                     <HelpCircle className="mr-2 h-5 w-5" />
                                     Request Help
                                 </CardTitle>
-                                <CardDescription>
+                                <CardDescription className="text-xs md:text-sm">
                                     Submit a help request to volunteers
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
                                 <form onSubmit={handleSubmitHelpRequest} className="space-y-4">
                                     <div className="space-y-2 border-white">
-                                        <Label htmlFor="description">Description</Label>
+                                        <Label htmlFor="description" className="text-xs md:text-sm">Description</Label>
                                         <Textarea
                                             id="description"
                                             placeholder="Describe your issue..."
                                             value={helpDescription}
                                             onChange={(e) => setHelpDescription(e.target.value)}
                                             required
-                                            className="min-h-[80px] border-white"
+                                            className="min-h-[80px] border-white text-sm"
                                         />
                                     </div>
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-2">
-                                            <Label htmlFor="category">Category</Label>
+                                            <Label htmlFor="category" className="text-xs md:text-sm">Category</Label>
                                             <select
                                                 id="category"
                                                 value={helpCategory}
                                                 onChange={(e) => setHelpCategory(e.target.value)}
-                                                className="flex h-10 w-full rounded-md border border-white bg-background px-3 py-2 text-sm"
+                                                className="flex h-9 md:h-10 w-full rounded-md border border-white bg-background px-3 py-2 text-xs md:text-sm"
                                             >
                                                 <option value="general">General</option>
                                                 <option value="technical">Technical</option>
@@ -248,12 +287,12 @@ export default function ParticipantDashboard() {
                                             </select>
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="priority">Priority</Label>
+                                            <Label htmlFor="priority" className="text-xs md:text-sm">Priority</Label>
                                             <select
                                                 id="priority"
                                                 value={helpPriority}
                                                 onChange={(e) => setHelpPriority(e.target.value)}
-                                                className="flex h-10 w-full rounded-md border border-white bg-background px-3 py-2 text-sm"
+                                                className="flex h-9 md:h-10 w-full rounded-md border border-white bg-background px-3 py-2 text-xs md:text-sm"
                                             >
                                                 <option value="low">Low</option>
                                                 <option value="medium">Medium</option>
@@ -261,7 +300,7 @@ export default function ParticipantDashboard() {
                                             </select>
                                         </div>
                                     </div>
-                                    <Button type="submit" className="w-full" disabled={submitting}>
+                                    <Button type="submit" className="w-full h-9 md:h-10 text-sm" disabled={submitting}>
                                         <Send className="mr-2 h-4 w-4" />
                                         {submitting ? 'Submitting...' : 'Submit Request'}
                                     </Button>
@@ -270,91 +309,38 @@ export default function ParticipantDashboard() {
                         </Card>
                     </div>
 
-                    {/* Announcements */}
-                    {announcements.length > 0 && (
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center">
-                                    <Megaphone className="mr-2 h-5 w-5" />
-                                    Announcements
-                                </CardTitle>
-                                <CardDescription>
-                                    Latest updates from organizers
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-2">
-                                    {announcements.slice(0, 5).map((announcement) => (
-                                        <div key={announcement._id} className="flex justify-between items-start p-3 bg-secondary/50  ">
-                                            <div className="flex-1">
-                                                <p className="font-medium text-card-foreground">{announcement.title}</p>
-                                                <p className="text-sm text-muted-foreground mt-1">{announcement.message}</p>
-                                                <p className="text-xs text-muted-foreground mt-1">
-                                                    {new Date(announcement.createdAt).toLocaleString()}
-                                                </p>
-                                            </div>
-                                            <Badge variant={announcement.priority === 'high' ? 'destructive' : announcement.priority === 'medium' ? 'default' : 'secondary'}>
-                                                {announcement.priority}
-                                            </Badge>
-                                        </div>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    )}
-
-
-                    {/* View Seating Button */}
-                    <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30 hover:border-primary/50 transition-all cursor-pointer">
-                        <Link href="/participant/seating">
-                            <CardContent className="p-6">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-3 bg-primary/20 rounded-full">
-                                            <MapPin className="h-6 w-6 text-primary" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-card-foreground">View My Seating Assignment</h3>
-                                            <p className="text-sm text-muted-foreground">Check your team's assigned seats in the lab</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-muted-foreground text-2xl">→</div>
-                                </div>
-                            </CardContent>
-                        </Link>
-                    </Card>
                     {/* Help Request History */}
                     {helpRequests.length > 0 && (
                         <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center">
+                            <CardHeader className="p-4 md:p-6">
+                                <CardTitle className="flex items-center text-lg md:text-xl">
                                     <HelpCircle className="mr-2 h-5 w-5" />
                                     My Help Requests
                                 </CardTitle>
-                                <CardDescription>
+                                <CardDescription className="text-xs md:text-sm">
                                     Your help request history
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
                                 <div className="space-y-2">
                                     {helpRequests.map((req) => (
-                                        <div key={req._id} className="flex justify-between items-start p-3 bg-secondary/50  ">
+                                        <div key={req._id} className="flex justify-between items-start p-3 bg-secondary/50 rounded-md">
                                             <div className="flex-1">
-                                                <p className="font-medium text-card-foreground">{req.description}</p>
+                                                <p className="font-medium text-sm md:text-base text-card-foreground">{req.description}</p>
                                                 <div className="flex gap-2 mt-1">
-                                                    <Badge variant="outline" className="text-xs capitalize">{req.category}</Badge>
-                                                    <Badge variant="outline" className="text-xs capitalize">{req.priority}</Badge>
+                                                    <Badge variant="outline" className="text-[10px] md:text-xs capitalize">{req.category}</Badge>
+                                                    <Badge variant="outline" className="text-[10px] md:text-xs capitalize">{req.priority}</Badge>
                                                 </div>
-                                                <p className="text-xs text-muted-foreground mt-1">
+                                                <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
                                                     {new Date(req.createdAt).toLocaleString()}
                                                 </p>
                                                 {req.status === 'resolved' && req.resolvedBy && (
-                                                    <p className="text-xs text-green-600 mt-1">
+                                                    <p className="text-[10px] md:text-xs text-green-600 mt-1">
                                                         Resolved by {req.resolvedBy.name}
                                                     </p>
                                                 )}
                                             </div>
-                                            <Badge variant={req.status === 'resolved' ? 'default' : 'secondary'}>
+                                            <Badge variant={req.status === 'resolved' ? 'default' : 'secondary'} className="text-[10px] md:text-xs">
                                                 {req.status}
                                             </Badge>
                                         </div>
@@ -366,33 +352,33 @@ export default function ParticipantDashboard() {
 
                     {/* Recent Activity */}
                     <Card>
-                        <CardHeader>
-                            <CardTitle className="flex items-center">
+                        <CardHeader className="p-4 md:p-6">
+                            <CardTitle className="flex items-center text-lg md:text-xl">
                                 <History className="mr-2 h-5 w-5" />
                                 Recent Activity
                             </CardTitle>
-                            <CardDescription>
+                            <CardDescription className="text-xs md:text-sm">
                                 Your resource claim history
                             </CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
                             {transactions.length === 0 ? (
-                                <p className="text-center text-muted-foreground py-8">
+                                <p className="text-center text-muted-foreground py-8 text-sm">
                                     No activity yet. Claim resources to see them here.
                                 </p>
                             ) : (
                                 <div className="space-y-2">
                                     {transactions.map((tx) => (
-                                        <div key={tx._id} className="flex justify-between items-center p-3 bg-secondary/50  ">
+                                        <div key={tx._id} className="flex justify-between items-center p-3 bg-secondary/50 rounded-md">
                                             <div>
-                                                <p className="font-medium text-card-foreground">
+                                                <p className="font-medium text-sm md:text-base text-card-foreground">
                                                     {tx.resourceId?.name || 'Resource Unavailable'}
                                                 </p>
-                                                <p className="text-xs text-muted-foreground">
+                                                <p className="text-[10px] md:text-xs text-muted-foreground">
                                                     {new Date(tx.timestamp).toLocaleString()}
                                                 </p>
                                             </div>
-                                            <span className="text-xs bg-green-500/10 text-green-500 px-2 py-1 rounded">
+                                            <span className="text-[10px] md:text-xs bg-green-500/10 text-green-500 px-2 py-1 rounded">
                                                 {tx.action}
                                             </span>
                                         </div>

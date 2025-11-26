@@ -541,3 +541,126 @@ Import traces:
     ./app/volunteer/seating/page.tsx [Server Component]
 [01:40:23.041] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:41:23.505] Server  LOG      ✓ Compiled in 260ms
+[01:45:39.430] Server  LOG      ✓ Compiled in 269ms
+[01:45:57.392] Server  LOG      ✓ Compiled in 359ms
+[01:46:00.679] Server  LOG      ✓ Compiled in 193ms
+[01:48:20.583] Server  LOG      ✓ Compiled in 182ms
+[01:48:20.691] Browser ERROR   ./app/participant/page.tsx:327:1
+Parsing ecmascript source code failed
+  325 |             </div>
+  326 |             )
+> 327 | }
+      | ^
+  328 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:48:23.584] Browser ERROR   ./app/participant/page.tsx:335:1
+Parsing ecmascript source code failed
+  333 |             </div>
+  334 |             )
+> 335 | }
+      | ^
+  336 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:49:11.290] Server  LOG      ✓ Compiled in 132ms
+[01:49:12.212] Browser ERROR   ./app/participant/page.tsx:335:1
+Parsing ecmascript source code failed
+  333 |             </div>
+  334 |             )
+> 335 | }
+      | ^
+  336 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:49:12.212] Browser ERROR   ./app/participant/page.tsx:327:1
+Parsing ecmascript source code failed
+  325 |             </div>
+  326 |             )
+> 327 | }
+      | ^
+  328 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:50:21.674] Server  LOG      ✓ Compiled in 135ms
+[01:50:22.007] Browser ERROR   ./app/participant/page.tsx:333:1
+Parsing ecmascript source code failed
+  331 |             </div>
+  332 |             )
+> 333 | }
+      | ^
+  334 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:52:38.037] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:52:38.037] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:52:38.250] Browser LOG     🪑 [Participant Seating] Response status: 404
+[01:52:38.250] Browser LOG     🪑 [Participant Seating] Error response: {"message":"No team assigned to your account"}
+[01:52:38.455] Browser LOG     🪑 [Participant Seating] Response status: 404
+[01:52:38.455] Browser LOG     🪑 [Participant Seating] Error response: {"message":"No team assigned to your account"}
+[01:52:40.144] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:52:40.263] Browser LOG     🪑 [Participant Seating] Response status: 404
+[01:52:40.263] Browser LOG     🪑 [Participant Seating] Error response: {"message":"No team assigned to your account"}
+[01:52:40.957] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:52:41.128] Browser LOG     🪑 [Participant Seating] Response status: 404
+[01:52:41.128] Browser LOG     🪑 [Participant Seating] Error response: {"message":"No team assigned to your account"}
+[01:53:14.725] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:53:14.725] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:53:15.067] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:53:15.067] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:53:15.220] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:53:15.220] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:54:54.151] Server  LOG      ✓ Compiled in 255ms
+[01:55:15.131] Server  LOG      ✓ Compiled in 230ms
+[01:55:50.078] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:55:50.078] Browser LOG     🪑 [Participant Seating] Fetching seating data...
+[01:55:50.223] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:55:50.223] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:55:50.399] Browser LOG     🪑 [Participant Seating] Response status: 200
+[01:55:50.399] Browser LOG     🪑 [Participant Seating] Seating data received: {"allOccupiedSeats":[{"column":1,"row":1,"section":"right"},{"column":1,"row":1,"section":"left"},{"column":2,"row":1,"section":"right"},{"column":3,"row":1,"section":"right"},{"column":2,"row":1,"section":"left"},{"column":3,"row":1,"section":"left"},{"column":4,"row":1,"section":"right"}],"mySeating":{"labName":"APJ Abdul Kalam Lab","seats":[{"_id":"69273164e1fa5f74b2a7c9eb","column":3,"row":1,"seatNumber":3}],"section":"left","teamId":"Seat","teamSize":1},"sectionLayout":{"left":{"columns":10,"rows":10},"right":{"columns":10,"rows":10}}}
+[01:56:05.681] Server  LOG      ✓ Compiled in 306ms

@@ -91,23 +91,23 @@ export default function ParticipantSeatingPage() {
         <div className="min-h-screen bg-background relative">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
 
-            <div className="relative z-10 p-6">
-                <div className="max-w-7xl mx-auto space-y-6">
-                    <div className="flex items-center gap-4">
+            <div className="relative z-10 p-4 md:p-6">
+                <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
+                    <div className="flex items-center gap-3 md:gap-4">
                         <Link href="/participant">
-                            <Button variant="default" size="icon">
+                            <Button variant="default" size="icon" className="h-8 w-8 md:h-10 md:w-10">
                                 <ArrowLeft className="h-4 w-4 text-white" />
                             </Button>
                         </Link>
                         <div className="flex-1">
-                            <h1 className="text-3xl font-bold text-foreground">My Seating Assignment</h1>
-                            <p className="text-muted-foreground">View your team's assigned seats</p>
+                            <h1 className="text-2xl md:text-3xl font-bold text-foreground">My Seating</h1>
+                            <p className="text-xs md:text-sm text-muted-foreground">View your team's assigned seats</p>
                         </div>
                     </div>
 
                     {loadingSeating && (
                         <Card>
-                            <CardContent className="p-12 text-center">
+                            <CardContent className="p-8 md:p-12 text-center">
                                 <p className="text-muted-foreground">Loading seating information...</p>
                             </CardContent>
                         </Card>
@@ -115,13 +115,13 @@ export default function ParticipantSeatingPage() {
 
                     {!loadingSeating && error && (
                         <Card className="border-orange-500/50 bg-orange-500/5">
-                            <CardContent className="p-12 text-center">
-                                <MapPin className="h-12 w-12 text-orange-500 mx-auto mb-4" />
+                            <CardContent className="p-8 md:p-12 text-center">
+                                <MapPin className="h-10 w-10 md:h-12 md:w-12 text-orange-500 mx-auto mb-4" />
                                 <h3 className="text-lg font-semibold text-card-foreground mb-2">
                                     Seating Not Available
                                 </h3>
-                                <p className="text-muted-foreground mb-4">{error}</p>
-                                <Button onClick={fetchSeating} variant="outline">
+                                <p className="text-muted-foreground mb-4 text-sm md:text-base">{error}</p>
+                                <Button onClick={fetchSeating} variant="outline" size="sm">
                                     Try Again
                                 </Button>
                             </CardContent>
@@ -131,37 +131,37 @@ export default function ParticipantSeatingPage() {
                     {!loadingSeating && pageData && (
                         <div className="space-y-4">
                             <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30">
-                                <CardContent className="p-6">
-                                    <div className="flex items-center justify-between flex-wrap gap-4">
-                                        <div className="flex items-center gap-4">
-                                            <div className="p-3 bg-primary/20 rounded-full">
-                                                <MapPin className="h-6 w-6 text-primary" />
+                                <CardContent className="p-4 md:p-6">
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <div className="flex items-center gap-3 md:gap-4">
+                                            <div className="p-2 md:p-3 bg-primary/20 rounded-full">
+                                                <MapPin className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                                             </div>
                                             <div>
-                                                <h3 className="text-xl font-bold text-card-foreground">
-                                                    Your Team Seats Assigned
+                                                <h3 className="text-lg md:text-xl font-bold text-card-foreground">
+                                                    Your Team Seats
                                                 </h3>
-                                                <p className="text-sm text-muted-foreground">{pageData.mySeating.labName}</p>
+                                                <p className="text-xs md:text-sm text-muted-foreground">{pageData.mySeating.labName}</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4">
+                                        <div className="grid grid-cols-3 gap-2 md:flex md:items-center md:gap-4 border-t md:border-t-0 pt-4 md:pt-0">
                                             <div className="text-center">
-                                                <p className="text-xs text-muted-foreground">Section</p>
+                                                <p className="text-[10px] md:text-xs text-muted-foreground">Section</p>
                                                 <Badge
-                                                    className={`mt-1 ${pageData.mySeating.section === 'left' ? 'bg-blue-500' : 'bg-orange-500'} text-white`}
+                                                    className={`mt-1 ${pageData.mySeating.section === 'left' ? 'bg-blue-500' : 'bg-orange-500'} text-white text-[10px] md:text-xs px-2 py-0.5`}
                                                 >
                                                     {pageData.mySeating.section === 'left' ? 'Left' : 'Right'}
                                                 </Badge>
                                             </div>
-                                            <div className="text-center px-4 border-x border-border">
-                                                <p className="text-xs text-muted-foreground">Team Size</p>
-                                                <p className="text-2xl font-bold text-foreground mt-1">
+                                            <div className="text-center px-2 md:px-4 border-x border-border">
+                                                <p className="text-[10px] md:text-xs text-muted-foreground">Team Size</p>
+                                                <p className="text-xl md:text-2xl font-bold text-foreground mt-1">
                                                     {pageData.mySeating.teamSize}
                                                 </p>
                                             </div>
                                             <div className="text-center">
-                                                <p className="text-xs text-muted-foreground">Seats</p>
-                                                <p className="text-sm font-semibold text-foreground mt-1">
+                                                <p className="text-[10px] md:text-xs text-muted-foreground">Seats</p>
+                                                <p className="text-xs md:text-sm font-semibold text-foreground mt-1 break-words">
                                                     {pageData.mySeating.seats.map(s =>
                                                         `${String.fromCharCode(64 + s.row)}${s.column}`
                                                     ).join(', ')}

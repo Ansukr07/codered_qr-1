@@ -166,7 +166,7 @@ export default function SeatingMap({
 
     return (
         <Card className="bg-card border-border">
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
                 <div className="space-y-6">
                     {/* Header */}
                     <div className="text-center space-y-1">
@@ -175,41 +175,45 @@ export default function SeatingMap({
                     </div>
 
                     {/* Both Sections Side-by-Side - BookMyShow Style */}
-                    <div className="grid md:grid-cols-2 gap-6 px-4">
+                    <div className="grid md:grid-cols-2 gap-6 md:px-4">
                         {/* Left Section */}
-                        {renderSection(leftSeats, 'left', '← LEFT SECTION')}
+                        <div className="overflow-x-auto pb-2">
+                            {renderSection(leftSeats, 'left', '← LEFT SECTION')}
+                        </div>
 
                         {/* Right Section */}
-                        {renderSection(rightSeats, 'right', 'RIGHT SECTION →')}
+                        <div className="overflow-x-auto pb-2">
+                            {renderSection(rightSeats, 'right', 'RIGHT SECTION →')}
+                        </div>
                     </div>
 
                     {/* Screen/Stage Indicator - BookMyShow Style */}
                     <div className="text-center pt-4">
-                        <div className="inline-block px-16 py-2 bg-gradient-to-b from-primary/30 to-primary/10 border-t-2 border-x-2 border-primary/40 rounded-t-[100px]">
-                            <p className="text-xs text-muted-foreground font-medium">All eyes this way please</p>
+                        <div className="inline-block px-8 md:px-16 py-2 bg-gradient-to-b from-primary/30 to-primary/10 border-t-2 border-x-2 border-primary/40 rounded-t-[100px]">
+                            <p className="text-[10px] md:text-xs text-muted-foreground font-medium whitespace-nowrap">All eyes this way please</p>
                         </div>
                     </div>
 
                     {/* Legend */}
                     <div className="border-t border-border pt-4">
-                        <div className="flex justify-center gap-6 text-xs flex-wrap">
+                        <div className="flex justify-center gap-4 md:gap-6 text-xs flex-wrap">
                             <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 bg-secondary/30 border border-border rounded-sm"></div>
+                                <div className="w-4 h-4 md:w-5 md:h-5 bg-secondary/30 border border-border rounded-sm"></div>
                                 <span className="text-muted-foreground">Available</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 bg-primary/20 border border-primary rounded-sm"></div>
+                                <div className="w-4 h-4 md:w-5 md:h-5 bg-primary/20 border border-primary rounded-sm"></div>
                                 <span className="text-muted-foreground">Occupied</span>
                             </div>
                             {teamSeats.length > 0 && (
                                 <div className="flex items-center gap-2">
-                                    <div className="w-5 h-5 bg-green-500 border border-green-600 rounded-sm"></div>
+                                    <div className="w-4 h-4 md:w-5 md:h-5 bg-green-500 border border-green-600 rounded-sm"></div>
                                     <span className="text-muted-foreground font-semibold">Your Team</span>
                                 </div>
                             )}
                             {highlightedSeats.length > 0 && (
                                 <div className="flex items-center gap-2">
-                                    <div className="w-5 h-5 bg-yellow-500 border border-yellow-600 rounded-sm animate-pulse"></div>
+                                    <div className="w-4 h-4 md:w-5 md:h-5 bg-yellow-500 border border-yellow-600 rounded-sm animate-pulse"></div>
                                     <span className="text-muted-foreground font-semibold">Search Result</span>
                                 </div>
                             )}
