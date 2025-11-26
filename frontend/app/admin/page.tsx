@@ -88,7 +88,7 @@ export default function AdminDashboard() {
   const [newResource, setNewResource] = useState({
     name: '',
     totalQuantity: 0,
-    type: 'consumable',
+    category: 'other',
   })
 
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function AdminDashboard() {
 
       if (res.ok) {
         setIsCreateDialogOpen(false)
-        setNewResource({ name: '', totalQuantity: 0, type: 'consumable' })
+        setNewResource({ name: '', totalQuantity: 0, category: 'other' })
         fetchAdminData()
       } else {
         const data = await res.json()
@@ -299,17 +299,19 @@ export default function AdminDashboard() {
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="type">Resource Type</Label>
+                          <Label htmlFor="category">Resource Category</Label>
                           <Select
-                            value={newResource.type}
-                            onValueChange={(value) => setNewResource({ ...newResource, type: value })}
+                            value={newResource.category}
+                            onValueChange={(value) => setNewResource({ ...newResource, category: value })}
                           >
                             <SelectTrigger>
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="consumable">Consumable</SelectItem>
-                              <SelectItem value="returnable">Returnable</SelectItem>
+                              <SelectItem value="food">Food</SelectItem>
+                              <SelectItem value="accommodation">Accommodation</SelectItem>
+                              <SelectItem value="chill_room">Chill Room</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>

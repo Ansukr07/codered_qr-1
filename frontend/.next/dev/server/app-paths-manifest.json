@@ -1,5 +1,11 @@
 {
+  "/admin/announcements/page": "app/admin/announcements/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/participants/detail/page": "app/admin/participants/detail/page.js",
+  "/admin/participants/page": "app/admin/participants/page.js",
+  "/admin/users/page": "app/admin/users/page.js",
   "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
   "/volunteer/help/page": "app/volunteer/help/page.js",
   "/volunteer/page": "app/volunteer/page.js",
   "/volunteer/resource-tracking/page": "app/volunteer/resource-tracking/page.js",

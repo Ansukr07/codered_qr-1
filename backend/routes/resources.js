@@ -19,12 +19,12 @@ router.get('/', requireAuth, async (req, res) => {
 // Create resource (Admin only)
 router.post('/', requireAuth, requireRole('admin'), async (req, res) => {
     try {
-        const { name, totalQuantity, type } = req.body;
+        const { name, totalQuantity, category } = req.body;
         const resource = await Resource.create({
             name,
             totalQuantity,
             distributedQuantity: 0,
-            category: type || 'other' // Map 'type' to 'category' for compatibility
+            category: category || 'other'
         });
 
         res.status(201).json({ message: 'Resource created', resource });

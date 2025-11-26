@@ -256,3 +256,11 @@ Import traces:
 [00:50:04.578] Browser LOG     Stats: {"completed":1,"pending":7,"total":8}
 [00:50:04.578] Browser LOG     Completed count: 1
 [00:50:04.578] Browser LOG     Pending count: 7
+[00:58:29.913] Server  LOG      ✓ Compiled in 157ms
+[00:59:46.822] Server  LOG      ✓ Compiled in 129ms
+[01:00:23.082] Server  ERROR   Failed to proxy http://localhost:5000/api/resources Error: read ECONNRESET
+[01:00:23.084] Server  ERROR   Error: read ECONNRESET
+[01:00:24.991] Browser ERROR   Failed to create resource: {}
+[01:00:41.175] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:01:26.209] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:05:56.448] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
