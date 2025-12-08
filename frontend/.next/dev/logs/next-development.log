@@ -1,75 +1,11 @@
-[00:00:00.978] Server  LOG      ✓ Ready in 616ms
-[00:00:04.031] Server  LOG      ○ Compiling /login ...
-[00:00:04.149] Server  ERROR   (node:13848) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:01.105] Server  LOG      ✓ Ready in 701ms
+[00:00:11.211] Server  LOG      ○ Compiling / ...
+[00:00:18.564] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:18.797] Server  ERROR   (node:18152) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[00:00:04.177] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:04.188] Server  ERROR   AggregateError
-[00:00:04.953] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:04.964] Server  ERROR   AggregateError
-[00:00:05.425] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:05.437] Server  ERROR   AggregateError
-[00:00:05.536] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:05.539] Server  ERROR   AggregateError
-[00:00:05.850] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:05.880] Server  ERROR   AggregateError
-[00:00:06.259] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:06.274] Server  ERROR   AggregateError
-[00:00:06.612] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:06.618] Server  ERROR   AggregateError
-[00:00:06.783] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:06.786] Server  ERROR   AggregateError
-[00:00:06.977] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:06.996] Server  ERROR   AggregateError
-[00:00:07.324] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/login AggregateError
-[00:00:07.338] Server  ERROR   AggregateError
-[00:00:09.237] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:09.379] Server  ERROR   Failed to proxy http://localhost:5000/api/auth/me AggregateError
-[00:00:09.380] Server  ERROR   AggregateError
-[00:01:10.101] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:49.805] Server  LOG      ✓ Compiled in 212ms
-[00:05:24.483] Server  LOG      ✓ Compiled in 129ms
-[00:06:00.551] Server  LOG      ✓ Compiled in 100ms
-[00:06:59.643] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:07:04.051] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:07:29.366] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:16:40.104] Server  LOG      ✓ Compiled in 115ms
-[00:18:03.866] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:18:45.201] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:18:58.883] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:19:14.101] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:19:17.680] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:25:43.529] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:25:52.486] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:21.851] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:44.423] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:59.011] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:28:31.692] Server  LOG      ✓ Compiled in 62ms
-[00:28:32.292] Browser ERROR   uncaughtError: TypeError: Constructor Map requires 'new'
-[00:28:41.325] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:28:41.330] Server  LOG      ✓ Compiled in 83ms
-[00:28:41.863] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:29:27.440] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:30:17.593] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:34:20.334] Server  LOG      ✓ Compiled in 75ms
-[00:38:42.741] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:38:56.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:39:14.213] Server  LOG      ✓ Compiled in 1278ms
-[00:40:44.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:41:03.943] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:45:03.288] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:48:07.706] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:49:36.909] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:49:40.763] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:51:05.403] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:51:17.958] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:52:09.627] Server  LOG      ✓ Compiled in 97ms
-[00:52:44.703] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:52:49.002] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:52:58.382] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:53:42.285] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:54:33.161] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:55:46.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:55:58.961] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:05:37.937] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:05:53.782] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:07:54.972] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:21.885] Server  LOG      ○ Compiling /login ...
+[00:00:29.213] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:16.033] Server  LOG      ✓ Compiled in 7.1s
+[00:09:35.553] Server  LOG      ✓ Compiled in 2.1s
+[00:10:46.833] Server  LOG      ✓ Compiled in 2.9s
+[00:11:18.817] Server  LOG      ✓ Compiled in 3.1s

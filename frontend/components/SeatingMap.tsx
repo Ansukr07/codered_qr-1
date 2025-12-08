@@ -5,19 +5,12 @@ interface SeatingMapProps {
     teamName?: string;
 }
 
-// Global Config
-const TOTAL_SEATS = 50; // Limited to 50 teams as requested
-const COLUMNS = 4; // 2 left, 2 right
+const TOTAL_SEATS = 50;
+const COLUMNS = 4;
 
-/**
- * Maps a team name to a specific index (0 to 49) deterministically.
- */
 function getSeatIndex(teamName: string): number {
     let hash = 0;
-    // STRICT normalization: lowercase, remove ALL whitespace
-    // This ensures "Team A" and "Team  A" and "team a" all map to the same index
     const str = teamName.toLowerCase().replace(/\s+/g, '');
-
     for (let i = 0; i < str.length; i++) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
@@ -29,133 +22,118 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName }) => {
     const activeSeatIndex = normalizedTeamName ? getSeatIndex(normalizedTeamName) : -1;
     const hasTeam = !!normalizedTeamName;
 
-    // Render the grid dynamically with a "Theatre" curve
-    const renderSeats = () => {
+    const renderGrid = () => {
         const seats = [];
-        const seatWidth = 100;
-        const seatHeight = 50;
-        const gapX = 15;
-        const gapY = 50;
-        const aisleWidth = 100;
+        const seatWidth = 80;
+        const seatHeight = 40;
+        const gapX = 12;
+        const gapY = 30; // Closer vertical spacing
+        const aisleWidth = 80;
 
-        // Starting offset
+        // Layout Config
         const startX = 140;
-        const startY = 150;
+        const startY = 160;
+
+        // Generate Row Labels (A, B, C...)
+        const totalRows = Math.ceil(TOTAL_SEATS / COLUMNS);
+        const rowLabels = [];
+
+        for (let r = 0; r < totalRows; r++) {
+            const yPos = startY + (r * (seatHeight + gapY)) + (seatHeight / 2);
+            const labelChar = String.fromCharCode(65 + r); // A, B, C...
+            rowLabels.push(
+                <text key={`row-${r}`} x="80" y={yPos} className={styles.axisLabel}>{labelChar}</text>
+            );
+        }
 
         for (let i = 0; i < TOTAL_SEATS; i++) {
             const row = Math.floor(i / COLUMNS);
             const col = i % COLUMNS;
 
-            // X Calculation
-            // 2 left cols, aisle, 2 right cols
             let x = startX;
-
-            // Left block: cols 0, 1
+            // Left Block
             if (col === 0) x += 0;
             if (col === 1) x += seatWidth + gapX;
-
-            // Right block: cols 2, 3 (pushed by aisle)
+            // Right Block
             if (col >= 2) x += (seatWidth * 2) + gapX + aisleWidth;
-
             if (col === 2) x += 0;
             if (col === 3) x += seatWidth + gapX;
 
-            // Y Calculation with Theatre Curve
-            // Seats further from center are slightly "lower" (higher Y value) to create an arc effect relative to the 'stage' at top
-            // Distance from center (1.5) -> 0: 1.5, 1: 0.5, 2: 0.5, 3: 1.5
-            const distFromCenter = Math.abs(col - 1.5);
-            const curveOffset = distFromCenter * 20; // 20px drop for outer seats
-
-            const y = startY + (row * (seatHeight + gapY)) + curveOffset;
+            const y = startY + (row * (seatHeight + gapY));
 
             const isActive = (i === activeSeatIndex);
             const isInactive = hasTeam && !isActive;
 
-            // Define CSS class based on state
             let cssClass = styles.zone;
             if (isActive) cssClass = `${styles.zone} ${styles.zoneActive}`;
             else if (isInactive) cssClass = `${styles.zone} ${styles.zoneInactive}`;
 
-            // SVG Group for Seat
+            // Seat Group
             seats.push(
                 <g key={i}>
-                    {/* Seat Rectangle (Curved rounded box) */}
-                    <rect
-                        x={x}
-                        y={y}
-                        width={seatWidth}
-                        height={seatHeight}
-                        rx="12" // More rounded for "organic/theatre" feel
-                        ry="12"
+                    {/* Chair Back (Visual Detail) */}
+                    <path
+                        d={`M ${x},${y} h ${seatWidth} a 4,4 0 0 1 4,4 v ${seatHeight - 8} a 4,4 0 0 1 -4,4 h -${seatWidth} a 4,4 0 0 1 -4,-4 v -${seatHeight - 8} a 4,4 0 0 1 4,-4 Z`}
                         className={cssClass}
+                        data-index={i}
                     />
-
-                    {/* NO TEXT LABELS as requested */}
+                    {/* Small Desk Detail line */}
+                    <line x1={x + 10} y1={y + 10} x2={x + seatWidth - 10} y2={y + 10} stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
                 </g>
             );
         }
-        return seats;
+
+        return { seats, rowLabels };
     };
+
+    const { seats, rowLabels } = renderGrid();
 
     return (
         <div className={styles.container}>
             <svg
                 className={styles.mapSvg}
-                viewBox="0 0 800 1600"
+                viewBox="0 0 700 1200"
                 preserveAspectRatio="xMidYMin meet"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <defs>
-                    <linearGradient id="activeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ef4444" />
-                        <stop offset="100%" stopColor="#b91c1c" />
+                    <linearGradient id="screenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#ef4444" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
                     </linearGradient>
-                    {/* Subtle floor grid pattern */}
-                    <pattern id="floorGrid" width="60" height="60" patternUnits="userSpaceOnUse">
-                        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#2a2a35" strokeWidth="1" />
-                    </pattern>
                 </defs>
 
-                {/* Floor Background */}
-                <rect width="100%" height="100%" fill="url(#floorGrid)" opacity="0.3" />
+                {/* --- ARCHITECTURAL ELEMENTS --- */}
 
-                {/* Entrance Marker (Top Left) */}
-                <g transform="translate(40, 40)">
-                    {/* Main Arrow Body */}
-                    <path
-                        d="M 0,0 L 60,35 L 0,70 Z"
-                        fill="#fb923c"
-                    />
-                    {/* Secondary Arrow for depth */}
-                    <path
-                        d="M 25,0 L 85,35 L 25,70 Z"
-                        fill="#fb923c"
-                        opacity="0.6"
-                    />
-                    <text x="20" y="95" fill="#fb923c" fontSize="16" fontWeight="bold" fontFamily="sans-serif">ENTRANCE</text>
+                {/* Stage Area */}
+                <g transform="translate(150, 40)">
+                    {/* Screen Glow */}
+                    <path d="M 0,20 L 400,20 L 350,150 L 50,150 Z" className={styles.screenGlow} />
+                    {/* Curved Screen */}
+                    <path d="M 20,20 Q 200,50 380,20" fill="none" stroke="#27272a" strokeWidth="6" strokeLinecap="round" />
+                    <text x="200" y="10" textAnchor="middle" className={styles.screenText}>STAGE</text>
                 </g>
 
-                {/* Stage / Screen indicator at top center */}
-                <path
-                    d="M 200,80 Q 400,120 600,80"
-                    fill="none"
-                    stroke="#ef4444"
-                    strokeWidth="4"
-                    opacity="0.3"
-                />
-                <text x="400" y="60" textAnchor="middle" fill="#555" fontSize="14" letterSpacing="2">STAGE / SCREEN</text>
+                {/* Entrance Indicator - Schematic Style */}
+                <g transform="translate(40, 60)">
+                    <rect x="0" y="0" width="60" height="24" rx="4" fill="#27272a" stroke="#3f3f46" />
+                    <text x="30" y="16" textAnchor="middle" fill="#fb923c" fontSize="10" fontWeight="bold" fontFamily="sans-serif">ENTRY</text>
+                    <path d="M 30,28 L 30,50 M 20,40 L 30,50 L 40,40" stroke="#fb923c" strokeWidth="2" fill="none" />
+                </g>
 
-                {/* Render Grid */}
-                {renderSeats()}
+                {/* Row Labels */}
+                {rowLabels}
+
+                {/* Seats */}
+                {seats}
 
             </svg>
 
-            {/* Overlay Message if no team selected */}
             {!hasTeam && (
                 <div className={styles.messageContainer}>
                     <div className={styles.messageTitle}>Seating Map</div>
                     <div className={styles.messageSub}>
-                        Search for a member or join a team to see your seat.
+                        Enter a team member name to locate your desk.
                     </div>
                 </div>
             )}
