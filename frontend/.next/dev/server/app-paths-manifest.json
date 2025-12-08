@@ -1,17 +1,9 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/admin/seating/page": "app/admin/seating/page.js",
-  "/admin/seating/preview/page": "app/admin/seating/preview/page.js",
   "/login/page": "app/login/page.js",
   "/page": "app/page.js",
   "/participant/page": "app/participant/page.js",
   "/participant/qr/page": "app/participant/qr/page.js",
-  "/participant/seating/page": "app/participant/seating/page.js",
   "/volunteer/page": "app/volunteer/page.js",
   "/volunteer/scan-bag/page": "app/volunteer/scan-bag/page.js",
-  "/volunteer/scan-chill/page": "app/volunteer/scan-chill/page.js",
-  "/volunteer/scan-food/page": "app/volunteer/scan-food/page.js",
-  "/volunteer/scan/[resourceId]/page": "app/volunteer/scan/[resourceId]/page.js",
-  "/volunteer/seating/page": "app/volunteer/seating/page.js"
+  "/volunteer/scan-chill/page": "app/volunteer/scan-chill/page.js"
 }

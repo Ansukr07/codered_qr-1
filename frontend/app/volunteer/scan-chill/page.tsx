@@ -55,6 +55,19 @@ export default function ScanChillPage() {
     }
   }, [scanning])
 
+  const extractIdFromQr = (text: string) => {
+    try {
+      if (text.startsWith('http')) {
+        const url = new URL(text);
+        const id = url.searchParams.get('id');
+        if (id) return id;
+      }
+      return text;
+    } catch (e) {
+      return text;
+    }
+  }
+
   const onScanSuccess = async (decodedText: string) => {
     if (!resource) {
       toast({
@@ -65,6 +78,8 @@ export default function ScanChillPage() {
       return
     }
 
+    const cleanId = extractIdFromQr(decodedText);
+
     setScanning(false)
 
     try {
@@ -72,7 +87,7 @@ export default function ScanChillPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          qr_code: decodedText,
+          qr_code: cleanId,
           resource_id: resource._id,
         }),
       })

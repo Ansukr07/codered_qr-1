@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Code2, Shield, Users, QrCode, ArrowRight, Loader2 } from 'lucide-react'
+import { Code2, Shield, Users, QrCode, ArrowRight, Loader2, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -10,14 +10,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
-  const { login, register } = useAuth()
+  const { login } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
-  const [isLogin, setIsLogin] = useState(true)
   const [role, setRole] = useState<'admin' | 'volunteer' | 'team'>('team')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
-  const [teamName, setTeamName] = useState('')
+  const [code, setCode] = useState('')
   const [error, setError] = useState('')
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -26,15 +25,17 @@ export default function LoginPage() {
     setError('')
 
     try {
-      if (isLogin) {
-        await login(email, password)
+      if (role === 'team') {
+        // For team/participant, Name + Code
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, code })
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data.message)
+        window.location.href = '/participant';
       } else {
-        const roleToSend = role === 'team' ? 'participant' : role
-        await register(name, email, password, roleToSend, teamName)
-        // Auto login after register or redirect? AuthContext register returns data but doesn't auto login usually.
-        // Let's assume we want to login immediately or redirect. 
-        // The current register function in AuthContext just returns json.
-        // Let's login the user after registration for smooth UX
         await login(email, password)
       }
     } catch (err: any) {
@@ -63,26 +64,9 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
-            {/* Mode Toggle */}
-            <div className="flex bg-secondary/50 p-1 rounded-lg mb-6">
-              <button
-                type="button"
-                onClick={() => { setIsLogin(true); setError(''); }}
-                className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${isLogin ? 'bg-background shadow text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                Login
-              </button>
-              <button
-                type="button"
-                onClick={() => { setIsLogin(false); setError(''); setRole('team'); }}
-                className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${!isLogin ? 'bg-background shadow text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                Sign Up
-              </button>
-            </div>
 
             {/* Role Selection */}
-            <div className={`grid gap-2 mb-6 ${isLogin ? 'grid-cols-3' : 'grid-cols-1'}`}>
+            <div className="grid grid-cols-3 gap-2 mb-6">
               <button
                 type="button"
                 onClick={() => setRole('team')}
@@ -94,35 +78,31 @@ export default function LoginPage() {
                 <Users className="w-5 h-5 mb-1" />
                 <span className="text-xs font-medium">Team</span>
               </button>
-              {isLogin && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setRole('volunteer')}
-                    className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'volunteer'
-                      ? 'bg-red-500/10 border-red-500 text-red-500'
-                      : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
-                      }`}
-                  >
-                    <QrCode className="w-5 h-5 mb-1" />
-                    <span className="text-xs font-medium">Volunteer</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setRole('admin')}
-                    className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'admin'
-                      ? 'bg-red-500/10 border-red-500 text-red-500'
-                      : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
-                      }`}
-                  >
-                    <Shield className="w-5 h-5 mb-1" />
-                    <span className="text-xs font-medium">Admin</span>
-                  </button>
-                </>
-              )}
+              <button
+                type="button"
+                onClick={() => setRole('volunteer')}
+                className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'volunteer'
+                  ? 'bg-red-500/10 border-red-500 text-red-500'
+                  : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
+                  }`}
+              >
+                <QrCode className="w-5 h-5 mb-1" />
+                <span className="text-xs font-medium">Volunteer</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setRole('admin')}
+                className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'admin'
+                  ? 'bg-red-500/10 border-red-500 text-red-500'
+                  : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
+                  }`}
+              >
+                <Shield className="w-5 h-5 mb-1" />
+                <span className="text-xs font-medium">Admin</span>
+              </button>
             </div>
 
-            {!isLogin && (
+            {role === 'team' ? (
               <>
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
@@ -134,43 +114,44 @@ export default function LoginPage() {
                     className="bg-secondary/50 border-border/50"
                   />
                 </div>
-                {role === 'team' && (
-                  <div className="space-y-2">
-                    <Label htmlFor="teamName">Team Name</Label>
-                    <Input
-                      id="teamName"
-                      placeholder="Enter your team name"
-                      value={teamName}
-                      onChange={(e) => setTeamName(e.target.value)}
-                      className="bg-secondary/50 border-border/50"
-                    />
-                  </div>
-                )}
+                <div className="space-y-2">
+                  <Label htmlFor="code">Code</Label>
+                  <Input
+                    id="code"
+                    type="text"
+                    placeholder="e.g. CRU-T01-P01"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    className="bg-secondary/50 border-border/50"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email ID"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-secondary/50 border-border/50"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="bg-secondary/50 border-border/50"
+                  />
+                </div>
               </>
             )}
-
-            <div className="space-y-2">
-              <Label htmlFor="email">ID (Email)</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email ID"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-secondary/50 border-border/50"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-secondary/50 border-border/50"
-              />
-            </div>
 
             {error && (
               <div className="text-sm text-destructive text-center bg-destructive/10 p-2 rounded-md">
@@ -182,11 +163,11 @@ export default function LoginPage() {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {isLogin ? 'Signing in...' : 'Creating account...'}
+                  Signing in...
                 </>
               ) : (
                 <>
-                  {isLogin ? 'Sign In' : 'Sign Up'}
+                  Sign In
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </>
               )}
@@ -209,8 +190,8 @@ export default function LoginPage() {
               </div>
               <div className="p-2 rounded bg-secondary/50 border border-border/50">
                 <p className="font-semibold text-primary">Team</p>
-                <p className="text-muted-foreground mt-1">participant@test.com</p>
-                <p className="text-muted-foreground">password123</p>
+                <p className="text-muted-foreground mt-1">Participant Name</p>
+                <p className="text-muted-foreground">CRU-...</p>
               </div>
             </div>
           </div>

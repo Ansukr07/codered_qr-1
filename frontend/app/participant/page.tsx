@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, MapPin } from 'lucide-react'
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
@@ -191,25 +191,7 @@ export default function ParticipantDashboard() {
                         </div>
                     </div>
 
-                    {/* Seating Assignment - Priority Display */}
-                    <Card className="bg-gradient-to-r from-primary/20 to-primary/5 border-primary/30 hover:border-primary/50 transition-all cursor-pointer">
-                        <Link href="/participant/seating">
-                            <CardContent className="p-4 md:p-6">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-3 md:gap-4">
-                                        <div className="p-2 md:p-3 bg-primary/20 rounded-full">
-                                            <MapPin className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-lg md:text-xl font-bold text-card-foreground">View My Seating Assignment</h3>
-                                            <p className="text-xs md:text-sm text-muted-foreground">Check your team's assigned seats in the lab</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-muted-foreground text-xl md:text-2xl">→</div>
-                                </div>
-                            </CardContent>
-                        </Link>
-                    </Card>
+
 
                     <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                         {/* Announcements */}

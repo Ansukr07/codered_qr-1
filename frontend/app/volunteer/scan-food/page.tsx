@@ -90,6 +90,20 @@ export default function ScanFoodPage() {
     }
   }, [scanning])
 
+  const extractIdFromQr = (text: string) => {
+    try {
+      // Check if it's a URL
+      if (text.startsWith('http')) {
+        const url = new URL(text);
+        const id = url.searchParams.get('id');
+        if (id) return id;
+      }
+      return text;
+    } catch (e) {
+      return text;
+    }
+  }
+
   const onScanSuccess = async (decodedText: string) => {
     if (!selectedResourceId) {
       toast({
@@ -100,24 +114,26 @@ export default function ScanFoodPage() {
       return
     }
 
+    const cleanId = extractIdFromQr(decodedText);
+
     // Prevent multiple scans of the same code while processing
-    if (decodedText === lastScannedCode && (showConfirmDialog || showClaimedDialog)) {
+    if (cleanId === lastScannedCode && (showConfirmDialog || showClaimedDialog)) {
       return
     }
 
     setScanning(false)
-    setLastScannedCode(decodedText)
+    setLastScannedCode(cleanId)
 
     // Small delay to allow scanner to cleanup
     setTimeout(async () => {
       try {
-        console.log('🔍 [Scan] Validating QR:', decodedText)
+        console.log('🔍 [Scan] Validating QR:', cleanId)
         // Step 1: Validate
         const res = await fetch('/api/scan/validate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            qr_code: decodedText,
+            qr_code: cleanId,
             resource_id: selectedResourceId,
           }),
         })
