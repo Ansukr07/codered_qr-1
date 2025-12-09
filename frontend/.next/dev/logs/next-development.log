@@ -1,0 +1,792 @@
+[00:00:01.105] Server  LOG      ✓ Ready in 701ms
+[00:00:11.211] Server  LOG      ○ Compiling / ...
+[00:00:18.564] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:18.797] Server  ERROR   (node:18152) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[00:00:21.885] Server  LOG      ○ Compiling /login ...
+[00:00:29.213] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:16.033] Server  LOG      ✓ Compiled in 7.1s
+[00:09:35.553] Server  LOG      ✓ Compiled in 2.1s
+[00:10:46.833] Server  LOG      ✓ Compiled in 2.9s
+[00:11:18.817] Server  LOG      ✓ Compiled in 3.1s
+[01:22:49.795] Server  LOG      ✓ Compiled in 308ms
+[01:22:49.907] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:49.911] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:49.929] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:49.932] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:49.988] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:49.991] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.027] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.030] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.069] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.072] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.101] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.104] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.153] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.156] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.169] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.171] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.227] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.229] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.242] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.245] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.286] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.288] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.316] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.318] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.360] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.363] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.420] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.422] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.456] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.458] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.510] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.512] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.524] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.526] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.574] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.577] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.589] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.591] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.647] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.649] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.667] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.670] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.700] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.703] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.741] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.743] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.769] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.771] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.818] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.821] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.833] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.835] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.884] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.887] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.899] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.902] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.943] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.945] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.970] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:50.972] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.001] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.003] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.039] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.042] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.068] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.070] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.122] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.124] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.136] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.139] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.185] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.187] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.200] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.202] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.251] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.253] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.266] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.268] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.302] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.305] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.328] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.331] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.365] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.367] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.390] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.392] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.423] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.425] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.457] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.459] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.483] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.486] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.531] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.534] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.545] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.548] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.596] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.598] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.610] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.613] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.658] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.661] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.686] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.688] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.717] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.720] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.752] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.755] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.779] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.782] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.828] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.831] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.843] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.845] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.897] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.899] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.911] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.914] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.951] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.953] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.978] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:51.980] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.011] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.014] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.045] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.048] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.072] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.075] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.121] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.124] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.136] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.139] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.187] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.190] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.202] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.204] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.245] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.248] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.271] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.274] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.305] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.307] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.339] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.341] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.366] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.369] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.414] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.416] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.428] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.431] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.477] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.480] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.492] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.495] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.538] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.541] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.566] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.569] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.596] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.599] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.634] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.637] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.661] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.664] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.670] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.671] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.676] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.676] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.676] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.677] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:52.711] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.714] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.726] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.729] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.778] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.781] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.793] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.796] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.836] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.839] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.863] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.866] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.897] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.900] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.931] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.934] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.960] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:52.964] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.011] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.014] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.026] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.030] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.077] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.080] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.092] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.095] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.131] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.134] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.159] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.162] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.191] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.194] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.210] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:53.210] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:53.210] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:53.226] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.229] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.261] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.264] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.304] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.308] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.353] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.356] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.398] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.402] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.439] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.442] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.484] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.487] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.524] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.527] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.563] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.566] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.605] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.608] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.646] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.649] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.654] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:53.654] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:53.654] Browser ERROR   ./app/participant/page.tsx:10:1
+Parsing ecmascript source code failed
+   8 | =======
+   9 | import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
+> 10 | >>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+     | ^^^^^^^
+  11 | import { Button } from '@/components/ui/button'
+  12 | import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+  13 | import { useAuth } from '@/contexts/AuthContext'
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/participant/page.tsx [Client Component Browser]
+    ./app/participant/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/participant/page.tsx [Client Component SSR]
+    ./app/participant/page.tsx [Server Component]
+[01:22:53.697] Server  WARN    Could not find files for /_error in .next/build-manifest.json
+[01:22:53.700] Server  WARN    Could not find files for /_error in .next/build-manifest.json

@@ -1,0 +1,126 @@
+/* SeatingMap.module.css */
+
+.container {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #09090b;
+    /* Very dark zinc */
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    /* subtle architectural grid */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    box-shadow: 0 0 0 1px #27272a;
+}
+
+.mapSvg {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    /* Removed aggressive 3D tilt for a more readable, professional schematic view */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+.zone {
+    fill: #18181b;
+    /* Zinc-900 */
+    stroke: #3f3f46;
+    /* Zinc-700 */
+    stroke-width: 1px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.zoneActive {
+    fill: #7f1d1d;
+    /* Dark Red background */
+    stroke: #ef4444;
+    /* Bright Red border */
+    stroke-width: 2px;
+    fill-opacity: 0.8;
+    /* Professional glow: contained, not messy */
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.5));
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.zoneInactive {
+    opacity: 0.4;
+    fill: #0f0f10;
+    stroke: #27272a;
+}
+
+/* Axis Labels (A, B, C...) */
+.axisLabel {
+    fill: #71717a;
+    /* Zinc-400 */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+/* Screen/Stage area */
+.screenBody {
+    fill: #18181b;
+    stroke: #27272a;
+}
+
+.screenGlow {
+    fill: url(#screenGradient);
+    opacity: 0.2;
+}
+
+.screenText {
+    fill: #52525b;
+    font-family: sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Overlay */
+.messageContainer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(9, 9, 11, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 50;
+}
+
+.messageTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f4f4f5;
+    margin-bottom: 0.25rem;
+}
+
+.messageSub {
+    font-size: 0.875rem;
+    color: #a1a1aa;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        stroke-opacity: 1;
+        fill-opacity: 0.8;
+    }
+
+    50% {
+        stroke-opacity: 0.6;
+        fill-opacity: 0.6;
+    }
+}
