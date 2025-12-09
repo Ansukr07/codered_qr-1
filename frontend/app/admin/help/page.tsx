@@ -158,14 +158,18 @@ export default function HelpPage() {
                     <div className="flex items-start justify-between">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <CardTitle className="text-lg text-card-foreground">{request.userId.name}</CardTitle>
-                          {request.userId.teamId && (
+                          <CardTitle className="text-lg text-card-foreground">
+                            {request.userId?.name || 'Unknown User'}
+                          </CardTitle>
+                          {request.userId?.teamId && (
                             <Badge variant="outline" className="text-xs">
                               {request.userId.teamId}
                             </Badge>
                           )}
                         </div>
-                        <p className="text-sm text-muted-foreground">{request.userId.email}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {request.userId?.email || 'No Email'}
+                        </p>
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" className="capitalize">{request.category}</Badge>
@@ -218,15 +222,19 @@ export default function HelpPage() {
                     <div className="flex items-start justify-between">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <CardTitle className="text-lg text-card-foreground">{request.userId.name}</CardTitle>
-                          {request.userId.teamId && (
+                          <CardTitle className="text-lg text-card-foreground">
+                            {request.userId?.name || 'Unknown User'}
+                          </CardTitle>
+                          {request.userId?.teamId && (
                             <Badge variant="outline" className="text-xs">
                               {request.userId.teamId}
                             </Badge>
                           )}
                           <Badge className="bg-green-600">Resolved</Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">{request.userId.email}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {request.userId?.email || 'No Email'}
+                        </p>
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" className="capitalize">{request.category}</Badge>

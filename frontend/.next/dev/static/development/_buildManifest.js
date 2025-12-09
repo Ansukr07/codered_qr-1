@@ -6,6 +6,9 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [
       {
         "source": "/api/:path*"
+      },
+      {
+        "source": "/uploads/:path*"
       }
     ],
     "beforeFiles": [],

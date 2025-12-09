@@ -24,6 +24,7 @@ interface Participant {
   qrCode: string
   resourcesClaimed: number
   createdAt: string
+  track?: string
 }
 
 export default function ParticipantsPage() {
@@ -49,12 +50,24 @@ export default function ParticipantsPage() {
     }
   }
 
-  const filteredParticipants = participants.filter(p =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (p.teamId && p.teamId.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    p.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    p.qrCode.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const [tab, setTab] = useState<'main' | 'unisys'>('main')
+
+  const filteredParticipants = participants.filter(p => {
+    // Search Filter
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (p.teamId && p.teamId.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (p.email && p.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (p.qrCode && p.qrCode.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    // Track Filter - Check track field OR qrCode content
+    const isUnisys = (p.track === 'CRU') || (p.qrCode && p.qrCode.toUpperCase().includes('CRU'));
+
+    const matchesTrack = tab === 'main'
+      ? !isUnisys
+      : isUnisys
+
+    return matchesSearch && matchesTrack
+  })
 
   const exportToCSV = () => {
     const headers = ['Name', 'Email', 'Team ID', 'QR Code', 'Resources Claimed', 'Created At']
@@ -80,13 +93,15 @@ export default function ParticipantsPage() {
     a.click()
   }
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64 text-white">
-        <p>Loading participants...</p>
-      </div>
-    )
-  }
+  // Grouping Logic (Reused)
+  const groupedParticipants = filteredParticipants.reduce((groups, participant) => {
+    const team = participant.teamId || 'No Team'
+    if (!groups[team]) {
+      groups[team] = []
+    }
+    groups[team].push(participant)
+    return groups
+  }, {} as Record<string, Participant[]>)
 
   return (
     <div className="space-y-6">
@@ -98,10 +113,34 @@ export default function ParticipantsPage() {
         </Button>
       </div>
 
+      {/* Tabs */}
+      <div className="flex gap-2 border-b border-border/50">
+        <button
+          onClick={() => setTab('main')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${tab === 'main'
+            ? 'border-primary text-primary'
+            : 'border-transparent text-muted-foreground hover:text-foreground'
+            }`}
+        >
+          Main Track (CodeRed)
+        </button>
+        <button
+          onClick={() => setTab('unisys')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${tab === 'unisys'
+            ? 'border-primary text-primary'
+            : 'border-transparent text-muted-foreground hover:text-foreground'
+            }`}
+        >
+          Unisys Track
+        </button>
+      </div>
+
       <Card className="bg-card/50 backdrop-blur border-border/50">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>All Participants ({filteredParticipants.length})</CardTitle>
+            <CardTitle>
+              {tab === 'main' ? 'Main Track' : 'Unisys Track'} Participants ({filteredParticipants.length})
+            </CardTitle>
             <div className="flex items-center gap-2">
               <div className="relative w-64">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -116,60 +155,65 @@ export default function ParticipantsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="text-foreground">Name</TableHead>
-                <TableHead className="text-foreground">Email</TableHead>
-                <TableHead className="text-foreground">Team ID</TableHead>
-                <TableHead className="text-foreground">QR Code</TableHead>
-                <TableHead className="text-foreground">Resources Claimed</TableHead>
-                <TableHead className="text-foreground">Joined</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredParticipants.map((participant) => (
-                <TableRow
-                  key={participant._id}
-                  className="cursor-pointer hover:bg-secondary/50 transition-colors"
-                  onClick={() => window.location.href = `/admin/participants/detail?id=${participant._id}`}
-                >
-                  <TableCell className="font-medium text-card-foreground">
-                    {participant.name}
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{participant.email}</TableCell>
-                  <TableCell>
-                    {participant.teamId ? (
-                      <Badge variant="outline">{participant.teamId}</Badge>
-                    ) : (
-                      <span className="text-muted-foreground">-</span>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <QrCode className="h-4 w-4 text-muted-foreground" />
-                      <span className="font-mono text-xs">{participant.qrCode}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={participant.resourcesClaimed > 0 ? "default" : "secondary"}>
-                      {participant.resourcesClaimed}
+          <div className="space-y-8">
+            {Object.entries(groupedParticipants)
+              .sort((a, b) => a[0].localeCompare(b[0]))
+              .map(([teamId, teamParticipants]) => (
+                <div key={teamId} className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-lg text-primary">{teamId}</h3>
+                    <Badge variant="secondary" className="text-xs">
+                      {teamParticipants.length} members
                     </Badge>
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {new Date(participant.createdAt).toLocaleDateString()}
-                  </TableCell>
-                </TableRow>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-foreground w-[200px]">Name</TableHead>
+                        <TableHead className="text-foreground">Email</TableHead>
+                        <TableHead className="text-foreground">QR Code</TableHead>
+                        <TableHead className="text-foreground text-center">Resources</TableHead>
+                        <TableHead className="text-foreground text-right">Joined</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {teamParticipants.map((participant) => (
+                        <TableRow
+                          key={participant._id}
+                          className="cursor-pointer hover:bg-secondary/50 transition-colors"
+                          onClick={() => window.location.href = `/admin/participants/detail?id=${participant._id}`}
+                        >
+                          <TableCell className="font-medium text-card-foreground">
+                            {participant.name}
+                          </TableCell>
+                          <TableCell className="text-sm text-muted-foreground">{participant.email || '-'}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <QrCode className="h-4 w-4 text-muted-foreground" />
+                              <span className="font-mono text-xs">{participant.qrCode}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-center">
+                            <Badge variant={participant.resourcesClaimed > 0 ? "default" : "secondary"}>
+                              {participant.resourcesClaimed}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-sm text-muted-foreground text-right">
+                            {new Date(participant.createdAt).toLocaleDateString()}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               ))}
-              {filteredParticipants.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                    No participants found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+
+            {filteredParticipants.length === 0 && (
+              <div className="text-center py-8 text-muted-foreground">
+                No participants found in {tab === 'main' ? 'Main' : 'Unisys'} track
+              </div>
+            )}
+          </div>
         </CardContent>
       </Card>
     </div>

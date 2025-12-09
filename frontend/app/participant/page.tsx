@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone } from 'lucide-react'
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
@@ -177,6 +177,13 @@ export default function ParticipantDashboard() {
                             <p className="text-xs md:text-sm text-muted-foreground">Welcome, {user.name}</p>
                         </div>
                         <div className="flex gap-2">
+                            <Link href="/participant/tasks">
+                                <Button variant="default" size="sm" className="h-9 md:h-10 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 border-none text-white">
+                                    <Trophy className="mr-2 h-4 w-4" />
+                                    <span className="hidden md:inline">Tasks</span>
+                                    <span className="md:hidden">Tasks</span>
+                                </Button>
+                            </Link>
                             <Link href="/participant/qr">
                                 <Button variant="secondary" size="sm" className="h-9 md:h-10">
                                     <QrCode className="mr-2 h-4 w-4" />

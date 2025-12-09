@@ -8,6 +8,7 @@ import { Camera, CheckCircle2, XCircle, ArrowLeft, Package } from 'lucide-react'
 import Link from 'next/link'
 import { Html5QrcodeScanner } from 'html5-qrcode'
 import { useToast } from '@/hooks/use-toast'
+import { extractIdFromQr } from '@/lib/utils'
 
 interface Resource {
   _id: string
@@ -55,18 +56,7 @@ export default function ScanChillPage() {
     }
   }, [scanning])
 
-  const extractIdFromQr = (text: string) => {
-    try {
-      if (text.startsWith('http')) {
-        const url = new URL(text);
-        const id = url.searchParams.get('id');
-        if (id) return id;
-      }
-      return text;
-    } catch (e) {
-      return text;
-    }
-  }
+  // Removed local extractIdFromQr definition
 
   const onScanSuccess = async (decodedText: string) => {
     if (!resource) {

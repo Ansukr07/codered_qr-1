@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react'
+import { extractIdFromQr } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/AuthContext'
@@ -16,18 +17,7 @@ function VerifyContent() {
     const [message, setMessage] = useState('Verifying...')
     const [memberData, setMemberData] = useState<any>(null)
 
-    const extractIdFromQr = (text: string) => {
-        try {
-            if (text.startsWith('http')) {
-                const url = new URL(text);
-                const id = url.searchParams.get('id');
-                return id || text;
-            }
-            return text;
-        } catch (e) {
-            return text;
-        }
-    }
+    // Removed local extractIdFromQr definition
 
     const rawId = searchParams.get('id')
     const id = rawId ? extractIdFromQr(rawId) : null
