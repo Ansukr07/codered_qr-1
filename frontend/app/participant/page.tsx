@@ -3,11 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-<<<<<<< HEAD
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy } from 'lucide-react'
-=======
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Map } from 'lucide-react'
->>>>>>> 825cb5c9c04089cc1b710e24ba201b6ca63a1d22
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy, Map } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'

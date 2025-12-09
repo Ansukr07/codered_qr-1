@@ -1,6 +1,12 @@
 {
+  "/admin/page": "app/admin/page.js",
+  "/admin/tasks/page": "app/admin/tasks/page.js",
+  "/admin/users/page": "app/admin/users/page.js",
   "/login/page": "app/login/page.js",
   "/page": "app/page.js",
   "/participant/page": "app/participant/page.js",
-  "/participant/seating/page": "app/participant/seating/page.js"
+  "/participant/seating/page": "app/participant/seating/page.js",
+  "/participant/tasks/page": "app/participant/tasks/page.js",
+  "/volunteer/page": "app/volunteer/page.js",
+  "/volunteer/verify-tasks/page": "app/volunteer/verify-tasks/page.js"
 }

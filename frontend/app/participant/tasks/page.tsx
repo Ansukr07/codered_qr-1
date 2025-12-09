@@ -24,7 +24,7 @@ export default function ParticipantTasksPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#0a0a0c] text-white relative overflow-x-hidden selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-[#0a0a0c] text-white relative overflow-x-hidden selection:bg-cyan-500/30">
             {/* Ambient Background Effects */}
             <div className="fixed inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 pointer-events-none" />
             <div className="fixed inset-0 opacity-[0.08] pointer-events-none" style={{
@@ -64,9 +64,9 @@ export default function ParticipantTasksPage() {
                             <div className="sticky top-8 space-y-6">
                                 <LiveLeaderboard />
 
-                                <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-900/50 to-purple-900/50 border border-indigo-500/20">
-                                    <h3 className="font-bold text-indigo-300 mb-2">💡 Pro Tip</h3>
-                                    <p className="text-sm text-indigo-100/70">
+                                <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-900/50 to-blue-900/50 border border-cyan-500/20">
+                                    <h3 className="font-bold text-cyan-300 mb-2">💡 Pro Tip</h3>
+                                    <p className="text-sm text-cyan-100/70">
                                         Focus on the <span className="text-white font-semibold">Technical</span> quests for higher XP rewards. They heavily impact your team's level!
                                     </p>
                                 </div>

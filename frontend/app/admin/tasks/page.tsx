@@ -82,11 +82,79 @@ export default function AdminTasksPage() {
         document.body.removeChild(link);
     }
 
+    const [newQuest, setNewQuest] = useState({ title: '', description: '', points: 10, category: 'general' })
+    const [creating, setCreating] = useState(false)
+    const [open, setOpen] = useState(false)
+
+    const handleCreateQuest = async () => {
+        setCreating(true)
+        try {
+            const res = await fetch('/api/gamification/tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newQuest)
+            })
+            if (res.ok) {
+                // toast.success("Quest Created!") // Toast not imported, ignoring
+                setOpen(false)
+                setNewQuest({ title: '', description: '', points: 10, category: 'general' })
+            }
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setCreating(false)
+        }
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold text-primary">Task Logs</h1>
                 <div className="flex gap-2">
+                    <Dialog open={open} onOpenChange={setOpen}>
+                        <DialogTrigger asChild>
+                            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">Create Quest</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <CardHeader>
+                                <CardTitle>Create New Quest</CardTitle>
+                            </CardHeader>
+                            <div className="space-y-4 py-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Title</label>
+                                    <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                        value={newQuest.title} onChange={e => setNewQuest({ ...newQuest, title: e.target.value })} placeholder="Quest Title" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Description</label>
+                                    <textarea className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                        value={newQuest.description} onChange={e => setNewQuest({ ...newQuest, description: e.target.value })} placeholder="Quest Details" />
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Points</label>
+                                        <input type="number" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                            value={newQuest.points} onChange={e => setNewQuest({ ...newQuest, points: parseInt(e.target.value) })} />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Category</label>
+                                        <Select value={newQuest.category} onValueChange={v => setNewQuest({ ...newQuest, category: v })}>
+                                            <SelectTrigger><SelectValue /></SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="general">General</SelectItem>
+                                                <SelectItem value="technical">Technical</SelectItem>
+                                                <SelectItem value="fun">Fun</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                </div>
+                                <Button onClick={handleCreateQuest} disabled={creating} className="w-full">
+                                    {creating ? 'Creating...' : 'Launch Quest'}
+                                </Button>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+
                     <Button variant="secondary" size="sm" onClick={fetchSubmissions} className="border border-border">
                         <RefreshCw className="h-4 w-4 mr-2" />
                         Refresh
