@@ -31,19 +31,21 @@ export default function VerifyTasksPage() {
     const [processing, setProcessing] = useState<string | null>(null)
     const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null)
 
-    const fetchSubmissions = async (status = currentTab) => {
-        setFetching(true)
+    const fetchSubmissions = async (status = currentTab, silent = false) => {
+        if (!silent) setFetching(true)
         try {
-            const res = await fetch(`/api/gamification/submissions?status=${status}`)
+            const timestamp = new Date().getTime()
+            const res = await fetch(`/api/gamification/submissions?status=${status}&t=${timestamp}`, {
+                cache: 'no-store'
+            })
             if (res.ok) {
                 const data = await res.json()
                 setSubmissions(data.submissions)
             }
         } catch (error) {
             console.error('Failed to fetch submissions:', error)
-            toast.error('Failed to load submissions')
         } finally {
-            setFetching(false)
+            if (!silent) setFetching(false)
         }
     }
 
@@ -53,19 +55,14 @@ export default function VerifyTasksPage() {
         if (user && (user.role === 'volunteer' || user.role === 'admin')) {
             fetchSubmissions()
             interval = setInterval(() => {
-                fetchSubmissions()
-            }, 10000) // Poll every 10 seconds
+                fetchSubmissions(currentTab, true)
+            }, 5000)
         }
 
         return () => {
             if (interval) clearInterval(interval)
         }
-    }, [user, currentTab]) // Added currentTab dep strict checks
-
-    // ...
-
-
-
+    }, [user, currentTab])
     const handleVerify = async (id: string, status: 'approved' | 'rejected') => {
         setProcessing(id)
         try {
