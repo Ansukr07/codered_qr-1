@@ -222,19 +222,7 @@ export default function ScanFoodPage() {
     setShowClaimedDialog(false)
   }
 
-  // Debug function to test dialogs
-  const handleTestDialog = () => {
-    setValidationResult({
-      status: 'allowed',
-      message: 'Ready to claim',
-      member: {
-        name: 'Test Participant',
-        teamId: 'TEST-001',
-        email: 'test@example.com'
-      }
-    })
-    setShowConfirmDialog(true)
-  }
+
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -248,9 +236,6 @@ export default function ScanFoodPage() {
           <h1 className="text-3xl font-bold text-foreground">Scan for Food</h1>
           <p className="text-muted-foreground">Scan participant QR to record meal</p>
         </div>
-        <Button variant="outline" size="sm" onClick={handleTestDialog}>
-          Test Dialog
-        </Button>
       </div>
 
       {/* Scanner Card */}

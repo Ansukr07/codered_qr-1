@@ -155,3 +155,849 @@ For more information, see https://radix-ui.com/primitives/docs/components/dialog
 [01:16:50.809] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:18:01.431] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:18:08.279] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:21:53.529] Server  LOG      ✓ Compiled in 260ms
+[01:21:55.812] Server  LOG      ✓ Compiled in 292ms
+[01:22:26.915] Browser ERROR   `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog
+[01:22:26.915] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[01:22:26.915] Browser ERROR   `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog
+[01:22:26.915] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[01:23:27.431] Server  LOG      ✓ Compiled in 380ms
+[01:25:29.405] Server  LOG      ✓ Compiled in 301ms
+[01:27:03.499] Server  LOG      ✓ Compiled in 154ms
+[01:27:45.116] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:28:02.385] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:29:55.715] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:05.194] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:35:46.107] Server  LOG      ✓ Compiled in 145ms
+[01:35:49.727] Server  LOG      ✓ Compiled in 164ms
+[01:35:59.493] Browser LOG     🔍 [Scan] Validating QR: CR-T29-P03
+[01:35:59.609] Browser LOG     🔍 [Scan] Validation Response: {"member":{"name":"Srinidhi P","teamId":"AUTOMATIKS"},"message":"Ready to claim","status":"allowed"}
+[01:35:59.609] Browser LOG     ✅ [Scan] Status Allowed -> Showing Confirm Dialog
+[01:37:21.169] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:37:28.776] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:38:29.939] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:40:52.429] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:40:59.729] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:41:25.596] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:43:42.593] Server  LOG      ✓ Compiled in 227ms
+[01:43:42.721] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:43:43.165] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:43:43.166] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:43:43.166] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:43:43.166] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:43:43.166] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:07.546] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:08.153] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:08.153] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:08.153] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:08.153] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:08.153] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:10.294] Server  LOG      ✓ Compiled in 284ms
+[01:44:10.410] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:11.159] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:11.159] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:11.160] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:11.160] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:11.160] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:25.290] Browser ERROR   uncaughtError: Error: ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+
+[01:44:25.426] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:25.531] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.160] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.160] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.161] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.162] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.162] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.162] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.162] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.162] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:44:26.162] Browser ERROR   ./app/volunteer/verify-tasks/page.tsx:57:16
+Parsing ecmascript source code failed
+  55 |
+  56 |         // Update Tabs to use state
+> 57 |         < Tabs value = { currentTab } className = "w-full" onValueChange = {(val) => {
+     |                ^^^^^
+  58 |         setCurrentTab(val)
+  59 |         fetchSubmissions(val)
+  60 |     }
+
+Expected ';', '}' or <eof>
+
+Import traces:
+  Client Component Browser:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component Browser]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/volunteer/verify-tasks/page.tsx [Client Component SSR]
+    ./app/volunteer/verify-tasks/page.tsx [Server Component]
+[01:45:20.579] Server  LOG      ✓ Compiled in 222ms
+[01:45:20.581] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:21.178] Browser ERROR   uncaughtError: ReferenceError: selectedSubmission is not defined
+[01:45:21.178] Browser ERROR   uncaughtError: ReferenceError: selectedSubmission is not defined
+[01:45:21.178] Browser ERROR   uncaughtError: ReferenceError: selectedSubmission is not defined
+[01:45:21.676] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:45:42.662] Server  LOG      ✓ Compiled in 154ms
+[01:45:42.668] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:42.672] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:43.251] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:45:43.748] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:45:43.761] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:45:43.788] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:46:06.978] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:48:26.288] Server  LOG      ✓ Compiled in 170ms
+[01:48:27.163] Browser ERROR   The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [[object Object]] [[object Object], pending]
+[01:48:27.163] Browser ERROR   The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [[object Object]] [[object Object], pending]
+[01:48:27.163] Browser ERROR   The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [[object Object]] [[object Object], pending]
+[01:49:04.180] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:49:25.129] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:49:33.565] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -171,12 +171,12 @@ export default function ParticipantDashboard() {
             <div className="relative z-10 p-4 md:p-6">
                 <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
                     {/* Header */}
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Participant Dashboard</h1>
                             <p className="text-xs md:text-sm text-muted-foreground">Welcome, {user.name}</p>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2">
                             <Link href="/participant/tasks">
                                 <Button variant="default" size="sm" className="h-9 md:h-10 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 border-none text-white">
                                     <Trophy className="mr-2 h-4 w-4" />

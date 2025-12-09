@@ -27,18 +27,11 @@ export default function VerifyTasksPage() {
     const router = useRouter()
     const [submissions, setSubmissions] = useState<Submission[]>([])
     const [fetching, setFetching] = useState(true)
+    const [currentTab, setCurrentTab] = useState('pending')
     const [processing, setProcessing] = useState<string | null>(null)
     const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null)
 
-
-
-    useEffect(() => {
-        if (!loading && (!user || (user.role !== 'volunteer' && user.role !== 'admin'))) {
-            router.push('/login')
-        }
-    }, [user, loading, router])
-
-    const fetchSubmissions = async (status = 'pending') => {
+    const fetchSubmissions = async (status = currentTab) => {
         setFetching(true)
         try {
             const res = await fetch(`/api/gamification/submissions?status=${status}`)
@@ -55,10 +48,23 @@ export default function VerifyTasksPage() {
     }
 
     useEffect(() => {
+        let interval: NodeJS.Timeout
+
         if (user && (user.role === 'volunteer' || user.role === 'admin')) {
             fetchSubmissions()
+            interval = setInterval(() => {
+                fetchSubmissions()
+            }, 10000) // Poll every 10 seconds
         }
-    }, [user])
+
+        return () => {
+            if (interval) clearInterval(interval)
+        }
+    }, [user, currentTab]) // Added currentTab dep strict checks
+
+    // ...
+
+
 
     const handleVerify = async (id: string, status: 'approved' | 'rejected') => {
         setProcessing(id)
@@ -130,7 +136,7 @@ export default function VerifyTasksPage() {
                         <Button
                             variant="outline"
                             size="icon"
-                            onClick={() => fetchSubmissions()}
+                            onClick={() => fetchSubmissions(currentTab)}
                             disabled={fetching}
                             className="h-auto aspect-square bg-zinc-900/50 border-white/10 text-white hover:bg-white/10 hover:text-white"
                         >
@@ -140,7 +146,10 @@ export default function VerifyTasksPage() {
                 </div>
 
                 <div className="flex flex-col space-y-6">
-                    <Tabs defaultValue="pending" className="w-full" onValueChange={(val) => fetchSubmissions(val)}>
+                    <Tabs value={currentTab} className="w-full" onValueChange={(val) => {
+                        setCurrentTab(val)
+                        fetchSubmissions(val)
+                    }}>
                         <div className="flex justify-between items-center bg-zinc-900/50 p-1 rounded-lg border border-white/10 w-fit">
                             <TabsList className="bg-transparent border-none">
                                 <TabsTrigger value="pending" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-500">
@@ -267,11 +276,11 @@ export default function VerifyTasksPage() {
                             )}
                         </TabsContent>
                     </Tabs>
-                </div>
-            </div>
+                </div >
+            </div >
 
             {/* View Proof Modal */}
-            <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
+            < Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
                 <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col p-0 gap-0 overflow-hidden bg-black/95 border-none">
                     <DialogHeader className="p-4 absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent">
                         <DialogTitle className="text-white flex items-center gap-2">
@@ -312,7 +321,7 @@ export default function VerifyTasksPage() {
                         </Button>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog>
-        </div>
+            </Dialog >
+        </div >
     )
 }

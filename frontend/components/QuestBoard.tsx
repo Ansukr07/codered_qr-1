@@ -78,6 +78,8 @@ export default function QuestBoard() {
                 setSelectedTask(null)
                 setFile(null)
                 fetchTasks()
+                // Force a second update to be sure
+                setTimeout(fetchTasks, 1000)
             } else {
                 const data = await res.json()
                 toast.error(data.message || 'Transmission failed')
