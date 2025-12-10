@@ -35,17 +35,31 @@ export default function VerifyTasksPage() {
         if (!silent) setFetching(true)
         try {
             const timestamp = new Date().getTime()
+            console.log(`[Polling] Fetching submissions with status: ${status}, silent: ${silent}`)
             const res = await fetch(`/api/gamification/submissions?status=${status}&t=${timestamp}`, {
-                cache: 'no-store'
+                cache: 'no-store',
+                credentials: 'include' // Ensure cookies are sent
             })
             if (res.ok) {
                 const data = await res.json()
+                console.log(`[Polling] Received ${data.submissions.length} submissions`)
                 setSubmissions(data.submissions)
+                if (!silent) {
+                    toast.success('Refreshed successfully!')
+                }
+            } else {
+                console.error(`[Polling] Failed with status: ${res.status}`)
+                if (!silent) {
+                    toast.error('Failed to fetch submissions')
+                }
             }
         } catch (error) {
-            console.error('Failed to fetch submissions:', error)
+            console.error('[Polling] Network error:', error)
+            if (!silent) {
+                toast.error('Network error while fetching submissions')
+            }
         } finally {
-            if (!silent) setFetching(false)
+            setFetching(false) // Always reset, regardless of silent flag
         }
     }
 
@@ -53,14 +67,19 @@ export default function VerifyTasksPage() {
         let interval: NodeJS.Timeout
 
         if (user && (user.role === 'volunteer' || user.role === 'admin')) {
+            console.log('[Polling] Setting up polling for status:', currentTab)
             fetchSubmissions()
             interval = setInterval(() => {
+                console.log('[Polling] Interval tick - fetching submissions')
                 fetchSubmissions(currentTab, true)
             }, 5000)
         }
 
         return () => {
-            if (interval) clearInterval(interval)
+            if (interval) {
+                console.log('[Polling] Cleaning up interval')
+                clearInterval(interval)
+            }
         }
     }, [user, currentTab])
     const handleVerify = async (id: string, status: 'approved' | 'rejected') => {

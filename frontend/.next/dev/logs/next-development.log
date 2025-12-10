@@ -213,3 +213,492 @@ For more information, see https://radix-ui.com/primitives/docs/components/dialog
 [00:38:19.376] Browser ERROR   Submission error: {}
 [00:38:20.114] Browser ERROR   Submission error: {}
 [00:38:20.332] Browser ERROR   Submission error: {}
+[00:40:44.453] Server  LOG      ✓ Compiled in 302ms
+[00:41:07.996] Browser ERROR   Submission error: {}
+[00:41:34.899] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:41:45.316] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:02.229] Server  LOG      ✓ Compiled in 201ms
+[00:44:30.693] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:44:30.693] Browser ERROR   [Polling] Failed with status: 403
+[00:44:31.538] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:44:31.538] Browser ERROR   [Polling] Failed with status: 403
+[00:44:33.531] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:44:33.531] Browser LOG     [Polling] Setting up polling for status: approved
+[00:44:33.531] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:44:33.531] Browser ERROR   [Polling] Failed with status: 403
+[00:44:33.531] Browser ERROR   [Polling] Failed with status: 403
+[00:44:35.278] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:44:35.278] Browser ERROR   [Polling] Failed with status: 403
+[00:44:37.106] Browser LOG     [Polling] Cleaning up interval
+[00:44:39.416] Browser LOG     [Polling] Setting up polling for status: pending
+[00:44:39.416] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:44:39.416] Browser LOG     [Polling] Cleaning up interval
+[00:44:39.416] Browser LOG     [Polling] Setting up polling for status: pending
+[00:44:39.416] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:44:39.416] Browser ERROR   [Polling] Failed with status: 403
+[00:44:39.416] Browser ERROR   [Polling] Failed with status: 403
+[00:44:41.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:44:41.034] Browser ERROR   [Polling] Failed with status: 403
+[00:44:41.732] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:44:41.732] Browser ERROR   [Polling] Failed with status: 403
+[00:44:46.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:44:46.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:44:46.034] Browser ERROR   [Polling] Failed with status: 403
+[00:44:51.029] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:44:51.029] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:44:51.030] Browser ERROR   [Polling] Failed with status: 403
+[00:44:56.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:44:56.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:44:56.040] Browser ERROR   [Polling] Failed with status: 403
+[00:45:00.161] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:00.161] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:00.161] Browser ERROR   [Polling] Failed with status: 403
+[00:45:04.382] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:04.382] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:04.382] Browser ERROR   [Polling] Failed with status: 403
+[00:45:11.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:11.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:11.041] Browser ERROR   [Polling] Failed with status: 403
+[00:45:16.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:16.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:16.033] Browser ERROR   [Polling] Failed with status: 403
+[00:45:19.393] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:19.393] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:19.393] Browser ERROR   [Polling] Failed with status: 403
+[00:45:23.208] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:23.208] Browser ERROR   [Polling] Failed with status: 403
+[00:45:24.049] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:24.049] Browser ERROR   [Polling] Failed with status: 403
+[00:45:24.385] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:24.385] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:24.385] Browser ERROR   [Polling] Failed with status: 403
+[00:45:24.632] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:24.632] Browser ERROR   [Polling] Failed with status: 403
+[00:45:31.036] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:31.036] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:31.036] Browser ERROR   [Polling] Failed with status: 403
+[00:45:36.028] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:36.028] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:36.028] Browser ERROR   [Polling] Failed with status: 403
+[00:45:41.030] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:41.030] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:41.030] Browser ERROR   [Polling] Failed with status: 403
+[00:45:43.617] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:43.618] Browser ERROR   [Polling] Failed with status: 403
+[00:45:44.382] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:44.382] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:44.382] Browser ERROR   [Polling] Failed with status: 403
+[00:45:45.176] Browser LOG     [Polling] Cleaning up interval
+[00:45:46.716] Browser LOG     [Polling] Setting up polling for status: pending
+[00:45:46.717] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:46.717] Browser LOG     [Polling] Cleaning up interval
+[00:45:46.717] Browser LOG     [Polling] Setting up polling for status: pending
+[00:45:46.717] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:46.717] Browser ERROR   [Polling] Failed with status: 403
+[00:45:46.717] Browser ERROR   [Polling] Failed with status: 403
+[00:45:48.132] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:45:48.132] Browser LOG     [Polling] Cleaning up interval
+[00:45:48.132] Browser LOG     [Polling] Setting up polling for status: approved
+[00:45:48.132] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:45:48.132] Browser ERROR   [Polling] Failed with status: 403
+[00:45:48.132] Browser ERROR   [Polling] Failed with status: 403
+[00:45:48.933] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:48.933] Browser LOG     [Polling] Cleaning up interval
+[00:45:48.933] Browser LOG     [Polling] Setting up polling for status: pending
+[00:45:48.933] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:48.933] Browser ERROR   [Polling] Failed with status: 403
+[00:45:48.933] Browser ERROR   [Polling] Failed with status: 403
+[00:45:50.542] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:45:50.542] Browser ERROR   [Polling] Failed with status: 403
+[00:45:53.939] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:53.939] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:53.940] Browser ERROR   [Polling] Failed with status: 403
+[00:45:58.945] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:45:58.945] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:45:58.945] Browser ERROR   [Polling] Failed with status: 403
+[00:46:03.943] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:03.943] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:03.943] Browser ERROR   [Polling] Failed with status: 403
+[00:46:05.116] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:46:05.117] Browser ERROR   [Polling] Failed with status: 403
+[00:46:08.934] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:08.934] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:08.934] Browser ERROR   [Polling] Failed with status: 403
+[00:46:13.945] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:13.945] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:13.945] Browser ERROR   [Polling] Failed with status: 403
+[00:46:20.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:20.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:20.033] Browser ERROR   [Polling] Failed with status: 403
+[00:46:25.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:25.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:25.041] Browser ERROR   [Polling] Failed with status: 403
+[00:46:30.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:30.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:30.033] Browser ERROR   [Polling] Failed with status: 403
+[00:46:35.039] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:35.039] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:35.040] Browser ERROR   [Polling] Failed with status: 403
+[00:46:40.042] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:40.042] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:40.042] Browser ERROR   [Polling] Failed with status: 403
+[00:46:45.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:45.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:45.041] Browser ERROR   [Polling] Failed with status: 403
+[00:46:49.180] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:49.180] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:49.180] Browser ERROR   [Polling] Failed with status: 403
+[00:46:53.942] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:46:53.942] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:46:53.942] Browser LOG     [Polling] Cleaning up interval
+[00:46:53.942] Browser ERROR   [Polling] Failed with status: 403
+[00:48:10.301] Browser LOG     [Polling] Setting up polling for status: pending
+[00:48:10.301] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:48:10.301] Browser LOG     [Polling] Cleaning up interval
+[00:48:10.302] Browser LOG     [Polling] Setting up polling for status: pending
+[00:48:10.302] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:48:10.302] Browser ERROR   [Polling] Failed with status: 403
+[00:48:10.302] Browser ERROR   [Polling] Failed with status: 403
+[00:48:12.281] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:48:12.281] Browser ERROR   [Polling] Failed with status: 403
+[00:48:13.018] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:48:13.018] Browser ERROR   [Polling] Failed with status: 403
+[00:48:17.035] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:17.035] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:17.035] Browser ERROR   [Polling] Failed with status: 403
+[00:48:22.042] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:22.042] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:22.042] Browser ERROR   [Polling] Failed with status: 403
+[00:48:27.035] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:27.035] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:27.035] Browser ERROR   [Polling] Failed with status: 403
+[00:48:32.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:32.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:32.033] Browser ERROR   [Polling] Failed with status: 403
+[00:48:37.042] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:37.042] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:37.042] Browser ERROR   [Polling] Failed with status: 403
+[00:48:42.036] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:42.036] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:42.036] Browser ERROR   [Polling] Failed with status: 403
+[00:48:47.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:47.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:47.040] Browser ERROR   [Polling] Failed with status: 403
+[00:48:50.257] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:48:50.257] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:48:50.257] Browser ERROR   [Polling] Failed with status: 403
+[00:48:58.546] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:18.728] Browser LOG     [Polling] Setting up polling for status: pending
+[00:49:18.728] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:49:18.728] Browser LOG     [Polling] Cleaning up interval
+[00:49:18.728] Browser LOG     [Polling] Setting up polling for status: pending
+[00:49:18.728] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:49:18.958] Browser LOG     [Polling] Received 2 submissions
+[00:49:18.958] Browser LOG     [Polling] Received 2 submissions
+[00:49:23.726] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:23.726] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:23.912] Browser LOG     [Polling] Received 2 submissions
+[00:49:28.729] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:28.729] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:30.859] Browser LOG     [Polling] Received 2 submissions
+[00:49:33.819] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:33.819] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:33.819] Browser LOG     [Polling] Received 2 submissions
+[00:49:38.822] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:38.822] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:38.823] Browser LOG     [Polling] Received 2 submissions
+[00:49:45.029] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:45.029] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:45.029] Browser LOG     [Polling] Received 2 submissions
+[00:49:50.036] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:50.036] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:50.036] Browser LOG     [Polling] Received 2 submissions
+[00:49:53.731] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:53.731] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:53.870] Browser LOG     [Polling] Received 2 submissions
+[00:49:58.729] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:49:58.729] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:49:58.870] Browser LOG     [Polling] Received 2 submissions
+[00:50:03.812] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:03.813] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:03.813] Browser LOG     [Polling] Received 2 submissions
+[00:50:08.730] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:08.730] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:08.843] Browser LOG     [Polling] Received 2 submissions
+[00:50:13.735] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:13.736] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:13.846] Browser LOG     [Polling] Received 2 submissions
+[00:50:20.042] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:20.042] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:20.042] Browser LOG     [Polling] Received 2 submissions
+[00:50:23.832] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:23.832] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:23.832] Browser LOG     [Polling] Received 2 submissions
+[00:50:28.729] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:28.729] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:28.853] Browser LOG     [Polling] Received 2 submissions
+[00:50:33.816] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:33.816] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:33.816] Browser LOG     [Polling] Received 2 submissions
+[00:50:38.815] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:38.815] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:38.815] Browser LOG     [Polling] Received 2 submissions
+[00:50:43.726] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:43.726] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:43.838] Browser LOG     [Polling] Received 2 submissions
+[00:50:50.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:50.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:50.041] Browser LOG     [Polling] Received 2 submissions
+[00:50:51.292] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:50:55.029] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:50:55.029] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:50:55.029] Browser LOG     [Polling] Received 2 submissions
+[00:51:00.037] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:00.037] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:00.037] Browser LOG     [Polling] Received 2 submissions
+[00:51:05.043] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:05.043] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:05.044] Browser LOG     [Polling] Received 2 submissions
+[00:51:05.885] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:51:10.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:10.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:10.033] Browser ERROR   [Polling] Failed with status: 403
+[00:51:15.028] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:15.028] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:15.028] Browser ERROR   [Polling] Failed with status: 403
+[00:51:18.846] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:18.847] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:18.847] Browser ERROR   [Polling] Failed with status: 403
+[00:51:21.259] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:21.259] Browser ERROR   [Polling] Failed with status: 403
+[00:51:22.134] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:22.134] Browser ERROR   [Polling] Failed with status: 403
+[00:51:22.299] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:22.299] Browser ERROR   [Polling] Failed with status: 403
+[00:51:22.506] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:22.506] Browser ERROR   [Polling] Failed with status: 403
+[00:51:23.746] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:23.746] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:23.746] Browser ERROR   [Polling] Failed with status: 403
+[00:51:24.060] Browser LOG     [Polling] Cleaning up interval
+[00:51:25.953] Browser LOG     [Polling] Setting up polling for status: pending
+[00:51:25.953] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:25.953] Browser LOG     [Polling] Cleaning up interval
+[00:51:25.953] Browser LOG     [Polling] Setting up polling for status: pending
+[00:51:25.953] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:25.953] Browser ERROR   [Polling] Failed with status: 403
+[00:51:25.953] Browser ERROR   [Polling] Failed with status: 403
+[00:51:30.905] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:30.905] Browser ERROR   [Polling] Failed with status: 403
+[00:51:30.905] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:30.905] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:30.905] Browser ERROR   [Polling] Failed with status: 403
+[00:51:31.486] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:31.487] Browser ERROR   [Polling] Failed with status: 403
+[00:51:31.704] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:31.704] Browser ERROR   [Polling] Failed with status: 403
+[00:51:33.049] Browser LOG     [Polling] Cleaning up interval
+[00:51:34.467] Browser LOG     [Polling] Setting up polling for status: pending
+[00:51:34.467] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:34.467] Browser LOG     [Polling] Cleaning up interval
+[00:51:34.467] Browser LOG     [Polling] Setting up polling for status: pending
+[00:51:34.467] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:34.467] Browser ERROR   [Polling] Failed with status: 403
+[00:51:34.467] Browser ERROR   [Polling] Failed with status: 403
+[00:51:35.807] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:51:35.807] Browser LOG     [Polling] Cleaning up interval
+[00:51:35.807] Browser LOG     [Polling] Setting up polling for status: approved
+[00:51:35.807] Browser LOG     [Polling] Fetching submissions with status: approved, silent: false
+[00:51:35.807] Browser ERROR   [Polling] Failed with status: 403
+[00:51:35.807] Browser ERROR   [Polling] Failed with status: 403
+[00:51:36.865] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:36.865] Browser LOG     [Polling] Cleaning up interval
+[00:51:36.865] Browser LOG     [Polling] Setting up polling for status: pending
+[00:51:36.865] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:36.865] Browser ERROR   [Polling] Failed with status: 403
+[00:51:36.865] Browser ERROR   [Polling] Failed with status: 403
+[00:51:38.449] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:38.449] Browser ERROR   [Polling] Failed with status: 403
+[00:51:38.904] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:38.904] Browser ERROR   [Polling] Failed with status: 403
+[00:51:39.063] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:39.063] Browser ERROR   [Polling] Failed with status: 403
+[00:51:39.219] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:39.219] Browser ERROR   [Polling] Failed with status: 403
+[00:51:39.378] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:39.378] Browser ERROR   [Polling] Failed with status: 403
+[00:51:39.533] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:39.533] Browser ERROR   [Polling] Failed with status: 403
+[00:51:39.750] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:39.751] Browser ERROR   [Polling] Failed with status: 403
+[00:51:39.971] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:51:39.971] Browser ERROR   [Polling] Failed with status: 403
+[00:51:43.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:43.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:43.032] Browser ERROR   [Polling] Failed with status: 403
+[00:51:44.164] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:51:48.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:48.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:48.034] Browser ERROR   [Polling] Failed with status: 403
+[00:51:53.042] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:53.042] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:53.042] Browser ERROR   [Polling] Failed with status: 403
+[00:51:58.043] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:51:58.043] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:51:58.043] Browser ERROR   [Polling] Failed with status: 403
+[00:52:03.028] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:03.028] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:03.028] Browser LOG     [Polling] Received 3 submissions
+[00:52:03.271] Browser LOG     [Polling] Setting up polling for status: pending
+[00:52:03.271] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:52:03.271] Browser LOG     [Polling] Cleaning up interval
+[00:52:03.271] Browser LOG     [Polling] Setting up polling for status: pending
+[00:52:03.271] Browser LOG     [Polling] Fetching submissions with status: pending, silent: false
+[00:52:03.505] Browser LOG     [Polling] Received 3 submissions
+[00:52:03.505] Browser LOG     [Polling] Received 3 submissions
+[00:52:08.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:08.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:08.041] Browser LOG     [Polling] Received 3 submissions
+[00:52:08.352] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:08.352] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:08.352] Browser LOG     [Polling] Received 2 submissions
+[00:52:11.944] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:11.944] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:11.944] Browser LOG     [Polling] Received 2 submissions
+[00:52:12.597] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:52:15.029] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:15.029] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:15.029] Browser LOG     [Polling] Received 2 submissions
+[00:52:18.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:18.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:18.033] Browser LOG     [Polling] Received 2 submissions
+[00:52:20.038] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:20.038] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:20.038] Browser LOG     [Polling] Received 2 submissions
+[00:52:22.237] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:52:23.042] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:23.042] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:23.042] Browser ERROR   [Polling] Failed with status: 403
+[00:52:25.031] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:25.031] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:25.031] Browser ERROR   [Polling] Failed with status: 403
+[00:52:28.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:28.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:28.040] Browser ERROR   [Polling] Failed with status: 403
+[00:52:30.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:30.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:30.032] Browser ERROR   [Polling] Failed with status: 403
+[00:52:33.037] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:33.037] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:33.037] Browser ERROR   [Polling] Failed with status: 403
+[00:52:35.036] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:35.037] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:35.037] Browser ERROR   [Polling] Failed with status: 403
+[00:52:38.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:38.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:38.032] Browser ERROR   [Polling] Failed with status: 403
+[00:52:40.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:40.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:40.034] Browser ERROR   [Polling] Failed with status: 403
+[00:52:43.039] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:43.039] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:43.039] Browser ERROR   [Polling] Failed with status: 403
+[00:52:45.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:45.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:45.032] Browser ERROR   [Polling] Failed with status: 403
+[00:52:48.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:48.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:48.034] Browser ERROR   [Polling] Failed with status: 403
+[00:52:50.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:50.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:50.040] Browser ERROR   [Polling] Failed with status: 403
+[00:52:53.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:53.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:53.040] Browser ERROR   [Polling] Failed with status: 403
+[00:52:55.029] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:55.029] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:55.029] Browser ERROR   [Polling] Failed with status: 403
+[00:52:58.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:52:58.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:52:58.034] Browser ERROR   [Polling] Failed with status: 403
+[00:53:00.038] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:00.038] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:00.038] Browser ERROR   [Polling] Failed with status: 403
+[00:53:03.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:03.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:03.040] Browser ERROR   [Polling] Failed with status: 403
+[00:53:05.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:05.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:05.041] Browser ERROR   [Polling] Failed with status: 403
+[00:53:08.036] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:08.036] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:08.036] Browser ERROR   [Polling] Failed with status: 403
+[00:53:10.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:10.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:10.041] Browser ERROR   [Polling] Failed with status: 403
+[00:53:52.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:52.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:52.041] Browser ERROR   [Polling] Failed with status: 403
+[00:53:52.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:53:52.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:53:52.041] Browser ERROR   [Polling] Failed with status: 403
+[00:54:49.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:54:49.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:54:49.032] Browser ERROR   [Polling] Failed with status: 403
+[00:54:49.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:54:49.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:54:49.032] Browser ERROR   [Polling] Failed with status: 403
+[00:55:49.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:55:49.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:55:49.040] Browser ERROR   [Polling] Failed with status: 403
+[00:55:49.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:55:49.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:55:49.041] Browser ERROR   [Polling] Failed with status: 403
+[00:56:49.036] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:56:49.036] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:56:49.037] Browser ERROR   [Polling] Failed with status: 403
+[00:56:49.037] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:56:49.037] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:56:49.037] Browser ERROR   [Polling] Failed with status: 403
+[00:57:49.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:57:49.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:57:49.034] Browser ERROR   [Polling] Failed with status: 403
+[00:57:49.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:57:49.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:57:49.034] Browser ERROR   [Polling] Failed with status: 403
+[00:58:49.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:58:49.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:58:49.033] Browser ERROR   [Polling] Failed with status: 403
+[00:58:49.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:58:49.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:58:49.034] Browser ERROR   [Polling] Failed with status: 403
+[00:59:49.039] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:59:49.039] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:59:49.039] Browser ERROR   [Polling] Failed with status: 403
+[00:59:49.039] Browser LOG     [Polling] Interval tick - fetching submissions
+[00:59:49.039] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[00:59:49.039] Browser ERROR   [Polling] Failed with status: 403
+[01:00:49.040] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:00:49.040] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:00:49.040] Browser ERROR   [Polling] Failed with status: 403
+[01:00:49.041] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:00:49.041] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:00:49.041] Browser ERROR   [Polling] Failed with status: 403
+[01:01:49.043] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:01:49.043] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:01:49.043] Browser ERROR   [Polling] Failed with status: 403
+[01:01:49.046] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:01:49.046] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:01:49.046] Browser ERROR   [Polling] Failed with status: 403
+[01:02:49.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:02:49.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:02:49.034] Browser ERROR   [Polling] Failed with status: 403
+[01:02:49.034] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:02:49.034] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:02:49.034] Browser ERROR   [Polling] Failed with status: 403
+[01:03:49.031] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:03:49.031] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:03:49.031] Browser ERROR   [Polling] Failed with status: 403
+[01:03:49.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:03:49.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:03:49.032] Browser ERROR   [Polling] Failed with status: 403
