@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/contexts/AuthContext'
 import SeatingMap from '@/components/SeatingMap'
 import { findTeamByMember } from '@/lib/teamData'
+import { SEATING_DATA } from '@/lib/seatingData'
 
 export default function SeatingPage() {
     const { user, loading } = useAuth()
@@ -40,12 +41,22 @@ export default function SeatingPage() {
         setSearchQuery(query);
 
         if (query.trim().length > 0) {
-            const team = findTeamByMember(query);
+            // 1. Try finding by member name
+            let team = findTeamByMember(query);
+
+            // 2. If not found, try searching SEATING_DATA for Team Name match
+            if (!team) {
+                const foundSeat = SEATING_DATA.find(s =>
+                    s.team.toLowerCase().includes(query.toLowerCase())
+                );
+                if (foundSeat) {
+                    team = foundSeat.team;
+                }
+            }
+
             if (team) {
                 setDisplayTeam(team);
             } else {
-                // Keep showing previous team or empty if not found? 
-                // Any 'not found' state handling can be done by passing an empty string or seeing that displayTeam matches nothing in the map
                 setDisplayTeam('');
             }
         } else {
@@ -105,7 +116,7 @@ export default function SeatingPage() {
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 group-focus-within:text-red-500 transition-colors" />
                         <Input
                             type="text"
-                            placeholder="Find member's seat..."
+                            placeholder="Find team or member..."
                             className="pl-9 w-full md:w-64 bg-[#1e1e2e] border-[#2a2a35] focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all text-white placeholder:text-muted-foreground"
                             value={searchQuery}
                             onChange={handleSearch}

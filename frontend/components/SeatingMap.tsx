@@ -2,57 +2,118 @@
 
 import React, { useMemo, useRef, useEffect, useState } from 'react';
 import styles from './SeatingMap.module.css';
+import { SEATING_DATA, Seat } from '@/lib/seatingData';
 
 interface SeatingMapProps {
     teamName?: string;
 }
 
-function getTeamIndex(teamName: string, maxTeams: number): number {
-    let hash = 0;
-    const str = teamName.toLowerCase().replace(/\s+/g, '');
-    for (let i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return Math.abs(hash) % maxTeams;
-}
-
-// Helper to create path for rectangle with specific rounded corners
+// ----------------------------------------------------------------------
+// Geometry Helpers (EXACT ORIGINAL LOGIC)
 function getRoundedRectPath(x: number, y: number, w: number, h: number, r: number, corners: boolean[]) {
-    // corners: [tl, tr, br, bl]
     const [tl, tr, br, bl] = corners;
-
-    // Start top-left
     let d = `M${x + (tl ? r : 0)},${y}`;
-
-    // Top line
     d += ` L${x + w - (tr ? r : 0)},${y}`;
-    // Top-right corner
     if (tr) d += ` Q${x + w},${y} ${x + w},${y + r}`;
-
-    // Right line
     d += ` L${x + w},${y + h - (br ? r : 0)}`;
-    // Bottom-right corner
     if (br) d += ` Q${x + w},${y + h} ${x + w - r},${y + h}`;
-
-    // Bottom line
     d += ` L${x + (bl ? r : 0)},${y + h}`;
-    // Bottom-left corner
     if (bl) d += ` Q${x},${y + h} ${x},${y + h - r}`;
-
-    // Left line
     d += ` L${x},${y + (tl ? r : 0)}`;
-    // Top-left corner
     if (tl) d += ` Q${x},${y} ${x + r},${y}`;
-
     d += " Z";
-
     return d;
 }
 
+// Helper to generate a radial cluster
+function generateRadialCluster(
+    data: Seat[],
+    centerX: number,
+    centerY: number,
+    startRadius: number
+) {
+    const blocks: any[] = [];
+    const BLOCK_WIDTH = 70;
+    const BLOCK_HEIGHT = 100;
+    const COLUMN_SPACING = 150;
+    const AISLE_GAP = 60;
+
+    // Group logic based on data type
+    // If Row exists (APJ), group by Row. Else chunk.
+    const isRowBased = data.some(d => d.row.startsWith('R'));
+
+    let groupedData: Seat[][] = [];
+
+    if (isRowBased) {
+        const rowMap: { [key: string]: Seat[] } = {};
+        data.forEach(d => {
+            if (!rowMap[d.row]) rowMap[d.row] = [];
+            rowMap[d.row].push(d);
+        });
+        const keys = Object.keys(rowMap).sort((a, b) => {
+            const na = parseInt(a.replace('R', '')) || 0;
+            const nb = parseInt(b.replace('R', '')) || 0;
+            return na - nb;
+        });
+        keys.forEach(k => groupedData.push(rowMap[k]));
+    } else {
+        // Simple chunking for pools
+        for (let i = 0; i < data.length; i += 4) {
+            groupedData.push(data.slice(i, i + 4));
+        }
+    }
+
+    groupedData.forEach((group, colIndex) => {
+        const radius = startRadius + colIndex * COLUMN_SPACING;
+        const innerOffset = (AISLE_GAP / 2) + (BLOCK_HEIGHT / 2);
+        const outerOffset = innerOffset + BLOCK_HEIGHT;
+        const thetaInner = Math.asin(innerOffset / radius);
+        const thetaOuter = Math.asin(outerOffset / radius);
+
+        // REVERSED ORDER to swap Col 4 with 1, 3 with 2
+        // Original Order: -thetaOuter (Top), -thetaInner, thetaInner, thetaOuter (Bottom)
+        // New Order: thetaOuter (Bottom), thetaInner, -thetaInner, -thetaOuter (Top)
+        const positions = [
+            { angle: thetaOuter, posType: 'bottom-outer' },
+            { angle: thetaInner, posType: 'bottom-inner' },
+            { angle: -thetaInner, posType: 'top-inner' },
+            { angle: -thetaOuter, posType: 'top-outer' }
+        ];
+
+        group.forEach((seat, seatIdx) => {
+            if (seatIdx >= 4) return;
+            const pos = positions[seatIdx];
+            const rotation = pos.angle * (180 / Math.PI);
+            const x = centerX + radius * Math.cos(pos.angle);
+            const y = centerY + radius * Math.sin(pos.angle);
+
+            blocks.push({
+                data: seat,
+                x,
+                y,
+                rotation,
+                width: BLOCK_WIDTH,
+                height: BLOCK_HEIGHT,
+                posType: pos.posType
+            });
+        });
+    });
+
+    return blocks;
+}
+
+// ----------------------------------------------------------------------
+
 const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
-    const normalizedName = teamName.trim().toUpperCase();
-    const totalTeams = 52;
-    const activeIndex = normalizedName ? getTeamIndex(normalizedName, totalTeams) : -1;
+    const normalizedName = teamName.trim().toLowerCase();
+
+    // 1. Identify the Team and Lab
+    const activeData = useMemo(() => {
+        if (!normalizedName) return null;
+        return SEATING_DATA.find(s => s.team.toLowerCase() === normalizedName);
+    }, [normalizedName]);
+
+    const targetLab = activeData ? activeData.lab : 'APJ'; // Default to APJ if no user/match
 
     const containerRef = useRef<HTMLDivElement>(null);
     const [viewBox, setViewBox] = useState('0 0 1000 800');
@@ -60,83 +121,48 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
     // Layout Constants
     const BLOCK_WIDTH = 70;
     const BLOCK_HEIGHT = 100;
-    const COLUMN_SPACING = 150;
-    const AISLE_GAP = 60;
-    const CORNER_RADIUS = 12; // Smooth architectural radius
+    const CORNER_RADIUS = 12;
 
     const layout = useMemo(() => {
-        const blocks: any[] = [];
+        // Filter data for ONLY the target Lab
+        const labData = SEATING_DATA.filter(s => s.lab === targetLab);
 
-        // Final geometry tuning
-        const cx = -1200;
-        const cy = 400;
-        const startRadius = 1450;
-        const numColumns = 13;
+        // Generate SINGLE radial cluster (preserving "Old UI" exact look)
+        // Center logic copied from original: cx = -1200, cy = 400, startRadius = 1450
+        const clusterBlocks = generateRadialCluster(labData, -1200, 400, 1450);
 
-        for (let col = 0; col < numColumns; col++) {
-            const radius = startRadius + col * COLUMN_SPACING;
+        const allBlocks = [
+            // { type: 'label', text: `${targetLab.toUpperCase()} LAB`, x: 0, y: 0 },
+            ...clusterBlocks.map(b => ({ ...b, type: 'seat' }))
+        ];
 
-            // Offsets
-            // Pair 1 (Top): Inner at Offset 1, Outer at Offset 2
-            const innerOffset = (AISLE_GAP / 2) + (BLOCK_HEIGHT / 2);
-            // Gap between inner/outer is 0 for connection.
-            // Center distance = Height.
-            const outerOffset = innerOffset + BLOCK_HEIGHT;
+        return allBlocks;
+    }, [targetLab]);
 
-            // Angles
-            const thetaInner = Math.asin(innerOffset / radius);
-            const thetaOuter = Math.asin(outerOffset / radius);
-
-            const positions = [
-                { angle: -thetaOuter, posType: 'top-outer', index: col * 4 },
-                { angle: -thetaInner, posType: 'top-inner', index: col * 4 + 1 },
-                { angle: thetaInner, posType: 'bottom-inner', index: col * 4 + 2 },
-                { angle: thetaOuter, posType: 'bottom-outer', index: col * 4 + 3 }
-            ];
-
-            positions.forEach(pos => {
-                if (pos.index >= totalTeams) return;
-
-                const rotation = pos.angle * (180 / Math.PI);
-                const x = cx + radius * Math.cos(pos.angle);
-                const y = cy + radius * Math.sin(pos.angle);
-
-                blocks.push({
-                    index: pos.index,
-                    x,
-                    y,
-                    rotation,
-                    width: BLOCK_WIDTH,
-                    height: BLOCK_HEIGHT,
-                    posType: pos.posType,
-                    col
-                });
-            });
-        }
-
-        return blocks;
-    }, [totalTeams]);
-
+    // ViewBox
     useEffect(() => {
         if (layout.length > 0) {
-            const xs = layout.map(b => b.x);
+            const seats = layout.filter(b => b.type === 'seat');
+            const xs = seats.map(b => b.x);
+            // const ys = seats.map(b => b.y);
             const maxX = Math.max(...xs) + 200;
+            // Standard height 800 preserved from original UI
             setViewBox(`0 0 ${maxX} 800`);
         }
     }, [layout]);
 
+    // Auto-scroll
     useEffect(() => {
-        if (activeIndex !== -1 && containerRef.current && layout.find(b => b.index === activeIndex)) {
-            const target = layout.find(b => b.index === activeIndex);
+        if (activeData && containerRef.current) {
+            const target = layout.find(b => b.type === 'seat' && b.data.team === activeData.team);
             if (target) {
                 const container = containerRef.current;
                 const clientW = container.clientWidth;
-                // Center target
                 const scrollLeft = target.x - clientW / 2;
                 container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
             }
         }
-    }, [activeIndex, layout]);
+    }, [activeData, layout]);
 
     return (
         <div className={styles.container}>
@@ -149,48 +175,33 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                 >
                     <defs>
                         <linearGradient id="blockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            {/* Vertical gradient */}
                             <stop offset="0%" stopColor="rgba(255,255,255,0.1)" />
                             <stop offset="100%" stopColor="rgba(255,255,255,0)" />
                         </linearGradient>
                     </defs>
 
-                    {/* Stage Group */}
+                    {/* Stage Group - Dynamic Label */}
                     <g transform="translate(50, 200)">
                         <rect
                             x="0" y="0"
                             width="60" height="400"
                             className={styles.stageRect}
                         />
+                        {/* Centered vertical text */}
                         <text
                             x="30" y="200"
                             transform="rotate(-90, 30, 200)"
                             className={styles.stageText}
+                            style={{ fontSize: '14px' }}
                         >
-                            STAGE
+                            {targetLab.toUpperCase()}
                         </text>
                     </g>
 
-                    {/* Teams */}
-                    {layout.map((block) => {
-                        const isActive = block.index === activeIndex;
+                    {layout.map((block, idx) => {
+                        if (block.type !== 'seat') return null;
 
-                        // Determine corners [tl, tr, br, bl]
-                        // Standard rotation: Top is Top?
-                        // Rotation aligns block tangent to arc.
-                        // For 'top-outer', it's the top-most block. The "Outer" edge is Top.
-                        // So Top-Outer needs Round Top ([1,1,0,0]).
-                        // Top-Inner needs Round Bottom ([0,0,1,1]) -> Touches Aisle.
-                        // Wait. Top-Inner touches Top-Outer at Top edge.
-                        // LayoutStack: [Top-Outer]
-                        //              [Top-Inner]
-                        //              (Aisle)
-
-                        // top-outer: Radius Top.
-                        // top-inner: Radius Bottom.
-
-                        // bottom-inner: Radius Top (Touches Aisle).
-                        // bottom-outer: Radius Bottom.
+                        const isActive = activeData && block.data.team === activeData.team;
 
                         let corners = [false, false, false, false];
                         if (block.posType === 'top-outer') corners = [true, true, false, false];
@@ -198,9 +209,6 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                         if (block.posType === 'bottom-inner') corners = [true, true, false, false];
                         if (block.posType === 'bottom-outer') corners = [false, false, true, true];
 
-                        // Generate Path
-                        // Local coords centered at 0,0 for rotation
-                        // x: -w/2, y: -h/2
                         const pathD = getRoundedRectPath(
                             -block.width / 2,
                             -block.height / 2,
@@ -212,32 +220,61 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
 
                         return (
                             <g
-                                key={`block-${block.index}`}
+                                key={`block-${idx}`}
                                 transform={`translate(${block.x}, ${block.y}) rotate(${block.rotation})`}
+                                className="group cursor-pointer"
                             >
+                                <title>{`${block.data.team} - ${block.data.seatId}`}</title>
+
                                 <path
                                     d={pathD}
                                     className={`${isActive ? styles.blockActive : styles.blockInactive}`}
                                 />
 
-                                {/* Overlay / Detail */}
                                 <path
                                     d={pathD}
                                     fill="url(#blockGradient)"
                                     pointerEvents="none"
                                 />
 
-                                {/* Divider Line if needed? 
-                                    Connected blocks touch.
-                                    Maybe distinct border color?
-                                */}
+                                <text
+                                    x="0"
+                                    y="-20"
+                                    textAnchor="middle"
+                                    style={{
+                                        fontFamily: 'monospace',
+                                        fontSize: '9px',
+                                        fill: isActive ? '#000' : 'rgba(255,255,255,0.5)',
+                                        fontWeight: 600,
+                                        pointerEvents: 'none'
+                                    }}
+                                >
+                                    {block.data.seatId}
+                                </text>
+
+                                <text
+                                    x="0"
+                                    y="10"
+                                    textAnchor="middle"
+                                    style={{
+                                        fontFamily: 'sans-serif',
+                                        fontSize: '10px',
+                                        fill: isActive ? '#000' : '#fff',
+                                        fontWeight: 700,
+                                        pointerEvents: 'none',
+                                        textTransform: 'uppercase'
+                                    }}
+                                >
+                                    {block.data.team.length > 10 ? block.data.team.slice(0, 9) + '..' : block.data.team}
+                                </text>
 
                                 {isActive && (
                                     <text
                                         x="0"
-                                        y="6"
+                                        y="35"
                                         className={styles.activeText}
                                         textAnchor="middle"
+                                        style={{ fill: '#facc15', fontSize: '10px', letterSpacing: '1px' }}
                                     >
                                         YOU
                                     </text>
@@ -250,8 +287,8 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
 
             {!teamName && (
                 <div className={styles.overlay}>
-                    <h2 className={styles.overlayTitle}>FLOOR PLAN</h2>
-                    <p className={styles.overlaySub}>Scroll to explore teams</p>
+                    <h2 className={styles.overlayTitle}>LAB SEATING</h2>
+                    <p className={styles.overlaySub}>Scroll to explore</p>
                 </div>
             )}
         </div>
