@@ -51,7 +51,7 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName }) => {
             const col = i % COLUMNS;
 
             let x = startX;
-            // Left Block
+            // Left Bloc
             if (col === 0) x += 0;
             if (col === 1) x += seatWidth + gapX;
             // Right Block
