@@ -312,7 +312,7 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                                     x="0"
                                     y={isGrid ? "5" : "10"} // Centered vertically for grid
                                     textAnchor="middle"
-                                    transform={isGrid ? "rotate(90)" : ""} // Rotate text to be horizontal if grid is vertical
+                                    // Removed explicit rotation to align with seat
                                     style={{
                                         fontFamily: 'sans-serif',
                                         fontSize: isGrid ? '14px' : '10px', // Larger font for grid
