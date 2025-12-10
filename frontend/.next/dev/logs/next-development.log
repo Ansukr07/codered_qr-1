@@ -702,3 +702,29 @@ For more information, see https://radix-ui.com/primitives/docs/components/dialog
 [01:03:49.032] Browser LOG     [Polling] Interval tick - fetching submissions
 [01:03:49.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
 [01:03:49.032] Browser ERROR   [Polling] Failed with status: 403
+[01:04:49.038] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:04:49.038] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:04:49.038] Browser ERROR   [Polling] Failed with status: 403
+[01:04:49.038] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:04:49.038] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:04:49.038] Browser ERROR   [Polling] Failed with status: 403
+[01:05:49.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:05:49.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:05:49.033] Browser ERROR   [Polling] Failed with status: 403
+[01:05:49.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:05:49.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:05:49.033] Browser ERROR   [Polling] Failed with status: 403
+[01:06:49.032] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:06:49.032] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:06:49.032] Browser ERROR   [Polling] Failed with status: 403
+[01:06:49.033] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:06:49.033] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:06:49.033] Browser ERROR   [Polling] Failed with status: 403
+[01:07:18.019] Server  LOG      ✓ Compiled in 165ms
+[01:07:20.967] Server  LOG      ✓ Compiled in 212ms
+[01:07:49.035] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:07:49.035] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:07:49.035] Browser ERROR   [Polling] Failed with status: 403
+[01:07:49.035] Browser LOG     [Polling] Interval tick - fetching submissions
+[01:07:49.035] Browser LOG     [Polling] Fetching submissions with status: pending, silent: true
+[01:07:49.035] Browser ERROR   [Polling] Failed with status: 403

@@ -228,7 +228,7 @@ export default function VerifyTasksPage() {
                                                         onClick={() => setSelectedSubmission(submission)}
                                                     >
                                                         <img
-                                                            src={`/${submission.proofUrl}`}
+                                                            src={submission.proofUrl}
                                                             alt="Proof"
                                                             className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                                                         />
@@ -310,7 +310,7 @@ export default function VerifyTasksPage() {
                     <div className="flex-1 flex items-center justify-center h-[80vh] relative">
                         {selectedSubmission && (
                             <img
-                                src={`/${selectedSubmission.proofUrl}`}
+                                src={selectedSubmission.proofUrl}
                                 alt="Proof Fullscreen"
                                 className="max-w-full max-h-full object-contain"
                             />

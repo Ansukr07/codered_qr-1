@@ -124,11 +124,24 @@ router.post('/submit', requireAuth, requireRole('participant'), upload.single('p
             return res.status(400).json({ message: 'Submission already exists' });
         }
 
+        let proofData = '';
+
+        // Convert file to base64 if provided
+        if (req.file) {
+            const fs = require('fs');
+            const fileBuffer = fs.readFileSync(req.file.path);
+            const base64Image = fileBuffer.toString('base64');
+            proofData = `data:${req.file.mimetype};base64,${base64Image}`;
+
+            // Delete the temporary file after conversion
+            deleteFile(req.file.path);
+        }
+
         const submission = new Submission({
             userId: user._id,
             teamId: user.teamId,
             taskId,
-            proofUrl: req.file ? req.file.path.replace(/\\/g, '/') : '', // Normalize path if file exists
+            proofUrl: proofData, // Now stores base64 string instead of file path
             status: 'pending'
         });
 
@@ -175,12 +188,7 @@ router.patch('/submissions/:id/verify', requireAuth, requireRole('volunteer', 'a
             return res.status(404).json({ message: 'Submission not found' });
         }
 
-        // Delete valid proof file upon verification (as requested to save storage)
-        // Delete valid proof file upon verification (as requested to save storage)
-        if (submission.proofUrl) {
-            // deleteFile(submission.proofUrl); // DISABLED TEMPORARILY: Potential file lock issue on Windows
-            // submission.proofUrl = ""; // Keep path for record for now
-        }
+        // No need to delete files anymore - images are stored as base64 in DB
 
         submission.status = status;
         submission.verifiedBy = req.user.userId;
