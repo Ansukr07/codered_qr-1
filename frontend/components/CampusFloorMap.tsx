@@ -121,21 +121,38 @@ const CampusFloorMap: React.FC<CampusFloorMapProps> = ({ floorNumber, data }) =>
 
                         {renderStairsPattern(node)}
 
-                        {/* Room Label */}
-                        <text
-                            x={node.x + node.width / 2}
-                            y={node.y + node.height / 2}
-                            dy=".3em"
-                            fill="rgba(255,255,255,0.9)"
-                            fontSize={node.label.length > 15 ? "10" : "12"}
-                            fontWeight={node.type === 'lab' || node.type === 'office' ? "bold" : "normal"}
-                            textAnchor="middle"
-                            // Simple text wrapping logic could go here, or just rotation
-                            transform={node.rotation ? `rotate(${node.rotation}, ${node.x + node.width / 2}, ${node.y + node.height / 2})` : undefined}
-                            style={{ pointerEvents: 'none', textShadow: '0 0 3px rgba(0,0,0,0.8)' }}
+                        {/* Room Label using foreignObject for text wrapping */}
+                        <foreignObject
+                            x={node.x}
+                            y={node.y}
+                            width={node.width}
+                            height={node.height}
+                            style={{ pointerEvents: 'none' }}
                         >
-                            {node.label}
-                        </text>
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                    color: 'rgba(255,255,255,0.95)',
+                                    fontSize: node.type === 'lab' || node.type === 'office' ? '16px' : '14px',
+                                    fontWeight: node.type === 'lab' || node.type === 'office' ? '800' : '500',
+                                    lineHeight: '1.2',
+                                    padding: '4px',
+                                    wordWrap: 'break-word',
+                                    overflow: 'hidden',
+                                    textShadow: '0px 1px 3px rgba(0,0,0,0.9)',
+                                    // Handle rotation via writing-mode for clean vertical text
+                                    writingMode: node.rotation === 90 || node.rotation === 270 ? 'vertical-rl' : undefined,
+                                    textOrientation: 'mixed'
+                                }}
+                            >
+                                {node.label}
+                            </div>
+                        </foreignObject>
 
                         {/* Special Mark (X for blocked stairs) */}
                         {node.specialMark && (

@@ -16,7 +16,7 @@ const FLOOR_3_DATA: RoomNode[] = [
     { id: '3-teach-1', label: 'Teachers Cabin', type: 'office', x: 20, y: 150, width: 80, height: 100 },
     { id: '3-teach-2', label: 'Teachers', type: 'office', x: 20, y: 250, width: 80, height: 100 },
     { id: '3-lift-l', label: 'LIFT', type: 'lift', x: 100, y: 180, width: 50, height: 50 },
-    { id: '3-wash-g', label: 'Girls Washroom', type: 'washroom', x: 100, y: 100, width: 80, height: 80 },
+    { id: '3-wash-g', label: 'Washroom', type: 'washroom', x: 100, y: 100, width: 80, height: 80 },
     { id: '3-stair-l', label: 'Stairs', type: 'stairs', x: 180, y: 50, width: 100, height: 100, specialMark: 'X' },
 
     // --- Middle Top ---
@@ -38,11 +38,14 @@ const FLOOR_3_DATA: RoomNode[] = [
     { id: '308', label: '308 (Eval)', type: 'classroom', x: 840, y: 370, width: 100, height: 80 },
     { id: '3-teach-4', label: 'Teachers', type: 'office', x: 940, y: 370, width: 100, height: 80 },
 
+    // --- Gates ---
+    { id: '3-gate-l', label: 'GATE', type: 'utility', x: 180, y: 150, width: 100, height: 20 },
+    { id: '3-gate-r', label: 'GATE', type: 'utility', x: 1050, y: 150, width: 100, height: 20 },
 
     // --- Right Wing ---
-    { id: '3-water', label: 'Water', type: 'water', x: 1050, y: 150, width: 50, height: 50 },
+    { id: '3-water', label: 'Water', type: 'water', x: 1050, y: 150, width: 50, height: 50, rotation: 90 },
     { id: '3-stair-r', label: 'Stairs', type: 'stairs', x: 1050, y: 50, width: 100, height: 100, specialMark: 'X' },
-    { id: '3-wash-b', label: 'Boys Washroom', type: 'washroom', x: 1150, y: 120, width: 80, height: 50 },
+    { id: '3-wash-b', label: 'Washroom', type: 'washroom', x: 1150, y: 120, width: 80, height: 50 },
     { id: '3-lift-r', label: 'LIFT', type: 'lift', x: 1150, y: 180, width: 50, height: 50 },
     { id: '3-place', label: 'Placement Office', type: 'office', x: 1200, y: 180, width: 80, height: 200, rotation: 90 },
 
@@ -52,35 +55,40 @@ const FLOOR_3_DATA: RoomNode[] = [
 
 const FLOOR_4_DATA: RoomNode[] = [
     // --- Left Wing (Identical structure mostly) ---
-    { id: '4-teach-1', label: 'Teachers Cabin', type: 'office', x: 20, y: 150, width: 80, height: 100 },
-    { id: '4-teach-2', label: 'Teachers', type: 'office', x: 20, y: 250, width: 80, height: 100 },
+    { id: '4-teach-vertical', label: 'Teachers Cabin', type: 'office', x: 20, y: 150, width: 80, height: 300 },
+    { id: '4-teach-horizontal', label: 'Teachers Cabin', type: 'office', x: 100, y: 370, width: 280, height: 80 },
     { id: '4-lift-l', label: 'LIFT', type: 'lift', x: 100, y: 180, width: 50, height: 50 },
-    { id: '4-wash-g', label: 'Girls Washroom', type: 'washroom', x: 100, y: 100, width: 80, height: 80 },
+    { id: '4-wash-g', label: 'Washroom', type: 'washroom', x: 100, y: 100, width: 80, height: 80 },
     { id: '4-stair-l', label: 'Stairs', type: 'stairs', x: 180, y: 50, width: 100, height: 100, specialMark: 'X' },
 
     // --- Middle Top ---
     // 401, 402, 403, APJ Lab
-    { id: '401', label: '401 (Girls Common)', type: 'common', x: 300, y: 150, width: 120, height: 80 },
-    { id: '402', label: '402 (Chill)', type: 'common', x: 420, y: 150, width: 100, height: 80 },
-    { id: '403', label: 'Savitribai Phule (403)', type: 'classroom', x: 520, y: 150, width: 150, height: 80 },
-    { id: '4-apj', label: 'APJ Abdul Kalam Lab', type: 'lab', x: 670, y: 150, width: 350, height: 80 },
+    { id: '401', label: '401 (Girls Common Room)', type: 'common', x: 280, y: 150, width: 140, height: 80 },
+    { id: '402', label: '402 (Chill Room)', type: 'common', x: 420, y: 150, width: 100, height: 80 },
+    { id: '403', label: 'Savitribai Phule Lab (403)', type: 'lab', x: 520, y: 150, width: 150, height: 80 },
+    { id: '4-apj', label: 'APJ Abdul Kalam Lab', type: 'lab', x: 670, y: 150, width: 270, height: 80 },
+    { id: '413', label: '413', type: 'classroom', x: 940, y: 150, width: 80, height: 80 },
 
     // --- Middle Bottom ---
     // Teachers, Kalpana Chawla (410), 409, 408
-    { id: '4-teach-3', label: 'Teachers', type: 'office', x: 300, y: 370, width: 80, height: 80 },
+    // { id: '4-teach-3', label: 'Teachers', type: 'office', x: 300, y: 370, width: 80, height: 80 }, <--- REMOVED/COVERED
     { id: '410', label: 'Kalpana Chawla Lab', type: 'lab', x: 380, y: 370, width: 300, height: 80 },
     // Stair gap
     { id: '4-stair-m', label: 'Stairs', type: 'stairs', x: 680, y: 450, width: 60, height: 80 },
     { id: '409', label: '409 (Storage)', type: 'storage', x: 740, y: 370, width: 100, height: 80 },
     { id: '408', label: '408 (Boys Common)', type: 'common', x: 840, y: 370, width: 120, height: 80 },
-    { id: '4-teach-4', label: 'Teachers', type: 'office', x: 960, y: 370, width: 80, height: 80 },
+    { id: '4-teach-4', label: 'Teachers Office', type: 'office', x: 960, y: 370, width: 270, height: 80 },
+
+    // --- Gates ---
+    { id: '4-gate-l', label: 'GATE', type: 'utility', x: 180, y: 150, width: 100, height: 20 },
+    { id: '4-gate-r', label: 'GATE', type: 'utility', x: 1050, y: 150, width: 100, height: 20 },
 
     // --- Right Wing ---
-    { id: '4-water', label: 'Water', type: 'water', x: 1050, y: 150, width: 50, height: 50 },
+    { id: '4-water', label: 'Water', type: 'water', x: 1020, y: 150, width: 30, height: 80, rotation: 90 },
     { id: '4-stair-r', label: 'Stairs', type: 'stairs', x: 1050, y: 50, width: 100, height: 100, specialMark: 'X' },
-    { id: '4-wash-b', label: 'Boys Washroom', type: 'washroom', x: 1150, y: 120, width: 80, height: 50 },
-    { id: '4-lift-r', label: 'LIFT', type: 'lift', x: 1150, y: 180, width: 50, height: 50 },
-    { id: '4-lab-long', label: 'Long LAB Block', type: 'lab', x: 1200, y: 180, width: 80, height: 250, rotation: 90 },
+    { id: '4-wash-b', label: 'Washroom', type: 'washroom', x: 1150, y: 120, width: 80, height: 50 },
+    { id: '4-lift-r', label: 'LIFT', type: 'lift', x: 1150, y: 170, width: 80, height: 50 },
+    { id: '4-lab-long', label: 'Lab', type: 'lab', x: 1230, y: 180, width: 80, height: 270, rotation: 90 },
 
     // --- Corridors ---
     { id: '4-corr-main', label: '', type: 'corridor', x: 180, y: 230, width: 970, height: 140 },
@@ -140,8 +148,8 @@ export default function CampusMapPage() {
                         <button
                             onClick={() => setActiveFloor(3)}
                             className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 3
-                                    ? 'bg-blue-600 text-white shadow-lg'
-                                    : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
                                 }`}
                         >
                             3rd Floor
@@ -149,8 +157,8 @@ export default function CampusMapPage() {
                         <button
                             onClick={() => setActiveFloor(4)}
                             className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 4
-                                    ? 'bg-blue-600 text-white shadow-lg'
-                                    : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
                                 }`}
                         >
                             4th Floor
