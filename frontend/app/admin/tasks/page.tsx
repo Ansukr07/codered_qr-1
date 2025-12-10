@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { CheckCircle, XCircle, Clock, Eye, Download, RefreshCw } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface Submission {
     _id: string
@@ -87,6 +88,11 @@ export default function AdminTasksPage() {
     const [open, setOpen] = useState(false)
 
     const handleCreateQuest = async () => {
+        if (!newQuest.title || !newQuest.description) {
+            toast.error('Please fill in all fields')
+            return
+        }
+
         setCreating(true)
         try {
             const res = await fetch('/api/gamification/tasks', {
@@ -95,11 +101,18 @@ export default function AdminTasksPage() {
                 body: JSON.stringify(newQuest)
             })
             if (res.ok) {
-                // toast.success("Quest Created!") // Toast not imported, ignoring
+                toast.success("Quest Created!")
                 setOpen(false)
                 setNewQuest({ title: '', description: '', points: 10, category: 'general', requiresProof: true })
+                fetchSubmissions() // Refresh list if needed, or maybe tasks list
+            } else {
+                const data = await res.json()
+                toast.error(data.message || 'Failed to create quest')
+                console.error('Quest creation failed:', data)
+                console.error('Status:', res.status, res.statusText)
             }
         } catch (err) {
+            toast.error('Network error occurred')
             console.error(err)
         } finally {
             setCreating(false)

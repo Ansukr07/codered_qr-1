@@ -30,6 +30,7 @@ export default function TasksList() {
             const res = await fetch('/api/gamification/tasks')
             if (res.ok) {
                 const data = await res.json()
+                console.log('Fetched tasks:', data.tasks)
                 setTasks(data.tasks)
             }
         } catch (error) {
@@ -118,7 +119,7 @@ export default function TasksList() {
                                     variant="outline"
                                 >
                                     <Upload className="w-4 h-4" />
-                                    {task.status === 'rejected' ? 'Try Again' : 'Submit Proof'}
+                                    {task.status === 'rejected' ? 'Try Again' : (task.requiresProof === false ? 'Claim Reward' : 'Submit Proof')}
                                 </Button>
                             ) : (
                                 <div className="text-xs text-muted-foreground italic w-full text-center">
@@ -134,9 +135,11 @@ export default function TasksList() {
             <Dialog open={!!selectedTask} onOpenChange={() => !uploading && setSelectedTask(null)}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Submit Proof: {selectedTask?.title}</DialogTitle>
+                        <DialogTitle>{selectedTask?.requiresProof === false ? 'Claim Reward' : 'Submit Proof'}: {selectedTask?.title}</DialogTitle>
                         <DialogDescription>
-                            Upload a screenshot or photo to verify you've completed this task.
+                            {selectedTask?.requiresProof === false
+                                ? "Confirm you have completed this task to claim your points."
+                                : "Upload a screenshot or photo to verify you've completed this task."}
                         </DialogDescription>
                     </DialogHeader>
 

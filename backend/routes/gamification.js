@@ -71,6 +71,7 @@ router.get('/tasks', requireAuth, async (req, res) => {
 // POST /tasks: Create new task (Admin only)
 router.post('/tasks', requireAuth, requireRole('admin'), async (req, res) => {
     try {
+        console.log('Received Create Task Request:', req.body, 'User:', req.user);
         const { title, description, points, category, requiresProof } = req.body;
 
         const task = new Task({
