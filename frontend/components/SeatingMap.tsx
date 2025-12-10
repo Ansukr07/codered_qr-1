@@ -264,6 +264,54 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                         </text>
                     </g>
 
+                    {/* Modern Bottom Entry Gate */}
+                    <g transform="translate(140, 700)" className="group">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        {/* Outer Glow Ring */}
+                        <rect x="-50" y="-20" width="100" height="40" rx="20"
+                            fill="rgba(0,0,0,0.6)"
+                            stroke="#fff"
+                            strokeWidth="1.5"
+                            filter="url(#glow)"
+                        />
+
+                        {/* Inner Gradient/Solid Fill Effect */}
+                        <rect x="-46" y="-16" width="92" height="32" rx="16"
+                            fill="rgba(255,255,255,0.1)"
+                            stroke="none"
+                        />
+
+                        {/* Text */}
+                        <text x="-10" y="5"
+                            style={{
+                                fontFamily: 'sans-serif',
+                                fontSize: '11px',
+                                fontWeight: 800,
+                                fill: '#fff',
+                                letterSpacing: '2px',
+                                textShadow: '0 0 5px rgba(255,255,255,0.5)'
+                            }}
+                            textAnchor="middle"
+                        >
+                            ENTRY
+                        </text>
+
+                        {/* Modern Arrow Icon (Simple Solid Triangle) */}
+                        <path
+                            d="M35,-8 L28,4 L42,4 Z"
+                            fill="#fff"
+                        />
+                    </g>
+
                     {layout.map((block, idx) => {
                         if (block.type !== 'seat') return null;
 
