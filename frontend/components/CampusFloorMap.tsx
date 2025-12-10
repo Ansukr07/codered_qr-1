@@ -9,6 +9,7 @@ export interface RoomNode {
     width: number;
     height: number;
     rotation?: number; // 0 means horizontal text
+    verticalText?: boolean; // Force vertical text without rotation
     specialMark?: string; // e.g., 'X' for blocked stairs
 }
 
@@ -117,6 +118,7 @@ const CampusFloorMap: React.FC<CampusFloorMapProps> = ({ floorNumber, data }) =>
                             strokeWidth="1.5"
                             rx="2"
                             className="transition-colors duration-300 group-hover:fill-opacity-40"
+                            transform={node.rotation ? `rotate(${node.rotation}, ${node.x + node.width / 2}, ${node.y + node.height / 2})` : undefined}
                         />
 
                         {renderStairsPattern(node)}
@@ -146,7 +148,7 @@ const CampusFloorMap: React.FC<CampusFloorMapProps> = ({ floorNumber, data }) =>
                                     overflow: 'hidden',
                                     textShadow: '0px 1px 3px rgba(0,0,0,0.9)',
                                     // Handle rotation via writing-mode for clean vertical text
-                                    writingMode: node.rotation === 90 || node.rotation === 270 ? 'vertical-rl' : undefined,
+                                    writingMode: node.rotation === 90 || node.rotation === 270 || node.verticalText ? 'vertical-rl' : undefined,
                                     textOrientation: 'mixed'
                                 }}
                             >
