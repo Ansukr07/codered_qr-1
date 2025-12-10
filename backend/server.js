@@ -23,6 +23,10 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/volunteers', require('./routes/volunteers'));
 app.use('/api/help-requests', require('./routes/helpRequests'));
 app.use('/api/announcements', require('./routes/announcements'));
+app.use('/api/gamification', require('./routes/gamification'));
+
+// Serve static files for proof uploads
+app.use('/uploads', express.static('uploads'));
 
 
 const PORT = process.env.PORT || 5000;

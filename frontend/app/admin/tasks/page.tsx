@@ -82,7 +82,7 @@ export default function AdminTasksPage() {
         document.body.removeChild(link);
     }
 
-    const [newQuest, setNewQuest] = useState({ title: '', description: '', points: 10, category: 'general' })
+    const [newQuest, setNewQuest] = useState({ title: '', description: '', points: 10, category: 'general', requiresProof: true })
     const [creating, setCreating] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -97,7 +97,7 @@ export default function AdminTasksPage() {
             if (res.ok) {
                 // toast.success("Quest Created!") // Toast not imported, ignoring
                 setOpen(false)
-                setNewQuest({ title: '', description: '', points: 10, category: 'general' })
+                setNewQuest({ title: '', description: '', points: 10, category: 'general', requiresProof: true })
             }
         } catch (err) {
             console.error(err)
@@ -147,6 +147,18 @@ export default function AdminTasksPage() {
                                             </SelectContent>
                                         </Select>
                                     </div>
+                                </div>
+                                <div className="flex items-center gap-2 py-2">
+                                    <input
+                                        type="checkbox"
+                                        id="requiresProof"
+                                        checked={newQuest.requiresProof}
+                                        onChange={e => setNewQuest({ ...newQuest, requiresProof: e.target.checked })}
+                                        className="h-4 w-4 rounded border-gray-300 accent-primary"
+                                    />
+                                    <label htmlFor="requiresProof" className="text-sm font-medium cursor-pointer">
+                                        Requires Proof (Photo Upload)
+                                    </label>
                                 </div>
                                 <Button onClick={handleCreateQuest} disabled={creating} className="w-full">
                                     {creating ? 'Creating...' : 'Launch Quest'}

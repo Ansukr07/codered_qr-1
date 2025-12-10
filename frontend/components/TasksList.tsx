@@ -15,6 +15,7 @@ interface Task {
     description: string
     points: number
     status: 'open' | 'pending' | 'approved' | 'rejected'
+    requiresProof?: boolean
 }
 
 export default function TasksList() {
@@ -41,7 +42,7 @@ export default function TasksList() {
     useEffect(() => {
         fetchTasks()
         // Poll for status updates
-        const interval = setInterval(fetchTasks, 15000)
+        const interval = setInterval(fetchTasks, 5000)
         return () => clearInterval(interval)
     }, [])
 
@@ -52,12 +53,15 @@ export default function TasksList() {
     }
 
     const handleSubmit = async () => {
-        if (!selectedTask || !file) return
+        if (!selectedTask) return
+        if (selectedTask.requiresProof !== false && !file) return
 
         setUploading(true)
         const formData = new FormData()
         formData.append('taskId', selectedTask._id)
-        formData.append('proof', file)
+        if (file) {
+            formData.append('proof', file)
+        }
 
         try {
             const res = await fetch('/api/gamification/submit', {
@@ -118,7 +122,7 @@ export default function TasksList() {
                                 </Button>
                             ) : (
                                 <div className="text-xs text-muted-foreground italic w-full text-center">
-                                    {task.status === 'pending' ? 'Waiting for verification...' : 'Task completed!'}
+                                    {task.status === 'pending' ? 'Waiting for verification...' : 'Claimed'}
                                 </div>
                             )}
                         </CardFooter>
@@ -137,24 +141,31 @@ export default function TasksList() {
                     </DialogHeader>
 
                     <div className="space-y-4 py-4">
-                        <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-secondary/50 transition-colors relative">
-                            <Input
-                                type="file"
-                                accept="image/*"
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                onChange={handleFileChange}
-                            />
-                            {file ? (
-                                <div className="text-sm font-medium text-primary">
-                                    {file.name}
-                                </div>
-                            ) : (
-                                <>
-                                    <Upload className="h-8 w-8 text-muted-foreground mb-2" />
-                                    <p className="text-sm text-muted-foreground">Click to upload image</p>
-                                </>
-                            )}
-                        </div>
+                        {selectedTask?.requiresProof === false ? (
+                            <div className="text-center py-8">
+                                <p className="text-lg font-medium text-primary">No proof required</p>
+                                <p className="text-sm text-muted-foreground mt-2">Just click submit to complete this task!</p>
+                            </div>
+                        ) : (
+                            <div className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-secondary/50 transition-colors relative">
+                                <Input
+                                    type="file"
+                                    accept="image/*"
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    onChange={handleFileChange}
+                                />
+                                {file ? (
+                                    <div className="text-sm font-medium text-primary">
+                                        {file.name}
+                                    </div>
+                                ) : (
+                                    <>
+                                        <Upload className="h-8 w-8 text-muted-foreground mb-2" />
+                                        <p className="text-sm text-muted-foreground">Click to upload image</p>
+                                    </>
+                                )}
+                            </div>
+                        )}
                         {selectedTask?.status === 'rejected' && (
                             <div className="flex items-center gap-2 text-sm text-destructive p-3 bg-destructive/10 rounded-md">
                                 <AlertCircle className="w-4 h-4" />
@@ -173,7 +184,7 @@ export default function TasksList() {
                         </Button>
                         <Button
                             onClick={handleSubmit}
-                            disabled={!file || uploading}
+                            disabled={(selectedTask?.requiresProof !== false && !file) || uploading}
                         >
                             {uploading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                             Submit

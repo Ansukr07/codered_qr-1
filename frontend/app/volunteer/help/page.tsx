@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 interface HelpRequest {
   _id: string
-  userId: { name: string; email: string; teamId?: string; qrCode: string }
+  userId: { name: string; email: string; teamId?: string; qrCode: string } | null
   description: string
   category: string
   priority: string
@@ -157,9 +157,9 @@ export default function HelpPage() {
                     <div key={request._id} className="p-4 bg-secondary/50 rounded-lg border border-border">
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <p className="font-semibold text-card-foreground">{request.userId.name}</p>
-                          <p className="text-sm text-muted-foreground">{request.userId.email}</p>
-                          {request.userId.teamId && (
+                          <p className="font-semibold text-card-foreground">{request.userId?.name || 'Unknown User'}</p>
+                          <p className="text-sm text-muted-foreground">{request.userId?.email || 'No email'}</p>
+                          {request.userId?.teamId && (
                             <p className="text-xs text-muted-foreground">Team: {request.userId.teamId}</p>
                           )}
                         </div>
@@ -211,8 +211,8 @@ export default function HelpPage() {
                     <div key={request._id} className="p-4 bg-green-500/10 rounded-lg border border-green-500/20">
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <p className="font-semibold text-card-foreground">{request.userId.name}</p>
-                          <p className="text-sm text-muted-foreground">{request.userId.email}</p>
+                          <p className="font-semibold text-card-foreground">{request.userId?.name || 'Unknown User'}</p>
+                          <p className="text-sm text-muted-foreground">{request.userId?.email || 'No email'}</p>
                         </div>
                         <div className="flex gap-2">
                           <Badge variant="outline" className="capitalize">{request.category}</Badge>
