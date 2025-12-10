@@ -5,123 +5,134 @@
     height: 100%;
     min-height: 600px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #09090b;
-    /* Very dark zinc */
-    border-radius: 12px;
-    
-    overflow: hidden;
-    position: relative;
-    /* subtle architectural grid */
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    box-shadow: 0 0 0 1px #27272a;
-}
-
-.mapSvg {
-    width: 100%;
-    height: 100%;
-    max-width: 800px;
-    /* Removed aggressive 3D tilt for a more readable, professional schematic view */
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
-}
-
-.zone {
-    fill: #18181b;
-    /* Zinc-900 */
-    stroke: #3f3f46;
-    /* Zinc-700 */
-    stroke-width: 1px;
-    transition: all 0.3s ease;
-    cursor: default;
-}
-
-.zoneActive {
-    fill: #7f1d1d;
-    /* Dark Red background */
-    stroke: #ef4444;
-    /* Bright Red border */
-    stroke-width: 2px;
-    fill-opacity: 0.8;
-    /* Professional glow: contained, not messy */
-    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.5));
-    animation: pulse 3s infinite ease-in-out;
-}
-
-.zoneInactive {
-    opacity: 0.4;
-    fill: #0f0f10;
-    stroke: #27272a;
-}
-
-/* Axis Labels (A, B, C...) */
-.axisLabel {
-    fill: #71717a;
-    /* Zinc-400 */
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    text-anchor: middle;
-    dominant-baseline: middle;
-}
-
-/* Screen/Stage area */
-.screenBody {
-    fill: #18181b;
-    stroke: #27272a;
-}
-
-.screenGlow {
-    fill: url(#screenGradient);
-    opacity: 0.2;
-}
-
-.screenText {
-    fill: #52525b;
-    font-family: sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-/* Overlay */
-.messageContainer {
-    position: absolute;
-    inset: 0;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(9, 9, 11, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 50;
+    background: #09090b;
+    /* Zinc 950 */
+    position: relative;
+    overflow: hidden;
 }
 
-.messageTitle {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #f4f4f5;
-    margin-bottom: 0.25rem;
+.scrollContainer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Subtle radial for dept */
+    background: radial-gradient(circle at 50% 50%, #18181b 0%, #09090b 100%);
 }
 
-.messageSub {
-    font-size: 0.875rem;
+.scrollContainer::-webkit-scrollbar {
+    height: 12px;
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 6px;
+    border: 3px solid #000;
+}
+
+.mapSvg {
+    display: block;
+    min-height: 800px;
+}
+
+/* Stage */
+.stageRect {
+    fill: #ffffff;
+    stroke: #52525b;
+    /* Zinc 600 */
+    stroke-width: 4px;
+}
+
+.stageText {
+    fill: #18181b;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-anchor: middle;
+}
+
+/* Blocks */
+.blockInactive {
+    fill: #7f1d1d;
+    /* Deep Maroon */
+    stroke: rgba(0, 0, 0, 0.5);
+    /* Subtle division line */
+    stroke-width: 1px;
+    transition: fill 0.3s ease;
+}
+
+.blockInactive:hover {
+    fill: #991b1b;
+}
+
+.blockActive {
+    fill: #facc15;
+    /* Yellow 400 */
+    stroke: #fff;
+    stroke-width: 2px;
+    /* Strong glow */
+    filter: drop-shadow(0 0 16px rgba(250, 204, 21, 0.6));
+    animation: pulse-block 2000ms infinite ease-in-out;
+    /* Ensure it stands out */
+    z-index: 10;
+    /* Does not work in SVG but logic handles render order */
+}
+
+.activeText {
+    fill: #000;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(9, 9, 11, 0.9);
+    border: 1px solid #27272a;
+    padding: 16px 24px;
+    border-radius: 8px;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.overlayTitle {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 4px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.overlaySub {
     color: #a1a1aa;
+    font-size: 13px;
+    margin: 0;
+    font-family: sans-serif;
 }
 
-@keyframes pulse {
+@keyframes pulse-block {
 
     0%,
     100% {
-        stroke-opacity: 1;
-        fill-opacity: 0.8;
+        filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.5));
+        transform: scale(1);
     }
 
     50% {
-        stroke-opacity: 0.6;
-        fill-opacity: 0.6;
+        filter: drop-shadow(0 0 24px rgba(250, 204, 21, 0.9));
+        transform: scale(1.02);
     }
 }
