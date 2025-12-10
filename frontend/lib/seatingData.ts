@@ -90,6 +90,7 @@ export const SEATING_DATA: Seat[] = [
     { lab: "Savitribai Phule", row: "Pool", team: "Team 0/1", seatId: "U8" },
 
     // Kalpana Chawla Lab
+    // Kalpana Chawla Lab
     { lab: "Kalpana Chawla", row: "Pool", team: "Vague_Sense", seatId: "U1" },
     { lab: "Kalpana Chawla", row: "Pool", team: "Mjolnir", seatId: "U5" },
     { lab: "Kalpana Chawla", row: "Pool", team: "The binary brain", seatId: "U2" },

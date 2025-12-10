@@ -102,6 +102,64 @@ function generateRadialCluster(
     return blocks;
 }
 
+// Helper to generate a 5x2 grid cluster (Transposed)
+function generateGridCluster(
+    data: Seat[],
+    centerX: number,
+    centerY: number
+) {
+    const blocks: any[] = [];
+    const BLOCK_WIDTH = 250; // Width of the desk
+    const BLOCK_HEIGHT = 100; // Depth of the desk
+
+    // Transposed: 5 Columns, 2 Rows
+    // We want them to face LEFT (Stage is at x=50).
+    // So "Front" of desk should point Left. 
+    // Rotation -90 degrees.
+    // If rotated -90, Width becomes vertical visual height, Height becomes horizontal visual width.
+
+    const COL_SPACING = 150; // Spacing between columns (Was Row spacing)
+    const ROW_SPACING = 350; // Spacing between rows (Was Col spacing + gap)
+
+    // Center alignment offsets
+    // 5 Columns: width approx 5 * COL_SPACING
+    // 2 Rows: height approx 2 * ROW_SPACING
+    const startX = centerX - (5 * COL_SPACING) / 2 + COL_SPACING / 2;
+    const startY = centerY - (2 * ROW_SPACING) / 2 + ROW_SPACING / 2;
+
+    data.forEach((seat, idx) => {
+        // Transpose Logic:
+        // Original Pairs (0,1), (2,3)... were Row 0, Row 1...
+        // Now we want pairs to be vertically aligned (same Column)?
+        // Or pairs horizontally?
+        // Matrix Transpose:
+        // Index 0 -> C0, R0
+        // Index 1 -> C0, R1
+        // Index 2 -> C1, R0
+        // Index 3 -> C1, R1
+
+        const col = Math.floor(idx / 2); // 0, 0, 1, 1, 2, 2...
+        const row = 1 - (idx % 2); // Swap rows: 0 becomes 1, 1 becomes 0
+
+        // x increases with Column (Left to Right)
+        // y increases with Row (Top to Bottom)
+        const x = startX + col * COL_SPACING;
+        const y = startY + row * ROW_SPACING;
+
+        blocks.push({
+            data: seat,
+            x: x,
+            y: y,
+            rotation: -90, // Face Left
+            width: BLOCK_WIDTH,
+            height: BLOCK_HEIGHT,
+            posType: 'grid'
+        });
+    });
+
+    return blocks;
+}
+
 // ----------------------------------------------------------------------
 
 const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
@@ -127,9 +185,17 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
         // Filter data for ONLY the target Lab
         const labData = SEATING_DATA.filter(s => s.lab === targetLab);
 
-        // Generate SINGLE radial cluster (preserving "Old UI" exact look)
-        // Center logic copied from original: cx = -1200, cy = 400, startRadius = 1450
-        const clusterBlocks = generateRadialCluster(labData, -1200, 400, 1450);
+        // Generate layout based on Lab
+        let clusterBlocks;
+        if (targetLab === 'Kalpana Chawla') {
+            // Using grid layout for Kalpana Chawla
+            // Center roughly at 500, 400
+            clusterBlocks = generateGridCluster(labData, 500, 400);
+        } else {
+            // Generate SINGLE radial cluster (preserving "Old UI" exact look)
+            // Center logic copied from original: cx = -1200, cy = 400, startRadius = 1450
+            clusterBlocks = generateRadialCluster(labData, -1200, 400, 1450);
+        }
 
         const allBlocks = [
             // { type: 'label', text: `${targetLab.toUpperCase()} LAB`, x: 0, y: 0 },
@@ -208,6 +274,7 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                         if (block.posType === 'top-inner') corners = [false, false, true, true];
                         if (block.posType === 'bottom-inner') corners = [true, true, false, false];
                         if (block.posType === 'bottom-outer') corners = [false, false, true, true];
+                        if (block.posType === 'grid') corners = [true, true, true, true]; // All rounded for grid cards
 
                         const pathD = getRoundedRectPath(
                             -block.width / 2,
@@ -217,6 +284,8 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                             CORNER_RADIUS,
                             corners
                         );
+
+                        const isGrid = block.posType === 'grid';
 
                         return (
                             <g
@@ -237,35 +306,23 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                                     pointerEvents="none"
                                 />
 
-                                <text
-                                    x="0"
-                                    y="-20"
-                                    textAnchor="middle"
-                                    style={{
-                                        fontFamily: 'monospace',
-                                        fontSize: '9px',
-                                        fill: isActive ? '#000' : 'rgba(255,255,255,0.5)',
-                                        fontWeight: 600,
-                                        pointerEvents: 'none'
-                                    }}
-                                >
-                                    {block.data.seatId}
-                                </text>
+
 
                                 <text
                                     x="0"
-                                    y="10"
+                                    y={isGrid ? "5" : "10"} // Centered vertically for grid
                                     textAnchor="middle"
+                                    transform={isGrid ? "rotate(90)" : ""} // Rotate text to be horizontal if grid is vertical
                                     style={{
                                         fontFamily: 'sans-serif',
-                                        fontSize: '10px',
+                                        fontSize: isGrid ? '14px' : '10px', // Larger font for grid
                                         fill: isActive ? '#000' : '#fff',
                                         fontWeight: 700,
                                         pointerEvents: 'none',
                                         textTransform: 'uppercase'
                                     }}
                                 >
-                                    {block.data.team.length > 10 ? block.data.team.slice(0, 9) + '..' : block.data.team}
+                                    {isGrid ? block.data.team : (block.data.team.length > 10 ? block.data.team.slice(0, 9) + '..' : block.data.team)}
                                 </text>
 
                                 {isActive && (
