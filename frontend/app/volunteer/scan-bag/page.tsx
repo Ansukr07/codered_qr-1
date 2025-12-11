@@ -25,6 +25,7 @@ export default function ScanBagPage() {
   const [result, setResult] = useState<{ success: boolean; name: string; message?: string } | null>(null)
   const [resource, setResource] = useState<Resource | null>(null)
   const [mode, setMode] = useState<Mode>('issue')
+  const [cameraError, setCameraError] = useState<string | null>(null)
   const { toast } = useToast()
 
   useEffect(() => {
@@ -46,16 +47,58 @@ export default function ScanBagPage() {
 
   useEffect(() => {
     if (scanning) {
-      const scanner = new Html5QrcodeScanner(
-        'qr-reader-bag',
-        { fps: 10, qrbox: 250 },
-        false
-      )
+      setCameraError(null)
+      let scanner: any = null
 
-      scanner.render(onScanSuccess, onScanError)
+      try {
+        scanner = new Html5QrcodeScanner(
+          'qr-reader-bag',
+          { 
+            fps: 10, 
+            qrbox: { width: 250, height: 250 },
+            aspectRatio: 1.0,
+            videoConstraints: {
+              facingMode: "environment" // Use back camera
+            }
+          },
+          false // verbose = false
+        )
+
+        scanner.render(
+          onScanSuccess, 
+          (errorMessage: string) => {
+            // Only log errors, don't show them continuously
+            if (errorMessage && !errorMessage.includes('NotFoundException')) {
+              console.log('Scan error:', errorMessage)
+            }
+          }
+        ).catch((err: any) => {
+          console.error('Scanner render error:', err)
+          setCameraError('Failed to access camera. Please check permissions and try again.')
+          setScanning(false)
+          toast({
+            title: 'Camera Error',
+            description: 'Unable to access camera. Please ensure camera permissions are granted.',
+            variant: 'destructive',
+          })
+        })
+      } catch (error: any) {
+        console.error('Scanner initialization error:', error)
+        setCameraError(error.message || 'Failed to initialize scanner')
+        setScanning(false)
+        toast({
+          title: 'Scanner Error',
+          description: 'Failed to initialize QR scanner. Please refresh the page.',
+          variant: 'destructive',
+        })
+      }
 
       return () => {
-        scanner.clear().catch(console.error)
+        if (scanner) {
+          scanner.clear().catch((err: any) => {
+            console.error('Error clearing scanner:', err)
+          })
+        }
       }
     }
   }, [scanning, mode])
@@ -132,9 +175,54 @@ export default function ScanBagPage() {
     // Ignore continuous scan errors
   }
 
-  const handleStartScan = () => {
-    setScanning(true)
-    setResult(null)
+  const handleStartScan = async () => {
+    // Check if camera is available
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices()
+      const hasCamera = devices.some(device => device.kind === 'videoinput')
+      
+      if (!hasCamera) {
+        toast({
+          title: 'No Camera Found',
+          description: 'No camera device detected. Please connect a camera and try again.',
+          variant: 'destructive',
+        })
+        return
+      }
+
+      // Request camera permissions
+      try {
+        await navigator.mediaDevices.getUserMedia({ video: true })
+      } catch (permError: any) {
+        if (permError.name === 'NotAllowedError' || permError.name === 'PermissionDeniedError') {
+          toast({
+            title: 'Camera Permission Denied',
+            description: 'Please allow camera access in your browser settings and try again.',
+            variant: 'destructive',
+          })
+          return
+        } else if (permError.name === 'NotFoundError' || permError.name === 'DevicesNotFoundError') {
+          toast({
+            title: 'No Camera Found',
+            description: 'No camera device found. Please connect a camera and try again.',
+            variant: 'destructive',
+          })
+          return
+        }
+        throw permError
+      }
+
+      setScanning(true)
+      setResult(null)
+      setCameraError(null)
+    } catch (error: any) {
+      console.error('Camera access error:', error)
+      toast({
+        title: 'Camera Error',
+        description: error.message || 'Failed to access camera. Please check your browser settings.',
+        variant: 'destructive',
+      })
+    }
   }
 
   return (
@@ -177,7 +265,7 @@ export default function ScanBagPage() {
             </CardHeader>
             <CardContent className="space-y-6">
           <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border">
-            {!scanning && !result && (
+            {!scanning && !result && !cameraError && (
               <div className="aspect-square flex items-center justify-center">
                 <div className="text-center space-y-4 p-8">
                   <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
@@ -185,7 +273,16 @@ export default function ScanBagPage() {
                 </div>
               </div>
             )}
-            {scanning && (
+            {cameraError && (
+              <div className="aspect-square flex items-center justify-center">
+                <div className="text-center space-y-4 p-8">
+                  <XCircle className="h-16 w-16 text-destructive mx-auto" />
+                  <p className="text-sm text-destructive font-semibold">Camera Error</p>
+                  <p className="text-xs text-muted-foreground">{cameraError}</p>
+                </div>
+              </div>
+            )}
+            {scanning && !cameraError && (
               <div id="qr-reader-bag" className="w-full"></div>
             )}
             {result && (
@@ -217,11 +314,11 @@ export default function ScanBagPage() {
             {!result ? (
               <Button
                 onClick={handleStartScan}
-                disabled={scanning || !resource}
+                disabled={scanning || !resource || !!cameraError}
                 className="flex-1"
                 size="lg"
               >
-                {scanning ? "Scanning..." : "Start Scan"}
+                {scanning ? "Scanning..." : cameraError ? "Retry Camera" : "Start Scan"}
               </Button>
             ) : (
               <>
@@ -255,7 +352,7 @@ export default function ScanBagPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border">
-                {!scanning && !result && (
+                {!scanning && !result && !cameraError && (
                   <div className="aspect-square flex items-center justify-center">
                     <div className="text-center space-y-4 p-8">
                       <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
@@ -263,7 +360,16 @@ export default function ScanBagPage() {
                     </div>
                   </div>
                 )}
-                {scanning && (
+                {cameraError && (
+                  <div className="aspect-square flex items-center justify-center">
+                    <div className="text-center space-y-4 p-8">
+                      <XCircle className="h-16 w-16 text-destructive mx-auto" />
+                      <p className="text-sm text-destructive font-semibold">Camera Error</p>
+                      <p className="text-xs text-muted-foreground">{cameraError}</p>
+                    </div>
+                  </div>
+                )}
+                {scanning && !cameraError && (
                   <div id="qr-reader-bag" className="w-full"></div>
                 )}
                 {result && (
@@ -295,11 +401,11 @@ export default function ScanBagPage() {
                 {!result ? (
                   <Button
                     onClick={handleStartScan}
-                    disabled={scanning || !resource}
+                    disabled={scanning || !resource || !!cameraError}
                     className="flex-1"
                     size="lg"
                   >
-                    {scanning ? "Scanning..." : "Start Scan"}
+                    {scanning ? "Scanning..." : cameraError ? "Retry Camera" : "Start Scan"}
                   </Button>
                 ) : (
                   <>
