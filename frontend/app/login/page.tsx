@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Code2, Shield, Users, QrCode, ArrowRight, Loader2, User } from 'lucide-react'
+import { Shield, Users, ArrowRight, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -10,14 +11,28 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
-  const { login } = useAuth()
+  const { login, user, loading } = useAuth()
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [role, setRole] = useState<'admin' | 'volunteer' | 'team'>('team')
+  const [role, setRole] = useState<'admin' | 'team'>('team')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (!loading && user) {
+      if (user.role === 'admin') {
+        router.push('/admin')
+      } else if (user.role === 'volunteer') {
+        router.push('/volunteer')
+      } else if (user.role === 'participant') {
+        router.push('/participant')
+      }
+    }
+  }, [user, loading, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,6 +60,24 @@ export default function LoginPage() {
     }
   }
 
+  // Show loading while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    )
+  }
+
+  // Don't render login form if user is already authenticated (will redirect)
+  if (user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-muted-foreground">Redirecting...</p>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden p-4">
       {/* Background Elements */}
@@ -66,7 +99,7 @@ export default function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-4">
 
             {/* Role Selection */}
-            <div className="grid grid-cols-3 gap-2 mb-6">
+            <div className="grid grid-cols-2 gap-2 mb-6">
               <button
                 type="button"
                 onClick={() => setRole('team')}
@@ -77,17 +110,6 @@ export default function LoginPage() {
               >
                 <Users className="w-5 h-5 mb-1" />
                 <span className="text-xs font-medium">Team</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setRole('volunteer')}
-                className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'volunteer'
-                  ? 'bg-red-500/10 border-red-500 text-red-500'
-                  : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
-                  }`}
-              >
-                <QrCode className="w-5 h-5 mb-1" />
-                <span className="text-xs font-medium">Volunteer</span>
               </button>
               <button
                 type="button"
@@ -177,16 +199,11 @@ export default function LoginPage() {
         <CardFooter className="flex flex-col gap-4 border-t border-border/50 pt-6 bg-secondary/20">
           <div className="w-full text-center">
             <p className="text-xs text-muted-foreground mb-2">Demo Credentials</p>
-            <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="p-2 rounded bg-secondary/50 border border-border/50">
                 <p className="font-semibold text-red-400">Admin</p>
                 <p className="text-muted-foreground mt-1">demo@admin.com</p>
                 <p className="text-muted-foreground">admin123</p>
-              </div>
-              <div className="p-2 rounded bg-secondary/50 border border-border/50">
-                <p className="font-semibold text-red-400">Volunteer</p>
-                <p className="text-muted-foreground mt-1">volunteer@demo.com</p>
-                <p className="text-muted-foreground">volunteer123</p>
               </div>
               <div className="p-2 rounded bg-secondary/50 border border-border/50">
                 <p className="font-semibold text-primary">Team</p>

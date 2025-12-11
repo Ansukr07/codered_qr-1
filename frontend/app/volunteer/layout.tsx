@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { Code2, LogOut } from 'lucide-react'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export default function VolunteerLayout({
@@ -12,12 +11,12 @@ export default function VolunteerLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { user, loading } = useAuth()
+  const { user, loading, logout } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
     if (!loading && (!user || (user.role !== 'volunteer' && user.role !== 'admin'))) {
-      router.push('/login')
+      router.push('/volunteer-login')
     }
   }, [user, loading, router])
 
@@ -50,12 +49,15 @@ export default function VolunteerLayout({
                   <p className="text-xs text-muted-foreground">Volunteer Portal</p>
                 </div>
               </div>
-              <Link href="/login">
-                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10">
-                  <LogOut className="h-4 w-4" />
-                  Logout
-                </Button>
-              </Link>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                onClick={logout}
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
             </div>
           </div>
         </header>
