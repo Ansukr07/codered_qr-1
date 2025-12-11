@@ -2,20 +2,19 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { QrCode, ArrowRight, Loader2, ArrowLeft } from 'lucide-react'
+import { Mail, Lock, ArrowRight, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function VolunteerLoginPage() {
   const { login, user, loading } = useAuth()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('vol@vol.in')
+  const [password, setPassword] = useState('vol@123')
   const [error, setError] = useState('')
 
   // Redirect if already authenticated
@@ -93,36 +92,43 @@ export default function VolunteerLoginPage() {
           <div className="flex justify-center mb-4">
             <img src="/logo.png" alt="Codered Logo" className="w-12 h-12 object-contain" />
           </div>
-          <CardTitle className="text-2xl font-bold">Volunteer Portal</CardTitle>
+          <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
           <CardDescription>
-            Sign in to access the volunteer dashboard
+            Sign in to Code Red 3.0 Volunteer Portal
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email ID"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-secondary/50 border-border/50"
-              />
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-secondary/50 border-border/50 pl-10"
+                />
+              </div>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="bg-secondary/50 border-border/50"
-              />
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="bg-secondary/50 border-border/50 pl-10"
+                />
+              </div>
             </div>
 
             {error && (
@@ -146,14 +152,6 @@ export default function VolunteerLoginPage() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col gap-4 border-t border-border/50 pt-6 bg-secondary/20">
-          <Link href="/login" className="w-full">
-            <Button variant="ghost" className="w-full" size="sm">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Main Login
-            </Button>
-          </Link>
-        </CardFooter>
       </Card>
     </div>
   )

@@ -1,4 +1,6 @@
 const express = require('express');
+const https = require('https');
+const http = require('http');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -45,5 +47,34 @@ app.use('/uploads', express.static('uploads'));
 
 
 const PORT = process.env.PORT || 5000;
+const HTTPS_PORT = process.env.HTTPS_PORT || 5443;
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// HTTPS Configuration
+const SSL_KEY_PATH = process.env.SSL_KEY_PATH;
+const SSL_CERT_PATH = process.env.SSL_CERT_PATH;
+
+// Start HTTP server (always)
+const httpServer = http.createServer(app);
+httpServer.listen(PORT, () => {
+    console.log(`HTTP Server running on port ${PORT}`);
+});
+
+// Start HTTPS server if certificates are provided
+if (SSL_KEY_PATH && SSL_CERT_PATH) {
+    try {
+        const key = fs.readFileSync(SSL_KEY_PATH, 'utf8');
+        const cert = fs.readFileSync(SSL_CERT_PATH, 'utf8');
+        
+        const httpsServer = https.createServer({ key, cert }, app);
+        httpsServer.listen(HTTPS_PORT, () => {
+            console.log(`HTTPS Server running on port ${HTTPS_PORT}`);
+            console.log(`✓ SSL/TLS enabled`);
+        });
+    } catch (error) {
+        console.error('⚠️  Failed to start HTTPS server:', error.message);
+        console.error('   Make sure SSL_KEY_PATH and SSL_CERT_PATH point to valid certificate files');
+        console.error('   Server will continue running on HTTP only');
+    }
+} else {
+    console.log('⚠️  HTTPS not configured. Set SSL_KEY_PATH and SSL_CERT_PATH in .env to enable HTTPS');
+}

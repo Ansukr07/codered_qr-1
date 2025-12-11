@@ -1,0 +1,1659 @@
+{
+  "matched": [
+    {
+      "csvEmail": "24ug1byai252@bmsit.in",
+      "csvName": "POORVI M",
+      "mongoQrCode": "CR-T71-P01",
+      "mongoName": "POORVI M",
+      "matchType": "team_match",
+      "teamName": "VITACORE AI"
+    },
+    {
+      "csvEmail": "24ug1byai098@bmsit.in",
+      "csvName": "UMME HAFSA",
+      "mongoQrCode": "CR-T71-P02",
+      "mongoName": "UMME HAFSA",
+      "matchType": "exact",
+      "teamName": "VITACORE AI"
+    },
+    {
+      "csvEmail": "24ug1bycs1003@bmsit.in",
+      "csvName": "ZOHA TABASSUM KHADER",
+      "mongoQrCode": "CR-T71-P03",
+      "mongoName": "ZOHA TABASSUM KHADER",
+      "matchType": "exact",
+      "teamName": "VITACORE AI"
+    },
+    {
+      "csvEmail": "24ug1bycs338@bmsit.in",
+      "csvName": "HARSHITHA M",
+      "mongoQrCode": "CR-T71-P04",
+      "mongoName": "HARSHITHA M",
+      "matchType": "exact",
+      "teamName": "VITACORE AI"
+    },
+    {
+      "csvEmail": "vsmohit94@gmail.com",
+      "csvName": "Mohit V S",
+      "mongoQrCode": "CR-T53-P01",
+      "mongoName": "Mohit V S",
+      "matchType": "exact",
+      "teamName": "MisaMisa"
+    },
+    {
+      "csvEmail": "1ms23ci002@msrit.edu",
+      "csvName": "Aaryan Rao",
+      "mongoQrCode": "CR-T53-P02",
+      "mongoName": "Aaryan Rao",
+      "matchType": "exact",
+      "teamName": "MisaMisa"
+    },
+    {
+      "csvEmail": "adith2cool@gmail.com",
+      "csvName": "Adith Senthil",
+      "mongoQrCode": "CR-T53-P03",
+      "mongoName": "Adith Senthil",
+      "matchType": "exact",
+      "teamName": "MisaMisa"
+    },
+    {
+      "csvEmail": "anoopganesh28@gmail.com",
+      "csvName": "Anoop Ganesh",
+      "mongoQrCode": "CR-T53-P04",
+      "mongoName": "Anoop Ganesh",
+      "matchType": "exact",
+      "teamName": "MisaMisa"
+    },
+    {
+      "csvEmail": "shubhams.24.beis@acharya.ac.in",
+      "csvName": "Shubham Kumar",
+      "mongoQrCode": "CR-T40-P01",
+      "mongoName": "Shubham Kumar",
+      "matchType": "exact",
+      "teamName": "Dr Code"
+    },
+    {
+      "csvEmail": "adityal2.24.beis@acharya.ac.in",
+      "csvName": "Aditya Sinha",
+      "mongoQrCode": "CR-T40-P02",
+      "mongoName": "Aditya Sinha",
+      "matchType": "exact",
+      "teamName": "Dr Code"
+    },
+    {
+      "csvEmail": "mahalakshmsi.24.beis@acharya.ac.in",
+      "csvName": "Mahalakshmi S",
+      "mongoQrCode": "CR-T40-P03",
+      "mongoName": "Mahalakshmi S",
+      "matchType": "exact",
+      "teamName": "Dr Code"
+    },
+    {
+      "csvEmail": "nishchithar.24.beis@acharya.ac.in",
+      "csvName": "Nishchitha R",
+      "mongoQrCode": "CR-T40-P04",
+      "mongoName": "Nishchitha R",
+      "matchType": "exact",
+      "teamName": "Dr Code"
+    },
+    {
+      "csvEmail": "supreethamahesh2507@gmail.com",
+      "csvName": "Supreetha M",
+      "mongoQrCode": "CR-T60-P01",
+      "mongoName": "Supreetha M",
+      "matchType": "exact",
+      "teamName": "QuadraBytes"
+    },
+    {
+      "csvEmail": "nehakudur@gmail.com",
+      "csvName": "Neha M Kudur",
+      "mongoQrCode": "CR-T60-P02",
+      "mongoName": "Neha M Kudur",
+      "matchType": "exact",
+      "teamName": "QuadraBytes"
+    },
+    {
+      "csvEmail": "pavanigk7@gmail.com",
+      "csvName": "Pavani GK",
+      "mongoQrCode": "CR-T60-P03",
+      "mongoName": "Pavani GK",
+      "matchType": "exact",
+      "teamName": "QuadraBytes"
+    },
+    {
+      "csvEmail": "1ms23ci049@msrit.edu",
+      "csvName": "Joyal John Mangatt",
+      "mongoQrCode": "CR-T60-P04",
+      "mongoName": "Joyal John Mangatt",
+      "matchType": "exact",
+      "teamName": "QuadraBytes"
+    },
+    {
+      "csvEmail": "samyukthaa.mahesh@gmail.com",
+      "csvName": "Samyukthaa M",
+      "mongoQrCode": "CR-T39-P01",
+      "mongoName": "Samyukthaa M",
+      "matchType": "exact",
+      "teamName": "Delusion"
+    },
+    {
+      "csvEmail": "sreeyachand@gmail.com",
+      "csvName": "Sreeya Chand",
+      "mongoQrCode": "CR-T39-P02",
+      "mongoName": "Sreeya Chand",
+      "matchType": "exact",
+      "teamName": "Delusion"
+    },
+    {
+      "csvEmail": "praptiyush2007@gmail.com",
+      "csvName": "Prapti",
+      "mongoQrCode": "CR-T39-P03",
+      "mongoName": "Prapti",
+      "matchType": "exact",
+      "teamName": "Delusion"
+    },
+    {
+      "csvEmail": "aniksha100@gmail.com",
+      "csvName": "Aniksha Anithan",
+      "mongoQrCode": "CR-T39-P04",
+      "mongoName": "Aniksha Anithan",
+      "matchType": "exact",
+      "teamName": "Delusion"
+    },
+    {
+      "csvEmail": "nharshita.cy24@rvce.edu.in",
+      "csvName": "Harshita Nagesh",
+      "mongoQrCode": "CR-T59-P01",
+      "mongoName": "Harshita Nagesh",
+      "matchType": "exact",
+      "teamName": "Phishfry"
+    },
+    {
+      "csvEmail": "therayyn16@gmail.com",
+      "csvName": "Rayyan Shaikh",
+      "mongoQrCode": "CR-T59-P02",
+      "mongoName": "Rayyan Shaikh",
+      "matchType": "exact",
+      "teamName": "Phishfry"
+    },
+    {
+      "csvEmail": "ashithaspatil.cy24@rvce.edu.in",
+      "csvName": "Ashitha Patil",
+      "mongoQrCode": "CR-T59-P03",
+      "mongoName": "Ashitha Patil",
+      "matchType": "exact",
+      "teamName": "Phishfry"
+    },
+    {
+      "csvEmail": "1by23et001@bmsit.in",
+      "csvName": "Aakanksha K",
+      "mongoQrCode": "CR-T33-P01",
+      "mongoName": "Aakanksha K",
+      "matchType": "exact",
+      "teamName": "Code Wizards"
+    },
+    {
+      "csvEmail": "1by23et039@bmsit.in",
+      "csvName": "Nimisha V D",
+      "mongoQrCode": "CR-T33-P02",
+      "mongoName": "Nimisha V D",
+      "matchType": "exact",
+      "teamName": "Code Wizards"
+    },
+    {
+      "csvEmail": "1by23et038@bmsit.in",
+      "csvName": "Nikhil R",
+      "mongoQrCode": "CR-T33-P03",
+      "mongoName": "Nikhil R",
+      "matchType": "exact",
+      "teamName": "Code Wizards"
+    },
+    {
+      "csvEmail": "1by23et063@bmsit.in",
+      "csvName": "V Muhammed Saad Sabeel",
+      "mongoQrCode": "CR-T33-P04",
+      "mongoName": "V Muhammed Saad Sabeel",
+      "matchType": "exact",
+      "teamName": "Code Wizards"
+    },
+    {
+      "csvEmail": "varikutimanivardhanreddy@gmail.com",
+      "csvName": "V Manivardhan Reddy",
+      "mongoQrCode": "CR-T35-P01",
+      "mongoName": "V Manivardhan Reddy",
+      "matchType": "exact",
+      "teamName": "CodeOps"
+    },
+    {
+      "csvEmail": "2105vivek@gmail.com",
+      "csvName": "Vivek S M",
+      "mongoQrCode": "CR-T35-P02",
+      "mongoName": "Vivek S M",
+      "matchType": "exact",
+      "teamName": "CodeOps"
+    },
+    {
+      "csvEmail": "valaboju.eshwar05@gmail.com",
+      "csvName": "Eshwar V",
+      "mongoQrCode": "CR-T35-P03",
+      "mongoName": "Eshwar V",
+      "matchType": "exact",
+      "teamName": "CodeOps"
+    },
+    {
+      "csvEmail": "venkatajayakrishna936@gmail.com",
+      "csvName": "Yarru Venkata Jaya Krishna",
+      "mongoQrCode": "CR-T35-P04",
+      "mongoName": "Yarru Venkata Jaya Krishna",
+      "matchType": "exact",
+      "teamName": "CodeOps"
+    },
+    {
+      "csvEmail": "pragnya.s.rao@gmail.com",
+      "csvName": "Pragnya Srikanth Rao",
+      "mongoQrCode": "CR-T42-P01",
+      "mongoName": "Pragnya Srikanth Rao",
+      "matchType": "exact",
+      "teamName": "Electronauts"
+    },
+    {
+      "csvEmail": "1by23ec080@bmsit.in",
+      "csvName": "Prerana Kulkarni",
+      "mongoQrCode": "CR-T42-P02",
+      "mongoName": "Prerana Kulkarni",
+      "matchType": "exact",
+      "teamName": "Electronauts"
+    },
+    {
+      "csvEmail": "1by23ec109@bmsit.in",
+      "csvName": "Stuthi Jansale R",
+      "mongoQrCode": "CR-T42-P03",
+      "mongoName": "Stuthi Jansale R",
+      "matchType": "exact",
+      "teamName": "Electronauts"
+    },
+    {
+      "csvEmail": "1by23ec066@bmsit.in",
+      "csvName": "Manognya Guruprasad",
+      "mongoQrCode": "CR-T42-P04",
+      "mongoName": "Manognya Guruprasad",
+      "matchType": "exact",
+      "teamName": "Electronauts"
+    },
+    {
+      "csvEmail": "shivangkarol@gmail.com",
+      "csvName": "SHIVANG KAROL",
+      "mongoQrCode": "CR-T37-P01",
+      "mongoName": "SHIVANG KAROL",
+      "matchType": "exact",
+      "teamName": "Convoy Command Unit"
+    },
+    {
+      "csvEmail": "yashjha76@gmail.com",
+      "csvName": "PRIYANSHU",
+      "mongoQrCode": "CR-T37-P02",
+      "mongoName": "PRIYANSHU",
+      "matchType": "exact",
+      "teamName": "Convoy Command Unit"
+    },
+    {
+      "csvEmail": "agrimarora0106@gmail.com",
+      "csvName": "AGRIM ARORA",
+      "mongoQrCode": "CR-T37-P03",
+      "mongoName": "AGRIM ARORA",
+      "matchType": "exact",
+      "teamName": "Convoy Command Unit"
+    },
+    {
+      "csvEmail": "adhirajsingh00000@gmail.com",
+      "csvName": "ADHIRAJ SINGH",
+      "mongoQrCode": "CR-T37-P04",
+      "mongoName": "ADHIRAJ SINGH",
+      "matchType": "exact",
+      "teamName": "Convoy Command Unit"
+    },
+    {
+      "csvEmail": "tejashj527@gmail.com",
+      "csvName": "Tejas H J",
+      "mongoQrCode": "CR-T67-P01",
+      "mongoName": "Tejas H J",
+      "matchType": "exact",
+      "teamName": "Tryanuka"
+    },
+    {
+      "csvEmail": "abhishekraok5@gmail.com",
+      "csvName": "Abhishek Rao k",
+      "mongoQrCode": "CR-T67-P02",
+      "mongoName": "Abhishek Rao k",
+      "matchType": "exact",
+      "teamName": "Tryanuka"
+    },
+    {
+      "csvEmail": "havyashavi007@gmail.com",
+      "csvName": "Havyas M P",
+      "mongoQrCode": "CR-T67-P03",
+      "mongoName": "Havyas M P",
+      "matchType": "exact",
+      "teamName": "Tryanuka"
+    },
+    {
+      "csvEmail": "kshitiz.k.1403@gmail.com",
+      "csvName": "Kshitiz Khandelwal",
+      "mongoQrCode": "CR-T44-P01",
+      "mongoName": "Kshitiz Khandelwal",
+      "matchType": "exact",
+      "teamName": "FourLoop"
+    },
+    {
+      "csvEmail": "24ug1bybs024@bmsit.in",
+      "csvName": "Harsh Jha",
+      "mongoQrCode": "CR-T44-P02",
+      "mongoName": "Harsh Jha",
+      "matchType": "exact",
+      "teamName": "FourLoop"
+    },
+    {
+      "csvEmail": "24ug1bybs034@bmsit.in",
+      "csvName": "Priyanshi Gupta",
+      "mongoQrCode": "CR-T44-P03",
+      "mongoName": "Priyanshi Gupta",
+      "matchType": "exact",
+      "teamName": "FourLoop"
+    },
+    {
+      "csvEmail": "muskaann.mail19@gmail.com",
+      "csvName": "Muskan Singh",
+      "mongoQrCode": "CR-T44-P04",
+      "mongoName": "Muskan Singh",
+      "matchType": "exact",
+      "teamName": "FourLoop"
+    },
+    {
+      "csvEmail": "iamdayana2006@gmail.com",
+      "csvName": "Dayana B",
+      "mongoQrCode": "CR-T57-P01",
+      "mongoName": "Dayana B",
+      "matchType": "exact",
+      "teamName": "NextGen "
+    },
+    {
+      "csvEmail": "govardhanakyk@gmail.com",
+      "csvName": "K Y K Govardhana",
+      "mongoQrCode": "CR-T57-P02",
+      "mongoName": "K Y K Govardhana",
+      "matchType": "exact",
+      "teamName": "NextGen "
+    },
+    {
+      "csvEmail": "manushreedevang@gmail.com",
+      "csvName": "Manushree DV",
+      "mongoQrCode": "CR-T57-P03",
+      "mongoName": "Manushree DV",
+      "matchType": "exact",
+      "teamName": "NextGen "
+    },
+    {
+      "csvEmail": "vharishkumar2866@gmail.com",
+      "csvName": "Harish Kumar V",
+      "mongoQrCode": "CR-T57-P04",
+      "mongoName": "Harish Kumar V",
+      "matchType": "exact",
+      "teamName": "NextGen "
+    },
+    {
+      "csvEmail": "kushalmys55@gmail.com",
+      "csvName": "Kushal P",
+      "mongoQrCode": "CR-T28-P01",
+      "mongoName": "Kushal P",
+      "matchType": "exact",
+      "teamName": "APEX-AI-X"
+    },
+    {
+      "csvEmail": "tanishqvernekar@gmail.com",
+      "csvName": "TANISHQ S VERNEKAR",
+      "mongoQrCode": "CR-T28-P02",
+      "mongoName": "TANISHQ S VERNEKAR",
+      "matchType": "exact",
+      "teamName": "APEX-AI-X"
+    },
+    {
+      "csvEmail": "yashun3431@gmail.com",
+      "csvName": "Yashwanth N",
+      "mongoQrCode": "CR-T28-P03",
+      "mongoName": "Yashwanth N",
+      "matchType": "exact",
+      "teamName": "APEX-AI-X"
+    },
+    {
+      "csvEmail": "rohithgn05@gmail.com",
+      "csvName": "Rohith G N",
+      "mongoQrCode": "CR-T28-P04",
+      "mongoName": "Rohith G N",
+      "matchType": "exact",
+      "teamName": "APEX-AI-X"
+    },
+    {
+      "csvEmail": "varadawamika@gmail.com",
+      "csvName": "Wamika Varada",
+      "mongoQrCode": "CR-T74-P01",
+      "mongoName": "Wamika Varada",
+      "matchType": "exact",
+      "teamName": "WISH"
+    },
+    {
+      "csvEmail": "pratusuresh47@gmail.com",
+      "csvName": "Pratyusha Suresh",
+      "mongoQrCode": "CR-T74-P02",
+      "mongoName": "Pratyusha Suresh",
+      "matchType": "exact",
+      "teamName": "WISH"
+    },
+    {
+      "csvEmail": "sahanaasadasivam@gmail.com",
+      "csvName": "Sahana S",
+      "mongoQrCode": "CR-T74-P03",
+      "mongoName": "Sahana S",
+      "matchType": "exact",
+      "teamName": "WISH"
+    },
+    {
+      "csvEmail": "shivaninkasa@gmail.com",
+      "csvName": "Shivani N K",
+      "mongoQrCode": "CR-T50-P01",
+      "mongoName": "Shivani N K",
+      "matchType": "exact",
+      "teamName": "KAFKA"
+    },
+    {
+      "csvEmail": "bhumikapolis@gmail.com",
+      "csvName": "Bhumika",
+      "mongoQrCode": "CR-T50-P02",
+      "mongoName": "Bhumika",
+      "matchType": "exact",
+      "teamName": "KAFKA"
+    },
+    {
+      "csvEmail": "dishakaybhat@gmail.com",
+      "csvName": "Dishaka Y bhat",
+      "mongoQrCode": "CR-T50-P03",
+      "mongoName": "Dishaka Y bhat",
+      "matchType": "exact",
+      "teamName": "KAFKA"
+    },
+    {
+      "csvEmail": "likhithasasa@gmail.com",
+      "csvName": "Likitha S A",
+      "mongoQrCode": "CR-T50-P04",
+      "mongoName": "Likitha S A",
+      "matchType": "exact",
+      "teamName": "KAFKA"
+    },
+    {
+      "csvEmail": "nishikareddy28@gmail.com",
+      "csvName": "Nishika R Reddy",
+      "mongoQrCode": "CR-T43-P01",
+      "mongoName": "Nishika R Reddy",
+      "matchType": "exact",
+      "teamName": "Forgeon2.0"
+    },
+    {
+      "csvEmail": "bhoomikabadkilaya@gmail.com",
+      "csvName": "Bhoomika G B",
+      "mongoQrCode": "CR-T43-P02",
+      "mongoName": "Bhoomika G B",
+      "matchType": "exact",
+      "teamName": "Forgeon2.0"
+    },
+    {
+      "csvEmail": "24ug1byec077@bmsit.in",
+      "csvName": "Akansha Kumari",
+      "mongoQrCode": "CR-T43-P03",
+      "mongoName": "Akansha Kumari",
+      "matchType": "exact",
+      "teamName": "Forgeon2.0"
+    },
+    {
+      "csvEmail": "srushti230406@gmail.com",
+      "csvName": "Srushti K",
+      "mongoQrCode": "CR-T38-P01",
+      "mongoName": "Srushti K",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "24ug1byec144@bmsit.in",
+      "csvName": "Sameer kedilaya",
+      "mongoQrCode": "CR-T38-P03",
+      "mongoName": "Sameer kedilaya",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "ayushmansharma2006@gmail.con",
+      "csvName": "Ayushman sharma",
+      "mongoQrCode": "CR-T38-P05",
+      "mongoName": "Ayushman sharma",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "24ug1byec009@gmail.com",
+      "csvName": "Parinitha V",
+      "mongoQrCode": "CR-T38-P07",
+      "mongoName": "Parinitha V",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "neerajar040@gmail.com",
+      "csvName": "Neeraja R",
+      "mongoQrCode": "CR-T54-P01",
+      "mongoName": "Neeraja R",
+      "matchType": "exact",
+      "teamName": "Momentum Crew "
+    },
+    {
+      "csvEmail": "spandanag0327@gmail.com",
+      "csvName": "Spandana",
+      "mongoQrCode": "CR-T54-P02",
+      "mongoName": "Spandana",
+      "matchType": "exact",
+      "teamName": "Momentum Crew "
+    },
+    {
+      "csvEmail": "prathibha31720@gmail.com",
+      "csvName": "Prathibha",
+      "mongoQrCode": "CR-T54-P03",
+      "mongoName": "Prathibha",
+      "matchType": "exact",
+      "teamName": "Momentum Crew "
+    },
+    {
+      "csvEmail": "prabhushreyank@gmail.com",
+      "csvName": "Shreyank prabhu CB",
+      "mongoQrCode": "CR-T73-P01",
+      "mongoName": "Shreyank prabhu CB",
+      "matchType": "exact",
+      "teamName": "WI-FIGTERS "
+    },
+    {
+      "csvEmail": "ramyajamadar99@gmail.com",
+      "csvName": "Ramya B J",
+      "mongoQrCode": "CR-T73-P02",
+      "mongoName": "Ramya B J",
+      "matchType": "exact",
+      "teamName": "WI-FIGTERS "
+    },
+    {
+      "csvEmail": "swatikarnalkar26@gmail.com",
+      "csvName": "Swati karnalkar",
+      "mongoQrCode": "CR-T73-P03",
+      "mongoName": "Swati karnalkar",
+      "matchType": "exact",
+      "teamName": "WI-FIGTERS "
+    },
+    {
+      "csvEmail": "sunarsuma1@gmail.com",
+      "csvName": "Suma Sunar",
+      "mongoQrCode": "CR-T73-P04",
+      "mongoName": "Suma Sunar",
+      "matchType": "exact",
+      "teamName": "WI-FIGTERS "
+    },
+    {
+      "csvEmail": "24ug1bycs914@bmsit.in",
+      "csvName": "Aashish Thakur",
+      "mongoQrCode": "CR-T66-P01",
+      "mongoName": "Aashish Thakur",
+      "matchType": "exact",
+      "teamName": "Titan Core"
+    },
+    {
+      "csvEmail": "24ug1bycs399@bmsit.in",
+      "csvName": "Akshat Kumar Tiwary",
+      "mongoQrCode": "CR-T66-P02",
+      "mongoName": "Akshat Kumar Tiwary",
+      "matchType": "exact",
+      "teamName": "Titan Core"
+    },
+    {
+      "csvEmail": "24ug1bycs598@bmsit.in",
+      "csvName": "Lakshy lohar",
+      "mongoQrCode": "CR-T66-P03",
+      "mongoName": "Lakshy lohar",
+      "matchType": "exact",
+      "teamName": "Titan Core"
+    },
+    {
+      "csvEmail": "24ug1bycs142@bmsit.in",
+      "csvName": "Bhanuprakash",
+      "mongoQrCode": "CR-T66-P04",
+      "mongoName": "Bhanuprakash",
+      "matchType": "exact",
+      "teamName": "Titan Core"
+    },
+    {
+      "csvEmail": "abhaykboy@gmail.com",
+      "csvName": "Abhay Krishna B",
+      "mongoQrCode": "CR-T48-P01",
+      "mongoName": "Abhay Krishna B",
+      "matchType": "exact",
+      "teamName": "Hardkode3.0"
+    },
+    {
+      "csvEmail": "mohithara.adu@gmail.com",
+      "csvName": "Mohith K Aralikatte",
+      "mongoQrCode": "CR-T48-P02",
+      "mongoName": "Mohith K Aralikatte",
+      "matchType": "exact",
+      "teamName": "Hardkode3.0"
+    },
+    {
+      "csvEmail": "25soumyadeep.m@gmail.com",
+      "csvName": "Soumyadeep Mukherjee",
+      "mongoQrCode": "CR-T48-P03",
+      "mongoName": "Soumyadeep Mukherjee",
+      "matchType": "exact",
+      "teamName": "Hardkode3.0"
+    },
+    {
+      "csvEmail": "chinmayrgowda2006@gmail.com",
+      "csvName": "Chinmay Ravindra gowda",
+      "mongoQrCode": "CR-T48-P04",
+      "mongoName": "Chinmay Ravindra gowda",
+      "matchType": "exact",
+      "teamName": "Hardkode3.0"
+    },
+    {
+      "csvEmail": "bhuvankumar.i3o96@gmail.com",
+      "csvName": "Bhuvan K K",
+      "mongoQrCode": "CR-T70-P01",
+      "mongoName": "Bhuvan K K",
+      "matchType": "exact",
+      "teamName": "Vision Vortex"
+    },
+    {
+      "csvEmail": "ysavyaya@gmail.com",
+      "csvName": "Avyaya S Yekkar",
+      "mongoQrCode": "CR-T70-P02",
+      "mongoName": "Avyaya S Yekkar",
+      "matchType": "exact",
+      "teamName": "Vision Vortex"
+    },
+    {
+      "csvEmail": "shreyankdk092@gmail.com",
+      "csvName": "Shreyank D K",
+      "mongoQrCode": "CR-T70-P03",
+      "mongoName": "Shreyank D K",
+      "matchType": "exact",
+      "teamName": "Vision Vortex"
+    },
+    {
+      "csvEmail": "mahesh27706@gmail.com",
+      "csvName": "N R Mahesh Raju",
+      "mongoQrCode": "CR-T70-P04",
+      "mongoName": "N R Mahesh Raju",
+      "matchType": "exact",
+      "teamName": "Vision Vortex"
+    },
+    {
+      "csvEmail": "vaibhavvaibhu2005@gmail.com",
+      "csvName": "Vaibhav M N",
+      "mongoQrCode": "CR-T51-P01",
+      "mongoName": "Vaibhav M N",
+      "matchType": "exact",
+      "teamName": "Kronyx"
+    },
+    {
+      "csvEmail": "yashasmanjuurs@gmail.com",
+      "csvName": "Yashas Manju Urs",
+      "mongoQrCode": "CR-T51-P02",
+      "mongoName": "Yashas Manju Urs",
+      "matchType": "exact",
+      "teamName": "Kronyx"
+    },
+    {
+      "csvEmail": "aneeshappid@gmail.com",
+      "csvName": "Aneesh Aveen Sunganahalli",
+      "mongoQrCode": "CR-T51-P03",
+      "mongoName": "Aneesh Aveen Sunganahalli",
+      "matchType": "exact",
+      "teamName": "Kronyx"
+    },
+    {
+      "csvEmail": "anirudhkashyap321@gmail.com",
+      "csvName": "Anirudh Kashyap",
+      "mongoQrCode": "CR-T51-P04",
+      "mongoName": "Anirudh Kashyap",
+      "matchType": "exact",
+      "teamName": "Kronyx"
+    },
+    {
+      "csvEmail": "sarangsanjay0506@gmail.com",
+      "csvName": "Sarang Sanjay",
+      "mongoQrCode": "CR-T55-P01",
+      "mongoName": "Sarang Sanjay",
+      "matchType": "exact",
+      "teamName": "Neural Net Ninjas"
+    },
+    {
+      "csvEmail": "kingskod1399@gmail.com",
+      "csvName": "Suhas Shivakumar",
+      "mongoQrCode": "CR-T55-P02",
+      "mongoName": "Suhas Shivakumar",
+      "matchType": "exact",
+      "teamName": "Neural Net Ninjas"
+    },
+    {
+      "csvEmail": "b7041017@gmail.com",
+      "csvName": "Bhuvan Gowda N C",
+      "mongoQrCode": "CR-T55-P03",
+      "mongoName": "Bhuvan Gowda N C",
+      "matchType": "exact",
+      "teamName": "Neural Net Ninjas"
+    },
+    {
+      "csvEmail": "abhilashgs14@gmail.com",
+      "csvName": "Abhilash G",
+      "mongoQrCode": "CR-T72-P01",
+      "mongoName": "Abhilash G",
+      "matchType": "exact",
+      "teamName": "Wi - Fight club "
+    },
+    {
+      "csvEmail": "2006abhii91@gmail.com",
+      "csvName": "Abhinav C",
+      "mongoQrCode": "CR-T72-P02",
+      "mongoName": "Abhinav C",
+      "matchType": "exact",
+      "teamName": "Wi - Fight club "
+    },
+    {
+      "csvEmail": "ashrithsrivathsa@gmail.com",
+      "csvName": "Ashrith Srivathsa KS",
+      "mongoQrCode": "CR-T72-P03",
+      "mongoName": "Ashrith Srivathsa KS",
+      "matchType": "exact",
+      "teamName": "Wi - Fight club "
+    },
+    {
+      "csvEmail": "ajaydali394@gmail.com",
+      "csvName": "Ajay Kumar R",
+      "mongoQrCode": "CR-T72-P04",
+      "mongoName": "Ajay Kumar R",
+      "matchType": "exact",
+      "teamName": "Wi - Fight club "
+    },
+    {
+      "csvEmail": "chethanvalukuru@gmail.com",
+      "csvName": "Chethan V",
+      "mongoQrCode": "CR-T32-P01",
+      "mongoName": "Chethan V",
+      "matchType": "exact",
+      "teamName": "Chai-Fi"
+    },
+    {
+      "csvEmail": "pavithraboopalan0417@gmail.com",
+      "csvName": "Pavithra B",
+      "mongoQrCode": "CR-T32-P02",
+      "mongoName": "Pavithra B",
+      "matchType": "exact",
+      "teamName": "Chai-Fi"
+    },
+    {
+      "csvEmail": "saisugeet20044@gmail.com",
+      "csvName": "G Sai Sugeet",
+      "mongoQrCode": "CR-T32-P03",
+      "mongoName": "G Sai Sugeet",
+      "matchType": "exact",
+      "teamName": "Chai-Fi"
+    },
+    {
+      "csvEmail": "noeldavid586@gmail.com",
+      "csvName": "Noel David",
+      "mongoQrCode": "CR-T32-P04",
+      "mongoName": "Noel David",
+      "matchType": "exact",
+      "teamName": "Chai-Fi"
+    },
+    {
+      "csvEmail": "lordhshiva@gmail.com",
+      "csvName": "Harshendra M",
+      "mongoQrCode": "CR-T63-P01",
+      "mongoName": "Harshendra M",
+      "matchType": "exact",
+      "teamName": "Runtime Terrors"
+    },
+    {
+      "csvEmail": "drs.prabhu2018@gmail.com",
+      "csvName": "Shashwath Prabhu",
+      "mongoQrCode": "CR-T63-P02",
+      "mongoName": "Shashwath Prabhu",
+      "matchType": "exact",
+      "teamName": "Runtime Terrors"
+    },
+    {
+      "csvEmail": "shiveshtiwari0@gmail.com",
+      "csvName": "Shivesh Tiwari",
+      "mongoQrCode": "CR-T63-P03",
+      "mongoName": "Shivesh Tiwari",
+      "matchType": "exact",
+      "teamName": "Runtime Terrors"
+    },
+    {
+      "csvEmail": "swapnilrao1@gmail.com",
+      "csvName": "Swapnil Rao",
+      "mongoQrCode": "CR-T63-P04",
+      "mongoName": "Swapnil Rao",
+      "matchType": "exact",
+      "teamName": "Runtime Terrors"
+    },
+    {
+      "csvEmail": "dharshansn.is23@rvce.edu.in",
+      "csvName": "Dharshan SN",
+      "mongoQrCode": "CR-T30-P01",
+      "mongoName": "Dharshan SN",
+      "matchType": "exact",
+      "teamName": "BLUE"
+    },
+    {
+      "csvEmail": "ananyacv952005@gmail.com",
+      "csvName": "Ananya CV",
+      "mongoQrCode": "CR-T30-P02",
+      "mongoName": "Ananya CV",
+      "matchType": "exact",
+      "teamName": "BLUE"
+    },
+    {
+      "csvEmail": "konanavarnivedita@gmail.com",
+      "csvName": "Nivedita konanavar",
+      "mongoQrCode": "CR-T30-P03",
+      "mongoName": "Nivedita konanavar",
+      "matchType": "exact",
+      "teamName": "BLUE"
+    },
+    {
+      "csvEmail": "karthikkp5033@gmail.com",
+      "csvName": "Karthik KP",
+      "mongoQrCode": "CR-T30-P04",
+      "mongoName": "Karthik KP",
+      "matchType": "exact",
+      "teamName": "BLUE"
+    },
+    {
+      "csvEmail": "hemanth3115s@gmail.com",
+      "csvName": "HEMANTH S",
+      "mongoQrCode": "CR-T46-P01",
+      "mongoName": "HEMANTH S",
+      "matchType": "exact",
+      "teamName": "GENESIS "
+    },
+    {
+      "csvEmail": "sumadhwarao2005@gmail.com",
+      "csvName": "Sumadhwa V",
+      "mongoQrCode": "CR-T46-P02",
+      "mongoName": "Sumadhwa V",
+      "matchType": "exact",
+      "teamName": "GENESIS "
+    },
+    {
+      "csvEmail": "sumanog2005@gmail.com",
+      "csvName": "Suman GS",
+      "mongoQrCode": "CR-T46-P03",
+      "mongoName": "Suman GS",
+      "matchType": "exact",
+      "teamName": "GENESIS "
+    },
+    {
+      "csvEmail": "ajaydbhat2005@gmail.com",
+      "csvName": "Ajay D Bhat",
+      "mongoQrCode": "CR-T46-P04",
+      "mongoName": "Ajay D Bhat",
+      "matchType": "exact",
+      "teamName": "GENESIS "
+    },
+    {
+      "csvEmail": "sahunishika06@gmail.com",
+      "csvName": "Nishika",
+      "mongoQrCode": "CR-T75-P01",
+      "mongoName": "Nishika",
+      "matchType": "exact",
+      "teamName": "Nishika"
+    },
+    {
+      "csvEmail": "parvathy.c19205@gmail.com",
+      "csvName": "Parvathy C",
+      "mongoQrCode": "CR-T75-P02",
+      "mongoName": "Parvathy C",
+      "matchType": "exact",
+      "teamName": "Nishika"
+    },
+    {
+      "csvEmail": "shreeyakiran04@gmail.com",
+      "csvName": "Shreeya",
+      "mongoQrCode": "CR-T75-P03",
+      "mongoName": "Shreeya",
+      "matchType": "exact",
+      "teamName": "Nishika"
+    },
+    {
+      "csvEmail": "ssrinidhivas@gmail.com",
+      "csvName": "S Srinidhi VAS",
+      "mongoQrCode": "CR-T56-P01",
+      "mongoName": "S Srinidhi VAS",
+      "matchType": "exact",
+      "teamName": "Neural Nooks"
+    },
+    {
+      "csvEmail": "vybhavwarrior14@gmail.com",
+      "csvName": "Kotturesh Vybhav",
+      "mongoQrCode": "CR-T56-P02",
+      "mongoName": "Kotturesh Vybhav",
+      "matchType": "exact",
+      "teamName": "Neural Nooks"
+    },
+    {
+      "csvEmail": "opgameing8978@gmail.com",
+      "csvName": "Arkesh.N",
+      "mongoQrCode": "CR-T56-P03",
+      "mongoName": "Arkesh.N",
+      "matchType": "exact",
+      "teamName": "Neural Nooks"
+    },
+    {
+      "csvEmail": "thescientist544@gmail.com",
+      "csvName": "Dhanush.P",
+      "mongoQrCode": "CR-T56-P04",
+      "mongoName": "Dhanush.P",
+      "matchType": "exact",
+      "teamName": "Neural Nooks"
+    },
+    {
+      "csvEmail": "sameernaseema175@gmail.com",
+      "csvName": "Mehaboob S",
+      "mongoQrCode": "CR-T65-P01",
+      "mongoName": "Mehaboob S",
+      "matchType": "exact",
+      "teamName": "The Gradient Decendents "
+    },
+    {
+      "csvEmail": "yashwanthbloo27@gmail.com",
+      "csvName": "Yashwanth BL",
+      "mongoQrCode": "CR-T65-P02",
+      "mongoName": "Yashwanth BL",
+      "matchType": "exact",
+      "teamName": "The Gradient Decendents "
+    },
+    {
+      "csvEmail": "rv7atofficial@gmail.com",
+      "csvName": "Rahul R Vasisht",
+      "mongoQrCode": "CR-T65-P03",
+      "mongoName": "Rahul R Vasisht",
+      "matchType": "exact",
+      "teamName": "The Gradient Decendents "
+    },
+    {
+      "csvEmail": "suditya.kulkarni@gmail.com",
+      "csvName": "Suditya Kulkarni",
+      "mongoQrCode": "CR-T31-P01",
+      "mongoName": "Suditya Kulkarni",
+      "matchType": "exact",
+      "teamName": "Brogrammers"
+    },
+    {
+      "csvEmail": "mallibennur141@gmail.com",
+      "csvName": "Mallikarjuna M",
+      "mongoQrCode": "CR-T31-P02",
+      "mongoName": "Mallikarjuna M",
+      "matchType": "exact",
+      "teamName": "Brogrammers"
+    },
+    {
+      "csvEmail": "shubhamprabhu1001@gmail.com",
+      "csvName": "Shubham Prabhu",
+      "mongoQrCode": "CR-T31-P03",
+      "mongoName": "Shubham Prabhu",
+      "matchType": "exact",
+      "teamName": "Brogrammers"
+    },
+    {
+      "csvEmail": "sujithkb24@gmail.com",
+      "csvName": "Sujith Kumar",
+      "mongoQrCode": "CR-T31-P04",
+      "mongoName": "Sujith Kumar",
+      "matchType": "exact",
+      "teamName": "Brogrammers"
+    },
+    {
+      "csvEmail": "aishwaryajacse@gmail.com",
+      "csvName": "Aishwarya JA",
+      "mongoQrCode": "CR-T62-P01",
+      "mongoName": "Aishwarya JA",
+      "matchType": "exact",
+      "teamName": "Reboot "
+    },
+    {
+      "csvEmail": "1by23cs022@bmsit.in",
+      "csvName": "Ananya Dinesh",
+      "mongoQrCode": "CR-T62-P02",
+      "mongoName": "Ananya Dinesh",
+      "matchType": "exact",
+      "teamName": "Reboot "
+    },
+    {
+      "csvEmail": "1by23cs141@bmsit.in",
+      "csvName": "Neha Gujjar",
+      "mongoQrCode": "CR-T62-P03",
+      "mongoName": "Neha Gujjar",
+      "matchType": "exact",
+      "teamName": "Reboot "
+    },
+    {
+      "csvEmail": "1by23cs002@bmsit.in",
+      "csvName": "Abdullah",
+      "mongoQrCode": "CR-T62-P04",
+      "mongoName": "Abdullah",
+      "matchType": "exact",
+      "teamName": "Reboot "
+    },
+    {
+      "csvEmail": "aradhyaprakash@gmail.com",
+      "csvName": "ARADHYA PRAKASH",
+      "mongoQrCode": "CR-T41-P01",
+      "mongoName": "ARADHYA PRAKASH",
+      "matchType": "exact",
+      "teamName": "ElectroEdge "
+    },
+    {
+      "csvEmail": "satyamharsh1102@gmail.com",
+      "csvName": "SATYAM KUMAR",
+      "mongoQrCode": "CR-T41-P02",
+      "mongoName": "SATYAM KUMAR",
+      "matchType": "exact",
+      "teamName": "ElectroEdge "
+    },
+    {
+      "csvEmail": "anupamprusty321@gmail.com",
+      "csvName": "ANUPAM PRUSTY",
+      "mongoQrCode": "CR-T41-P03",
+      "mongoName": "ANUPAM PRUSTY",
+      "matchType": "exact",
+      "teamName": "ElectroEdge "
+    },
+    {
+      "csvEmail": "1847625jitamitram@gmail.com",
+      "csvName": "JITAMITRA SAI M",
+      "mongoQrCode": "CR-T41-P04",
+      "mongoName": "JITAMITRA SAI M",
+      "matchType": "exact",
+      "teamName": "ElectroEdge "
+    },
+    {
+      "csvEmail": "amogh7365@gmail.com",
+      "csvName": "Amogh M G",
+      "mongoQrCode": "CR-T36-P01",
+      "mongoName": "Amogh M G",
+      "matchType": "exact",
+      "teamName": "CodeVortex"
+    },
+    {
+      "csvEmail": "sonusuhana754@gmail.com",
+      "csvName": "Suhana",
+      "mongoQrCode": "CR-T36-P02",
+      "mongoName": "Suhana",
+      "matchType": "exact",
+      "teamName": "CodeVortex"
+    },
+    {
+      "csvEmail": "vikasannigeri076@gmail.com",
+      "csvName": "Vikas Annigeri",
+      "mongoQrCode": "CR-T36-P03",
+      "mongoName": "Vikas Annigeri",
+      "matchType": "exact",
+      "teamName": "CodeVortex"
+    },
+    {
+      "csvEmail": "rohroorm2006@gmail.com",
+      "csvName": "Rohit Yareshimi",
+      "mongoQrCode": "CR-T36-P04",
+      "mongoName": "Rohit Yareshimi",
+      "matchType": "exact",
+      "teamName": "CodeVortex"
+    },
+    {
+      "csvEmail": "1by23et054@bmsit.in",
+      "csvName": "Shreyas S N",
+      "mongoQrCode": "CR-T69-P01",
+      "mongoName": "Shreyas S N",
+      "matchType": "exact",
+      "teamName": "VELOCITY FLYERS"
+    },
+    {
+      "csvEmail": "1by23et019@bmsit.in",
+      "csvName": "GAURAV I K",
+      "mongoQrCode": "CR-T69-P02",
+      "mongoName": "GAURAV I K",
+      "matchType": "exact",
+      "teamName": "VELOCITY FLYERS"
+    },
+    {
+      "csvEmail": "1by23et016@bmsit.in",
+      "csvName": "Drupadsurya",
+      "mongoQrCode": "CR-T69-P03",
+      "mongoName": "Drupadsurya",
+      "matchType": "exact",
+      "teamName": "VELOCITY FLYERS"
+    },
+    {
+      "csvEmail": "1by23et057@bmsit.in",
+      "csvName": "Sri Murari",
+      "mongoQrCode": "CR-T69-P04",
+      "mongoName": "Sri Murari",
+      "matchType": "exact",
+      "teamName": "VELOCITY FLYERS"
+    },
+    {
+      "csvEmail": "moscoviumsamarth@gmail.com",
+      "csvName": "Samarth Singh",
+      "mongoQrCode": "CR-T68-P01",
+      "mongoName": "Samarth Singh",
+      "matchType": "exact",
+      "teamName": "VCPRO"
+    },
+    {
+      "csvEmail": "shlocksaitavya5@gmail.com",
+      "csvName": "Shlok Saitavya",
+      "mongoQrCode": "CR-T68-P02",
+      "mongoName": "Shlok Saitavya",
+      "matchType": "exact",
+      "teamName": "VCPRO"
+    },
+    {
+      "csvEmail": "adityaraimohit@gmail.com",
+      "csvName": "Aditya Rai",
+      "mongoQrCode": "CR-T68-P03",
+      "mongoName": "Aditya Rai",
+      "matchType": "exact",
+      "teamName": "VCPRO"
+    },
+    {
+      "csvEmail": "aparnaprithvi137@gmail.com",
+      "csvName": "Prithvi Aparna",
+      "mongoQrCode": "CR-T68-P04",
+      "mongoName": "Prithvi Aparna",
+      "matchType": "exact",
+      "teamName": "VCPRO"
+    },
+    {
+      "csvEmail": "sumuk2472005@gmail.com",
+      "csvName": "Sumukh.R",
+      "mongoQrCode": "CR-T29-P01",
+      "mongoName": "Sumukh.R",
+      "matchType": "exact",
+      "teamName": "AUTOMATIKS"
+    },
+    {
+      "csvEmail": "gagangowda2603@gmail.com",
+      "csvName": "Gagan KS",
+      "mongoQrCode": "CR-T29-P02",
+      "mongoName": "Gagan KS",
+      "matchType": "exact",
+      "teamName": "AUTOMATIKS"
+    },
+    {
+      "csvEmail": "srinidhip06@gmail.com",
+      "csvName": "Srinidhi P",
+      "mongoQrCode": "CR-T29-P03",
+      "mongoName": "Srinidhi P",
+      "matchType": "team_match",
+      "teamName": "AUTOMATIKS"
+    },
+    {
+      "csvEmail": "24ug1bycs1012@bmsit.in",
+      "csvName": "Dayana KM",
+      "mongoQrCode": "CR-T29-P04",
+      "mongoName": "Dayana KM",
+      "matchType": "exact",
+      "teamName": "AUTOMATIKS"
+    },
+    {
+      "csvEmail": "umarab7860@gmail.com",
+      "csvName": "MD UMAR ABDULLAH",
+      "mongoQrCode": "CR-T49-P01",
+      "mongoName": "MD UMAR ABDULLAH",
+      "matchType": "exact",
+      "teamName": "Invincible_4"
+    },
+    {
+      "csvEmail": "safwan076@gmail.com",
+      "csvName": "MD.SAFWAN ANSARI",
+      "mongoQrCode": "CR-T49-P02",
+      "mongoName": "MD.SAFWAN ANSARI",
+      "matchType": "exact",
+      "teamName": "Invincible_4"
+    },
+    {
+      "csvEmail": "abdullhannan6344@gmail.com",
+      "csvName": "Abdul hannan",
+      "mongoQrCode": "CR-T49-P03",
+      "mongoName": "Abdul hannan",
+      "matchType": "exact",
+      "teamName": "Invincible_4"
+    },
+    {
+      "csvEmail": "1ar24cd018@atria.edu",
+      "csvName": "Aayan Asif",
+      "mongoQrCode": "CR-T49-P04",
+      "mongoName": "Aayan Asif",
+      "matchType": "exact",
+      "teamName": "Invincible_4"
+    },
+    {
+      "csvEmail": "varshalakshmik@gmail.com",
+      "csvName": "Varsha Lakshmi K",
+      "mongoQrCode": "CR-T47-P01",
+      "mongoName": "Varsha Lakshmi K",
+      "matchType": "exact",
+      "teamName": "Half Brain Cell"
+    },
+    {
+      "csvEmail": "keerthanarn05@gmail.com",
+      "csvName": "Keerthana R Nair",
+      "mongoQrCode": "CR-T47-P02",
+      "mongoName": "Keerthana R Nair",
+      "matchType": "exact",
+      "teamName": "Half Brain Cell"
+    },
+    {
+      "csvEmail": "chinmaygchandramouli@gmail.com",
+      "csvName": "Chinmay G C",
+      "mongoQrCode": "CR-T47-P03",
+      "mongoName": "Chinmay G C",
+      "matchType": "exact",
+      "teamName": "Half Brain Cell"
+    },
+    {
+      "csvEmail": "raoprithveesh@gmail.com",
+      "csvName": "Prithveesh Rao",
+      "mongoQrCode": "CR-T47-P04",
+      "mongoName": "Prithveesh Rao",
+      "matchType": "exact",
+      "teamName": "Half Brain Cell"
+    },
+    {
+      "csvEmail": "tanmaykapadnis2005@gmail.com",
+      "csvName": "Tanmay Sachin Kapadnis",
+      "mongoQrCode": "CR-T45-P01",
+      "mongoName": "Tanmay Sachin Kapadnis",
+      "matchType": "exact",
+      "teamName": "Full Stack Biryani"
+    },
+    {
+      "csvEmail": "shambhavimanjunath42@gmail.com",
+      "csvName": "Shambhavi Manjunath",
+      "mongoQrCode": "CR-T45-P02",
+      "mongoName": "Shambhavi Manjunath",
+      "matchType": "exact",
+      "teamName": "Full Stack Biryani"
+    },
+    {
+      "csvEmail": "colourfulautumns@gmail.com",
+      "csvName": "Sunisha P S",
+      "mongoQrCode": "CR-T45-P03",
+      "mongoName": "Sunisha P S",
+      "matchType": "exact",
+      "teamName": "Full Stack Biryani"
+    },
+    {
+      "csvEmail": "pranayrajsingh393@gmail.com",
+      "csvName": "Pranay Raj Singh",
+      "mongoQrCode": "CR-T45-P04",
+      "mongoName": "Pranay Raj Singh",
+      "matchType": "exact",
+      "teamName": "Full Stack Biryani"
+    },
+    {
+      "csvEmail": "surabhirnadi@gmail.com",
+      "csvName": "Surabhi R Nadig",
+      "mongoQrCode": "CR-T61-P01",
+      "mongoName": "Surabhi R Nadig",
+      "matchType": "exact",
+      "teamName": "Questers"
+    },
+    {
+      "csvEmail": "shanbhagsanjana56@gmail.com",
+      "csvName": "Sanjana Shanbhag",
+      "mongoQrCode": "CR-T61-P02",
+      "mongoName": "Sanjana Shanbhag",
+      "matchType": "exact",
+      "teamName": "Questers"
+    },
+    {
+      "csvEmail": "tarapanth06@gmail.com",
+      "csvName": "Tara Panth",
+      "mongoQrCode": "CR-T61-P03",
+      "mongoName": "Tara Panth",
+      "matchType": "exact",
+      "teamName": "Questers"
+    },
+    {
+      "csvEmail": "swatibmathapati@gmail.com",
+      "csvName": "Swati B Mathapati",
+      "mongoQrCode": "CR-T61-P04",
+      "mongoName": "Swati B Mathapati",
+      "matchType": "exact",
+      "teamName": "Questers"
+    },
+    {
+      "csvEmail": "akkeerthan07@gmail.com",
+      "csvName": "Keerthan A K",
+      "mongoQrCode": "CR-T52-P01",
+      "mongoName": "Keerthan A K",
+      "matchType": "exact",
+      "teamName": "LogicHigh"
+    },
+    {
+      "csvEmail": "pramodurso30@gmail.com",
+      "csvName": "Pramod Urs O",
+      "mongoQrCode": "CR-T52-P02",
+      "mongoName": "Pramod Urs O",
+      "matchType": "exact",
+      "teamName": "LogicHigh"
+    },
+    {
+      "csvEmail": "sagarshigehalli38319@gmail.com",
+      "csvName": "Sagar Anil Shigehalli",
+      "mongoQrCode": "CR-T52-P03",
+      "mongoName": "Sagar Anil Shigehalli",
+      "matchType": "exact",
+      "teamName": "LogicHigh"
+    },
+    {
+      "csvEmail": "ishitbarman2006@gmail.com",
+      "csvName": "Ishit Barman",
+      "mongoQrCode": "CR-T34-P01",
+      "mongoName": "Ishit Barman",
+      "matchType": "exact",
+      "teamName": "Code Yoddhas"
+    },
+    {
+      "csvEmail": "poorvi08mitra@gmail.com",
+      "csvName": "Poorvi M",
+      "mongoQrCode": "CR-T34-P02",
+      "mongoName": "Poorvi M",
+      "matchType": "team_match",
+      "teamName": "Code Yoddhas"
+    },
+    {
+      "csvEmail": "samarthb816@gmail.com",
+      "csvName": "Samarth B",
+      "mongoQrCode": "CR-T34-P03",
+      "mongoName": "Samarth B",
+      "matchType": "exact",
+      "teamName": "Code Yoddhas"
+    },
+    {
+      "csvEmail": "shreyakrishnan06@gmail.com",
+      "csvName": "Shreya Krishnan",
+      "mongoQrCode": "CR-T34-P04",
+      "mongoName": "Shreya Krishnan",
+      "matchType": "exact",
+      "teamName": "Code Yoddhas"
+    },
+    {
+      "csvEmail": "meghanakirachand@gmail.com",
+      "csvName": "Meghana Kiranchand",
+      "mongoQrCode": "CR-T38-P02",
+      "mongoName": "Meghana Kiranchand",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "kavanap704@gmail.com",
+      "csvName": "Kavana P R",
+      "mongoQrCode": "CR-T38-P04",
+      "mongoName": "Kavana P R",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "obpujar@gmail.com",
+      "csvName": "Obana Pujar",
+      "mongoQrCode": "CR-T38-P06",
+      "mongoName": "Obana Pujar",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "vgayatri.p@gmail.com",
+      "csvName": "Gayatri P",
+      "mongoQrCode": "CR-T38-P08",
+      "mongoName": "Gayatri P",
+      "matchType": "exact",
+      "teamName": "Databaes"
+    },
+    {
+      "csvEmail": "pspm0603@gmail.com",
+      "csvName": "POORVI M SURESH",
+      "mongoQrCode": "CR-T64-P01",
+      "mongoName": "POORVI M SURESH",
+      "matchType": "exact",
+      "teamName": "Tech Titans"
+    },
+    {
+      "csvEmail": "vishnushreer96@gmail.com",
+      "csvName": "VISHNUSHREE R",
+      "mongoQrCode": "CR-T64-P02",
+      "mongoName": "VISHNUSHREE R",
+      "matchType": "exact",
+      "teamName": "Tech Titans"
+    },
+    {
+      "csvEmail": "digvijayppa@gmail.com",
+      "csvName": "DIGVIJAY PATIL",
+      "mongoQrCode": "CR-T64-P03",
+      "mongoName": "DIGVIJAY PATIL",
+      "matchType": "exact",
+      "teamName": "Tech Titans"
+    },
+    {
+      "csvEmail": "rahuln984282@gmail.com",
+      "csvName": "Rahul Kumar Gupta",
+      "mongoQrCode": "CR-T64-P04",
+      "mongoName": "Rahul Kumar Gupta",
+      "matchType": "exact",
+      "teamName": "Tech Titans"
+    },
+    {
+      "csvEmail": "jiya11kulkarni@gmail.com",
+      "csvName": "Jiya Kulkarni",
+      "mongoQrCode": "CR-T77-P01",
+      "mongoName": "Jiya Kulkarni",
+      "matchType": "exact",
+      "teamName": "TEAM INFRARED "
+    },
+    {
+      "csvEmail": "mpoojashri19@gmail.com",
+      "csvName": "M Poojashri",
+      "mongoQrCode": "CR-T77-P02",
+      "mongoName": "M Poojashri",
+      "matchType": "exact",
+      "teamName": "TEAM INFRARED "
+    },
+    {
+      "csvEmail": "mandar.joshi505@gmail.com",
+      "csvName": "Mandar Joshi",
+      "mongoQrCode": "CR-T77-P03",
+      "mongoName": "Mandar Joshi",
+      "matchType": "exact",
+      "teamName": "TEAM INFRARED "
+    },
+    {
+      "csvEmail": "cahrmanjucr11@gmail.com",
+      "csvName": "Manjunatha",
+      "mongoQrCode": "CR-T77-P04",
+      "mongoName": "Manjunatha",
+      "matchType": "exact",
+      "teamName": "TEAM INFRARED "
+    },
+    {
+      "csvEmail": "bsuraj.1006@gmail.com",
+      "csvName": "B Suraj",
+      "mongoQrCode": "CR-T76-P02",
+      "mongoName": "B Suraj",
+      "matchType": "exact",
+      "teamName": "Signotech"
+    },
+    {
+      "csvEmail": "dattguru16@gmail.com",
+      "csvName": "Gurudatt N",
+      "mongoQrCode": "CR-T76-P03",
+      "mongoName": "Gurudatt N",
+      "matchType": "exact",
+      "teamName": "Signotech"
+    },
+    {
+      "csvEmail": "achyuth0306@gmail.com",
+      "csvName": "P Achyuth",
+      "mongoQrCode": "CR-T76-P04",
+      "mongoName": "P Achyuth",
+      "matchType": "exact",
+      "teamName": "Signotech"
+    },
+    {
+      "csvEmail": "risaryan9@gmail.com",
+      "csvName": "Aryan R",
+      "mongoQrCode": "CR-T76-P01",
+      "mongoName": "Aryan R",
+      "matchType": "exact",
+      "teamName": "Signotech"
+    }
+  ],
+  "unmatched": [
+    {
+      "name": "Rohith GN",
+      "email": "rohithgn05@gmail.com",
+      "teamName": "APEX-AI-X",
+      "problemCode": "CR(S)2",
+      "role": "member"
+    },
+    {
+      "name": "Aprameya HP",
+      "email": "hpaprameya1@gmail.com",
+      "teamName": "404 Brain Not Found",
+      "problemCode": "CR(S)2",
+      "role": "leader"
+    },
+    {
+      "name": "Archita Pai",
+      "email": "archupai05@gmail.com",
+      "teamName": "404 Brain Not Found",
+      "problemCode": "CR(S)2",
+      "role": "member"
+    },
+    {
+      "name": "Vidyashankara CK",
+      "email": "vidyashankara2005@gmail.com",
+      "teamName": "404 Brain Not Found",
+      "problemCode": "CR(S)2",
+      "role": "member"
+    },
+    {
+      "name": "Prathviraj S Bhure",
+      "email": "prathvibhure10@gmail.com",
+      "teamName": "404 Brain Not Found",
+      "problemCode": "CR(S)2",
+      "role": "member"
+    },
+    {
+      "name": "Rachit Jain",
+      "email": "nprachit84@gmail.com",
+      "teamName": "Titans of Tech",
+      "problemCode": "CR (H) 2",
+      "role": "leader"
+    },
+    {
+      "name": "Rahul Murali",
+      "email": "muralirahul6210@gmail.com",
+      "teamName": "Titans of Tech",
+      "problemCode": "CR (H) 2",
+      "role": "member"
+    },
+    {
+      "name": "Shalini H R",
+      "email": "shalinihr2005@gmail.com",
+      "teamName": "Titans of Tech",
+      "problemCode": "CR (H) 2",
+      "role": "member"
+    },
+    {
+      "name": "Pallavi S",
+      "email": "pallavis2125@gmail.com",
+      "teamName": "Titans of Tech",
+      "problemCode": "CR (H) 2",
+      "role": "member"
+    },
+    {
+      "name": "ANTONY FIDEL CASTRO A",
+      "email": "fidelcastropro6@gmail.com",
+      "teamName": "LEAVE IT TO US",
+      "problemCode": "CR(S)5",
+      "role": "leader"
+    },
+    {
+      "name": "PRANAV A",
+      "email": "pranav.a2024cce@sece.ac.in",
+      "teamName": "LEAVE IT TO US",
+      "problemCode": "CR(S)5",
+      "role": "member"
+    },
+    {
+      "name": "RAGHUL S",
+      "email": "raghulsekar676@gmail.com",
+      "teamName": "LEAVE IT TO US",
+      "problemCode": "CR(S)5",
+      "role": "member"
+    },
+    {
+      "name": "SUDHIR D",
+      "email": "sudhir.d2024cce@sece.ac.in",
+      "teamName": "LEAVE IT TO US",
+      "problemCode": "CR(S)5",
+      "role": "member"
+    },
+    {
+      "name": "N Tarun",
+      "email": "tarunsuriya.n015@gmail.com",
+      "teamName": "TesserHack ",
+      "problemCode": "CR(S)03",
+      "role": "leader"
+    },
+    {
+      "name": "Tharun B",
+      "email": "btharun587@gmail.com",
+      "teamName": "TesserHack ",
+      "problemCode": "CR(S)03",
+      "role": "member"
+    },
+    {
+      "name": "Suprith Kumar S",
+      "email": "suprithkumars2005@gmail.com",
+      "teamName": "TesserHack ",
+      "problemCode": "CR(S)03",
+      "role": "member"
+    },
+    {
+      "name": "Shravan Kumar Timmapur",
+      "email": "1ms24cy059@msrit.edu",
+      "teamName": "TesserHack ",
+      "problemCode": "CR(S)03",
+      "role": "member"
+    }
+  ],
+  "stats": {
+    "totalCSV": 211,
+    "totalMongo": 268,
+    "matched": 194,
+    "unmatched": 17
+  }
+}

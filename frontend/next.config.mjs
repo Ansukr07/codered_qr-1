@@ -6,18 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:5000/api/:path*',
-      },
-      {
-        source: '/uploads/:path*',
-        destination: 'http://localhost:5000/uploads/:path*',
-      },
-    ]
-  },
+  // API routes are now handled by Next.js API routes (app/api/*)
+  // No need for rewrites to external backend
 }
 
 export default nextConfig
