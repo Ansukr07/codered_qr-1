@@ -6,6 +6,7 @@ const User = require('../models/User');
 const Participant = require('../models/Participant');
 const Volunteer = require('../models/Volunteer');
 const Admin = require('../models/Admin');
+const supabase = require('../config/supabase');
 const { v4: uuidv4 } = require('uuid');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
@@ -116,43 +117,112 @@ router.get('/me', async (req, res) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         let user;
+        let userData;
 
         // Find user based on role
         if (decoded.role === 'admin') {
             user = await Admin.findById(decoded.userId).select('-password');
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            userData = {
+                userId: user._id.toString(),
+                name: user.name,
+                email: user.email,
+                role: decoded.role,
+            };
+            if (user.teamId) {
+                userData.teamId = user.teamId;
+            }
         } else if (decoded.role === 'volunteer') {
             user = await Volunteer.findById(decoded.userId).select('-password');
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            userData = {
+                userId: user._id.toString(),
+                name: user.name,
+                email: user.email,
+                role: decoded.role,
+            };
+            if (user.qrCode) {
+                userData.qrCode = user.qrCode;
+            }
+            if (user.teamId) {
+                userData.teamId = user.teamId;
+            }
         } else if (decoded.role === 'participant') {
-            user = await Participant.findById(decoded.userId);
+            // Use Supabase for participants
+            if (supabase) {
+                const { data: participant, error } = await supabase
+                    .from('participants')
+                    .select('*')
+                    .eq('id', decoded.userId)
+                    .single();
+
+                if (error || !participant) {
+                    console.error('Error fetching participant from Supabase:', error);
+                    return res.status(404).json({ message: 'Participant not found' });
+                }
+
+                userData = {
+                    userId: participant.id,
+                    name: participant.name,
+                    email: participant.email,
+                    role: decoded.role,
+                };
+
+                if (participant.qr_code) {
+                    userData.qrCode = participant.qr_code;
+                }
+                if (participant.team_id) {
+                    userData.teamId = participant.team_id;
+                }
+                if (participant.participant_id) {
+                    userData.participantId = participant.participant_id;
+                }
+            } else {
+                // Fallback to MongoDB if Supabase not configured
+                user = await Participant.findById(decoded.userId);
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                userData = {
+                    userId: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                    role: decoded.role,
+                };
+                if (user.qrCode) {
+                    userData.qrCode = user.qrCode;
+                }
+                if (user.teamId) {
+                    userData.teamId = user.teamId;
+                }
+                if (user.participantId) {
+                    userData.participantId = user.participantId;
+                }
+            }
         } else {
             // Fallback to old User model for backward compatibility
             user = await User.findById(decoded.userId).select('-password');
-        }
-
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        const userData = {
-            userId: user._id,
-            name: user.name,
-            email: user.email,
-            role: decoded.role,
-        };
-
-        // Add role-specific fields
-        if (decoded.role === 'participant' && user.qrCode) {
-            userData.qrCode = user.qrCode;
-            userData.teamId = user.teamId;
-            userData.participantId = user.participantId;
-        } else if (decoded.role === 'volunteer' && user.qrCode) {
-            userData.qrCode = user.qrCode;
-        } else if (user.teamId) {
-            userData.teamId = user.teamId;
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            userData = {
+                userId: user._id.toString(),
+                name: user.name,
+                email: user.email,
+                role: decoded.role,
+            };
+            if (user.teamId) {
+                userData.teamId = user.teamId;
+            }
         }
 
         res.json({ user: userData });
     } catch (error) {
+        console.error('Error in /me endpoint:', error);
         res.status(401).json({ message: 'Invalid token' });
     }
 });

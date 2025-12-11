@@ -3,8 +3,22 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
+const path = require('path');
+const fs = require('fs');
 
-dotenv.config();
+// Load .env.local first, then .env as fallback
+const envLocalPath = path.join(__dirname, '.env.local');
+const envPath = path.join(__dirname, '.env');
+
+if (fs.existsSync(envLocalPath)) {
+    dotenv.config({ path: envLocalPath });
+    console.log('Loaded .env.local');
+} else if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+    console.log('Loaded .env');
+} else {
+    dotenv.config(); // Will show error if not found
+}
 
 connectDB();
 
