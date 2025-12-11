@@ -52,10 +52,10 @@
 }
 
 /* Html5Qrcode main container - maintains aspect ratio */
-#qr-reader-bag > div,
-#qr-reader-food > div,
-#qr-reader-chill > div,
-#qr-reader-dynamic > div {
+#qr-reader-bag>div,
+#qr-reader-food>div,
+#qr-reader-chill>div,
+#qr-reader-dynamic>div {
   width: 100% !important;
   height: 100% !important;
   position: relative !important;
@@ -81,143 +81,28 @@
   z-index: 1 !important;
 }
 
-/* Scanning box overlay container - centered with proper aspect ratio */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  z-index: 10 !important;
-  pointer-events: none !important;
-  width: 250px !important;
-  height: 250px !important;
-  max-width: 60% !important;
-  max-height: 60% !important;
-  aspect-ratio: 1 / 1 !important;
+/* Nuclear option: Hide EVERYTHING inside the scanner wrapper that isn't the video element.
+   This removes the shaded overlay, corner brackets, pause text, etc. */
+#qr-reader-bag > div > *:not(video),
+#qr-reader-food > div > *:not(video),
+#qr-reader-chill > div > *:not(video),
+#qr-reader-dynamic > div > *:not(video) {
+  display: none !important;
 }
 
-/* Scanning box inner container - maintains structure and allows absolute positioning */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > div,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > div,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > div,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > div {
+/* Ensure video is visible and covers the area */
+#qr-reader-bag video,
+#qr-reader-food video,
+#qr-reader-chill video,
+#qr-reader-dynamic video {
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  position: relative !important;
-  display: block !important;
-  overflow: visible !important;
-}
-
-/* Ensure all direct children can be positioned absolutely */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > *,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > *,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > *,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > * {
-  position: relative !important;
-}
-
-/* But allow SVGs to be absolutely positioned */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region svg {
-  position: absolute !important;
-}
-
-/* Corner brackets - positioned at four corners, prevent jumbling */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region svg,
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > div > svg,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > div > svg,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > div > svg,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > div > svg {
-  position: absolute !important;
-  width: 40px !important;
-  height: 40px !important;
-  z-index: 11 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Top-left corner bracket */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region svg:first-of-type,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region svg:first-of-type,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region svg:first-of-type,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region svg:first-of-type,
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > div > svg:first-of-type,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > div > svg:first-of-type,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > div > svg:first-of-type,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > div > svg:first-of-type {
-  top: 0 !important;
-  left: 0 !important;
-  right: auto !important;
-  bottom: auto !important;
-}
-
-/* Top-right corner bracket */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(2),
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(2),
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(2),
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(2),
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(2),
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(2),
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(2),
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(2) {
-  top: 0 !important;
-  right: 0 !important;
-  left: auto !important;
-  bottom: auto !important;
-}
-
-/* Bottom-left corner bracket */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(3),
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(3),
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(3),
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(3),
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(3),
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(3),
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(3),
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(3) {
-  bottom: 0 !important;
-  left: 0 !important;
-  top: auto !important;
-  right: auto !important;
-}
-
-/* Bottom-right corner bracket */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(4),
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(4),
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(4),
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region svg:nth-of-type(4),
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(4),
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(4),
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(4),
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region > div > svg:nth-of-type(4) {
-  bottom: 0 !important;
-  right: 0 !important;
-  top: auto !important;
-  left: auto !important;
-}
-
-/* Alternative selector for corner brackets using classes or other elements */
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region .html5-qrcode-border,
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region .html5-qrcode-border,
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region .html5-qrcode-border,
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region .html5-qrcode-border,
-#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region [class*="corner"],
-#qr-reader-food #html5-qrcode-anchor__qr-shaded-region [class*="corner"],
-#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region [class*="corner"],
-#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region [class*="corner"] {
-  position: absolute !important;
-  width: 40px !important;
-  height: 40px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  object-fit: cover !important;
+  z-index: 1 !important;
 }
 
 /* Scanner viewfinder controls - positioned at top center, away from overlay */
@@ -242,10 +127,10 @@
 #qr-reader-food .html5-qrcode-status,
 #qr-reader-chill .html5-qrcode-status,
 #qr-reader-dynamic .html5-qrcode-status,
-#qr-reader-bag > div > span,
-#qr-reader-food > div > span,
-#qr-reader-chill > div > span,
-#qr-reader-dynamic > div > span {
+#qr-reader-bag>div>span,
+#qr-reader-food>div>span,
+#qr-reader-chill>div>span,
+#qr-reader-dynamic>div>span {
   position: absolute !important;
   bottom: 20px !important;
   left: 50% !important;
@@ -262,10 +147,10 @@
 }
 
 /* Ensure all html5-qrcode text elements are positioned correctly */
-#qr-reader-bag > div > *:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change),
-#qr-reader-food > div > *:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change),
-#qr-reader-chill > div > *:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change),
-#qr-reader-dynamic > div > *:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change) {
+#qr-reader-bag>div>*:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change),
+#qr-reader-food>div>*:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change),
+#qr-reader-chill>div>*:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change),
+#qr-reader-dynamic>div>*:not(video):not(#html5-qrcode-anchor__qr-shaded-region):not(#html5-qrcode-anchor-scan-type-change) {
   position: relative !important;
 }
 

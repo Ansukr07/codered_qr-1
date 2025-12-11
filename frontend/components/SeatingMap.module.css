@@ -97,7 +97,7 @@
 .overlay {
     position: absolute;
     bottom: 30px;
-    left: 30px;
+    right: 30px;
     background: rgba(9, 9, 11, 0.9);
     border: 1px solid #27272a;
     padding: 16px 24px;

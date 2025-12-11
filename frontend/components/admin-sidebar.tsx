@@ -32,11 +32,7 @@ const sidebarItems = [
     href: "/admin/help",
     icon: HelpCircle
   },
-  {
-    title: "Task Logs",
-    href: "/admin/tasks",
-    icon: ClipboardList
-  },
+
   {
     title: "Sleeping Bags",
     href: "/admin/sleeping-bags",

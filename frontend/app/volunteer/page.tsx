@@ -177,16 +177,7 @@ export default function VolunteerDashboard() {
       count: resources.length,
       resources: [] // Navigation only
     },
-    {
-      title: 'Task Verification',
-      description: 'Review proofs',
-      icon: ClipboardList,
-      href: '/volunteer/verify-tasks',
-      color: 'text-yellow-500',
-      bgColor: 'bg-yellow-500/10',
-      count: 0, // Dynamic count would require fetching
-      resources: []
-    },
+
 
   ]
 
