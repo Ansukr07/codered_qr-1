@@ -70,14 +70,12 @@ function generateRadialCluster(
         const thetaInner = Math.asin(innerOffset / radius);
         const thetaOuter = Math.asin(outerOffset / radius);
 
-        // REVERSED ORDER to swap Col 4 with 1, 3 with 2
-        // Original Order: -thetaOuter (Top), -thetaInner, thetaInner, thetaOuter (Bottom)
-        // New Order: thetaOuter (Bottom), thetaInner, -thetaInner, -thetaOuter (Top)
+        // New Order: -thetaOuter (Top), -thetaInner, thetaInner, thetaOuter (Bottom)
         const positions = [
-            { angle: thetaOuter, posType: 'bottom-outer' },
-            { angle: thetaInner, posType: 'bottom-inner' },
+            { angle: -thetaOuter, posType: 'top-outer' },
             { angle: -thetaInner, posType: 'top-inner' },
-            { angle: -thetaOuter, posType: 'top-outer' }
+            { angle: thetaInner, posType: 'bottom-inner' },
+            { angle: thetaOuter, posType: 'bottom-outer' }
         ];
 
         group.forEach((seat, seatIdx) => {
@@ -189,8 +187,8 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
         let clusterBlocks;
         if (targetLab === 'Kalpana Chawla') {
             // Using grid layout for Kalpana Chawla
-            // Center roughly at 500, 400
-            clusterBlocks = generateGridCluster(labData, 500, 400);
+            // Center roughly at 500, 350 (Moved up to avoid overlap with ENTRY)
+            clusterBlocks = generateGridCluster(labData, 500, 350);
         } else {
             // Generate SINGLE radial cluster (preserving "Old UI" exact look)
             // Center logic copied from original: cx = -1200, cy = 400, startRadius = 1450
