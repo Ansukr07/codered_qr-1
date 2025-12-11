@@ -107,6 +107,73 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
     }
 });
 
+// Return resource (e.g., sleeping bag)
+router.post('/return', requireAuth, requireRole('volunteer', 'admin'), async (req, res) => {
+    try {
+        const { qr_code, resource_id } = req.body;
+
+        const user = await User.findOne({ qrCode: qr_code });
+        if (!user) {
+            return res.status(404).json({ message: 'Invalid QR Code' });
+        }
+
+        const resource = await Resource.findById(resource_id);
+        if (!resource) {
+            return res.status(404).json({ message: 'Resource not found' });
+        }
+
+        // Check if user has a claim transaction for this resource
+        const claimTransaction = await Transaction.findOne({
+            userId: user._id,
+            resourceId: resource._id,
+            action: 'claim'
+        });
+
+        if (!claimTransaction) {
+            return res.status(400).json({
+                message: `No active claim found. This participant has not claimed ${resource.name}.`
+            });
+        }
+
+        // Check if already returned
+        const returnTransaction = await Transaction.findOne({
+            userId: user._id,
+            resourceId: resource._id,
+            action: 'return'
+        });
+
+        if (returnTransaction) {
+            return res.status(400).json({
+                message: `Already returned: ${resource.name} was already returned by this participant.`
+            });
+        }
+
+        // Decrement distributed quantity
+        if (resource.distributedQuantity > 0) {
+            resource.distributedQuantity -= 1;
+            await resource.save();
+        }
+
+        // Create return transaction
+        const transaction = await Transaction.create({
+            userId: user._id,
+            resourceId: resource._id,
+            volunteerId: req.user.userId,
+            action: 'return',
+        });
+
+        res.status(200).json({
+            message: 'Return successful',
+            transaction,
+            memberName: user.name,
+            claimedAt: claimTransaction.timestamp,
+            returnedAt: transaction.timestamp
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Verify/Check-in Participant
 router.post('/verify-participant', requireAuth, requireRole('volunteer', 'admin'), async (req, res) => {
     try {

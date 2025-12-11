@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Camera, CheckCircle2, XCircle, ArrowLeft, BedDouble } from 'lucide-react'
+import { Camera, CheckCircle2, XCircle, ArrowLeft, BedDouble, Package, PackageCheck } from 'lucide-react'
 import Link from 'next/link'
 import { Html5QrcodeScanner } from 'html5-qrcode'
 import { useToast } from '@/hooks/use-toast'
 import { extractIdFromQr } from '@/lib/utils'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface Resource {
   _id: string
@@ -17,10 +18,13 @@ interface Resource {
   distributedQuantity: number
 }
 
+type Mode = 'issue' | 'return'
+
 export default function ScanBagPage() {
   const [scanning, setScanning] = useState(false)
   const [result, setResult] = useState<{ success: boolean; name: string; message?: string } | null>(null)
   const [resource, setResource] = useState<Resource | null>(null)
+  const [mode, setMode] = useState<Mode>('issue')
   const { toast } = useToast()
 
   useEffect(() => {
@@ -54,7 +58,7 @@ export default function ScanBagPage() {
         scanner.clear().catch(console.error)
       }
     }
-  }, [scanning])
+  }, [scanning, mode])
 
   // Removed local extractIdFromQr definition
 
@@ -73,7 +77,8 @@ export default function ScanBagPage() {
     setScanning(false)
 
     try {
-      const res = await fetch('/api/scan', {
+      const endpoint = mode === 'return' ? '/api/scan/return' : '/api/scan'
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -92,7 +97,9 @@ export default function ScanBagPage() {
         })
         toast({
           title: 'Success',
-          description: 'Sleeping bag issued successfully',
+          description: mode === 'return' 
+            ? 'Sleeping bag returned successfully' 
+            : 'Sleeping bag issued successfully',
         })
         fetchBagResource() // Refresh counts
       } else {
@@ -139,19 +146,36 @@ export default function ScanBagPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Scan for Sleeping Bag</h1>
-          <p className="text-muted-foreground">Issue sleeping bag to participant</p>
+          <h1 className="text-3xl font-bold text-foreground">Sleeping Bag Management</h1>
+          <p className="text-muted-foreground">Issue or return sleeping bags</p>
         </div>
       </div>
 
-      <Card className="bg-card/50 backdrop-blur border-border/50">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BedDouble className="h-5 w-5 text-indigo-400" />
-            QR Code Scanner
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
+      <Tabs value={mode} onValueChange={(value) => {
+        setMode(value as Mode)
+        setResult(null)
+        setScanning(false)
+      }} className="w-full">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="issue" className="flex items-center gap-2">
+            <Package className="h-4 w-4" />
+            Issue Bag
+          </TabsTrigger>
+          <TabsTrigger value="return" className="flex items-center gap-2">
+            <PackageCheck className="h-4 w-4" />
+            Return Bag
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="issue" className="space-y-6">
+          <Card className="bg-card/50 backdrop-blur border-border/50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BedDouble className="h-5 w-5 text-indigo-400" />
+                Issue Sleeping Bag
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
           <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border">
             {!scanning && !result && (
               <div className="aspect-square flex items-center justify-center">
@@ -173,7 +197,7 @@ export default function ScanBagPage() {
                       <div className="space-y-2">
                         <p className="text-lg font-semibold text-card-foreground">{result.name}</p>
                         <Badge variant="default" className="text-sm bg-indigo-500">
-                          Sleeping bag issued
+                          {mode === 'return' ? 'Sleeping bag returned' : 'Sleeping bag issued'}
                         </Badge>
                       </div>
                     </>
@@ -219,6 +243,86 @@ export default function ScanBagPage() {
           </div>
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="return" className="space-y-6">
+          <Card className="bg-card/50 backdrop-blur border-border/50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BedDouble className="h-5 w-5 text-indigo-400" />
+                Return Sleeping Bag
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border">
+                {!scanning && !result && (
+                  <div className="aspect-square flex items-center justify-center">
+                    <div className="text-center space-y-4 p-8">
+                      <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
+                      <p className="text-sm text-muted-foreground">Ready to scan QR code</p>
+                    </div>
+                  </div>
+                )}
+                {scanning && (
+                  <div id="qr-reader-bag" className="w-full"></div>
+                )}
+                {result && (
+                  <div className="aspect-square flex items-center justify-center">
+                    <div className="text-center space-y-4 p-8">
+                      {result.success ? (
+                        <>
+                          <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto" />
+                          <div className="space-y-2">
+                            <p className="text-lg font-semibold text-card-foreground">{result.name}</p>
+                            <Badge variant="default" className="text-sm bg-indigo-500">
+                              {mode === 'return' ? 'Sleeping bag returned' : 'Sleeping bag issued'}
+                            </Badge>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <XCircle className="h-16 w-16 text-destructive mx-auto" />
+                          <p className="text-lg font-semibold text-destructive">Scan Failed</p>
+                          <p className="text-sm text-muted-foreground">{result.message}</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex gap-3">
+                {!result ? (
+                  <Button
+                    onClick={handleStartScan}
+                    disabled={scanning || !resource}
+                    className="flex-1"
+                    size="lg"
+                  >
+                    {scanning ? "Scanning..." : "Start Scan"}
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      onClick={() => setResult(null)}
+                      variant="outline"
+                      className="flex-1"
+                      size="lg"
+                    >
+                      Scan Another
+                    </Button>
+                    <Link href="/volunteer" className="flex-1">
+                      <Button variant="default" className="w-full" size="lg">
+                        Done
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
       {resource && (
         <Card className="bg-gradient-to-br from-indigo-500/10 to-primary/10 border-indigo-500/20">

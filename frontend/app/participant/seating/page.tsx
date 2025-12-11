@@ -9,12 +9,14 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/contexts/AuthContext'
 import SeatingMap from '@/components/SeatingMap'
 import { findTeamByMember } from '@/lib/teamData'
+import { SEATING_DATA } from '@/lib/seatingData'
 
 export default function SeatingPage() {
     const { user, loading } = useAuth()
     const router = useRouter()
     const [searchQuery, setSearchQuery] = React.useState('')
     const [displayTeam, setDisplayTeam] = React.useState<string>('')
+    const [userTeamName, setUserTeamName] = React.useState<string>('')
 
     // Redirect if not logged in
     React.useEffect(() => {
@@ -25,13 +27,18 @@ export default function SeatingPage() {
 
     // Initial load: Find team for logged in user
     React.useEffect(() => {
-        if (user?.name && !searchQuery) {
+        if (user?.name) {
             const dbTeam = findTeamByMember(user.name);
             // Fallback to user context team if not in DB
             const contextTeam = (user as any).teamName || (user as any).teamId?.name || (user as any).team || '';
-            const initialTeam = dbTeam || contextTeam;
+            const myTeam = dbTeam || contextTeam;
 
-            if (initialTeam) setDisplayTeam(initialTeam);
+            if (myTeam) {
+                setUserTeamName(myTeam);
+                if (!searchQuery) {
+                    setDisplayTeam(myTeam);
+                }
+            }
         }
     }, [user, searchQuery]);
 
@@ -40,21 +47,46 @@ export default function SeatingPage() {
         setSearchQuery(query);
 
         if (query.trim().length > 0) {
-            const team = findTeamByMember(query);
+            // 1. Try finding by member name
+            let team = findTeamByMember(query);
+
+            // 2. If not found, try searching SEATING_DATA for Team Name match
+            if (!team) {
+                const foundSeat = SEATING_DATA.find(s =>
+                    s.team.toLowerCase().includes(query.toLowerCase())
+                );
+                if (foundSeat) {
+                    team = foundSeat.team;
+                }
+            }
+
             if (team) {
-                setDisplayTeam(team);
+                // RESTRICTION LOGIC: Check if found team is in the same lab as user
+                const userSeat = SEATING_DATA.find(s => s.team.toLowerCase() === userTeamName.toLowerCase());
+                const targetSeat = SEATING_DATA.find(s => s.team.toLowerCase() === team!.toLowerCase());
+
+                // Only allow showing if labs match (or if user has no assigned seat, unrestricted?)
+                // Requirement: "participant that has a particular lab alloted shouldnt see teams in other labs"
+                const userLab = userSeat?.lab;
+                const targetLab = targetSeat?.lab;
+
+                if (userLab && targetLab && userLab === targetLab) {
+                    setDisplayTeam(team);
+                } else if (!userLab) {
+                    // If user has no lab allotted, maybe allow viewing all? Or restrict? 
+                    // Safest is to allow viewing if we assume generic access, but request implies restriction based on allotment.
+                    // If I am not allotted, I might still want to search.
+                    setDisplayTeam(team);
+                } else {
+                    // Allotted to a lab, but searching for team in another lab -> Hide (Show own team instead)
+                    setDisplayTeam(userTeamName);
+                }
             } else {
-                // Keep showing previous team or empty if not found? 
-                // Any 'not found' state handling can be done by passing an empty string or seeing that displayTeam matches nothing in the map
-                setDisplayTeam('');
+                setDisplayTeam(userTeamName); // Revert to own team if not found
             }
         } else {
             // Revert to user's team
-            if (user?.name) {
-                const dbTeam = findTeamByMember(user.name);
-                const contextTeam = (user as any).teamName || (user as any).teamId?.name || (user as any).team || '';
-                setDisplayTeam(dbTeam || contextTeam);
-            }
+            setDisplayTeam(userTeamName);
         }
     };
 
@@ -100,17 +132,7 @@ export default function SeatingPage() {
                             </p>
                         </div>
                     </div>
-                    {/* Search Bar */}
-                    <div className="w-full md:w-auto relative group">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 group-focus-within:text-red-500 transition-colors" />
-                        <Input
-                            type="text"
-                            placeholder="Find member's seat..."
-                            className="pl-9 w-full md:w-64 bg-[#1e1e2e] border-[#2a2a35] focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all text-white placeholder:text-muted-foreground"
-                            value={searchQuery}
-                            onChange={handleSearch}
-                        />
-                    </div>
+
                 </header>
 
                 {/* Main Content Area */}

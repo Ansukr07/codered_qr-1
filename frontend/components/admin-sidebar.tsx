@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, UserPlus, Megaphone, HelpCircle, Github, LogOut, Code2, ClipboardList } from 'lucide-react'
+import { LayoutDashboard, Users, UserPlus, Megaphone, HelpCircle, Github, LogOut, Code2, ClipboardList, BedDouble } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
@@ -36,6 +36,11 @@ const sidebarItems = [
     title: "Task Logs",
     href: "/admin/tasks",
     icon: ClipboardList
+  },
+  {
+    title: "Sleeping Bags",
+    href: "/admin/sleeping-bags",
+    icon: BedDouble
   },
   {
     title: "GitHub Status",
