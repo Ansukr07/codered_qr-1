@@ -16,7 +16,7 @@ export default function VolunteerLayout({
 
   useEffect(() => {
     if (!loading && (!user || (user.role !== 'volunteer' && user.role !== 'admin'))) {
-      router.push('/volunteer-login')
+      router.push('/volunteer')
     }
   }, [user, loading, router])
 

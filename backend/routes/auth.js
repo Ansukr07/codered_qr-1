@@ -3,6 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Participant = require('../models/Participant');
+const Volunteer = require('../models/Volunteer');
+const Admin = require('../models/Admin');
 const { v4: uuidv4 } = require('uuid');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
@@ -35,37 +38,49 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login
+// Login - for Admin and Volunteer (email + password)
 router.post('/login', async (req, res) => {
     try {
-        const { email, password, name, code } = req.body;
+        const { email, password, role } = req.body;
 
-        let user;
-
-        if (name && code) {
-            // Participant login with Name and Code
-            user = await User.findOne({ name: name, qrCode: code });
-            if (!user) {
-                return res.status(401).json({ message: 'Invalid name or code' });
-            }
-        } else if (email && password) {
-            // Admin/Volunteer login with Email and Password
-            user = await User.findOne({ email });
-            if (!user) {
-                return res.status(401).json({ message: 'Invalid credentials' });
-            }
-
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) {
-                return res.status(401).json({ message: 'Invalid credentials' });
-            }
-        } else {
-            return res.status(400).json({ message: 'Please provide valid credentials' });
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email and password are required' });
         }
 
+        let user;
+        let userRole;
+
+        // Check based on role parameter or try all
+        if (role === 'admin') {
+            user = await Admin.findOne({ email: email.toLowerCase() });
+            userRole = 'admin';
+        } else if (role === 'volunteer') {
+            user = await Volunteer.findOne({ email: email.toLowerCase() });
+            userRole = 'volunteer';
+        } else {
+            // Try admin first, then volunteer
+            user = await Admin.findOne({ email: email.toLowerCase() });
+            if (user) {
+                userRole = 'admin';
+            } else {
+                user = await Volunteer.findOne({ email: email.toLowerCase() });
+                if (user) {
+                    userRole = 'volunteer';
+                }
+            }
+        }
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
 
         const token = jwt.sign(
-            { userId: user._id, role: user.role, name: user.name },
+            { userId: user._id, role: userRole, name: user.name, email: user.email },
             JWT_SECRET,
             { expiresIn: '1d' }
         );
@@ -77,7 +92,14 @@ router.post('/login', async (req, res) => {
             path: '/',
         });
 
-        res.json({ message: 'Login successful', user: { name: user.name, role: user.role } });
+        res.json({
+            message: 'Login successful',
+            user: {
+                name: user.name,
+                role: userRole,
+                email: user.email
+            }
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -93,22 +115,43 @@ router.get('/me', async (req, res) => {
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-        const user = await User.findById(decoded.userId).select('-password');
+        let user;
+
+        // Find user based on role
+        if (decoded.role === 'admin') {
+            user = await Admin.findById(decoded.userId).select('-password');
+        } else if (decoded.role === 'volunteer') {
+            user = await Volunteer.findById(decoded.userId).select('-password');
+        } else if (decoded.role === 'participant') {
+            user = await Participant.findById(decoded.userId);
+        } else {
+            // Fallback to old User model for backward compatibility
+            user = await User.findById(decoded.userId).select('-password');
+        }
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.json({
-            user: {
-                userId: user._id,
-                name: user.name,
-                email: user.email,
-                role: user.role,
-                qrCode: user.qrCode,
-                teamId: user.teamId
-            }
-        });
+        const userData = {
+            userId: user._id,
+            name: user.name,
+            email: user.email,
+            role: decoded.role,
+        };
+
+        // Add role-specific fields
+        if (decoded.role === 'participant' && user.qrCode) {
+            userData.qrCode = user.qrCode;
+            userData.teamId = user.teamId;
+            userData.participantId = user.participantId;
+        } else if (decoded.role === 'volunteer' && user.qrCode) {
+            userData.qrCode = user.qrCode;
+        } else if (user.teamId) {
+            userData.teamId = user.teamId;
+        }
+
+        res.json({ user: userData });
     } catch (error) {
         res.status(401).json({ message: 'Invalid token' });
     }

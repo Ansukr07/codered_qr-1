@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { QrCode, ArrowRight, Loader2, ArrowLeft } from 'lucide-react'
+import { Shield, ArrowRight, Loader2, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
 
-export default function VolunteerLoginPage() {
+export default function AdminLoginPage() {
   const { login, user, loading } = useAuth()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -21,10 +21,10 @@ export default function VolunteerLoginPage() {
   // Redirect if already authenticated
   useEffect(() => {
     if (!loading && user) {
-      if (user.role === 'volunteer') {
-        router.push('/volunteer')
-      } else if (user.role === 'admin') {
+      if (user.role === 'admin') {
         router.push('/admin')
+      } else if (user.role === 'volunteer') {
+        router.push('/volunteer')
       } else if (user.role === 'participant') {
         router.push('/participant')
       }
@@ -40,7 +40,7 @@ export default function VolunteerLoginPage() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, role: 'volunteer' })
+        body: JSON.stringify({ email, password, role: 'admin' })
       })
 
       const data = await res.json()
@@ -49,13 +49,13 @@ export default function VolunteerLoginPage() {
         throw new Error(data.message || 'Authentication failed')
       }
 
-      // Check if user is a volunteer
-      if (data.user && data.user.role !== 'volunteer') {
-        throw new Error('Access denied. This portal is only for volunteers.')
+      // Check if user is an admin
+      if (data.user && data.user.role !== 'admin') {
+        throw new Error('Access denied. This portal is only for administrators.')
       }
 
-      // If successful, login will redirect to /volunteer
-      await login(email, password, 'volunteer')
+      // If successful, login will redirect to /admin
+      await login(email, password, 'admin')
     } catch (err: any) {
       setError(err.message || 'Authentication failed')
     } finally {
@@ -93,9 +93,9 @@ export default function VolunteerLoginPage() {
           <div className="flex justify-center mb-4">
             <img src="/logo.png" alt="Codered Logo" className="w-12 h-12 object-contain" />
           </div>
-          <CardTitle className="text-2xl font-bold">Volunteer Portal</CardTitle>
+          <CardTitle className="text-2xl font-bold">Admin Portal</CardTitle>
           <CardDescription>
-            Sign in to access the volunteer dashboard
+            Sign in to access the admin dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>

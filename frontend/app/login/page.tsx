@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { Shield, Users, ArrowRight, Loader2 } from 'lucide-react'
+import { Users, ArrowRight, Loader2, Mail, KeyRound } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -11,15 +10,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
-  const { login, user, loading } = useAuth()
+  const { user, loading, refreshUser } = useAuth()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [role, setRole] = useState<'admin' | 'team'>('team')
+  const [step, setStep] = useState<'email' | 'otp'>('email')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
-  const [code, setCode] = useState('')
+  const [otp, setOtp] = useState('')
   const [error, setError] = useState('')
+  const [otpSent, setOtpSent] = useState(false)
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -34,30 +32,71 @@ export default function LoginPage() {
     }
   }, [user, loading, router])
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
 
     try {
-      if (role === 'team') {
-        // For team/participant, Name + Code
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, code })
-        })
-        const data = await res.json()
-        if (!res.ok) throw new Error(data.message)
-        window.location.href = '/participant';
-      } else {
-        await login(email, password)
+      const res = await fetch('/api/otp/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+
+      const data = await res.json()
+      
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to send OTP')
+      }
+
+      setOtpSent(true)
+      setStep('otp')
+      
+      // In development, show OTP in console
+      if (data.otp) {
+        console.log('OTP (dev only):', data.otp)
       }
     } catch (err: any) {
-      setError(err.message || 'Authentication failed')
+      setError(err.message || 'Failed to send OTP')
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/otp/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+      })
+
+      const data = await res.json()
+      
+      if (!res.ok) {
+        throw new Error(data.message || 'Invalid OTP')
+      }
+
+      // Refresh user data and redirect
+      await refreshUser()
+      router.push('/participant')
+    } catch (err: any) {
+      setError(err.message || 'Invalid OTP')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleBackToEmail = () => {
+    setStep('email')
+    setOtp('')
+    setOtpSent(false)
+    setError('')
   }
 
   // Show loading while checking authentication
@@ -96,123 +135,107 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
-
-            {/* Role Selection */}
-            <div className="grid grid-cols-2 gap-2 mb-6">
-              <button
-                type="button"
-                onClick={() => setRole('team')}
-                className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'team'
-                  ? 'bg-primary/10 border-primary text-primary'
-                  : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
-                  }`}
-              >
-                <Users className="w-5 h-5 mb-1" />
-                <span className="text-xs font-medium">Team</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setRole('admin')}
-                className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${role === 'admin'
-                  ? 'bg-red-500/10 border-red-500 text-red-500'
-                  : 'bg-secondary/50 border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
-                  }`}
-              >
-                <Shield className="w-5 h-5 mb-1" />
-                <span className="text-xs font-medium">Admin</span>
-              </button>
-            </div>
-
-            {role === 'team' ? (
-              <>
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Enter your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="bg-secondary/50 border-border/50"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="code">Code</Label>
-                  <Input
-                    id="code"
-                    type="text"
-                    placeholder="e.g. CRU-T01-P01"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    className="bg-secondary/50 border-border/50"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+          {step === 'email' ? (
+            <form onSubmit={handleSendOTP} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
-                    placeholder="Enter your email ID"
+                    placeholder="Enter your registered email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-secondary/50 border-border/50"
+                    required
+                    className="bg-secondary/50 border-border/50 pl-10"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="bg-secondary/50 border-border/50"
-                  />
-                </div>
-              </>
-            )}
-
-            {error && (
-              <div className="text-sm text-destructive text-center bg-destructive/10 p-2 rounded-md">
-                {error}
+                <p className="text-xs text-muted-foreground">
+                  Enter the email you used during registration
+                </p>
               </div>
-            )}
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                <>
-                  Sign In
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </>
+              {error && (
+                <div className="text-sm text-destructive text-center bg-destructive/10 p-2 rounded-md">
+                  {error}
+                </div>
               )}
-            </Button>
-          </form>
+
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending OTP...
+                  </>
+                ) : (
+                  <>
+                    Send OTP
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+          ) : (
+            <form onSubmit={handleVerifyOTP} className="space-y-4">
+              <div className="space-y-2">
+                <Label>Email</Label>
+                <div className="p-3 bg-secondary/50 rounded-md border border-border/50">
+                  <p className="text-sm font-medium">{email}</p>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleBackToEmail}
+                  className="text-xs"
+                >
+                  Change email
+                </Button>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="otp">Enter OTP</Label>
+                <div className="relative">
+                  <KeyRound className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="otp"
+                    type="text"
+                    placeholder="Enter 6-digit OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    required
+                    maxLength={6}
+                    className="bg-secondary/50 border-border/50 pl-10 text-center text-lg tracking-widest"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Check your email for the OTP code
+                </p>
+              </div>
+
+              {error && (
+                <div className="text-sm text-destructive text-center bg-destructive/10 p-2 rounded-md">
+                  {error}
+                </div>
+              )}
+
+              <Button type="submit" className="w-full" disabled={isLoading || otp.length !== 6}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Verifying...
+                  </>
+                ) : (
+                  <>
+                    Verify & Sign In
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
         </CardContent>
-        <CardFooter className="flex flex-col gap-4 border-t border-border/50 pt-6 bg-secondary/20">
-          <div className="w-full text-center">
-            <p className="text-xs text-muted-foreground mb-2">Demo Credentials</p>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="p-2 rounded bg-secondary/50 border border-border/50">
-                <p className="font-semibold text-red-400">Admin</p>
-                <p className="text-muted-foreground mt-1">demo@admin.com</p>
-                <p className="text-muted-foreground">admin123</p>
-              </div>
-              <div className="p-2 rounded bg-secondary/50 border border-border/50">
-                <p className="font-semibold text-primary">Team</p>
-                <p className="text-muted-foreground mt-1">Participant Name</p>
-                <p className="text-muted-foreground">CRU-...</p>
-              </div>
-            </div>
-          </div>
-        </CardFooter>
       </Card>
     </div>
   )

@@ -16,6 +16,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/otp', require('./routes/otp'));
 app.use('/api/resources', require('./routes/resources'));
 app.use('/api/scan', require('./routes/scan'));
 app.use('/api/transactions', require('./routes/transactions'));
