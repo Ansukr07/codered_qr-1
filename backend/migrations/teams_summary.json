@@ -1,0 +1,387 @@
+[
+  {
+    "name": "4DIRECTION",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Caffeine Crew",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "CodeBreaker5",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Forbidden Phishers",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "GARUDA",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Infinity Devs",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "INNOVCAMP",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Kairos",
+    "track": "CRU",
+    "memberCount": 2
+  },
+  {
+    "name": "LogiMind",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "LOLgorithms",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Mjolnir",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "MSN",
+    "track": "CRU",
+    "memberCount": 2
+  },
+  {
+    "name": "NexTech",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "No code paradigm",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Prototype pirates",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "REDBYTE",
+    "track": "CRU",
+    "memberCount": 2
+  },
+  {
+    "name": "Run Time Terror",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "SlothX",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Team 0/1",
+    "track": "CRU",
+    "memberCount": 2
+  },
+  {
+    "name": "Team 269",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Tech titans",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "TENET",
+    "track": "CRU",
+    "memberCount": 2
+  },
+  {
+    "name": "TESLA_CURIE",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "The binary brain",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "THE QUADRENT",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Unified Cargo Exchange(UCX)",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "Vague_Sense",
+    "track": "CRU",
+    "memberCount": 3
+  },
+  {
+    "name": "APEX-AI-X",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "AUTOMATIKS",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "BLUE",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Brogrammers",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Chai-Fi",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Code Wizards",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Code Yoddhas",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "CodeOps",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "CodeVortex",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Convoy Command Unit",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Databaes",
+    "track": "CR",
+    "memberCount": 8
+  },
+  {
+    "name": "Delusion",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Dr Code",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "ElectroEdge",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Electronauts",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Forgeon2.0",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "FourLoop",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Full Stack Biryani",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "GENESIS",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Half Brain Cell",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Hardkode3.0",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Invincible_4",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "KAFKA",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Kronyx",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "LogicHigh",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "MisaMisa",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Momentum Crew",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "Neural Net Ninjas",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "Neural Nooks",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "NextGen",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Phishfry",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "QuadraBytes",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Questers",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Reboot",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Runtime Terrors",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Tech Titans",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "The Gradient Decendents",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "Titan Core",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Tryanuka",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "VCPRO",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "VELOCITY FLYERS",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Vision Vortex",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "VITACORE AI",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "Wi - Fight club",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "WI-FIGTERS",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "WISH",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "Material Girlz",
+    "track": "CR",
+    "memberCount": 3
+  },
+  {
+    "name": "Signotech",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "TEAM INFRARED",
+    "track": "CR",
+    "memberCount": 4
+  },
+  {
+    "name": "DEMO_TEAM",
+    "track": "DEMO",
+    "memberCount": 1
+  }
+]

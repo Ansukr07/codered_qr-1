@@ -44,32 +44,61 @@
   width: 100% !important;
   min-height: 400px !important;
   position: relative !important;
+  z-index: 1 !important;
+  background: #000 !important;
+  display: block !important;
 }
 
+/* Target all video elements inside scanner containers - Html5Qrcode creates video directly */
 #qr-reader-bag video,
 #qr-reader-food video,
 #qr-reader-chill video,
 #qr-reader-dynamic video {
   width: 100% !important;
   height: auto !important;
-  max-height: 500px !important;
+  min-height: 400px !important;
+  max-height: 600px !important;
   object-fit: contain !important;
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   background: #000 !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-#qr-reader-bag canvas,
-#qr-reader-food canvas,
-#qr-reader-chill canvas,
-#qr-reader-dynamic canvas {
-  display: none !important;
-}
-
-/* Html5QrcodeScanner internal styles */
+/* Html5Qrcode internal container divs */
 #qr-reader-bag > div,
 #qr-reader-food > div,
 #qr-reader-chill > div,
 #qr-reader-dynamic > div {
   width: 100% !important;
   min-height: 400px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Scanner viewfinder overlay */
+#qr-reader-bag #html5-qrcode-anchor-scan-type-change,
+#qr-reader-food #html5-qrcode-anchor-scan-type-change,
+#qr-reader-chill #html5-qrcode-anchor-scan-type-change,
+#qr-reader-dynamic #html5-qrcode-anchor-scan-type-change {
+  z-index: 5 !important;
+  position: relative !important;
+}
+
+/* QR box overlay */
+#qr-reader-bag #html5-qrcode-anchor__qr-shaded-region,
+#qr-reader-food #html5-qrcode-anchor__qr-shaded-region,
+#qr-reader-chill #html5-qrcode-anchor__qr-shaded-region,
+#qr-reader-dynamic #html5-qrcode-anchor__qr-shaded-region {
+  z-index: 2 !important;
+}
+
+/* Hide canvas but keep video visible */
+#qr-reader-bag canvas,
+#qr-reader-food canvas,
+#qr-reader-chill canvas,
+#qr-reader-dynamic canvas {
+  display: none !important;
 }

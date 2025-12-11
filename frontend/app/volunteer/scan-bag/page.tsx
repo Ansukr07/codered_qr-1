@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Camera, CheckCircle2, XCircle, ArrowLeft, BedDouble, Package, PackageCheck } from 'lucide-react'
 import Link from 'next/link'
-import { Html5QrcodeScanner } from 'html5-qrcode'
+import { Html5Qrcode } from 'html5-qrcode'
 import { useToast } from '@/hooks/use-toast'
 import { extractIdFromQr } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -48,60 +48,49 @@ export default function ScanBagPage() {
   useEffect(() => {
     if (scanning) {
       setCameraError(null)
-      let scanner: any = null
+      let html5Qrcode: any = null
 
-      try {
-        scanner = new Html5QrcodeScanner(
-          'qr-reader-bag',
-          { 
-            fps: 10, 
-            qrbox: { width: 250, height: 250 },
-            aspectRatio: 1.0,
-            videoConstraints: {
-              facingMode: "environment" // Use back camera
+      const startScanning = async () => {
+        try {
+          html5Qrcode = new Html5Qrcode('qr-reader-bag')
+          
+          await html5Qrcode.start(
+            { facingMode: "user" },
+            {
+              fps: 10,
+              qrbox: { width: 250, height: 250 },
+              aspectRatio: 1.0
+            },
+            (decodedText: string) => {
+              onScanSuccess(decodedText)
+            },
+            (errorMessage: string) => {
+              // Ignore continuous scan errors
+              if (errorMessage && !errorMessage.includes('NotFoundException')) {
+                console.log('Scan error:', errorMessage)
+              }
             }
-          },
-          false // verbose = false
-        )
-
-        const renderPromise = scanner.render(
-          onScanSuccess, 
-          (errorMessage: string) => {
-            // Only log errors, don't show them continuously
-            if (errorMessage && !errorMessage.includes('NotFoundException')) {
-              console.log('Scan error:', errorMessage)
-            }
-          }
-        )
-        
-        // Only catch if render returns a promise
-        if (renderPromise && typeof renderPromise.catch === 'function') {
-          renderPromise.catch((err: any) => {
-            console.error('Scanner render error:', err)
-            setCameraError('Failed to access camera. Please check permissions and try again.')
-            setScanning(false)
-            toast({
-              title: 'Camera Error',
-              description: 'Unable to access camera. Please ensure camera permissions are granted.',
-              variant: 'destructive',
-            })
+          )
+          
+          console.log('✅ Scanner started successfully')
+        } catch (error: any) {
+          console.error('Scanner start error:', error)
+          setCameraError(error.message || 'Failed to start camera')
+          setScanning(false)
+          toast({
+            title: 'Camera Error',
+            description: error.message || 'Unable to access camera. Please check permissions.',
+            variant: 'destructive',
           })
         }
-      } catch (error: any) {
-        console.error('Scanner initialization error:', error)
-        setCameraError(error.message || 'Failed to initialize scanner')
-        setScanning(false)
-        toast({
-          title: 'Scanner Error',
-          description: 'Failed to initialize QR scanner. Please refresh the page.',
-          variant: 'destructive',
-        })
       }
 
+      startScanning()
+
       return () => {
-        if (scanner) {
-          scanner.clear().catch((err: any) => {
-            console.error('Error clearing scanner:', err)
+        if (html5Qrcode && html5Qrcode.isScanning) {
+          html5Qrcode.stop().catch((err: any) => {
+            console.error('Error stopping scanner:', err)
           })
         }
       }
@@ -269,7 +258,7 @@ export default function ScanBagPage() {
             <CardContent className="space-y-6">
           <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border" style={{ minHeight: '400px' }}>
             {!scanning && !result && !cameraError && (
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="text-center space-y-4 p-8">
                   <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
                   <p className="text-sm text-muted-foreground">Ready to scan QR code</p>
@@ -277,7 +266,7 @@ export default function ScanBagPage() {
               </div>
             )}
             {cameraError && (
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="text-center space-y-4 p-8">
                   <XCircle className="h-16 w-16 text-destructive mx-auto" />
                   <p className="text-sm text-destructive font-semibold">Camera Error</p>
@@ -286,10 +275,10 @@ export default function ScanBagPage() {
               </div>
             )}
             {scanning && !cameraError && (
-              <div id="qr-reader-bag" className="w-full h-full"></div>
+              <div id="qr-reader-bag" className="w-full h-full" style={{ position: 'relative', zIndex: 1, backgroundColor: '#000', minHeight: '400px' }}></div>
             )}
             {result && (
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/90">
                 <div className="text-center space-y-4 p-8">
                   {result.success ? (
                     <>
@@ -356,7 +345,7 @@ export default function ScanBagPage() {
             <CardContent className="space-y-6">
               <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border" style={{ minHeight: '400px' }}>
                 {!scanning && !result && !cameraError && (
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
                     <div className="text-center space-y-4 p-8">
                       <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
                       <p className="text-sm text-muted-foreground">Ready to scan QR code</p>
@@ -364,7 +353,7 @@ export default function ScanBagPage() {
                   </div>
                 )}
                 {cameraError && (
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
                     <div className="text-center space-y-4 p-8">
                       <XCircle className="h-16 w-16 text-destructive mx-auto" />
                       <p className="text-sm text-destructive font-semibold">Camera Error</p>
@@ -373,10 +362,10 @@ export default function ScanBagPage() {
                   </div>
                 )}
                 {scanning && !cameraError && (
-                  <div id="qr-reader-bag" className="w-full h-full"></div>
+                  <div id="qr-reader-bag" className="w-full h-full" style={{ position: 'relative', zIndex: 1, backgroundColor: '#000', minHeight: '400px' }}></div>
                 )}
                 {result && (
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/90">
                     <div className="text-center space-y-4 p-8">
                       {result.success ? (
                         <>
