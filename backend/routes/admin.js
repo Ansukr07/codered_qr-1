@@ -247,4 +247,87 @@ router.get('/participants/:id/help-requests', requireAuth, requireRole('admin'),
     }
 });
 
+// Get all sleeping bag transactions with claim/return status
+router.get('/sleeping-bags', requireAuth, requireRole('admin'), async (req, res) => {
+    try {
+        // Find sleeping bag resource
+        const bagResource = await Resource.findOne({
+            $or: [
+                { name: { $regex: /bag/i } },
+                { name: { $regex: /sleep/i } }
+            ]
+        });
+
+        if (!bagResource) {
+            return res.json({ transactions: [], resource: null });
+        }
+
+        // Get all transactions for sleeping bag (both claim and return)
+        const transactions = await Transaction.find({ resourceId: bagResource._id })
+            .populate('userId', 'name email teamId qrCode')
+            .populate('volunteerId', 'name')
+            .sort({ timestamp: -1 });
+
+        // Group transactions by user to show claim/return pairs
+        const userTransactions = new Map();
+
+        transactions.forEach(tx => {
+            const userId = tx.userId._id.toString();
+            if (!userTransactions.has(userId)) {
+                userTransactions.set(userId, {
+                    user: {
+                        _id: tx.userId._id,
+                        name: tx.userId.name,
+                        email: tx.userId.email,
+                        teamId: tx.userId.teamId,
+                        qrCode: tx.userId.qrCode
+                    },
+                    claim: null,
+                    return: null
+                });
+            }
+
+            const userTx = userTransactions.get(userId);
+            if (tx.action === 'claim') {
+                userTx.claim = {
+                    _id: tx._id,
+                    timestamp: tx.timestamp,
+                    volunteer: tx.volunteerId ? tx.volunteerId.name : 'Unknown'
+                };
+            } else if (tx.action === 'return') {
+                userTx.return = {
+                    _id: tx._id,
+                    timestamp: tx.timestamp,
+                    volunteer: tx.volunteerId ? tx.volunteerId.name : 'Unknown'
+                };
+            }
+        });
+
+        // Convert to array and sort by claim timestamp (most recent first)
+        const transactionsList = Array.from(userTransactions.values()).sort((a, b) => {
+            const aTime = a.claim ? new Date(a.claim.timestamp).getTime() : 0;
+            const bTime = b.claim ? new Date(b.claim.timestamp).getTime() : 0;
+            return bTime - aTime;
+        });
+
+        res.json({
+            resource: {
+                _id: bagResource._id,
+                name: bagResource.name,
+                totalQuantity: bagResource.totalQuantity,
+                distributedQuantity: bagResource.distributedQuantity,
+                remaining: bagResource.totalQuantity - bagResource.distributedQuantity
+            },
+            transactions: transactionsList,
+            stats: {
+                totalIssued: transactionsList.length,
+                totalReturned: transactionsList.filter(t => t.return !== null).length,
+                pendingReturns: transactionsList.filter(t => t.claim !== null && t.return === null).length
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router;
