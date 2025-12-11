@@ -64,7 +64,7 @@ export default function ScanBagPage() {
           false // verbose = false
         )
 
-        scanner.render(
+        const renderPromise = scanner.render(
           onScanSuccess, 
           (errorMessage: string) => {
             // Only log errors, don't show them continuously
@@ -72,16 +72,21 @@ export default function ScanBagPage() {
               console.log('Scan error:', errorMessage)
             }
           }
-        ).catch((err: any) => {
-          console.error('Scanner render error:', err)
-          setCameraError('Failed to access camera. Please check permissions and try again.')
-          setScanning(false)
-          toast({
-            title: 'Camera Error',
-            description: 'Unable to access camera. Please ensure camera permissions are granted.',
-            variant: 'destructive',
+        )
+        
+        // Only catch if render returns a promise
+        if (renderPromise && typeof renderPromise.catch === 'function') {
+          renderPromise.catch((err: any) => {
+            console.error('Scanner render error:', err)
+            setCameraError('Failed to access camera. Please check permissions and try again.')
+            setScanning(false)
+            toast({
+              title: 'Camera Error',
+              description: 'Unable to access camera. Please ensure camera permissions are granted.',
+              variant: 'destructive',
+            })
           })
-        })
+        }
       } catch (error: any) {
         console.error('Scanner initialization error:', error)
         setCameraError(error.message || 'Failed to initialize scanner')
