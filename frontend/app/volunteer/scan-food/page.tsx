@@ -346,7 +346,7 @@ export default function ScanFoodPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Camera Preview Area */}
-          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border" style={{ minHeight: '400px' }}>
+          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border flex items-center justify-center" style={{ minHeight: '400px', aspectRatio: '4/3' }}>
             {!scanning && !result && !cameraError && (
               <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="text-center space-y-4 p-8">
@@ -365,7 +365,7 @@ export default function ScanFoodPage() {
               </div>
             )}
             {scanning && !cameraError && (
-              <div id="qr-reader-food" className="w-full h-full" style={{ position: 'relative', zIndex: 1, backgroundColor: '#000', minHeight: '400px' }}></div>
+              <div id="qr-reader-food" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
             )}
             {result && (
               <div className="aspect-square flex items-center justify-center">

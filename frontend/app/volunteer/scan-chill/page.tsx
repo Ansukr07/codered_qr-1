@@ -152,7 +152,7 @@ export default function ScanChillPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border">
+          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border flex items-center justify-center" style={{ minHeight: '400px', aspectRatio: '4/3' }}>
             {!scanning && !result && (
               <div className="aspect-square flex items-center justify-center">
                 <div className="text-center space-y-4 p-8">
@@ -162,7 +162,7 @@ export default function ScanChillPage() {
               </div>
             )}
             {scanning && (
-              <div id="qr-reader-chill" className="w-full"></div>
+              <div id="qr-reader-chill" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
             )}
             {result && (
               <div className="aspect-square flex items-center justify-center">
