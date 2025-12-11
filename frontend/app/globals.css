@@ -35,3 +35,41 @@
 
   --radius: 0.75rem;
 }
+
+/* QR Scanner Styles - Ensure camera feed is visible */
+#qr-reader-bag,
+#qr-reader-food,
+#qr-reader-chill,
+#qr-reader-dynamic {
+  width: 100% !important;
+  min-height: 400px !important;
+  position: relative !important;
+}
+
+#qr-reader-bag video,
+#qr-reader-food video,
+#qr-reader-chill video,
+#qr-reader-dynamic video {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 500px !important;
+  object-fit: contain !important;
+  display: block !important;
+  background: #000 !important;
+}
+
+#qr-reader-bag canvas,
+#qr-reader-food canvas,
+#qr-reader-chill canvas,
+#qr-reader-dynamic canvas {
+  display: none !important;
+}
+
+/* Html5QrcodeScanner internal styles */
+#qr-reader-bag > div,
+#qr-reader-food > div,
+#qr-reader-chill > div,
+#qr-reader-dynamic > div {
+  width: 100% !important;
+  min-height: 400px !important;
+}

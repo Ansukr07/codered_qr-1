@@ -341,9 +341,9 @@ export default function ScanFoodPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Camera Preview Area */}
-          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border">
+          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border" style={{ minHeight: '400px' }}>
             {!scanning && !result && !cameraError && (
-              <div className="aspect-square flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-4 p-8">
                   <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
                   <p className="text-sm text-muted-foreground">Ready to scan QR code</p>
@@ -351,7 +351,7 @@ export default function ScanFoodPage() {
               </div>
             )}
             {cameraError && (
-              <div className="aspect-square flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-4 p-8">
                   <XCircle className="h-16 w-16 text-destructive mx-auto" />
                   <p className="text-sm text-destructive font-semibold">Camera Error</p>
@@ -360,7 +360,7 @@ export default function ScanFoodPage() {
               </div>
             )}
             {scanning && !cameraError && (
-              <div id="qr-reader-food" className="w-full"></div>
+              <div id="qr-reader-food" className="w-full h-full"></div>
             )}
             {result && (
               <div className="aspect-square flex items-center justify-center">
