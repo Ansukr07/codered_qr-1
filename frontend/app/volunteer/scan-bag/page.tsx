@@ -137,6 +137,11 @@ export default function ScanBagPage() {
             : 'Sleeping bag issued successfully',
         })
         fetchBagResource() // Refresh counts
+        // Restart scanner after a short delay to allow re-scanning
+        setTimeout(() => {
+          setResult(null)
+          setScanning(true)
+        }, 2000)
       } else {
         setResult({
           success: false,

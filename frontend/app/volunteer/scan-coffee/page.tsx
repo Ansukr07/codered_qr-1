@@ -139,8 +139,8 @@ export default function ScanCoffeePage() {
 
     const cleanId = extractIdFromQr(decodedText);
 
-    // Prevent multiple scans of the same code while processing
-    if (cleanId === lastScannedCode && (showConfirmDialog || showClaimedDialog || showLimitDialog)) {
+    // Prevent multiple scans of the same code while processing (but allow re-scanning after completion)
+    if (cleanId === lastScannedCode && (showConfirmDialog || showClaimedDialog || showLimitDialog || processingClaim)) {
       return
     }
 
@@ -258,6 +258,14 @@ export default function ScanCoffeePage() {
           description: `Coffee recorded successfully`,
         })
         setShowConfirmDialog(false)
+        // Reset state to allow re-scanning
+        setLastScannedCode('')
+        setValidationResult(null)
+        // Restart scanner after a short delay
+        setTimeout(() => {
+          setResult(null)
+          setScanning(true)
+        }, 2000)
       } else {
         toast({
           title: 'Error',

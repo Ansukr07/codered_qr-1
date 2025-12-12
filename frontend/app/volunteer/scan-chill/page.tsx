@@ -95,6 +95,13 @@ export default function ScanChillPage() {
           description: 'Chill room access granted',
         })
         fetchChillResource() // Refresh counts
+        // Reset state to allow re-scanning
+        setLastScannedCode('')
+        // Restart scanner after a short delay
+        setTimeout(() => {
+          setResult(null)
+          setScanning(true)
+        }, 2000)
       } else {
         setResult({
           success: false,
