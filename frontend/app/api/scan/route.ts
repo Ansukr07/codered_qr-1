@@ -94,23 +94,52 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Check if this is a sleeping bag (team-based resource)
+        const isSleepingBag = resource.name.toLowerCase().includes('bag') || 
+                             resource.name.toLowerCase().includes('sleep') ||
+                             resource.category === 'accommodation';
+        
         // For coffee, allow multiple claims (up to 3)
-        // For other resources, only allow one claim
+        // For sleeping bags, allow one per team
+        // For other resources, only allow one claim per participant
         const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
         const maxClaims = isCoffee ? 3 : 1;
 
-        // Count existing claim transactions for this user and resource
-        const claimCount = await Transaction.countDocuments({
-            userId: userRecord._id,
-            resourceId: resource._id,
-            action: 'claim'
-        });
+        if (isSleepingBag && userRecord.teamId) {
+            // For sleeping bags, check if any team member has already claimed
+            const teamMembers = await User.find({ 
+                teamId: userRecord.teamId,
+                role: 'participant'
+            }).select('_id');
+            
+            const teamMemberIds = teamMembers.map(m => m._id);
+            
+            const teamClaimCount = await Transaction.countDocuments({
+                userId: { $in: teamMemberIds },
+                resourceId: resource._id,
+                action: 'claim'
+            });
 
-        if (claimCount >= maxClaims) {
-            return NextResponse.json(
-                { message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.` },
-                { status: 400 }
-            );
+            if (teamClaimCount >= 1) {
+                return NextResponse.json(
+                    { message: `Maximum limit reached: ${resource.name}. Your team "${userRecord.teamId}" has already claimed a sleeping bag. Only one sleeping bag per team is allowed.` },
+                    { status: 400 }
+                );
+            }
+        } else {
+            // For non-sleeping bag resources, check individual participant claims
+            const claimCount = await Transaction.countDocuments({
+                userId: userRecord._id,
+                resourceId: resource._id,
+                action: 'claim'
+            });
+
+            if (claimCount >= maxClaims) {
+                return NextResponse.json(
+                    { message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.` },
+                    { status: 400 }
+                );
+            }
         }
 
         resource.distributedQuantity += 1;

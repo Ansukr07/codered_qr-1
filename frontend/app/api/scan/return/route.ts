@@ -79,32 +79,88 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Check if user has a claim transaction for this resource
-        const claimTransaction = await Transaction.findOne({
-            userId: userRecord._id,
-            resourceId: resource._id,
-            action: 'claim'
-        });
+        // Check if this is a sleeping bag (team-based resource)
+        const isSleepingBag = resource.name.toLowerCase().includes('bag') || 
+                             resource.name.toLowerCase().includes('sleep') ||
+                             resource.category === 'accommodation';
+        
+        let claimTransaction;
+        
+        if (isSleepingBag && userRecord.teamId) {
+            // For sleeping bags, check if any team member has claimed it
+            const teamMembers = await User.find({ 
+                teamId: userRecord.teamId,
+                role: 'participant'
+            }).select('_id');
+            
+            const teamMemberIds = teamMembers.map(m => m._id);
+            
+            claimTransaction = await Transaction.findOne({
+                userId: { $in: teamMemberIds },
+                resourceId: resource._id,
+                action: 'claim'
+            });
+            
+            if (!claimTransaction) {
+                return NextResponse.json(
+                    { message: `No active claim found. Your team "${userRecord.teamId}" has not claimed ${resource.name}.` },
+                    { status: 400 }
+                );
+            }
+        } else {
+            // For non-sleeping bag resources, check individual participant claim
+            claimTransaction = await Transaction.findOne({
+                userId: userRecord._id,
+                resourceId: resource._id,
+                action: 'claim'
+            });
 
-        if (!claimTransaction) {
-            return NextResponse.json(
-                { message: `No active claim found. This participant has not claimed ${resource.name}.` },
-                { status: 400 }
-            );
+            if (!claimTransaction) {
+                return NextResponse.json(
+                    { message: `No active claim found. This participant has not claimed ${resource.name}.` },
+                    { status: 400 }
+                );
+            }
         }
 
-        // Check if already returned
-        const returnTransaction = await Transaction.findOne({
-            userId: userRecord._id,
-            resourceId: resource._id,
-            action: 'return'
-        });
+        // Check if already returned (team-based for sleeping bags)
+        let returnTransaction;
+        
+        if (isSleepingBag && userRecord.teamId) {
+            // For sleeping bags, check if any team member has returned it
+            const teamMembers = await User.find({ 
+                teamId: userRecord.teamId,
+                role: 'participant'
+            }).select('_id');
+            
+            const teamMemberIds = teamMembers.map(m => m._id);
+            
+            returnTransaction = await Transaction.findOne({
+                userId: { $in: teamMemberIds },
+                resourceId: resource._id,
+                action: 'return'
+            });
+            
+            if (returnTransaction) {
+                return NextResponse.json(
+                    { message: `Already returned: ${resource.name} was already returned by your team "${userRecord.teamId}".` },
+                    { status: 400 }
+                );
+            }
+        } else {
+            // For non-sleeping bag resources, check individual participant return
+            returnTransaction = await Transaction.findOne({
+                userId: userRecord._id,
+                resourceId: resource._id,
+                action: 'return'
+            });
 
-        if (returnTransaction) {
-            return NextResponse.json(
-                { message: `Already returned: ${resource.name} was already returned by this participant.` },
-                { status: 400 }
-            );
+            if (returnTransaction) {
+                return NextResponse.json(
+                    { message: `Already returned: ${resource.name} was already returned by this participant.` },
+                    { status: 400 }
+                );
+            }
         }
 
         // Decrement distributed quantity
