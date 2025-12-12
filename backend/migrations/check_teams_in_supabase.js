@@ -121,3 +121,4 @@ checkTeams()
         process.exit(1);
     });
 
+

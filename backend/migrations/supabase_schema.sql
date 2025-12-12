@@ -261,3 +261,4 @@ COMMENT ON TABLE submissions IS 'Task submissions by participants';
 COMMENT ON TABLE announcements IS 'System announcements';
 COMMENT ON TABLE help_requests IS 'Help requests from participants';
 
+

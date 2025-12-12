@@ -14,3 +14,4 @@ OTPSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 }); // Auto-delete exp
 
 module.exports = mongoose.models.OTP || mongoose.model('OTP', OTPSchema);
 
+

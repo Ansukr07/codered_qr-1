@@ -20,3 +20,4 @@ ParticipantSchema.index({ qrCode: 1 });
 
 module.exports = mongoose.models.Participant || mongoose.model('Participant', ParticipantSchema);
 
+

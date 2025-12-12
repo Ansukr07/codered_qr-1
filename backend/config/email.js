@@ -114,3 +114,4 @@ const sendOTPEmail = async (email, otpCode, participantName) => {
 
 module.exports = { sendOTPEmail, transporter };
 
+
