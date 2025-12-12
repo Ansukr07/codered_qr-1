@@ -51,12 +51,31 @@ export default function SeatingPage() {
             let team = findTeamByMember(query);
 
             // 2. If not found, try searching SEATING_DATA for Team Name match
+            // First try exact match, then partial match
             if (!team) {
-                const foundSeat = SEATING_DATA.find(s =>
-                    s.team.toLowerCase().includes(query.toLowerCase())
-                );
-                if (foundSeat) {
-                    team = foundSeat.team;
+                const queryLower = query.toLowerCase().trim();
+                // Try exact match first (case-insensitive)
+                let foundSeat = SEATING_DATA.find(s => {
+                    const teamLower = s.team.trim().toLowerCase();
+                    return teamLower === queryLower && teamLower !== '';
+                });
+                // If no exact match, try starts with match (more precise than includes)
+                if (!foundSeat) {
+                    foundSeat = SEATING_DATA.find(s => {
+                        const teamLower = s.team.trim().toLowerCase();
+                        return teamLower !== '' && teamLower.startsWith(queryLower);
+                    });
+                }
+                // Last resort: partial match
+                if (!foundSeat) {
+                    foundSeat = SEATING_DATA.find(s => {
+                        const teamLower = s.team.trim().toLowerCase();
+                        return teamLower !== '' && teamLower.includes(queryLower);
+                    });
+                }
+                // Use the exact team name from seating data to ensure consistency
+                if (foundSeat && foundSeat.team.trim() !== '') {
+                    team = foundSeat.team.trim();
                 }
             }
 

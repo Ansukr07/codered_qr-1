@@ -166,7 +166,18 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
     // 1. Identify the Team and Lab
     const activeData = useMemo(() => {
         if (!normalizedName) return null;
-        return SEATING_DATA.find(s => s.team.toLowerCase() === normalizedName);
+        // Try exact match first (case-insensitive, trimmed)
+        let found = SEATING_DATA.find(s => 
+            s.team.trim().toLowerCase() === normalizedName && s.team.trim() !== ''
+        );
+        // If no exact match, try to find by partial match (but prefer exact)
+        if (!found) {
+            found = SEATING_DATA.find(s => {
+                const teamLower = s.team.trim().toLowerCase();
+                return teamLower !== '' && teamLower.includes(normalizedName);
+            });
+        }
+        return found || null;
     }, [normalizedName]);
 
     const targetLab = activeData ? activeData.lab : 'APJ'; // Default to APJ if no user/match
@@ -218,7 +229,10 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
     // Auto-scroll
     useEffect(() => {
         if (activeData && containerRef.current) {
-            const target = layout.find(b => b.type === 'seat' && b.data.team === activeData.team);
+            const target = layout.find(b => 
+                b.type === 'seat' && 
+                b.data.team.trim().toLowerCase() === activeData.team.trim().toLowerCase()
+            );
             if (target) {
                 const container = containerRef.current;
                 const clientW = container.clientWidth;
@@ -313,7 +327,8 @@ const SeatingMap: React.FC<SeatingMapProps> = ({ teamName = '' }) => {
                     {layout.map((block, idx) => {
                         if (block.type !== 'seat') return null;
 
-                        const isActive = activeData && block.data.team === activeData.team;
+                        const isActive = activeData && 
+                            block.data.team.trim().toLowerCase() === activeData.team.trim().toLowerCase();
 
                         let corners = [false, false, false, false];
                         if (block.posType === 'top-outer') corners = [true, true, false, false];
