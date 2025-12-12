@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { LogOut, Package, Users, TrendingUp, Plus, Eye, UserCog, HandHelping } from 'lucide-react'
+import { LogOut, Package, Users, TrendingUp, Plus, Eye, UserCog, HandHelping, Github, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -30,6 +30,7 @@ interface Participant {
   email: string
   teamId?: string
   qrCode: string
+  githubLink?: string | null
   resourcesClaimed: number
   createdAt: string
 }
@@ -47,9 +48,12 @@ interface ResourceParticipant {
   name: string
   email: string
   teamId?: string
+  githubLink?: string | null
   timestamp?: string
   volunteer?: string
   qrCode?: string
+  claimCount?: number
+  maxClaims?: number
 }
 
 interface HelpRequest {
@@ -185,6 +189,40 @@ export default function AdminDashboard() {
     }
   }
 
+  const [githubStatus, setGithubStatus] = useState<{
+    participants: Array<{
+      _id: string
+      name: string
+      email: string
+      teamId?: string
+      githubLink: string | null
+      status: string
+    }>
+    stats: {
+      total: number
+      submitted: number
+      pending: number
+    }
+  } | null>(null)
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      fetchGithubStatus()
+    }
+  }, [user])
+
+  const fetchGithubStatus = async () => {
+    try {
+      const res = await fetch('/api/admin/participants/github-status')
+      if (res.ok) {
+        const data = await res.json()
+        setGithubStatus(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch GitHub status:', error)
+    }
+  }
+
   if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -250,6 +288,7 @@ export default function AdminDashboard() {
           <TabsList>
             <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="participants">Participants</TabsTrigger>
+            <TabsTrigger value="github">GitHub Status</TabsTrigger>
             <TabsTrigger value="users">User Management</TabsTrigger>
           </TabsList>
 
@@ -339,7 +378,7 @@ export default function AdminDashboard() {
                             <Eye className="h-4 w-4" />
                           </Button>
                         </div>
-                        <p className="text-sm text-muted-foreground capitalize">{resource.type}</p>
+                        <p className="text-sm text-muted-foreground capitalize">{resource.category || 'other'}</p>
                         <div className="mt-2">
                           <div className="flex justify-between text-sm mb-1 text-foreground">
                             <span>Distributed</span>
@@ -383,17 +422,29 @@ export default function AdminDashboard() {
                   <Users className="mr-2 h-5 w-5" />
                   All Participants ({participants.length})
                 </CardTitle>
-                <CardDescription>View all registered participants</CardDescription>
+                <CardDescription>View all registered participants and their transactions</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   {participants.map((participant) => (
                     <div key={participant._id} className="flex justify-between items-center p-3 bg-secondary/50 rounded-lg">
-                      <div>
+                      <div className="flex-1">
                         <p className="font-medium text-card-foreground">{participant.name}</p>
                         <p className="text-sm text-muted-foreground">{participant.email}</p>
                         {participant.teamId && (
                           <p className="text-xs text-muted-foreground">Team: {participant.teamId}</p>
+                        )}
+                        {participant.githubLink && (
+                          <a
+                            href={participant.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-blue-500 hover:underline flex items-center gap-1 mt-1"
+                          >
+                            <Github className="h-3 w-3" />
+                            GitHub Repository
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
                         )}
                       </div>
                       <div className="text-right">
@@ -408,6 +459,61 @@ export default function AdminDashboard() {
                     </p>
                   )}
                 </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* GitHub Status Tab */}
+          <TabsContent value="github">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Github className="mr-2 h-5 w-5" />
+                  GitHub Repository Status
+                </CardTitle>
+                <CardDescription>
+                  {githubStatus ? (
+                    <>
+                      {githubStatus.stats.submitted} submitted • {githubStatus.stats.pending} pending
+                    </>
+                  ) : (
+                    'View GitHub repository submission status'
+                  )}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {githubStatus ? (
+                  <div className="space-y-2">
+                    {githubStatus.participants.map((participant) => (
+                      <div key={participant._id} className="flex justify-between items-center p-3 bg-secondary/50 rounded-lg">
+                        <div className="flex-1">
+                          <p className="font-medium text-card-foreground">{participant.name}</p>
+                          <p className="text-sm text-muted-foreground">{participant.email}</p>
+                          {participant.teamId && (
+                            <p className="text-xs text-muted-foreground">Team: {participant.teamId}</p>
+                          )}
+                          {participant.githubLink && (
+                            <a
+                              href={participant.githubLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-blue-500 hover:underline flex items-center gap-1 mt-1"
+                            >
+                              <Github className="h-3 w-3" />
+                              {participant.githubLink}
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                        </div>
+                        <Badge variant={participant.status === 'submitted' ? 'default' : 'secondary'}>
+                          {participant.status === 'submitted' ? 'Submitted' : 'Pending'}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-center text-muted-foreground py-8">Loading GitHub status...</p>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -466,9 +572,27 @@ export default function AdminDashboard() {
                 <div className="space-y-2 max-h-60 overflow-y-auto">
                   {resourceDetails?.completed.map((p, idx) => (
                     <div key={idx} className="flex justify-between items-center p-2 bg-green-500/10 rounded">
-                      <div>
+                      <div className="flex-1">
                         <p className="font-medium text-sm">{p.name}</p>
                         <p className="text-xs text-muted-foreground">{p.email}</p>
+                        {p.teamId && <p className="text-xs text-muted-foreground">Team: {p.teamId}</p>}
+                        {p.githubLink && (
+                          <a
+                            href={p.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-blue-500 hover:underline flex items-center gap-1 mt-1"
+                          >
+                            <Github className="h-3 w-3" />
+                            GitHub
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                        {p.claimCount !== undefined && p.maxClaims !== undefined && p.maxClaims > 1 && (
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Claims: {p.claimCount}/{p.maxClaims}
+                          </p>
+                        )}
                       </div>
                       <div className="text-right text-xs text-muted-foreground">
                         {p.timestamp && <p>{new Date(p.timestamp).toLocaleString()}</p>}

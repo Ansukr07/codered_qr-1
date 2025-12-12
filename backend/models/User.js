@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
     track: { type: String }, // CRU or CR
     hall: { type: String }, // Main Hall, Small Hall 1, Small Hall 2
     seatNumber: { type: String }, // e.g. M-T6, S2-T12
+    githubLink: { type: String }, // GitHub repository link
     createdAt: { type: Date, default: Date.now },
 });
 
