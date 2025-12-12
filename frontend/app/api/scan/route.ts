@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
         const maxClaims = isCoffee ? 3 : 1;
 
         if (isSleepingBag && userRecord.teamId) {
-            // For sleeping bags, check if any team member has already claimed
+            // For sleeping bags, check if team has an active claim (claim without return)
             const teamMembers = await User.find({ 
                 teamId: userRecord.teamId,
                 role: 'participant'
@@ -114,15 +114,26 @@ export async function POST(request: NextRequest) {
             
             const teamMemberIds = teamMembers.map(m => m._id);
             
+            // Count claims and returns separately
             const teamClaimCount = await Transaction.countDocuments({
                 userId: { $in: teamMemberIds },
                 resourceId: resource._id,
                 action: 'claim'
             });
 
-            if (teamClaimCount >= 1) {
+            const teamReturnCount = await Transaction.countDocuments({
+                userId: { $in: teamMemberIds },
+                resourceId: resource._id,
+                action: 'return'
+            });
+
+            // Active claims = total claims - total returns
+            // Only block if there's an active claim (team hasn't returned their bag)
+            const activeClaims = teamClaimCount - teamReturnCount;
+
+            if (activeClaims >= 1) {
                 return NextResponse.json(
-                    { message: `Maximum limit reached: ${resource.name}. Your team "${userRecord.teamId}" has already claimed a sleeping bag. Only one sleeping bag per team is allowed.` },
+                    { message: `Maximum limit reached: ${resource.name}. Your team "${userRecord.teamId}" currently has an active sleeping bag claim. Please return it before claiming another one.` },
                     { status: 400 }
                 );
             }
