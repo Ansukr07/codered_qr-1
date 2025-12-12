@@ -72,10 +72,19 @@ export default function SelectRepositoryPage() {
 
         setIsSubmitting(true)
         try {
+            // Ensure we're sending the URL string, not the entire object
+            const githubUrl = typeof selectedRepo === 'string' ? selectedRepo : selectedRepo.html_url;
+            
+            if (!githubUrl) {
+                toast.error('Invalid repository URL')
+                setIsSubmitting(false)
+                return
+            }
+            
             const res = await fetch('/api/participant/github', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ githubLink: selectedRepo }),
+                body: JSON.stringify({ githubLink: githubUrl }),
             })
 
             const data = await res.json()
@@ -91,11 +100,12 @@ export default function SelectRepositoryPage() {
                 toast.success('Repository linked successfully!')
                 router.push('/participant/github')
             } else {
-                toast.error(data.message || 'Failed to link repository')
+                console.error('API error response:', data)
+                toast.error(data.message || `Failed to link repository (${res.status})`)
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error linking repository:', error)
-            toast.error('Failed to link repository')
+            toast.error(`Failed to link repository: ${error.message || 'Network error'}`)
         } finally {
             setIsSubmitting(false)
         }

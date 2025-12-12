@@ -47,11 +47,22 @@ export async function PUT(request: NextRequest) {
 
         const { user } = authResult;
         
+        if (!user || !user.userId) {
+            console.error('Invalid user data from auth:', { user, hasUserId: !!user?.userId });
+            return NextResponse.json(
+                { message: 'Invalid user data. Please log in again.' },
+                { status: 401 }
+            );
+        }
+        
+        console.log('Processing GitHub link update for user:', user.userId);
+        
         // Parse request body
         let body;
         try {
             body = await request.json();
         } catch (parseError) {
+            console.error('Error parsing request body:', parseError);
             return NextResponse.json(
                 { message: 'Invalid request body' },
                 { status: 400 }
@@ -59,22 +70,50 @@ export async function PUT(request: NextRequest) {
         }
         
         const { githubLink } = body;
+        console.log('Received GitHub link:', { githubLink, type: typeof githubLink });
+
+        // Handle both string URLs and object with html_url property
+        let linkToProcess: string | null = null;
+        if (typeof githubLink === 'string') {
+            linkToProcess = githubLink;
+        } else if (githubLink && typeof githubLink === 'object' && 'html_url' in githubLink) {
+            linkToProcess = githubLink.html_url;
+        } else if (githubLink && typeof githubLink === 'object' && 'url' in githubLink) {
+            linkToProcess = githubLink.url;
+        }
 
         // Trim and validate GitHub URL if provided
-        const trimmedLink = githubLink && typeof githubLink === 'string' ? githubLink.trim() : null;
+        const trimmedLink = linkToProcess && typeof linkToProcess === 'string' ? linkToProcess.trim() : null;
         
         if (trimmedLink) {
             const githubUrlPattern = /^https?:\/\/(www\.)?github\.com\/[\w\-\.]+\/[\w\-\.]+/;
             if (!githubUrlPattern.test(trimmedLink)) {
+                console.error('Invalid GitHub URL format:', trimmedLink);
                 return NextResponse.json(
                     { message: 'Invalid GitHub URL format. Please use format: https://github.com/username/repository' },
                     { status: 400 }
                 );
             }
         }
+        
+        console.log('Processed GitHub link:', { original: githubLink, processed: trimmedLink });
 
-        const userRecord = await User.findById(user.userId);
+        let userRecord;
+        try {
+            userRecord = await User.findById(user.userId);
+        } catch (findError: any) {
+            console.error('Error finding user:', findError);
+            return NextResponse.json(
+                { 
+                    message: 'Failed to find user',
+                    error: process.env.NODE_ENV === 'development' ? findError.message : undefined
+                },
+                { status: 500 }
+            );
+        }
+        
         if (!userRecord) {
+            console.error('User not found with ID:', user.userId);
             return NextResponse.json(
                 { message: 'User not found' },
                 { status: 404 }
@@ -82,14 +121,33 @@ export async function PUT(request: NextRequest) {
         }
 
         // Set githubLink
+        const previousLink = userRecord.githubLink;
         userRecord.githubLink = trimmedLink || null;
+        
+        console.log('Updating GitHub link:', {
+            userId: user.userId,
+            previousLink,
+            newLink: trimmedLink
+        });
         
         try {
             await userRecord.save();
+            console.log('Successfully saved GitHub link for user:', user.userId);
         } catch (saveError: any) {
             console.error('Error saving user record:', saveError);
+            console.error('Save error details:', {
+                userId: user.userId,
+                githubLink: trimmedLink,
+                error: saveError.message,
+                errorName: saveError.name,
+                errorCode: saveError.code,
+                stack: saveError.stack
+            });
             return NextResponse.json(
-                { message: `Failed to save GitHub link: ${saveError.message}` },
+                { 
+                    message: `Failed to save GitHub link: ${saveError.message || 'Unknown error'}`,
+                    error: process.env.NODE_ENV === 'development' ? saveError.stack : undefined
+                },
                 { status: 500 }
             );
         }
