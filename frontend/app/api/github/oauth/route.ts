@@ -14,7 +14,12 @@ export async function GET(request: NextRequest) {
 
         // GitHub OAuth configuration
         const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-        const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/github/callback`;
+        // Default to production URL, fallback to localhost for development
+        const defaultBaseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+            (process.env.NODE_ENV === 'production' 
+                ? 'https://coderedportal.vercel.app' 
+                : 'http://localhost:3000');
+        const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || `${defaultBaseUrl}/api/github/callback`;
         
         if (!GITHUB_CLIENT_ID) {
             return NextResponse.json(

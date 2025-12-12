@@ -22,7 +22,12 @@ export async function GET(request: NextRequest) {
         // Exchange code for access token
         const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
         const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-        const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/github/callback`;
+        // Default to production URL, fallback to localhost for development
+        const defaultBaseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+            (process.env.NODE_ENV === 'production' 
+                ? 'https://coderedportal.vercel.app' 
+                : 'http://localhost:3000');
+        const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || `${defaultBaseUrl}/api/github/callback`;
 
         if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET) {
             return NextResponse.redirect(new URL('/participant/github?error=oauth_not_configured', request.url));
