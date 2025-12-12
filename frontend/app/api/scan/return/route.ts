@@ -26,7 +26,36 @@ export async function POST(request: NextRequest) {
 
         const { qr_code, resource_id } = await request.json();
 
-        const userRecord = await User.findOne({ qrCode: qr_code });
+        // Normalize QR code: trim whitespace and handle URL format
+        let normalizedQrCode = qr_code ? qr_code.trim() : '';
+        
+        // Extract ID from URL if present (e.g., "https://example.com/verify?id=CR-T75-P01")
+        if (normalizedQrCode.includes('http') || normalizedQrCode.includes('?')) {
+            try {
+                const url = new URL(normalizedQrCode);
+                const idParam = url.searchParams.get('id');
+                if (idParam) {
+                    normalizedQrCode = idParam.trim();
+                }
+            } catch (e) {
+                // If URL parsing fails, try to extract manually
+                const idMatch = normalizedQrCode.match(/[?&]id=([^&]+)/);
+                if (idMatch) {
+                    normalizedQrCode = idMatch[1].trim();
+                }
+            }
+        }
+
+        // Try exact match first
+        let userRecord = await User.findOne({ qrCode: normalizedQrCode });
+        
+        // If not found, try case-insensitive match
+        if (!userRecord) {
+            userRecord = await User.findOne({ 
+                qrCode: { $regex: new RegExp(`^${normalizedQrCode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+            });
+        }
+        
         if (!userRecord) {
             return NextResponse.json(
                 { message: 'Invalid QR Code' },

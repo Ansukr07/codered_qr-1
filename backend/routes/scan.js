@@ -12,7 +12,36 @@ router.post('/', requireAuth, requireRole('volunteer', 'admin'), async (req, res
     try {
         const { qr_code, resource_id } = req.body;
 
-        const user = await User.findOne({ qrCode: qr_code });
+        // Normalize QR code: trim whitespace and handle URL format
+        let normalizedQrCode = qr_code ? qr_code.trim() : '';
+        
+        // Extract ID from URL if present (e.g., "https://example.com/verify?id=CR-T75-P01")
+        if (normalizedQrCode.includes('http') || normalizedQrCode.includes('?')) {
+            try {
+                const url = new URL(normalizedQrCode);
+                const idParam = url.searchParams.get('id');
+                if (idParam) {
+                    normalizedQrCode = idParam.trim();
+                }
+            } catch (e) {
+                // If URL parsing fails, try to extract manually
+                const idMatch = normalizedQrCode.match(/[?&]id=([^&]+)/);
+                if (idMatch) {
+                    normalizedQrCode = idMatch[1].trim();
+                }
+            }
+        }
+
+        // Try exact match first
+        let user = await User.findOne({ qrCode: normalizedQrCode });
+        
+        // If not found, try case-insensitive match
+        if (!user) {
+            user = await User.findOne({ 
+                qrCode: { $regex: new RegExp(`^${normalizedQrCode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+            });
+        }
+        
         if (!user) {
             return res.status(404).json({ message: 'Invalid QR Code' });
         }
@@ -68,7 +97,36 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
     try {
         const { qr_code, resource_id } = req.body;
 
-        const user = await User.findOne({ qrCode: qr_code });
+        // Normalize QR code: trim whitespace and handle URL format
+        let normalizedQrCode = qr_code ? qr_code.trim() : '';
+        
+        // Extract ID from URL if present (e.g., "https://example.com/verify?id=CR-T75-P01")
+        if (normalizedQrCode.includes('http') || normalizedQrCode.includes('?')) {
+            try {
+                const url = new URL(normalizedQrCode);
+                const idParam = url.searchParams.get('id');
+                if (idParam) {
+                    normalizedQrCode = idParam.trim();
+                }
+            } catch (e) {
+                // If URL parsing fails, try to extract manually
+                const idMatch = normalizedQrCode.match(/[?&]id=([^&]+)/);
+                if (idMatch) {
+                    normalizedQrCode = idMatch[1].trim();
+                }
+            }
+        }
+
+        // Try exact match first
+        let user = await User.findOne({ qrCode: normalizedQrCode });
+        
+        // If not found, try case-insensitive match
+        if (!user) {
+            user = await User.findOne({ 
+                qrCode: { $regex: new RegExp(`^${normalizedQrCode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+            });
+        }
+        
         if (!user) {
             return res.status(404).json({ message: 'Invalid QR Code' });
         }
@@ -154,7 +212,36 @@ router.post('/return', requireAuth, requireRole('volunteer', 'admin'), async (re
     try {
         const { qr_code, resource_id } = req.body;
 
-        const user = await User.findOne({ qrCode: qr_code });
+        // Normalize QR code: trim whitespace and handle URL format
+        let normalizedQrCode = qr_code ? qr_code.trim() : '';
+        
+        // Extract ID from URL if present (e.g., "https://example.com/verify?id=CR-T75-P01")
+        if (normalizedQrCode.includes('http') || normalizedQrCode.includes('?')) {
+            try {
+                const url = new URL(normalizedQrCode);
+                const idParam = url.searchParams.get('id');
+                if (idParam) {
+                    normalizedQrCode = idParam.trim();
+                }
+            } catch (e) {
+                // If URL parsing fails, try to extract manually
+                const idMatch = normalizedQrCode.match(/[?&]id=([^&]+)/);
+                if (idMatch) {
+                    normalizedQrCode = idMatch[1].trim();
+                }
+            }
+        }
+
+        // Try exact match first
+        let user = await User.findOne({ qrCode: normalizedQrCode });
+        
+        // If not found, try case-insensitive match
+        if (!user) {
+            user = await User.findOne({ 
+                qrCode: { $regex: new RegExp(`^${normalizedQrCode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+            });
+        }
+        
         if (!user) {
             return res.status(404).json({ message: 'Invalid QR Code' });
         }
@@ -221,7 +308,36 @@ router.post('/verify-participant', requireAuth, requireRole('volunteer', 'admin'
     try {
         const { qr_code } = req.body;
 
-        const user = await User.findOne({ qrCode: qr_code });
+        // Normalize QR code: trim whitespace and handle URL format
+        let normalizedQrCode = qr_code ? qr_code.trim() : '';
+        
+        // Extract ID from URL if present (e.g., "https://example.com/verify?id=CR-T75-P01")
+        if (normalizedQrCode.includes('http') || normalizedQrCode.includes('?')) {
+            try {
+                const url = new URL(normalizedQrCode);
+                const idParam = url.searchParams.get('id');
+                if (idParam) {
+                    normalizedQrCode = idParam.trim();
+                }
+            } catch (e) {
+                // If URL parsing fails, try to extract manually
+                const idMatch = normalizedQrCode.match(/[?&]id=([^&]+)/);
+                if (idMatch) {
+                    normalizedQrCode = idMatch[1].trim();
+                }
+            }
+        }
+
+        // Try exact match first
+        let user = await User.findOne({ qrCode: normalizedQrCode });
+        
+        // If not found, try case-insensitive match
+        if (!user) {
+            user = await User.findOne({ 
+                qrCode: { $regex: new RegExp(`^${normalizedQrCode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+            });
+        }
+        
         if (!user) {
             return res.status(404).json({ message: 'Invalid QR Code' });
         }
