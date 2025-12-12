@@ -1,7 +1,7 @@
 /**
  * Script to create a volunteer with hardcoded credentials
  * Email: vol@vol.in
- * Password: vol@123
+ * Password: volcom@1999
  */
 
 const mongoose = require('mongoose');
@@ -38,7 +38,7 @@ async function createVolunteer() {
         console.log('Connected to MongoDB\n');
 
         const email = 'vol@vol.in';
-        const password = 'vol@123';
+        const password = 'volcom@1999';
         const name = 'Volunteer User';
 
         // Check if volunteer already exists

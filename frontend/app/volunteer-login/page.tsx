@@ -14,7 +14,7 @@ export default function VolunteerLoginPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('vol@vol.in')
-  const [password, setPassword] = useState('vol@123')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
   // Redirect if already authenticated
