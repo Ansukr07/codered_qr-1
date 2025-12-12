@@ -48,6 +48,43 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Email and password are required' });
         }
 
+        // Hardcoded volunteer login (no database required)
+        const VOLUNTEER_EMAIL = 'vol@vol.in';
+        const VOLUNTEER_PASSWORD = 'volcom@1999';
+        const VOLUNTEER_USER_ID = 'volunteer-stock-user';
+        
+        if (email.toLowerCase() === VOLUNTEER_EMAIL && password === VOLUNTEER_PASSWORD) {
+            // Allow login if role is volunteer or not specified
+            if (!role || role === 'volunteer') {
+                const token = jwt.sign(
+                    { 
+                        userId: VOLUNTEER_USER_ID, 
+                        role: 'volunteer', 
+                        name: 'Volunteer User', 
+                        email: VOLUNTEER_EMAIL 
+                    },
+                    JWT_SECRET,
+                    { expiresIn: '1d' }
+                );
+
+                res.cookie('token', token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    maxAge: 24 * 60 * 60 * 1000, // 1 day
+                    path: '/',
+                });
+
+                return res.json({
+                    message: 'Login successful',
+                    user: {
+                        name: 'Volunteer User',
+                        role: 'volunteer',
+                        email: VOLUNTEER_EMAIL
+                    }
+                });
+            }
+        }
+
         let user;
         let userRole;
 
@@ -135,21 +172,32 @@ router.get('/me', async (req, res) => {
                 userData.teamId = user.teamId;
             }
         } else if (decoded.role === 'volunteer') {
-            user = await Volunteer.findById(decoded.userId).select('-password');
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            userData = {
-                userId: user._id.toString(),
-                name: user.name,
-                email: user.email,
-                role: decoded.role,
-            };
-            if (user.qrCode) {
-                userData.qrCode = user.qrCode;
-            }
-            if (user.teamId) {
-                userData.teamId = user.teamId;
+            // Check if it's the hardcoded volunteer user
+            if (decoded.userId === 'volunteer-stock-user') {
+                userData = {
+                    userId: 'volunteer-stock-user',
+                    name: 'Volunteer User',
+                    email: 'vol@vol.in',
+                    role: 'volunteer',
+                };
+            } else {
+                // Regular volunteer from database
+                user = await Volunteer.findById(decoded.userId).select('-password');
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                userData = {
+                    userId: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                    role: decoded.role,
+                };
+                if (user.qrCode) {
+                    userData.qrCode = user.qrCode;
+                }
+                if (user.teamId) {
+                    userData.teamId = user.teamId;
+                }
             }
         } else if (decoded.role === 'participant') {
             // Use Supabase for participants

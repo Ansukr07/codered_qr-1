@@ -18,7 +18,6 @@ async function connectDB() {
 
 export async function POST(request: NextRequest) {
     try {
-        await connectDB();
         const { email, password, role } = await request.json();
 
         if (!email || !password) {
@@ -28,6 +27,48 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Hardcoded volunteer login (no database required)
+        const VOLUNTEER_EMAIL = 'vol@vol.in';
+        const VOLUNTEER_PASSWORD = 'volcom@1999';
+        const VOLUNTEER_USER_ID = 'volunteer-stock-user';
+        
+        if (email.toLowerCase() === VOLUNTEER_EMAIL && password === VOLUNTEER_PASSWORD) {
+            // Allow login if role is volunteer or not specified
+            if (!role || role === 'volunteer') {
+                const token = jwt.sign(
+                    { 
+                        userId: VOLUNTEER_USER_ID, 
+                        role: 'volunteer', 
+                        name: 'Volunteer User', 
+                        email: VOLUNTEER_EMAIL 
+                    },
+                    JWT_SECRET,
+                    { expiresIn: '1d' }
+                );
+
+                const response = NextResponse.json({
+                    message: 'Login successful',
+                    user: {
+                        name: 'Volunteer User',
+                        role: 'volunteer',
+                        email: VOLUNTEER_EMAIL
+                    }
+                });
+
+                response.cookies.set('token', token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    maxAge: 24 * 60 * 60 * 1000, // 1 day
+                    path: '/',
+                    sameSite: 'lax',
+                });
+
+                return response;
+            }
+        }
+
+        // For other users, connect to database
+        await connectDB();
         let user: any;
         let userRole: string;
 

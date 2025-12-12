@@ -51,24 +51,35 @@ export async function GET(request: NextRequest) {
                 userData.teamId = user.teamId;
             }
         } else if (decoded.role === 'volunteer') {
-            user = await Volunteer.findById(decoded.userId).select('-password');
-            if (!user) {
-                return NextResponse.json(
-                    { message: 'User not found' },
-                    { status: 404 }
-                );
-            }
-            userData = {
-                userId: user._id.toString(),
-                name: user.name,
-                email: user.email,
-                role: decoded.role,
-            };
-            if (user.qrCode) {
-                userData.qrCode = user.qrCode;
-            }
-            if (user.teamId) {
-                userData.teamId = user.teamId;
+            // Check if it's the hardcoded volunteer user
+            if (decoded.userId === 'volunteer-stock-user') {
+                userData = {
+                    userId: 'volunteer-stock-user',
+                    name: 'Volunteer User',
+                    email: 'vol@vol.in',
+                    role: 'volunteer',
+                };
+            } else {
+                // Regular volunteer from database
+                user = await Volunteer.findById(decoded.userId).select('-password');
+                if (!user) {
+                    return NextResponse.json(
+                        { message: 'User not found' },
+                        { status: 404 }
+                    );
+                }
+                userData = {
+                    userId: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                    role: decoded.role,
+                };
+                if (user.qrCode) {
+                    userData.qrCode = user.qrCode;
+                }
+                if (user.teamId) {
+                    userData.teamId = user.teamId;
+                }
             }
         } else if (decoded.role === 'participant') {
             // Use Supabase for participants
