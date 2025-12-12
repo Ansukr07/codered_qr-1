@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Github, ArrowLeft, CheckCircle2, Loader2, ExternalLink, Link2 } from 'lucide-react'
@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { toast } from 'sonner'
 
-export default function ParticipantGitHubPage() {
+function GitHubPageContent() {
     const { user, loading } = useAuth()
     const router = useRouter()
     const searchParams = useSearchParams()
@@ -349,6 +349,18 @@ export default function ParticipantGitHubPage() {
                 </DialogContent>
             </Dialog>
         </div>
+    )
+}
+
+export default function ParticipantGitHubPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin" />
+            </div>
+        }>
+            <GitHubPageContent />
+        </Suspense>
     )
 }
 

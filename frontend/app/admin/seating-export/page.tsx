@@ -28,19 +28,10 @@ async function getTeamsForTrack(track: string) {
         await mongoose.connect(process.env.MONGODB_URI);
     }
 
-    // Define User Schema inline matching backend/models/User.js to avoid path issues or module caching
-    // Note: If model already exists, use it.
-    const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema({
-        name: { type: String, required: true },
-        email: { type: String, unique: true, sparse: true },
-        password: { type: String },
-        role: { type: String, enum: ['admin', 'volunteer', 'participant'], default: 'participant' },
-        teamId: { type: String },
-        qrCode: { type: String, unique: true, required: true },
-        track: { type: String },
-        createdAt: { type: Date, default: Date.now },
-    }));
-
+    // Import User model from the model file to avoid duplicate schema compilation
+    // This prevents the duplicate index warning
+    const User = (await import('@/lib/models/User')).default;
+    
     // Find users in this track
     const users = await User.find({ track: track });
 
