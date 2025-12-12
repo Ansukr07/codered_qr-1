@@ -23,9 +23,9 @@ export const SEATING_DATA: Seat[] = [
     { lab: "APJ", row: "R3", team: "Code Yoddhas", seatId: "CR(S) 3" },
     { lab: "APJ", row: "R3", team: "Code Wizards", seatId: "CR(H) 4" },
     { lab: "APJ", row: "R3", team: "TesserHack", seatId: "CR(S) 4" },
-    // Row 4 - Left: DELUSION, DATABAES | Right: Convoy Command Unit, CodeVortex
+    // Row 4 - Left: DELUSION, BYTEWAVE | Right: Convoy Command Unit, CodeVortex
     { lab: "APJ", row: "R4", team: "Delusion", seatId: "CR(H) 5" },
-    { lab: "APJ", row: "R4", team: "Databaes", seatId: "CR(S) 5" },
+    { lab: "APJ", row: "R4", team: "Bytewave", seatId: "CR(S) 5" },
     { lab: "APJ", row: "R4", team: "Convoy Command Unit", seatId: "CR(H) 6" },
     { lab: "APJ", row: "R4", team: "CodeVortex", seatId: "CR(S) 6" },
     // Row 5 - Left: FORGEON2.0, ELECTRONAUTS | Right: ElectroEdge, Dr Code
@@ -68,8 +68,8 @@ export const SEATING_DATA: Seat[] = [
     { lab: "APJ", row: "R12", team: "Nishika", seatId: "CR(S) 3" },
     { lab: "APJ", row: "R12", team: "", seatId: "CR(H) 4" },
     { lab: "APJ", row: "R12", team: "VELOCITY FLYERS", seatId: "CR(S) 4" },
-    // Row 13 - Left: BYTEWAVE, TEAM INFRARED | Right: WISH, WI-FIGTERS
-    { lab: "APJ", row: "R13", team: "BYTEWAVE", seatId: "CR(H) 5" },
+    // Row 13 - Left: DATABAES, TEAM INFRARED | Right: WISH, WI-FIGTERS
+    { lab: "APJ", row: "R13", team: "Databaes", seatId: "CR(H) 5" },
     { lab: "APJ", row: "R13", team: "TEAM INFRARED", seatId: "CR(S) 5" },
     { lab: "APJ", row: "R13", team: "WISH", seatId: "CR(H) 6" },
     { lab: "APJ", row: "R13", team: "WI-FIGTERS", seatId: "CR(S) 6" },

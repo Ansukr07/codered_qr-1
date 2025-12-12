@@ -79,16 +79,21 @@ export const TEAMS_DB: TeamData[] = [
     ]
   },
   {
-    "teamName": "Databaes",
+    "teamName": "Bytewave",
     "members": [
+      "Meghana Kiranchand",
       "Obana Pujar",
       "Gayatri P",
-      "Parinitha V",
-      "Ayushman sharma",
-      "Kavana P R",
+      "Kavana P R"
+    ]
+  },
+  {
+    "teamName": "Databaes",
+    "members": [
+      "Srushti K",
       "Sameer kedilaya",
-      "Meghana Kiranchand",
-      "Srushti K"
+      "Ayushman sharma",
+      "Parinitha V"
     ]
   },
   {
