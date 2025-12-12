@@ -55,11 +55,12 @@ export async function GET(request: NextRequest) {
 
         const repoData = await response.json();
 
-        // Fetch commit count (approximate from default branch)
+        // Fetch commit count using contributors API (more accurate)
         let commitCount = 0;
         try {
-            const commitsResponse = await fetch(
-                `https://api.github.com/repos/${owner}/${repoName}/commits?per_page=1`,
+            // Try to get commit count from contributors API
+            const contributorsResponse = await fetch(
+                `https://api.github.com/repos/${owner}/${repoName}/contributors?per_page=1&anon=1`,
                 {
                     headers: {
                         'Accept': 'application/vnd.github.v3+json',
@@ -68,18 +69,41 @@ export async function GET(request: NextRequest) {
                 }
             );
             
-            if (commitsResponse.ok) {
-                const linkHeader = commitsResponse.headers.get('link');
+            if (contributorsResponse.ok) {
+                const linkHeader = contributorsResponse.headers.get('link');
                 if (linkHeader) {
-                    // Extract total count from Link header if available
+                    // Extract total count from Link header
                     const lastPageMatch = linkHeader.match(/page=(\d+)>; rel="last"/);
                     if (lastPageMatch) {
-                        commitCount = parseInt(lastPageMatch[1], 10);
+                        commitCount = parseInt(lastPageMatch[1], 10) * 30; // Approximate (30 per page)
                     }
-                } else {
-                    // If no pagination, count commits (limited to 100 per page)
-                    const commits = await commitsResponse.json();
-                    commitCount = commits.length;
+                }
+            }
+            
+            // Fallback: try commits API with pagination
+            if (commitCount === 0) {
+                const commitsResponse = await fetch(
+                    `https://api.github.com/repos/${owner}/${repoName}/commits?per_page=1`,
+                    {
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json',
+                            'User-Agent': 'CodeRed-Portal'
+                        }
+                    }
+                );
+                
+                if (commitsResponse.ok) {
+                    const linkHeader = commitsResponse.headers.get('link');
+                    if (linkHeader) {
+                        const lastPageMatch = linkHeader.match(/page=(\d+)>; rel="last"/);
+                        if (lastPageMatch) {
+                            commitCount = parseInt(lastPageMatch[1], 10);
+                        }
+                    } else {
+                        // If no pagination, try to get all commits (limited)
+                        const commits = await commitsResponse.json();
+                        commitCount = commits.length > 0 ? 1 : 0;
+                    }
                 }
             }
         } catch (error) {

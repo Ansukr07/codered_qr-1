@@ -81,15 +81,20 @@ export default function GitHubPage() {
         const uniqueRepos = new Set<string>()
         
         data.participants.forEach((p: GitHubParticipant) => {
-          if (p.githubLink) {
-            uniqueRepos.add(p.githubLink)
+          if (p.githubLink && p.githubLink.trim()) {
+            uniqueRepos.add(p.githubLink.trim())
           }
         })
         
         // Fetch stats for each unique repository
         const statsPromises = Array.from(uniqueRepos).map(async (repoUrl) => {
           try {
-            const statsRes = await fetch(`/api/github/stats?url=${encodeURIComponent(repoUrl)}`)
+            const statsRes = await fetch(`/api/github/stats?url=${encodeURIComponent(repoUrl)}`, {
+              cache: 'no-store',
+              headers: {
+                'Cache-Control': 'no-cache'
+              }
+            })
             if (statsRes.ok) {
               const stats = await statsRes.json()
               statsMap.set(repoUrl, stats)
@@ -119,10 +124,20 @@ export default function GitHubPage() {
     )
   }
 
-  // Group participants by team
+  // Group participants by team and deduplicate by email within each team
   const teamMap = new Map<string, GitHubParticipant[]>()
   if (githubStatus) {
+    // First, deduplicate all participants by email+teamId
+    const participantMap = new Map<string, GitHubParticipant>()
     githubStatus.participants.forEach(participant => {
+      const dedupKey = `${participant.email?.toLowerCase() || participant._id}_${participant.teamId || 'no-team'}`
+      if (!participantMap.has(dedupKey)) {
+        participantMap.set(dedupKey, participant)
+      }
+    })
+    
+    // Then group by team
+    participantMap.forEach(participant => {
       const teamId = participant.teamId || 'Individual'
       if (!teamMap.has(teamId)) {
         teamMap.set(teamId, [])
@@ -153,7 +168,7 @@ export default function GitHubPage() {
       ) : githubStatus && githubStatus.participants.length > 0 ? (
         <div className="grid gap-4">
           {Array.from(teamMap.entries()).map(([teamId, participants]) => {
-            // Deduplicate participants by email within the team
+            // Participants are already deduplicated, but ensure no duplicates by email
             const uniqueParticipants = Array.from(
               new Map(participants.map(p => [p.email?.toLowerCase() || p._id, p])).values()
             )
@@ -195,7 +210,7 @@ export default function GitHubPage() {
                               View
                             </Button>
                           </div>
-                          {stats && (
+                          {stats ? (
                             <div className="flex items-center gap-4 text-xs text-muted-foreground pt-1">
                               <div className="flex items-center gap-1">
                                 <GitCommit className="h-3 w-3" />
@@ -214,6 +229,10 @@ export default function GitHubPage() {
                                   {stats.language}
                                 </span>
                               )}
+                            </div>
+                          ) : githubLink && (
+                            <div className="text-xs text-muted-foreground pt-1 italic">
+                              Loading stats...
                             </div>
                           )}
                         </div>
