@@ -206,11 +206,11 @@ export default function ParticipantDashboard() {
                                     <span className="md:hidden">Timeline</span>
                                 </Button>
                             </Link>
-                            <Link href="/participant/submission">
+                            <Link href="/participant/github">
                                 <Button variant="secondary" size="sm" className="h-9 md:h-10">
                                     <Github className="mr-2 h-4 w-4" />
-                                    <span className="hidden md:inline">Submission</span>
-                                    <span className="md:hidden">Submit</span>
+                                    <span className="hidden md:inline">GitHub</span>
+                                    <span className="md:hidden">GitHub</span>
                                 </Button>
                             </Link>
                             <Button onClick={() => logout()} variant="outline" size="sm" className="text-foreground h-9 md:h-10">

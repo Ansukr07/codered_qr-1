@@ -39,6 +39,12 @@ export async function PUT(request: NextRequest) {
         }
 
         userRecord.githubLink = githubLink || null;
+        // Update githubStatus based on whether a link is provided
+        if (githubLink && githubLink.trim()) {
+            userRecord.githubStatus = 'submitted';
+        } else {
+            userRecord.githubStatus = 'pending';
+        }
         await userRecord.save();
 
         return NextResponse.json({
