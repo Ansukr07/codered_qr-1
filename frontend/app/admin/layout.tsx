@@ -15,7 +15,7 @@ export default function AdminLayout({
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
-      router.push('/core')
+      router.push('/admin-login')
     }
   }, [user, loading, router])
 
@@ -34,7 +34,7 @@ export default function AdminLayout({
   return (
     <div className="min-h-screen bg-background relative">
       {/* Red Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4a1f1f_1px,transparent_1px),linear-gradient(to_bottom,#4a1f1f_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4a1f1f_1px,transparent_1px),linear-gradient(to_bottom,#4a1f1f_1px,transparent_1px)] bg-size-[4rem_4rem] opacity-50 pointer-events-none" />
 
       <div className="relative z-10">
         <AdminSidebar />

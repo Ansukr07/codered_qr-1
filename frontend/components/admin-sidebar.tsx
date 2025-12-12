@@ -1,10 +1,11 @@
 'use client'
 
 import Link from "next/link"
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { LayoutDashboard, Users, UserPlus, Megaphone, HelpCircle, Github, LogOut, Code2, ClipboardList, BedDouble } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useAuth } from '@/contexts/AuthContext'
 
 const sidebarItems = [
   {
@@ -47,6 +48,12 @@ const sidebarItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+  const { logout } = useAuth()
+
+  const handleLogout = async () => {
+    await logout('/admin-login')
+  }
 
   return (
     <div className="flex h-screen w-64 flex-col border-r border-border/40 bg-card/50 backdrop-blur-xl fixed left-0 top-0 z-30">
@@ -81,12 +88,14 @@ export function AdminSidebar() {
       </div>
 
       <div className="border-t border-border/40 p-4">
-        <Link href="/login">
-          <Button variant="ghost" className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10">
-            <LogOut className="h-4 w-4" />
-            Logout
-          </Button>
-        </Link>
+        <Button 
+          variant="ghost" 
+          className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+          onClick={handleLogout}
+        >
+          <LogOut className="h-4 w-4" />
+          Logout
+        </Button>
       </div>
     </div>
   )

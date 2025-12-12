@@ -98,13 +98,25 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
-      router.push('/login')
+      router.push('/admin-login')
     }
   }, [user, loading, router])
 
   useEffect(() => {
     if (user && user.role === 'admin') {
       fetchAdminData()
+      fetchGithubStatus()
+    }
+  }, [user])
+
+  // Refresh GitHub status periodically
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      const interval = setInterval(() => {
+        fetchGithubStatus()
+      }, 30000) // Refresh every 30 seconds
+
+      return () => clearInterval(interval)
     }
   }, [user])
 
@@ -207,7 +219,19 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (user && user.role === 'admin') {
+      fetchAdminData()
       fetchGithubStatus()
+    }
+  }, [user])
+
+  // Refresh GitHub status periodically
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      const interval = setInterval(() => {
+        fetchGithubStatus()
+      }, 30000) // Refresh every 30 seconds
+
+      return () => clearInterval(interval)
     }
   }, [user])
 
