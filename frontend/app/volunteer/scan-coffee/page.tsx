@@ -62,16 +62,31 @@ export default function ScanCoffeePage() {
     try {
       const res = await fetch('/api/resources')
       const data = await res.json()
+      console.log('All resources:', data.resources)
       const coffeeResources = data.resources.filter((r: any) =>
         r.category === 'coffee' || r.name.toLowerCase().includes('coffee')
       )
+      console.log('Coffee resources found:', coffeeResources)
       setResources(coffeeResources)
       if (coffeeResources.length > 0) {
         // Auto-select first resource
         setSelectedResourceId(coffeeResources[0]._id)
+        console.log('Auto-selected resource:', coffeeResources[0]._id)
+      } else {
+        console.warn('No coffee resources found. Please create a coffee resource in the admin panel.')
+        toast({
+          title: 'No Coffee Resource Found',
+          description: 'Please create a coffee resource in the admin panel first.',
+          variant: 'destructive',
+        })
       }
     } catch (error) {
       console.error('Failed to fetch resources:', error)
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch resources. Please try again.',
+        variant: 'destructive',
+      })
     }
   }
 
@@ -418,11 +433,11 @@ export default function ScanCoffeePage() {
             {!result ? (
               <Button
                 onClick={handleStartScan}
-                disabled={scanning || !selectedResourceId || !!cameraError}
+                disabled={scanning || !selectedResourceId || !!cameraError || resources.length === 0}
                 className="flex-1"
                 size="lg"
               >
-                {scanning ? "Scanning..." : cameraError ? "Retry Camera" : "Start Scan"}
+                {scanning ? "Scanning..." : cameraError ? "Retry Camera" : !selectedResourceId ? "Select Coffee Resource First" : "Start Scan"}
               </Button>
             ) : (
               <>
@@ -446,31 +461,54 @@ export default function ScanCoffeePage() {
       </Card>
 
       {/* Coffee Resource Selection */}
-      {!result && resources.length > 0 && (
+      {!result && (
         <Card className="bg-card/50 backdrop-blur border-border/50">
           <CardHeader>
             <CardTitle className="text-base">Select Coffee Resource</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 gap-3">
-              {resources.map((resource) => {
-                const isSelected = selectedResourceId === resource._id
-
-                return (
-                  <Button
-                    key={resource._id}
-                    variant="outline"
-                    className={`h-auto py-3 flex flex-col gap-2 ${isSelected ? 'border-primary text-primary' : ''}`}
-                    onClick={() => {
-                      setSelectedResourceId(resource._id)
-                    }}
-                  >
-                    <Coffee className="h-5 w-5 mx-auto" />
-                    <span className="text-sm text-card-foreground">{resource.name}</span>
+            {resources.length === 0 ? (
+              <div className="text-center py-8 space-y-4">
+                <Coffee className="h-12 w-12 text-muted-foreground mx-auto" />
+                <div>
+                  <p className="text-sm font-medium text-foreground">No Coffee Resource Found</p>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Please create a coffee resource in the admin panel first.
+                  </p>
+                </div>
+                <Link href="/admin">
+                  <Button variant="outline" size="sm">
+                    Go to Admin Panel
                   </Button>
-                )
-              })}
-            </div>
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-3">
+                {resources.map((resource) => {
+                  const isSelected = selectedResourceId === resource._id
+
+                  return (
+                    <Button
+                      key={resource._id}
+                      variant="outline"
+                      className={`h-auto py-3 flex flex-col gap-2 ${isSelected ? 'border-primary text-primary bg-primary/5' : ''}`}
+                      onClick={() => {
+                        setSelectedResourceId(resource._id)
+                        console.log('Selected resource:', resource._id, resource.name)
+                      }}
+                    >
+                      <Coffee className="h-5 w-5 mx-auto" />
+                      <span className="text-sm text-card-foreground">{resource.name}</span>
+                      {isSelected && (
+                        <Badge variant="default" className="text-xs mt-1">
+                          Selected
+                        </Badge>
+                      )}
+                    </Button>
+                  )
+                })}
+              </div>
+            )}
           </CardContent>
         </Card>
       )}

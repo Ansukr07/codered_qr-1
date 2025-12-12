@@ -160,7 +160,9 @@ export default function ResourceTracking() {
     const getCategoryColor = (category: string) => {
         const colors: { [key: string]: { bg: string; text: string } } = {
             food: { bg: 'bg-orange-500/10', text: 'text-orange-500' },
+            accommodation: { bg: 'bg-blue-500/10', text: 'text-blue-500' },
             'sleeping-bag': { bg: 'bg-blue-500/10', text: 'text-blue-500' },
+            chill_room: { bg: 'bg-purple-500/10', text: 'text-purple-500' },
             'chill-room': { bg: 'bg-purple-500/10', text: 'text-purple-500' },
             coffee: { bg: 'bg-amber-500/10', text: 'text-amber-500' },
             other: { bg: 'bg-gray-500/10', text: 'text-gray-500' }
@@ -171,7 +173,7 @@ export default function ResourceTracking() {
     return (
         <div className="min-h-screen bg-background relative">
             {/* White Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-size-[4rem_4rem] opacity-20 pointer-events-none" />
 
             <div className="relative z-10 p-6">
                 <div className="max-w-7xl mx-auto space-y-6">

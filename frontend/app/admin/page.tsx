@@ -314,6 +314,7 @@ export default function AdminDashboard() {
                               <SelectItem value="food">Food</SelectItem>
                               <SelectItem value="accommodation">Accommodation</SelectItem>
                               <SelectItem value="chill_room">Chill Room</SelectItem>
+                              <SelectItem value="coffee">Coffee</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
