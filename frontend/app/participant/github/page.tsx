@@ -3,11 +3,9 @@
 import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { Github, ArrowLeft, CheckCircle2, Loader2, ExternalLink, Link2 } from 'lucide-react'
+import { Github, ArrowLeft, CheckCircle2, Loader2, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { useAuth } from '@/contexts/AuthContext'
 import { Badge } from '@/components/ui/badge'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -17,8 +15,6 @@ function GitHubPageContent() {
     const { user, loading } = useAuth()
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [githubLink, setGithubLink] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
     const [currentGithubLink, setCurrentGithubLink] = useState<string | null>(null)
     const [isFetching, setIsFetching] = useState(true)
     const [showConfirmation, setShowConfirmation] = useState(false)
@@ -41,7 +37,7 @@ function GitHubPageContent() {
         const error = searchParams.get('error')
         if (error) {
             if (error === 'oauth_not_configured') {
-                toast.error('GitHub OAuth is not configured. Please use manual entry.')
+                toast.error('GitHub OAuth is not configured. Please contact support.')
             } else if (error === 'missing_params') {
                 toast.error('OAuth callback missing required parameters')
             } else {
@@ -57,7 +53,6 @@ function GitHubPageContent() {
             if (res.ok) {
                 const data = await res.json()
                 setCurrentGithubLink(data.githubLink)
-                setGithubLink(data.githubLink || '')
             }
         } catch (error) {
             console.error('Failed to fetch GitHub link:', error)
@@ -82,66 +77,16 @@ function GitHubPageContent() {
                 // Redirect to GitHub OAuth
                 window.location.href = data.authUrl
             } else {
-                toast.error(data.message || 'Failed to connect with GitHub. Please use manual entry.')
+                toast.error(data.message || 'Failed to connect with GitHub.')
                 setIsConnecting(false)
             }
         } catch (error) {
             console.error('Error connecting to GitHub:', error)
-            toast.error('Failed to connect with GitHub. Please use manual entry.')
+            toast.error('Failed to connect with GitHub.')
             setIsConnecting(false)
         }
     }
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-
-        if (!githubLink.trim()) {
-            toast.error('Please enter a GitHub repository URL')
-            return
-        }
-
-        // Validate GitHub URL format
-        const githubUrlPattern = /^https?:\/\/(www\.)?github\.com\/[\w\-\.]+\/[\w\-\.]+/
-        if (!githubUrlPattern.test(githubLink.trim())) {
-            toast.error('Please enter a valid GitHub repository URL (e.g., https://github.com/username/repository)')
-            return
-        }
-
-        setIsLoading(true)
-        try {
-            const trimmedLink = githubLink.trim()
-            const res = await fetch('/api/participant/github', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ githubLink: trimmedLink }),
-            })
-
-            const data = await res.json()
-
-            if (res.ok) {
-                // Update state first
-                setCurrentGithubLink(trimmedLink)
-                setGithubLink(trimmedLink)
-                
-                // Trigger event to update navbar
-                window.dispatchEvent(new CustomEvent('githubLinkUpdated'))
-                
-                // Show success toast
-                toast.success('GitHub repository link submitted successfully!')
-                
-                // Show confirmation dialog immediately
-                setShowConfirmation(true)
-                console.log('Confirmation dialog should be visible now', trimmedLink)
-            } else {
-                toast.error(data.message || 'Failed to update GitHub link')
-            }
-        } catch (error) {
-            console.error('Error submitting GitHub link:', error)
-            toast.error('Failed to update GitHub link')
-        } finally {
-            setIsLoading(false)
-        }
-    }
 
     if (loading || !user) {
         return (
@@ -173,7 +118,7 @@ function GitHubPageContent() {
                             GitHub Repository Link
                         </CardTitle>
                         <CardDescription>
-                            Enter your GitHub repository URL. This will be visible to administrators.
+                            Connect your GitHub account to select a repository. This will be visible to administrators.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -185,7 +130,6 @@ function GitHubPageContent() {
                             <div className="space-y-4">
                                 {/* Connect with GitHub Button */}
                                 <div className="space-y-2">
-                                    <Label>Connect with GitHub</Label>
                                     <Button
                                         type="button"
                                         onClick={handleConnectGitHub}
@@ -209,68 +153,26 @@ function GitHubPageContent() {
                                     </p>
                                 </div>
 
-                                {/* Divider */}
-                                <div className="relative">
-                                    <div className="absolute inset-0 flex items-center">
-                                        <span className="w-full border-t" />
-                                    </div>
-                                    <div className="relative flex justify-center text-xs uppercase">
-                                        <span className="bg-background px-2 text-muted-foreground">Or</span>
-                                    </div>
-                                </div>
-
-                                {/* Manual Entry Form */}
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="githubLink">Enter Repository URL Manually</Label>
-                                        <Input
-                                            id="githubLink"
-                                            type="url"
-                                            placeholder="https://github.com/username/repository"
-                                            value={githubLink}
-                                            onChange={(e) => setGithubLink(e.target.value)}
-                                            disabled={isLoading}
-                                        />
-                                        <p className="text-xs text-muted-foreground">
-                                            Enter the full URL to your GitHub repository (e.g., https://github.com/username/repository)
+                                {currentGithubLink && (
+                                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                            <span className="font-medium text-sm">Current Submission</span>
+                                        </div>
+                                        <a
+                                            href={currentGithubLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm text-blue-500 hover:underline break-all flex items-center gap-1"
+                                        >
+                                            {currentGithubLink}
+                                            <ExternalLink className="h-3 w-3" />
+                                        </a>
+                                        <p className="text-xs text-muted-foreground mt-2">
+                                            You can update this link by connecting with GitHub again
                                         </p>
                                     </div>
-
-                                    {currentGithubLink && (
-                                        <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <CheckCircle2 className="h-5 w-5 text-green-500" />
-                                                <span className="font-medium text-sm">Current Submission</span>
-                                            </div>
-                                            <a
-                                                href={currentGithubLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-sm text-blue-500 hover:underline break-all flex items-center gap-1"
-                                            >
-                                                {currentGithubLink}
-                                                <ExternalLink className="h-3 w-3" />
-                                            </a>
-                                            <p className="text-xs text-muted-foreground mt-2">
-                                                You can update this link at any time
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    <Button type="submit" disabled={isLoading || !githubLink.trim()} className="w-full" variant="outline">
-                                        {isLoading ? (
-                                            <>
-                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                                Updating...
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Link2 className="mr-2 h-4 w-4" />
-                                                {currentGithubLink ? 'Update Repository Link' : 'Submit Repository Link'}
-                                            </>
-                                        )}
-                                    </Button>
-                                </form>
+                                )}
                             </div>
                         )}
                     </CardContent>
