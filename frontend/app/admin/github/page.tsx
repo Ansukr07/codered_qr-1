@@ -124,26 +124,16 @@ export default function GitHubPage() {
     )
   }
 
-  // Group participants by team - API already deduplicates, but ensure no duplicates here
+  // Group participants by team - Supabase data should be clean
   const teamMap = new Map<string, GitHubParticipant[]>()
   if (githubStatus) {
-    // Use a Set to track seen participants by email+teamId to prevent duplicates
-    const seen = new Set<string>()
-    
     githubStatus.participants.forEach(participant => {
       const teamId = participant.teamId || 'Individual'
-      const email = participant.email?.toLowerCase() || ''
-      const dedupKey = `${email}_${teamId}_${participant._id}`
       
-      // Only add if we haven't seen this exact combination
-      if (!seen.has(dedupKey)) {
-        seen.add(dedupKey)
-        
-        if (!teamMap.has(teamId)) {
-          teamMap.set(teamId, [])
-        }
-        teamMap.get(teamId)!.push(participant)
+      if (!teamMap.has(teamId)) {
+        teamMap.set(teamId, [])
       }
+      teamMap.get(teamId)!.push(participant)
     })
   }
 
@@ -169,22 +159,11 @@ export default function GitHubPage() {
       ) : githubStatus && githubStatus.participants.length > 0 ? (
         <div className="grid gap-4">
           {Array.from(teamMap.entries()).map(([teamId, participants]) => {
-            // Final deduplication: remove any duplicates by email within the team
-            const emailMap = new Map<string, GitHubParticipant>()
-            participants.forEach(p => {
-              const emailKey = p.email?.toLowerCase() || p._id
-              // Only keep first occurrence, or prefer one with GitHub link
-              if (!emailMap.has(emailKey)) {
-                emailMap.set(emailKey, p)
-              } else {
-                const existing = emailMap.get(emailKey)!
-                // Prefer participant with GitHub link
-                if (p.githubLink && !existing.githubLink) {
-                  emailMap.set(emailKey, p)
-                }
-              }
+            // Supabase data should be clean, but just in case, remove duplicates by email
+            const uniqueParticipants = participants.filter((participant, index, arr) => {
+              // Keep first occurrence of each email
+              return arr.findIndex(p => p.email === participant.email) === index
             })
-            const uniqueParticipants = Array.from(emailMap.values())
             
             const hasGithubLink = uniqueParticipants.some(p => p.githubLink)
             const teamStatus = hasGithubLink ? 'submitted' : 'pending'
