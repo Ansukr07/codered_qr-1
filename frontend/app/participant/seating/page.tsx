@@ -25,13 +25,40 @@ export default function SeatingPage() {
         }
     }, [user, loading, router])
 
+    // Helper function to normalize and find exact team name from seating data
+    const normalizeTeamName = (teamName: string): string | null => {
+        if (!teamName) return null;
+        const normalized = teamName.trim().toLowerCase();
+        // Try to find exact match in seating data (case-insensitive)
+        const found = SEATING_DATA.find(s => 
+            s.team.trim().toLowerCase() === normalized && s.team.trim() !== ''
+        );
+        return found ? found.team.trim() : null;
+    };
+
     // Initial load: Find team for logged in user
     React.useEffect(() => {
         if (user?.name) {
-            const dbTeam = findTeamByMember(user.name);
-            // Fallback to user context team if not in DB
-            const contextTeam = (user as any).teamName || (user as any).teamId?.name || (user as any).team || '';
-            const myTeam = dbTeam || contextTeam;
+            // Priority 1: Use teamId from user object (from Supabase participant data)
+            // This is the most reliable as it comes directly from the database
+            const userTeamId = (user as any).teamId;
+            
+            // Normalize teamId to match exact team name from seating data
+            let normalizedTeamId: string | null = null;
+            if (userTeamId) {
+                normalizedTeamId = normalizeTeamName(userTeamId);
+            }
+            
+            // Priority 2: Try to find team by name (but only if teamId is not available or doesn't match)
+            // This is a fallback for cases where teamId might not be set or doesn't match seating data
+            const dbTeam = normalizedTeamId ? null : findTeamByMember(user.name);
+            
+            // Priority 3: Fallback to other team fields
+            const contextTeam = (user as any).teamName || (user as any).team || '';
+            const normalizedContextTeam = contextTeam ? normalizeTeamName(contextTeam) : null;
+            
+            // Use normalizedTeamId first, then dbTeam, then normalizedContextTeam
+            const myTeam = normalizedTeamId || dbTeam || normalizedContextTeam || contextTeam;
 
             if (myTeam) {
                 setUserTeamName(myTeam);
