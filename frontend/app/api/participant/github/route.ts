@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import User from '@/lib/models/User';
 import { requireAuth, requireRole } from '@/lib/middleware/rbac';
+import { createClient } from '@supabase/supabase-js';
 
 async function connectDB() {
     try {
@@ -22,6 +23,22 @@ async function connectDB() {
         console.error('Database connection error:', error);
         throw new Error(`Database connection failed: ${error.message}`);
     }
+}
+
+function getSupabaseClient() {
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+        return null;
+    }
+    
+    return createClient(supabaseUrl, supabaseServiceKey, {
+        auth: {
+            autoRefreshToken: false,
+            persistSession: false
+        }
+    });
 }
 
 export async function PUT(request: NextRequest) {
@@ -98,33 +115,87 @@ export async function PUT(request: NextRequest) {
         
         console.log('Processed GitHub link:', { original: githubLink, processed: trimmedLink });
 
-        let userRecord;
+        // Try to find user in MongoDB first
+        let userRecord = null;
         try {
             userRecord = await User.findById(user.userId);
         } catch (findError: any) {
-            console.error('Error finding user:', findError);
-            return NextResponse.json(
-                { 
-                    message: 'Failed to find user',
-                    error: process.env.NODE_ENV === 'development' ? findError.message : undefined
-                },
-                { status: 500 }
-            );
+            // If userId is not a valid MongoDB ObjectId, it might be a Supabase UUID
+            console.log('MongoDB findById failed, might be Supabase participant:', findError.message);
         }
         
+        // If not found in MongoDB and user is a participant, try Supabase
+        if (!userRecord && user.role === 'participant') {
+            console.log('User not found in MongoDB, trying Supabase for participant:', user.userId);
+            const supabase = getSupabaseClient();
+            
+            if (supabase) {
+                try {
+                    // Update Supabase participants table
+                    const { data: participant, error: supabaseError } = await supabase
+                        .from('participants')
+                        .update({ github_link: trimmedLink })
+                        .eq('id', user.userId)
+                        .select()
+                        .single();
+                    
+                    if (supabaseError) {
+                        console.error('Supabase update error:', supabaseError);
+                        return NextResponse.json(
+                            { 
+                                message: `Failed to update GitHub link in Supabase: ${supabaseError.message}`,
+                                error: process.env.NODE_ENV === 'development' ? supabaseError.details : undefined
+                            },
+                            { status: 500 }
+                        );
+                    }
+                    
+                    if (!participant) {
+                        console.error('Participant not found in Supabase with ID:', user.userId);
+                        return NextResponse.json(
+                            { message: 'Participant not found in database' },
+                            { status: 404 }
+                        );
+                    }
+                    
+                    console.log('Successfully updated GitHub link in Supabase for participant:', user.userId);
+                    return NextResponse.json({
+                        message: 'GitHub link updated successfully',
+                        githubLink: trimmedLink
+                    });
+                } catch (supabaseError: any) {
+                    console.error('Error updating Supabase:', supabaseError);
+                    return NextResponse.json(
+                        { 
+                            message: `Failed to update GitHub link: ${supabaseError.message || 'Unknown error'}`,
+                            error: process.env.NODE_ENV === 'development' ? supabaseError.stack : undefined
+                        },
+                        { status: 500 }
+                    );
+                }
+            } else {
+                console.error('Supabase client not available');
+                return NextResponse.json(
+                    { message: 'Database configuration error. Please contact support.' },
+                    { status: 500 }
+                );
+            }
+        }
+        
+        // If still not found, return error
         if (!userRecord) {
-            console.error('User not found with ID:', user.userId);
+            console.error('User not found with ID:', user.userId, 'role:', user.role);
             return NextResponse.json(
-                { message: 'User not found' },
+                { message: 'User not found in database' },
                 { status: 404 }
             );
         }
 
-        // Set githubLink
+        // Update MongoDB User record
         const previousLink = userRecord.githubLink;
         userRecord.githubLink = trimmedLink || null;
         
-        console.log('Updating GitHub link:', {
+        console.log('Updating GitHub link in MongoDB:', {
             userId: user.userId,
             previousLink,
             newLink: trimmedLink
@@ -190,13 +261,50 @@ export async function GET(request: NextRequest) {
         }
 
         const { user } = authResult;
-        const userRecord = await User.findById(user.userId).select('githubLink');
-
+        
+        // Try MongoDB first
+        let userRecord = null;
+        try {
+            userRecord = await User.findById(user.userId).select('githubLink');
+        } catch (findError: any) {
+            // If userId is not a valid MongoDB ObjectId, it might be a Supabase UUID
+            console.log('MongoDB findById failed, might be Supabase participant:', findError.message);
+        }
+        
+        // If not found in MongoDB and user is a participant, try Supabase
+        if (!userRecord && user.role === 'participant') {
+            const supabase = getSupabaseClient();
+            
+            if (supabase) {
+                try {
+                    const { data: participant, error: supabaseError } = await supabase
+                        .from('participants')
+                        .select('github_link')
+                        .eq('id', user.userId)
+                        .single();
+                    
+                    if (supabaseError || !participant) {
+                        return NextResponse.json({
+                            githubLink: null
+                        });
+                    }
+                    
+                    return NextResponse.json({
+                        githubLink: participant.github_link || null
+                    });
+                } catch (supabaseError: any) {
+                    console.error('Error fetching from Supabase:', supabaseError);
+                    return NextResponse.json({
+                        githubLink: null
+                    });
+                }
+            }
+        }
+        
         if (!userRecord) {
-            return NextResponse.json(
-                { message: 'User not found' },
-                { status: 404 }
-            );
+            return NextResponse.json({
+                githubLink: null
+            });
         }
 
         return NextResponse.json({
