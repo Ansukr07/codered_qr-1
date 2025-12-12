@@ -88,6 +88,7 @@ export async function POST(request: NextRequest) {
             action: 'claim'
         }).sort({ timestamp: -1 }).populate('volunteerId', 'name');
 
+        // If max claims reached, return limit_reached
         if (claimCount >= maxClaims) {
             return NextResponse.json({
                 status: 'limit_reached',
@@ -106,10 +107,12 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        if (claimCount > 0) {
+        // For coffee (multi-claim), if claimCount > 0 but < maxClaims, still allow scanning
+        // For other resources (single-claim), if claimCount > 0, block scanning
+        if (claimCount > 0 && !isCoffee) {
             return NextResponse.json({
                 status: 'claimed',
-                message: `Already claimed: ${resource.name}. This participant can claim up to ${maxClaims} times.`,
+                message: `Already claimed: ${resource.name}. This resource can only be claimed once.`,
                 member: {
                     name: userRecord.name,
                     teamId: userRecord.teamId,
@@ -124,16 +127,23 @@ export async function POST(request: NextRequest) {
             });
         }
 
+        // For coffee with existing claims (but under max), or first-time claims, allow
         return NextResponse.json({
             status: 'allowed',
-            message: 'Ready to claim',
+            message: claimCount > 0 
+                ? `Ready to claim (${claimCount}/${maxClaims} already claimed).` 
+                : 'Ready to claim',
             member: {
                 name: userRecord.name,
                 teamId: userRecord.teamId,
                 email: userRecord.email
             },
-            claimCount: 0,
-            maxClaims
+            claimCount,
+            maxClaims,
+            transaction: lastTransaction ? {
+                timestamp: lastTransaction.timestamp,
+                volunteerName: lastTransaction.volunteerId ? (lastTransaction.volunteerId as any).name : 'Unknown'
+            } : undefined
         });
     } catch (error: any) {
         return NextResponse.json(

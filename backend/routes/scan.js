@@ -154,6 +154,7 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
             action: 'claim'
         }).sort({ timestamp: -1 }).populate('volunteerId', 'name');
 
+        // If max claims reached, return limit_reached
         if (claimCount >= maxClaims) {
             return res.status(200).json({
                 status: 'limit_reached',
@@ -172,10 +173,12 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
             });
         }
 
-        if (claimCount > 0) {
+        // For coffee (multi-claim), if claimCount > 0 but < maxClaims, still allow scanning
+        // For other resources (single-claim), if claimCount > 0, block scanning
+        if (claimCount > 0 && !isCoffee) {
             return res.status(200).json({
                 status: 'claimed',
-                message: `Already claimed: ${resource.name}. This participant can claim up to ${maxClaims} times.`,
+                message: `Already claimed: ${resource.name}. This resource can only be claimed once.`,
                 member: {
                     name: user.name,
                     teamId: user.teamId,
@@ -190,16 +193,23 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
             });
         }
 
+        // For coffee with existing claims (but under max), or first-time claims, allow
         return res.status(200).json({
             status: 'allowed',
-            message: 'Ready to claim',
+            message: claimCount > 0 
+                ? `Ready to claim (${claimCount}/${maxClaims} already claimed).` 
+                : 'Ready to claim',
             member: {
                 name: user.name,
                 teamId: user.teamId,
                 email: user.email
             },
-            claimCount: 0,
-            maxClaims
+            claimCount,
+            maxClaims,
+            transaction: lastTransaction ? {
+                timestamp: lastTransaction.timestamp,
+                volunteerName: lastTransaction.volunteerId ? lastTransaction.volunteerId.name : 'Unknown'
+            } : undefined
         });
 
     } catch (error) {
