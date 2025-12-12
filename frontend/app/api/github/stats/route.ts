@@ -55,12 +55,13 @@ export async function GET(request: NextRequest) {
 
         const repoData = await response.json();
 
-        // Fetch commit count using contributors API (more accurate)
+        // Fetch commit count using commits API with proper pagination
         let commitCount = 0;
         try {
-            // Try to get commit count from contributors API
-            const contributorsResponse = await fetch(
-                `https://api.github.com/repos/${owner}/${repoName}/contributors?per_page=1&anon=1`,
+            // Use commits API with max per_page (100) for better accuracy
+            const perPage = 100;
+            const commitsResponse = await fetch(
+                `https://api.github.com/repos/${owner}/${repoName}/commits?per_page=${perPage}&page=1`,
                 {
                     headers: {
                         'Accept': 'application/vnd.github.v3+json',
@@ -69,46 +70,60 @@ export async function GET(request: NextRequest) {
                 }
             );
             
-            if (contributorsResponse.ok) {
-                const linkHeader = contributorsResponse.headers.get('link');
+            if (commitsResponse.ok) {
+                const linkHeader = commitsResponse.headers.get('link');
+                
                 if (linkHeader) {
-                    // Extract total count from Link header
-                    const lastPageMatch = linkHeader.match(/page=(\d+)>; rel="last"/);
-                    if (lastPageMatch) {
-                        commitCount = parseInt(lastPageMatch[1], 10) * 30; // Approximate (30 per page)
-                    }
-                }
-            }
-            
-            // Fallback: try commits API with pagination
-            if (commitCount === 0) {
-                const commitsResponse = await fetch(
-                    `https://api.github.com/repos/${owner}/${repoName}/commits?per_page=1`,
-                    {
-                        headers: {
-                            'Accept': 'application/vnd.github.v3+json',
-                            'User-Agent': 'CodeRed-Portal'
+                    // Parse Link header to find last page
+                    // Format: <url1>; rel="next", <url2>; rel="last"
+                    const links = linkHeader.split(',').map(link => link.trim());
+                    let lastPage: number | null = null;
+                    
+                    for (const link of links) {
+                        const lastPageMatch = link.match(/page=(\d+)>; rel="last"/);
+                        if (lastPageMatch) {
+                            lastPage = parseInt(lastPageMatch[1], 10);
+                            break;
                         }
                     }
-                );
-                
-                if (commitsResponse.ok) {
-                    const linkHeader = commitsResponse.headers.get('link');
-                    if (linkHeader) {
-                        const lastPageMatch = linkHeader.match(/page=(\d+)>; rel="last"/);
-                        if (lastPageMatch) {
-                            commitCount = parseInt(lastPageMatch[1], 10);
+                    
+                    if (lastPage !== null) {
+                        // Fetch the last page to get exact count on that page
+                        const lastPageResponse = await fetch(
+                            `https://api.github.com/repos/${owner}/${repoName}/commits?per_page=${perPage}&page=${lastPage}`,
+                            {
+                                headers: {
+                                    'Accept': 'application/vnd.github.v3+json',
+                                    'User-Agent': 'CodeRed-Portal'
+                                }
+                            }
+                        );
+                        
+                        if (lastPageResponse.ok) {
+                            const lastPageCommits = await lastPageResponse.json();
+                            const commitsOnLastPage = lastPageCommits.length;
+                            
+                            // Calculate total: (lastPage - 1) * perPage + commits on last page
+                            commitCount = (lastPage - 1) * perPage + commitsOnLastPage;
+                        } else {
+                            // Fallback: approximate using last page number
+                            // This is less accurate but better than 0
+                            commitCount = lastPage * perPage;
                         }
                     } else {
-                        // If no pagination, try to get all commits (limited)
+                        // No last page found in Link header, count commits on first page only
                         const commits = await commitsResponse.json();
-                        commitCount = commits.length > 0 ? 1 : 0;
+                        commitCount = commits.length;
                     }
+                } else {
+                    // No Link header means single page or no commits
+                    const commits = await commitsResponse.json();
+                    commitCount = commits.length;
                 }
             }
         } catch (error) {
             console.error('Error fetching commit count:', error);
-            // Continue without commit count
+            // Continue without commit count (will be 0)
         }
 
         return NextResponse.json({
