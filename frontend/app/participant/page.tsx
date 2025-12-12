@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy, Map, MapPinned } from 'lucide-react'
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy, Map, MapPinned, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
@@ -199,7 +199,14 @@ export default function ParticipantDashboard() {
                                     <span className="md:hidden">Campus</span>
                                 </Button>
                             </Link>
-                            <Button onClick={logout} variant="outline" size="sm" className="text-foreground h-9 md:h-10">
+                            <Link href="/participant/timeline">
+                                <Button variant="secondary" size="sm" className="h-9 md:h-10">
+                                    <Calendar className="mr-2 h-4 w-4" />
+                                    <span className="hidden md:inline">Event Flow</span>
+                                    <span className="md:hidden">Timeline</span>
+                                </Button>
+                            </Link>
+                            <Button onClick={() => logout()} variant="outline" size="sm" className="text-foreground h-9 md:h-10">
                                 <LogOut className="mr-2 h-4 w-4" />
                                 <span className="hidden md:inline">Logout</span>
                             </Button>
