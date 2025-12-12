@@ -24,6 +24,14 @@ export async function POST(request: NextRequest) {
         }
         const { user } = authResult;
 
+        if (!user || !user.userId) {
+            console.error('Invalid user data from auth:', { user, hasUserId: !!user?.userId });
+            return NextResponse.json(
+                { message: 'Invalid user data. Please log in again.' },
+                { status: 401 }
+            );
+        }
+
         const { qr_code, resource_id } = await request.json();
 
         // Normalize QR code: trim whitespace and handle URL format
@@ -108,10 +116,42 @@ export async function POST(request: NextRequest) {
         resource.distributedQuantity += 1;
         await resource.save();
 
+        // Ensure volunteerId is a valid ObjectId
+        let volunteerId: any = user.userId;
+        
+        // If volunteerId is not a valid ObjectId (e.g., for hardcoded volunteer), find/create a volunteer record
+        if (!mongoose.Types.ObjectId.isValid(volunteerId)) {
+            console.log(`VolunteerId is not a valid ObjectId: ${volunteerId}, looking up volunteer by email`);
+            const Volunteer = (await import('@/lib/models/Volunteer')).default;
+            let volunteerRecord = await Volunteer.findOne({ email: user.email || 'vol@vol.in' });
+            
+            if (!volunteerRecord) {
+                // Create a volunteer record if it doesn't exist (for hardcoded volunteer)
+                console.log('Creating volunteer record for hardcoded user');
+                try {
+                    volunteerRecord = await Volunteer.create({
+                        name: user.name || 'Volunteer User',
+                        email: user.email || 'vol@vol.in',
+                        password: 'dummy', // Password not used for hardcoded login
+                    });
+                } catch (createError: any) {
+                    // If creation fails (e.g., duplicate email), try to find again
+                    console.error('Error creating volunteer:', createError);
+                    volunteerRecord = await Volunteer.findOne({ email: user.email || 'vol@vol.in' });
+                    if (!volunteerRecord) {
+                        throw new Error('Failed to find or create volunteer record');
+                    }
+                }
+            }
+            
+            volunteerId = volunteerRecord._id;
+            console.log(`Using volunteerId: ${volunteerId}`);
+        }
+
         const transaction = await Transaction.create({
             userId: userRecord._id,
             resourceId: resource._id,
-            volunteerId: user.userId,
+            volunteerId: volunteerId,
             action: 'claim',
         });
 
@@ -121,8 +161,24 @@ export async function POST(request: NextRequest) {
             memberName: userRecord.name
         });
     } catch (error: any) {
+        console.error('Error in /api/scan:', error);
+        console.error('Error stack:', error.stack);
+        console.error('Error details:', {
+            message: error.message,
+            name: error.name,
+            code: error.code
+        });
+        
+        // Return more detailed error in development
+        const errorMessage = process.env.NODE_ENV === 'development' 
+            ? `${error.message || 'Internal server error'}. Stack: ${error.stack}`
+            : error.message || 'Internal server error. Please check the server logs.';
+        
         return NextResponse.json(
-            { message: error.message },
+            { 
+                message: errorMessage,
+                error: process.env.NODE_ENV === 'development' ? error.stack : undefined
+            },
             { status: 500 }
         );
     }
