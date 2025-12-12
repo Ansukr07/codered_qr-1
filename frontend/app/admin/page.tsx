@@ -237,10 +237,18 @@ export default function AdminDashboard() {
 
   const fetchGithubStatus = async () => {
     try {
-      const res = await fetch('/api/admin/participants/github-status')
+      const res = await fetch('/api/admin/participants/github-status', {
+        cache: 'no-store', // Ensure fresh data
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
       if (res.ok) {
         const data = await res.json()
+        console.log('GitHub status fetched:', data.stats)
         setGithubStatus(data)
+      } else {
+        console.error('Failed to fetch GitHub status:', res.status, res.statusText)
       }
     } catch (error) {
       console.error('Failed to fetch GitHub status:', error)
@@ -491,49 +499,68 @@ export default function AdminDashboard() {
           <TabsContent value="github">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Github className="mr-2 h-5 w-5" />
-                  GitHub Repository Status
-                </CardTitle>
-                <CardDescription>
-                  {githubStatus ? (
-                    <>
-                      {githubStatus.stats.submitted} submitted • {githubStatus.stats.pending} pending
-                    </>
-                  ) : (
-                    'View GitHub repository submission status'
-                  )}
-                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="flex items-center">
+                      <Github className="mr-2 h-5 w-5" />
+                      GitHub Repository Status
+                    </CardTitle>
+                    <CardDescription>
+                      {githubStatus ? (
+                        <>
+                          {githubStatus.stats.submitted} submitted • {githubStatus.stats.pending} pending
+                        </>
+                      ) : (
+                        'View GitHub repository submission status'
+                      )}
+                    </CardDescription>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={fetchGithubStatus}
+                    className="gap-2"
+                  >
+                    <TrendingUp className="h-4 w-4" />
+                    Refresh
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
                 {githubStatus ? (
                   <div className="space-y-2">
-                    {githubStatus.participants.map((participant) => (
-                      <div key={participant._id} className="flex justify-between items-center p-3 bg-secondary/50 rounded-lg">
-                        <div className="flex-1">
-                          <p className="font-medium text-card-foreground">{participant.name}</p>
-                          <p className="text-sm text-muted-foreground">{participant.email}</p>
-                          {participant.teamId && (
-                            <p className="text-xs text-muted-foreground">Team: {participant.teamId}</p>
-                          )}
-                          {participant.githubLink && (
-                            <a
-                              href={participant.githubLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-xs text-blue-500 hover:underline flex items-center gap-1 mt-1"
-                            >
-                              <Github className="h-3 w-3" />
-                              {participant.githubLink}
-                              <ExternalLink className="h-3 w-3" />
-                            </a>
-                          )}
+                    {githubStatus.participants.length > 0 ? (
+                      githubStatus.participants.map((participant) => (
+                        <div key={participant._id} className="flex justify-between items-center p-3 bg-secondary/50 rounded-lg">
+                          <div className="flex-1">
+                            <p className="font-medium text-card-foreground">{participant.name}</p>
+                            <p className="text-sm text-muted-foreground">{participant.email}</p>
+                            {participant.teamId && (
+                              <p className="text-xs text-muted-foreground">Team: {participant.teamId}</p>
+                            )}
+                            {participant.githubLink ? (
+                              <a
+                                href={participant.githubLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-blue-500 hover:underline flex items-center gap-1 mt-1 break-all"
+                              >
+                                <Github className="h-3 w-3 flex-shrink-0" />
+                                <span className="break-all">{participant.githubLink}</span>
+                                <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                              </a>
+                            ) : (
+                              <p className="text-xs text-muted-foreground mt-1">No repository link submitted</p>
+                            )}
+                          </div>
+                          <Badge variant={participant.status === 'submitted' ? 'default' : 'secondary'}>
+                            {participant.status === 'submitted' ? 'Submitted' : 'Pending'}
+                          </Badge>
                         </div>
-                        <Badge variant={participant.status === 'submitted' ? 'default' : 'secondary'}>
-                          {participant.status === 'submitted' ? 'Submitted' : 'Pending'}
-                        </Badge>
-                      </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className="text-center text-muted-foreground py-8">No participants found</p>
+                    )}
                   </div>
                 ) : (
                   <p className="text-center text-muted-foreground py-8">Loading GitHub status...</p>

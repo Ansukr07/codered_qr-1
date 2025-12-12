@@ -68,23 +68,34 @@ export default function ParticipantGitHubPage() {
 
         setIsLoading(true)
         try {
+            const trimmedLink = githubLink.trim()
             const res = await fetch('/api/participant/github', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ githubLink: githubLink.trim() }),
+                body: JSON.stringify({ githubLink: trimmedLink }),
             })
 
             const data = await res.json()
 
             if (res.ok) {
-                setCurrentGithubLink(githubLink.trim())
-                setShowConfirmation(true)
+                // Update state first
+                setCurrentGithubLink(trimmedLink)
+                setGithubLink(trimmedLink)
+                
                 // Trigger event to update navbar
                 window.dispatchEvent(new CustomEvent('githubLinkUpdated'))
+                
+                // Show success toast
+                toast.success('GitHub repository link submitted successfully!')
+                
+                // Show confirmation dialog immediately
+                setShowConfirmation(true)
+                console.log('Confirmation dialog should be visible now', trimmedLink)
             } else {
                 toast.error(data.message || 'Failed to update GitHub link')
             }
         } catch (error) {
+            console.error('Error submitting GitHub link:', error)
             toast.error('Failed to update GitHub link')
         } finally {
             setIsLoading(false)
@@ -207,38 +218,52 @@ export default function ParticipantGitHubPage() {
             </div>
 
             {/* Confirmation Dialog */}
-            <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
-                <DialogContent>
+            <Dialog open={showConfirmation} onOpenChange={(open) => {
+                setShowConfirmation(open)
+                if (!open) {
+                    router.push('/participant')
+                }
+            }}>
+                <DialogContent className="sm:max-w-[500px] z-[9999]">
                     <DialogHeader>
-                        <DialogTitle className="flex items-center gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-green-500" />
+                        <DialogTitle className="flex items-center gap-2 text-xl">
+                            <CheckCircle2 className="h-6 w-6 text-green-500" />
                             Repository Submitted Successfully!
                         </DialogTitle>
-                        <DialogDescription>
+                        <DialogDescription className="text-base pt-2">
                             Your GitHub repository link has been submitted and is now visible to administrators.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="py-4">
-                        {currentGithubLink && (
-                            <div className="p-3 bg-secondary rounded-lg">
-                                <p className="text-sm font-medium mb-1">Repository Link:</p>
-                                <a
-                                    href={currentGithubLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-sm text-blue-500 hover:underline break-all flex items-center gap-1"
-                                >
-                                    {currentGithubLink}
-                                    <ExternalLink className="h-3 w-3" />
-                                </a>
+                        {currentGithubLink ? (
+                            <div className="p-4 bg-secondary rounded-lg border border-green-500/20">
+                                <p className="text-sm font-semibold mb-2 text-foreground">Repository Link:</p>
+                                <div className="break-all">
+                                    <a
+                                        href={currentGithubLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm text-blue-500 hover:underline flex items-center gap-1 font-mono"
+                                    >
+                                        <span className="break-all">{currentGithubLink}</span>
+                                        <ExternalLink className="h-4 w-4 flex-shrink-0" />
+                                    </a>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="p-4 bg-secondary rounded-lg">
+                                <p className="text-sm text-muted-foreground">No repository link available</p>
                             </div>
                         )}
                     </div>
                     <DialogFooter>
-                        <Button onClick={() => {
-                            setShowConfirmation(false)
-                            router.push('/participant')
-                        }}>
+                        <Button 
+                            onClick={() => {
+                                setShowConfirmation(false)
+                                router.push('/participant')
+                            }}
+                            className="w-full sm:w-auto"
+                        >
                             Return to Dashboard
                         </Button>
                     </DialogFooter>

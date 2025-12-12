@@ -54,10 +54,18 @@ export default function GitHubPage() {
   const fetchGithubStatus = async () => {
     try {
       setIsLoading(true)
-      const res = await fetch('/api/admin/participants/github-status')
+      const res = await fetch('/api/admin/participants/github-status', {
+        cache: 'no-store', // Ensure fresh data
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
       if (res.ok) {
         const data = await res.json()
+        console.log('GitHub status fetched:', data.stats, 'participants:', data.participants.length)
         setGithubStatus(data)
+      } else {
+        console.error('Failed to fetch GitHub status:', res.status, res.statusText)
       }
     } catch (error) {
       console.error('Failed to fetch GitHub status:', error)

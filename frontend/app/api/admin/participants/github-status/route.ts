@@ -23,15 +23,18 @@ export async function GET(request: NextRequest) {
             .select('name email teamId githubLink createdAt')
             .sort({ createdAt: -1 });
 
-        const githubStatus = participants.map(p => ({
-            _id: p._id,
-            name: p.name,
-            email: p.email,
-            teamId: p.teamId,
-            githubLink: p.githubLink || null,
-            status: p.githubLink ? 'submitted' : 'pending',
-            createdAt: p.createdAt
-        }));
+        const githubStatus = participants.map(p => {
+            const hasLink = p.githubLink && p.githubLink.trim() && p.githubLink.trim().length > 0;
+            return {
+                _id: p._id.toString(),
+                name: p.name,
+                email: p.email,
+                teamId: p.teamId || null,
+                githubLink: hasLink ? p.githubLink.trim() : null,
+                status: hasLink ? 'submitted' : 'pending',
+                createdAt: p.createdAt
+            };
+        });
 
         const stats = {
             total: githubStatus.length,
