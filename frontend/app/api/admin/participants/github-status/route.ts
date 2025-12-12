@@ -60,38 +60,41 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        // Combine participants from both sources
+        // Combine participants from both sources, deduplicating by email and team
         const participantMap = new Map<string, any>();
         
-        // Add MongoDB participants
+        // Add MongoDB participants (use email+teamId as key for deduplication)
         mongoParticipants.forEach(p => {
             const hasLink = p.githubLink && p.githubLink.trim() && p.githubLink.trim().length > 0;
-            participantMap.set(p._id.toString(), {
-                _id: p._id.toString(),
-                name: p.name,
-                email: p.email || null,
-                teamId: p.teamId || null,
-                githubLink: hasLink ? p.githubLink.trim() : null,
-                status: hasLink ? 'submitted' : 'pending',
-                createdAt: p.createdAt
-            });
+            const key = `${p.email || p._id.toString()}_${p.teamId || 'no-team'}`;
+            
+            if (!participantMap.has(key)) {
+                participantMap.set(key, {
+                    _id: p._id.toString(),
+                    name: p.name,
+                    email: p.email || null,
+                    teamId: p.teamId || null,
+                    githubLink: hasLink ? p.githubLink.trim() : null,
+                    status: hasLink ? 'submitted' : 'pending',
+                    createdAt: p.createdAt
+                });
+            }
         });
         
-        // Add/update with Supabase participants (by email to match)
+        // Add/update with Supabase participants (deduplicate by email+teamId)
         supabaseParticipants.forEach(p => {
             const hasLink = p.github_link && p.github_link.trim() && p.github_link.trim().length > 0;
-            const key = p.email || p.id; // Use email as key, fallback to id
+            const key = `${p.email || p.id}_${p.team_id || 'no-team'}`;
             
-            // If participant exists in MongoDB by email, update it
-            // Otherwise, add as new entry
+            // If participant exists, prefer Supabase github_link if it exists
             if (participantMap.has(key)) {
                 const existing = participantMap.get(key);
-                // Prefer Supabase github_link if it exists
                 if (hasLink) {
                     existing.githubLink = p.github_link.trim();
                     existing.status = 'submitted';
                 }
             } else {
+                // Only add if not already in map
                 participantMap.set(key, {
                     _id: p.id,
                     name: p.name,
@@ -104,7 +107,16 @@ export async function GET(request: NextRequest) {
             }
         });
 
-        const githubStatus = Array.from(participantMap.values());
+        // Deduplicate by email within same team (remove exact duplicates)
+        const deduplicated = new Map<string, any>();
+        participantMap.forEach((participant, key) => {
+            const dedupKey = `${participant.email?.toLowerCase() || participant._id}_${participant.teamId || 'no-team'}`;
+            if (!deduplicated.has(dedupKey)) {
+                deduplicated.set(dedupKey, participant);
+            }
+        });
+
+        const githubStatus = Array.from(deduplicated.values());
 
         const stats = {
             total: githubStatus.length,

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, ExternalLink, Loader2 } from 'lucide-react'
+import { Github, ExternalLink, Loader2, GitCommit, Star, GitFork } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface GitHubParticipant {
@@ -16,6 +16,16 @@ interface GitHubParticipant {
   githubLink: string | null
   status: 'submitted' | 'pending'
   createdAt: string
+}
+
+interface GitHubStats {
+  stars: number
+  forks: number
+  commits: number
+  openIssues: number
+  language: string | null
+  description: string | null
+  updatedAt: string | null
 }
 
 interface GitHubStatus {
@@ -32,6 +42,7 @@ export default function GitHubPage() {
   const router = useRouter()
   const [githubStatus, setGithubStatus] = useState<GitHubStatus | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [repoStats, setRepoStats] = useState<Map<string, GitHubStats>>(new Map())
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
@@ -64,6 +75,32 @@ export default function GitHubPage() {
         const data = await res.json()
         console.log('GitHub status fetched:', data.stats, 'participants:', data.participants.length)
         setGithubStatus(data)
+        
+        // Fetch stats for all repositories
+        const statsMap = new Map<string, GitHubStats>()
+        const uniqueRepos = new Set<string>()
+        
+        data.participants.forEach((p: GitHubParticipant) => {
+          if (p.githubLink) {
+            uniqueRepos.add(p.githubLink)
+          }
+        })
+        
+        // Fetch stats for each unique repository
+        const statsPromises = Array.from(uniqueRepos).map(async (repoUrl) => {
+          try {
+            const statsRes = await fetch(`/api/github/stats?url=${encodeURIComponent(repoUrl)}`)
+            if (statsRes.ok) {
+              const stats = await statsRes.json()
+              statsMap.set(repoUrl, stats)
+            }
+          } catch (error) {
+            console.error(`Error fetching stats for ${repoUrl}:`, error)
+          }
+        })
+        
+        await Promise.all(statsPromises)
+        setRepoStats(statsMap)
       } else {
         console.error('Failed to fetch GitHub status:', res.status, res.statusText)
       }
@@ -116,9 +153,15 @@ export default function GitHubPage() {
       ) : githubStatus && githubStatus.participants.length > 0 ? (
         <div className="grid gap-4">
           {Array.from(teamMap.entries()).map(([teamId, participants]) => {
-            const hasGithubLink = participants.some(p => p.githubLink)
+            // Deduplicate participants by email within the team
+            const uniqueParticipants = Array.from(
+              new Map(participants.map(p => [p.email?.toLowerCase() || p._id, p])).values()
+            )
+            
+            const hasGithubLink = uniqueParticipants.some(p => p.githubLink)
             const teamStatus = hasGithubLink ? 'submitted' : 'pending'
-            const githubLink = participants.find(p => p.githubLink)?.githubLink || null
+            const githubLink = uniqueParticipants.find(p => p.githubLink)?.githubLink || null
+            const stats = githubLink ? repoStats.get(githubLink) : null
 
             return (
               <Card
@@ -135,21 +178,44 @@ export default function GitHubPage() {
                         )}
                       </CardTitle>
                       <CardDescription>
-                        {participants.length} member{participants.length !== 1 ? 's' : ''}
+                        {uniqueParticipants.length} member{uniqueParticipants.length !== 1 ? 's' : ''}
                       </CardDescription>
                       {githubLink && (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
-                          <Github className="h-4 w-4" />
-                          <span className="font-mono text-xs break-all">{githubLink}</span>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="h-6 px-2 gap-1"
-                            onClick={() => window.open(githubLink, '_blank')}
-                          >
-                            <ExternalLink className="h-3 w-3" />
-                            View
-                          </Button>
+                        <div className="space-y-2 mt-2">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Github className="h-4 w-4" />
+                            <span className="font-mono text-xs break-all">{githubLink}</span>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="h-6 px-2 gap-1"
+                              onClick={() => window.open(githubLink, '_blank')}
+                            >
+                              <ExternalLink className="h-3 w-3" />
+                              View
+                            </Button>
+                          </div>
+                          {stats && (
+                            <div className="flex items-center gap-4 text-xs text-muted-foreground pt-1">
+                              <div className="flex items-center gap-1">
+                                <GitCommit className="h-3 w-3" />
+                                <span>{stats.commits || 0} commits</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Star className="h-3 w-3" />
+                                <span>{stats.stars || 0} stars</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <GitFork className="h-3 w-3" />
+                                <span>{stats.forks || 0} forks</span>
+                              </div>
+                              {stats.language && (
+                                <span className="text-xs px-1.5 py-0.5 bg-primary/10 rounded">
+                                  {stats.language}
+                                </span>
+                              )}
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
@@ -163,7 +229,7 @@ export default function GitHubPage() {
                     <div className="space-y-2">
                       <p className="text-sm text-muted-foreground">Team Members:</p>
                       <div className="space-y-1">
-                        {participants.map((participant) => (
+                        {uniqueParticipants.map((participant) => (
                           <div key={participant._id} className="flex items-center justify-between p-2 bg-secondary/30 rounded">
                             <div>
                               <p className="text-sm font-medium">{participant.name}</p>
