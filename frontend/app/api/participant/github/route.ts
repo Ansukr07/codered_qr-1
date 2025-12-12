@@ -4,16 +4,42 @@ import User from '@/lib/models/User';
 import { requireAuth, requireRole } from '@/lib/middleware/rbac';
 
 async function connectDB() {
-    if (mongoose.connections[0].readyState) return;
-    const mongoUri = process.env.MONGODB_URI;
-    if (mongoUri) {
-        await mongoose.connect(mongoUri);
+    try {
+        if (mongoose.connections[0].readyState === 1) {
+            return; // Already connected
+        }
+        
+        const mongoUri = process.env.MONGODB_URI;
+        if (!mongoUri) {
+            throw new Error('MONGODB_URI is not defined in environment variables');
+        }
+        
+        await mongoose.connect(mongoUri, {
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+        });
+    } catch (error: any) {
+        console.error('Database connection error:', error);
+        throw new Error(`Database connection failed: ${error.message}`);
     }
 }
 
 export async function PUT(request: NextRequest) {
     try {
-        await connectDB();
+        // Connect to database first
+        try {
+            await connectDB();
+        } catch (dbError: any) {
+            console.error('Database connection failed:', dbError);
+            return NextResponse.json(
+                { 
+                    message: 'Database connection failed. Please check your MONGODB_URI environment variable.',
+                    error: process.env.NODE_ENV === 'development' ? dbError.message : undefined
+                },
+                { status: 500 }
+            );
+        }
+        
         const authResult = requireAuth(request);
         if (authResult instanceof NextResponse) {
             return authResult;
@@ -86,7 +112,20 @@ export async function PUT(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
     try {
-        await connectDB();
+        // Connect to database first
+        try {
+            await connectDB();
+        } catch (dbError: any) {
+            console.error('Database connection failed:', dbError);
+            return NextResponse.json(
+                { 
+                    message: 'Database connection failed. Please check your MONGODB_URI environment variable.',
+                    error: process.env.NODE_ENV === 'development' ? dbError.message : undefined
+                },
+                { status: 500 }
+            );
+        }
+        
         const authResult = requireAuth(request);
         if (authResult instanceof NextResponse) {
             return authResult;

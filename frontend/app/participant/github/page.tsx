@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { Github, ArrowLeft, CheckCircle2, Loader2, ExternalLink } from 'lucide-react'
+import { Github, ArrowLeft, CheckCircle2, Loader2, ExternalLink, Link2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -16,11 +16,13 @@ import { toast } from 'sonner'
 export default function ParticipantGitHubPage() {
     const { user, loading } = useAuth()
     const router = useRouter()
+    const searchParams = useSearchParams()
     const [githubLink, setGithubLink] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [currentGithubLink, setCurrentGithubLink] = useState<string | null>(null)
     const [isFetching, setIsFetching] = useState(true)
     const [showConfirmation, setShowConfirmation] = useState(false)
+    const [isConnecting, setIsConnecting] = useState(false)
 
     useEffect(() => {
         if (!loading && (!user || user.role !== 'participant')) {
@@ -33,6 +35,20 @@ export default function ParticipantGitHubPage() {
             fetchGithubLink()
         }
     }, [user])
+
+    useEffect(() => {
+        // Check for OAuth errors
+        const error = searchParams.get('error')
+        if (error) {
+            if (error === 'oauth_not_configured') {
+                toast.error('GitHub OAuth is not configured. Please use manual entry.')
+            } else if (error === 'missing_params') {
+                toast.error('OAuth callback missing required parameters')
+            } else {
+                toast.error(`GitHub connection failed: ${error}`)
+            }
+        }
+    }, [searchParams])
 
     const fetchGithubLink = async () => {
         try {
@@ -48,6 +64,31 @@ export default function ParticipantGitHubPage() {
             toast.error('Failed to fetch GitHub link')
         } finally {
             setIsFetching(false)
+        }
+    }
+
+    const handleConnectGitHub = async () => {
+        if (!user?.userId) {
+            toast.error('User not found. Please log in again.')
+            return
+        }
+
+        setIsConnecting(true)
+        try {
+            const res = await fetch(`/api/github/oauth?userId=${user.userId}`)
+            const data = await res.json()
+            
+            if (res.ok && data.authUrl) {
+                // Redirect to GitHub OAuth
+                window.location.href = data.authUrl
+            } else {
+                toast.error(data.message || 'Failed to connect with GitHub. Please use manual entry.')
+                setIsConnecting(false)
+            }
+        } catch (error) {
+            console.error('Error connecting to GitHub:', error)
+            toast.error('Failed to connect with GitHub. Please use manual entry.')
+            setIsConnecting(false)
         }
     }
 
@@ -141,58 +182,96 @@ export default function ParticipantGitHubPage() {
                                 <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
                             </div>
                         ) : (
-                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="space-y-4">
+                                {/* Connect with GitHub Button */}
                                 <div className="space-y-2">
-                                    <Label htmlFor="githubLink">GitHub Repository URL</Label>
-                                    <Input
-                                        id="githubLink"
-                                        type="url"
-                                        placeholder="https://github.com/username/repository"
-                                        value={githubLink}
-                                        onChange={(e) => setGithubLink(e.target.value)}
-                                        required
-                                        disabled={isLoading}
-                                    />
+                                    <Label>Connect with GitHub</Label>
+                                    <Button
+                                        type="button"
+                                        onClick={handleConnectGitHub}
+                                        disabled={isConnecting}
+                                        className="w-full bg-[#24292e] hover:bg-[#2f363d] text-white"
+                                    >
+                                        {isConnecting ? (
+                                            <>
+                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                Connecting...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Github className="mr-2 h-4 w-4" />
+                                                Connect with GitHub
+                                            </>
+                                        )}
+                                    </Button>
                                     <p className="text-xs text-muted-foreground">
-                                        Enter the full URL to your GitHub repository (e.g., https://github.com/username/repository)
+                                        Connect your GitHub account to easily select a repository
                                     </p>
                                 </div>
 
-                                {currentGithubLink && (
-                                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <CheckCircle2 className="h-5 w-5 text-green-500" />
-                                            <span className="font-medium text-sm">Current Submission</span>
-                                        </div>
-                                        <a
-                                            href={currentGithubLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-sm text-blue-500 hover:underline break-all flex items-center gap-1"
-                                        >
-                                            {currentGithubLink}
-                                            <ExternalLink className="h-3 w-3" />
-                                        </a>
-                                        <p className="text-xs text-muted-foreground mt-2">
-                                            You can update this link at any time
+                                {/* Divider */}
+                                <div className="relative">
+                                    <div className="absolute inset-0 flex items-center">
+                                        <span className="w-full border-t" />
+                                    </div>
+                                    <div className="relative flex justify-center text-xs uppercase">
+                                        <span className="bg-background px-2 text-muted-foreground">Or</span>
+                                    </div>
+                                </div>
+
+                                {/* Manual Entry Form */}
+                                <form onSubmit={handleSubmit} className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="githubLink">Enter Repository URL Manually</Label>
+                                        <Input
+                                            id="githubLink"
+                                            type="url"
+                                            placeholder="https://github.com/username/repository"
+                                            value={githubLink}
+                                            onChange={(e) => setGithubLink(e.target.value)}
+                                            disabled={isLoading}
+                                        />
+                                        <p className="text-xs text-muted-foreground">
+                                            Enter the full URL to your GitHub repository (e.g., https://github.com/username/repository)
                                         </p>
                                     </div>
-                                )}
 
-                                <Button type="submit" disabled={isLoading} className="w-full">
-                                    {isLoading ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                            Updating...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Github className="mr-2 h-4 w-4" />
-                                            {currentGithubLink ? 'Update Repository Link' : 'Submit Repository Link'}
-                                        </>
+                                    {currentGithubLink && (
+                                        <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                                <span className="font-medium text-sm">Current Submission</span>
+                                            </div>
+                                            <a
+                                                href={currentGithubLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-sm text-blue-500 hover:underline break-all flex items-center gap-1"
+                                            >
+                                                {currentGithubLink}
+                                                <ExternalLink className="h-3 w-3" />
+                                            </a>
+                                            <p className="text-xs text-muted-foreground mt-2">
+                                                You can update this link at any time
+                                            </p>
+                                        </div>
                                     )}
-                                </Button>
-                            </form>
+
+                                    <Button type="submit" disabled={isLoading || !githubLink.trim()} className="w-full" variant="outline">
+                                        {isLoading ? (
+                                            <>
+                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                Updating...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Link2 className="mr-2 h-4 w-4" />
+                                                {currentGithubLink ? 'Update Repository Link' : 'Submit Repository Link'}
+                                            </>
+                                        )}
+                                    </Button>
+                                </form>
+                            </div>
                         )}
                     </CardContent>
                 </Card>
