@@ -16,7 +16,7 @@ export default function VolunteerLayout({
 
   useEffect(() => {
     if (!loading && (!user || (user.role !== 'volunteer' && user.role !== 'admin'))) {
-      router.push('/volunteer')
+      router.push('/volunteer-login')
     }
   }, [user, loading, router])
 
@@ -53,7 +53,7 @@ export default function VolunteerLayout({
                 variant="ghost" 
                 size="sm" 
                 className="gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-                onClick={logout}
+                onClick={() => logout('/volunteer-login')}
               >
                 <LogOut className="h-4 w-4" />
                 Logout

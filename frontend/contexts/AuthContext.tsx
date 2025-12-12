@@ -15,7 +15,7 @@ interface AuthContextType {
     loading: boolean
     login: (email: string, password: string, role?: string) => Promise<void>
     register: (name: string, email: string, password: string, role: string, teamId?: string) => Promise<any>
-    logout: () => Promise<void>
+    logout: (redirectPath?: string) => Promise<void>
     refreshUser: () => Promise<void>
 }
 
@@ -87,7 +87,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return await res.json()
     }
 
-    const logout = async () => {
+    const logout = async (redirectPath: string = '/login') => {
         try {
             await fetch('/api/auth/logout', {
                 method: 'POST',
@@ -96,7 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             console.error('Logout error:', error)
         } finally {
             setUser(null)
-            router.push('/login')
+            router.push(redirectPath)
         }
     }
 
