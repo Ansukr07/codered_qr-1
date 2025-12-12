@@ -10,22 +10,9 @@ const seedUsers = async () => {
         await mongoose.connect(process.env.MONGODB_URI);
         console.log('Connected to MongoDB');
 
-        // Admin
-        const adminEmail = 'demo@admin.com';
-        const existingAdmin = await User.findOne({ email: adminEmail });
-        if (!existingAdmin) {
-            const hashedPassword = await bcrypt.hash('admin123', 10);
-            await User.create({
-                name: 'Demo Admin',
-                email: adminEmail,
-                password: hashedPassword,
-                role: 'admin',
-                qrCode: 'ADMIN-001'
-            });
-            console.log('Created admin user');
-        } else {
-            console.log('Admin user already exists');
-        }
+        // Note: Admin users are now managed separately using the Admin model
+        // Run backend/scripts/update_admin_users.js to create/update admin users
+        console.log('Note: Admin users should be created using backend/scripts/update_admin_users.js');
 
         // Volunteer
         const volunteerEmail = 'volunteer@demo.com';

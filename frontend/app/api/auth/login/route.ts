@@ -72,20 +72,35 @@ export async function POST(request: NextRequest) {
         let user: any;
         let userRole: string;
 
+        // Allowed admin emails
+        const ALLOWED_ADMIN_EMAILS = ['ecell@bmsit.in', 'milangs4606@gmail.com'];
+
         // Check based on role parameter or try all
         if (role === 'admin') {
-            user = await Admin.findOne({ email: email.toLowerCase() });
+            // Check if email is in whitelist for admin
+            const emailLower = email.toLowerCase();
+            if (!ALLOWED_ADMIN_EMAILS.includes(emailLower)) {
+                return NextResponse.json(
+                    { message: 'Access denied. This email is not authorized for admin access.' },
+                    { status: 403 }
+                );
+            }
+            user = await Admin.findOne({ email: emailLower });
             userRole = 'admin';
         } else if (role === 'volunteer') {
             user = await Volunteer.findOne({ email: email.toLowerCase() });
             userRole = 'volunteer';
         } else {
             // Try admin first, then volunteer
-            user = await Admin.findOne({ email: email.toLowerCase() });
-            if (user) {
-                userRole = 'admin';
-            } else {
-                user = await Volunteer.findOne({ email: email.toLowerCase() });
+            const emailLower = email.toLowerCase();
+            if (ALLOWED_ADMIN_EMAILS.includes(emailLower)) {
+                user = await Admin.findOne({ email: emailLower });
+                if (user) {
+                    userRole = 'admin';
+                }
+            }
+            if (!user) {
+                user = await Volunteer.findOne({ email: emailLower });
                 if (user) {
                     userRole = 'volunteer';
                 }
