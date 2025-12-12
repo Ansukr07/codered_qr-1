@@ -27,3 +27,4 @@ if (!supabaseUrl || !supabaseServiceKey) {
 export default supabase;
 
 
+

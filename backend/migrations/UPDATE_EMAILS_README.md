@@ -141,3 +141,4 @@ The CSV file should have the following columns:
 - The script checks for duplicate emails before updating
 - You can review the SQL script (`update_codered_local_emails.sql`) to see exactly what queries will run
 
+

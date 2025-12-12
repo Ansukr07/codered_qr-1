@@ -92,3 +92,4 @@ This is now a Next.js application that can be deployed to:
 The application is serverless - each API route is a serverless function.
 
 
+

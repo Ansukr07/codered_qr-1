@@ -173,3 +173,4 @@ async function fixTeamNamesAndQR() {
 
 fixTeamNamesAndQR();
 
+

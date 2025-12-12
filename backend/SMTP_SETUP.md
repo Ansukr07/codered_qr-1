@@ -52,3 +52,4 @@ After adding the SMTP configuration:
 4. Check server logs for any email errors
 
 
+

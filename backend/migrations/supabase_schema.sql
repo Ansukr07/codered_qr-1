@@ -262,3 +262,4 @@ COMMENT ON TABLE announcements IS 'System announcements';
 COMMENT ON TABLE help_requests IS 'Help requests from participants';
 
 
+

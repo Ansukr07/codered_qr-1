@@ -24,3 +24,4 @@ FROM information_schema.columns
 WHERE table_name = 'participants' 
 AND column_name = 'github_link';
 
+

@@ -51,7 +51,7 @@ async function undoTeamClaim() {
         console.log(`   Current Distributed Quantity: ${bagResource.distributedQuantity}\n`);
 
         // Team to undo
-        const teamName = 'Wi - Fight club';
+        const teamName = 'ElectroEdge';
 
         // Find team members
         const teamMembers = await User.find({
@@ -134,3 +134,4 @@ async function undoTeamClaim() {
 }
 
 undoTeamClaim();
+
