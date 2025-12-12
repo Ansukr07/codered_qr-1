@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, ExternalLink, Loader2, GitCommit, Star, GitFork } from 'lucide-react'
+import { Github, ExternalLink, Loader2, GitCommit, Star, GitFork, RefreshCw } from 'lucide-react'
+import { toast } from 'sonner'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface GitHubParticipant {
@@ -53,12 +54,7 @@ export default function GitHubPage() {
   useEffect(() => {
     if (user && user.role === 'admin') {
       fetchGithubStatus()
-      // Refresh every 30 seconds
-      const interval = setInterval(() => {
-        fetchGithubStatus()
-      }, 30000)
-
-      return () => clearInterval(interval)
+      // Only fetch once on mount, no auto-refresh
     }
   }, [user])
 
@@ -107,10 +103,13 @@ export default function GitHubPage() {
         await Promise.all(statsPromises)
         setRepoStats(statsMap)
       } else {
-        console.error('Failed to fetch GitHub status:', res.status, res.statusText)
+        const errorText = await res.text()
+        console.error('Failed to fetch GitHub status:', res.status, res.statusText, errorText)
+        toast.error('Failed to fetch GitHub status')
       }
     } catch (error) {
       console.error('Failed to fetch GitHub status:', error)
+      toast.error('Failed to fetch GitHub status')
     } finally {
       setIsLoading(false)
     }
@@ -144,12 +143,24 @@ export default function GitHubPage() {
           <h1 className="text-3xl font-bold text-primary">GitHub Project Status</h1>
           <p className="text-muted-foreground">View all participant GitHub repository submissions</p>
         </div>
-        {githubStatus && (
-          <Badge variant="outline" className="gap-2">
-            <Github className="h-4 w-4" />
-            {githubStatus.stats.submitted}/{githubStatus.stats.total} Teams Connected
-          </Badge>
-        )}
+        <div className="flex items-center gap-2">
+          {githubStatus && (
+            <Badge variant="outline" className="gap-2">
+              <Github className="h-4 w-4" />
+              {githubStatus.stats.submitted}/{githubStatus.stats.total} Teams Connected
+            </Badge>
+          )}
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={fetchGithubStatus} 
+            disabled={isLoading}
+            className="gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+        </div>
       </div>
 
       {isLoading ? (
@@ -175,94 +186,81 @@ export default function GitHubPage() {
                 key={teamId}
                 className={`bg-card/50 backdrop-blur border-border/50 ${teamStatus === "pending" ? "opacity-60" : ""}`}
               >
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <CardTitle className="text-lg flex items-center gap-2">
+                <CardContent className="p-6">
+                  <div className="flex flex-col items-center justify-center space-y-4">
+                    {/* Team Name */}
+                    <div className="text-center">
+                      <CardTitle className="text-2xl font-bold flex items-center justify-center gap-2">
                         {teamId}
                         {teamStatus === "submitted" && (
                           <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                         )}
                       </CardTitle>
-                      <CardDescription>
-                        {uniqueParticipants.length} member{uniqueParticipants.length !== 1 ? 's' : ''}
-                      </CardDescription>
-                      {githubLink && (
-                        <div className="space-y-2 mt-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Github className="h-4 w-4" />
-                            <span className="font-mono text-xs break-all">{githubLink}</span>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              className="h-6 px-2 gap-1"
-                              onClick={() => window.open(githubLink, '_blank')}
-                            >
-                              <ExternalLink className="h-3 w-3" />
-                              View
-                            </Button>
-                          </div>
-                          {stats ? (
-                            <div className="flex items-center gap-4 text-xs text-muted-foreground pt-1">
-                              <div className="flex items-center gap-1">
-                                <GitCommit className="h-3 w-3" />
-                                <span>{stats.commits || 0} commits</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Star className="h-3 w-3" />
-                                <span>{stats.stars || 0} stars</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <GitFork className="h-3 w-3" />
-                                <span>{stats.forks || 0} forks</span>
-                              </div>
-                              {stats.language && (
-                                <span className="text-xs px-1.5 py-0.5 bg-primary/10 rounded">
-                                  {stats.language}
-                                </span>
-                              )}
-                            </div>
-                          ) : githubLink && (
-                            <div className="text-xs text-muted-foreground pt-1 italic">
-                              Loading stats...
-                            </div>
-                          )}
-                        </div>
-                      )}
                     </div>
-                    <Badge variant={teamStatus === "submitted" ? "default" : "secondary"}>
-                      {teamStatus === "submitted" ? "Submitted" : "Pending"}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  {teamStatus === "submitted" && githubLink ? (
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">Team Members:</p>
-                      <div className="space-y-1">
-                        {uniqueParticipants.map((participant) => (
-                          <div key={participant._id} className="flex items-center justify-between p-2 bg-secondary/30 rounded">
-                            <div>
-                              <p className="text-sm font-medium">{participant.name}</p>
-                              <p className="text-xs text-muted-foreground">{participant.email}</p>
+
+                    {/* Repository Link */}
+                    {githubLink ? (
+                      <div className="w-full space-y-4">
+                        <div className="flex items-center justify-center gap-2">
+                          <Github className="h-5 w-5 text-muted-foreground" />
+                          <a
+                            href={githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-sm text-blue-500 hover:underline break-all text-center"
+                          >
+                            {githubLink}
+                          </a>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-6 px-2"
+                            onClick={() => window.open(githubLink, '_blank')}
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
+                        </div>
+
+                        {/* Stats - Large and Centered */}
+                        {stats ? (
+                          <div className="flex items-center justify-center gap-8 pt-4">
+                            <div className="flex flex-col items-center gap-2">
+                              <GitCommit className="h-6 w-6 text-muted-foreground" />
+                              <span className="text-4xl font-bold text-foreground">{stats.commits || 0}</span>
+                              <span className="text-sm text-muted-foreground">Commits</span>
                             </div>
-                            {participant.githubLink && (
-                              <Badge variant="outline" className="text-xs">
-                                Linked
-                              </Badge>
+                            <div className="flex flex-col items-center gap-2">
+                              <Star className="h-6 w-6 text-muted-foreground" />
+                              <span className="text-4xl font-bold text-foreground">{stats.stars || 0}</span>
+                              <span className="text-sm text-muted-foreground">Stars</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-2">
+                              <GitFork className="h-6 w-6 text-muted-foreground" />
+                              <span className="text-4xl font-bold text-foreground">{stats.forks || 0}</span>
+                              <span className="text-sm text-muted-foreground">Forks</span>
+                            </div>
+                            {stats.language && (
+                              <div className="flex flex-col items-center gap-2">
+                                <span className="text-xs px-2 py-1 bg-primary/10 rounded text-muted-foreground">
+                                  Language
+                                </span>
+                                <span className="text-2xl font-semibold text-foreground">{stats.language}</span>
+                              </div>
                             )}
                           </div>
-                        ))}
+                        ) : githubLink && (
+                          <div className="flex items-center justify-center py-4">
+                            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/30 border border-dashed border-border">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Github className="h-4 w-4" />
+                    ) : (
+                      <div className="flex items-center justify-center gap-2 text-muted-foreground py-4">
+                        <Github className="h-5 w-5" />
                         <span>No repository linked yet</span>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             )

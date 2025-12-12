@@ -64,6 +64,7 @@ export default function ScanFoodPage() {
         r.name.toLowerCase().includes('lunch') ||
         r.name.toLowerCase().includes('dinner') ||
         r.name.toLowerCase().includes('breakfast') ||
+        r.name.toLowerCase().includes('pizza') ||
         r.name.toLowerCase().includes('food')
       )
       setResources(foodResources)

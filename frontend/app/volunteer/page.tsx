@@ -94,7 +94,7 @@ export default function VolunteerDashboard() {
   }
 
   // Group resources by type
-  const foodResources = resources.filter(r => r.name.toLowerCase().includes('lunch') || r.name.toLowerCase().includes('dinner') || r.name.toLowerCase().includes('breakfast') || r.name.toLowerCase().includes('food'))
+  const foodResources = resources.filter(r => r.name.toLowerCase().includes('lunch') || r.name.toLowerCase().includes('dinner') || r.name.toLowerCase().includes('breakfast') || r.name.toLowerCase().includes('pizza') || r.name.toLowerCase().includes('food'))
   const bagResources = resources.filter(r => r.name.toLowerCase().includes('bag') || r.name.toLowerCase().includes('sleep'))
   const chillResources = resources.filter(r => r.name.toLowerCase().includes('chill'))
   const coffeeResources = resources.filter(r => r.category === 'coffee' || r.name.toLowerCase().includes('coffee'))
