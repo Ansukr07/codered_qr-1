@@ -7,7 +7,19 @@ const nextConfig = {
     unoptimized: true,
   },
   // API routes are now handled by Next.js API routes (app/api/*)
-  // No need for rewrites to external backend
+  // Proxy missing volunteer routes to backend
+  async rewrites() {
+    return [
+      {
+        source: '/api/volunteers/:path*',
+        destination: 'http://localhost:5000/api/volunteers/:path*',
+      },
+      {
+        source: '/api/transactions/:path*',
+        destination: 'http://localhost:5000/api/transactions/:path*',
+      },
+    ]
+  },
 }
 
 export default nextConfig
