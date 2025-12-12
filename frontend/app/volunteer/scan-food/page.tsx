@@ -84,9 +84,9 @@ export default function ScanFoodPage() {
       const startScanning = async () => {
         try {
           html5Qrcode = new Html5Qrcode('qr-reader-food')
-          
+
           await html5Qrcode.start(
-            { facingMode: "user" },
+            { facingMode: "environment" },
             {
               fps: 10,
               qrbox: { width: 250, height: 250 },
@@ -102,7 +102,7 @@ export default function ScanFoodPage() {
               }
             }
           )
-          
+
           console.log('✅ Scanner started successfully')
         } catch (error: any) {
           console.error('Scanner start error:', error)
@@ -271,7 +271,7 @@ export default function ScanFoodPage() {
     try {
       const devices = await navigator.mediaDevices.enumerateDevices()
       const hasCamera = devices.some(device => device.kind === 'videoinput')
-      
+
       if (!hasCamera) {
         toast({
           title: 'No Camera Found',

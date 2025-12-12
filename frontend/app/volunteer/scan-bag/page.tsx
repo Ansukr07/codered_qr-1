@@ -53,9 +53,9 @@ export default function ScanBagPage() {
       const startScanning = async () => {
         try {
           html5Qrcode = new Html5Qrcode('qr-reader-bag')
-          
+
           await html5Qrcode.start(
-            { facingMode: "user" },
+            { facingMode: "environment" },
             {
               fps: 10,
               qrbox: { width: 250, height: 250 },
@@ -71,7 +71,7 @@ export default function ScanBagPage() {
               }
             }
           )
-          
+
           console.log('✅ Scanner started successfully')
         } catch (error: any) {
           console.error('Scanner start error:', error)
@@ -132,8 +132,8 @@ export default function ScanBagPage() {
         })
         toast({
           title: 'Success',
-          description: mode === 'return' 
-            ? 'Sleeping bag returned successfully' 
+          description: mode === 'return'
+            ? 'Sleeping bag returned successfully'
             : 'Sleeping bag issued successfully',
         })
         fetchBagResource() // Refresh counts
@@ -172,7 +172,7 @@ export default function ScanBagPage() {
     try {
       const devices = await navigator.mediaDevices.enumerateDevices()
       const hasCamera = devices.some(device => device.kind === 'videoinput')
-      
+
       if (!hasCamera) {
         toast({
           title: 'No Camera Found',
@@ -256,82 +256,82 @@ export default function ScanBagPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-          <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border flex items-center justify-center" style={{ minHeight: '400px', aspectRatio: '4/3' }}>
-            {!scanning && !result && !cameraError && (
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="text-center space-y-4 p-8">
-                  <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
-                  <p className="text-sm text-muted-foreground">Ready to scan QR code</p>
-                </div>
-              </div>
-            )}
-            {cameraError && (
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="text-center space-y-4 p-8">
-                  <XCircle className="h-16 w-16 text-destructive mx-auto" />
-                  <p className="text-sm text-destructive font-semibold">Camera Error</p>
-                  <p className="text-xs text-muted-foreground">{cameraError}</p>
-                </div>
-              </div>
-            )}
-            {scanning && !cameraError && (
-              <div id="qr-reader-bag" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
-            )}
-            {result && (
-              <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/90">
-                <div className="text-center space-y-4 p-8">
-                  {result.success ? (
-                    <>
-                      <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto" />
-                      <div className="space-y-2">
-                        <p className="text-lg font-semibold text-card-foreground">{result.name}</p>
-                        <Badge variant="default" className="text-sm bg-indigo-500">
-                          {mode === 'return' ? 'Sleeping bag returned' : 'Sleeping bag issued'}
-                        </Badge>
-                      </div>
-                    </>
-                  ) : (
-                    <>
+              <div className="relative w-full max-w-md mx-auto rounded-lg overflow-hidden bg-secondary/50 border-2 border-dashed border-border flex items-center justify-center" style={{ minHeight: '400px', aspectRatio: '4/3' }}>
+                {!scanning && !result && !cameraError && (
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="text-center space-y-4 p-8">
+                      <Camera className="h-16 w-16 text-muted-foreground mx-auto" />
+                      <p className="text-sm text-muted-foreground">Ready to scan QR code</p>
+                    </div>
+                  </div>
+                )}
+                {cameraError && (
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="text-center space-y-4 p-8">
                       <XCircle className="h-16 w-16 text-destructive mx-auto" />
-                      <p className="text-lg font-semibold text-destructive">Scan Failed</p>
-                      <p className="text-sm text-muted-foreground">{result.message}</p>
-                    </>
-                  )}
-                </div>
+                      <p className="text-sm text-destructive font-semibold">Camera Error</p>
+                      <p className="text-xs text-muted-foreground">{cameraError}</p>
+                    </div>
+                  </div>
+                )}
+                {scanning && !cameraError && (
+                  <div id="qr-reader-bag" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
+                )}
+                {result && (
+                  <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/90">
+                    <div className="text-center space-y-4 p-8">
+                      {result.success ? (
+                        <>
+                          <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto" />
+                          <div className="space-y-2">
+                            <p className="text-lg font-semibold text-card-foreground">{result.name}</p>
+                            <Badge variant="default" className="text-sm bg-indigo-500">
+                              {mode === 'return' ? 'Sleeping bag returned' : 'Sleeping bag issued'}
+                            </Badge>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <XCircle className="h-16 w-16 text-destructive mx-auto" />
+                          <p className="text-lg font-semibold text-destructive">Scan Failed</p>
+                          <p className="text-sm text-muted-foreground">{result.message}</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <div className="flex gap-3">
-            {!result ? (
-              <Button
-                onClick={handleStartScan}
-                disabled={scanning || !resource || !!cameraError}
-                className="flex-1"
-                size="lg"
-              >
-                {scanning ? "Scanning..." : cameraError ? "Retry Camera" : "Start Scan"}
-              </Button>
-            ) : (
-              <>
-                <Button
-                  onClick={() => setResult(null)}
-                  variant="outline"
-                  className="flex-1"
-                  size="lg"
-                >
-                  Scan Another
-                </Button>
-                <Link href="/volunteer" className="flex-1">
-                  <Button variant="default" className="w-full" size="lg">
-                    Done
+              <div className="flex gap-3">
+                {!result ? (
+                  <Button
+                    onClick={handleStartScan}
+                    disabled={scanning || !resource || !!cameraError}
+                    className="flex-1"
+                    size="lg"
+                  >
+                    {scanning ? "Scanning..." : cameraError ? "Retry Camera" : "Start Scan"}
                   </Button>
-                </Link>
-              </>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+                ) : (
+                  <>
+                    <Button
+                      onClick={() => setResult(null)}
+                      variant="outline"
+                      className="flex-1"
+                      size="lg"
+                    >
+                      Scan Another
+                    </Button>
+                    <Link href="/volunteer" className="flex-1">
+                      <Button variant="default" className="w-full" size="lg">
+                        Done
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="return" className="space-y-6">
