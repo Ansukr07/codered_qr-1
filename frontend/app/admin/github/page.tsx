@@ -124,25 +124,26 @@ export default function GitHubPage() {
     )
   }
 
-  // Group participants by team and deduplicate by email within each team
+  // Group participants by team - API already deduplicates, but ensure no duplicates here
   const teamMap = new Map<string, GitHubParticipant[]>()
   if (githubStatus) {
-    // First, deduplicate all participants by email+teamId
-    const participantMap = new Map<string, GitHubParticipant>()
-    githubStatus.participants.forEach(participant => {
-      const dedupKey = `${participant.email?.toLowerCase() || participant._id}_${participant.teamId || 'no-team'}`
-      if (!participantMap.has(dedupKey)) {
-        participantMap.set(dedupKey, participant)
-      }
-    })
+    // Use a Set to track seen participants by email+teamId to prevent duplicates
+    const seen = new Set<string>()
     
-    // Then group by team
-    participantMap.forEach(participant => {
+    githubStatus.participants.forEach(participant => {
       const teamId = participant.teamId || 'Individual'
-      if (!teamMap.has(teamId)) {
-        teamMap.set(teamId, [])
+      const email = participant.email?.toLowerCase() || ''
+      const dedupKey = `${email}_${teamId}_${participant._id}`
+      
+      // Only add if we haven't seen this exact combination
+      if (!seen.has(dedupKey)) {
+        seen.add(dedupKey)
+        
+        if (!teamMap.has(teamId)) {
+          teamMap.set(teamId, [])
+        }
+        teamMap.get(teamId)!.push(participant)
       }
-      teamMap.get(teamId)!.push(participant)
     })
   }
 
@@ -168,10 +169,22 @@ export default function GitHubPage() {
       ) : githubStatus && githubStatus.participants.length > 0 ? (
         <div className="grid gap-4">
           {Array.from(teamMap.entries()).map(([teamId, participants]) => {
-            // Participants are already deduplicated, but ensure no duplicates by email
-            const uniqueParticipants = Array.from(
-              new Map(participants.map(p => [p.email?.toLowerCase() || p._id, p])).values()
-            )
+            // Final deduplication: remove any duplicates by email within the team
+            const emailMap = new Map<string, GitHubParticipant>()
+            participants.forEach(p => {
+              const emailKey = p.email?.toLowerCase() || p._id
+              // Only keep first occurrence, or prefer one with GitHub link
+              if (!emailMap.has(emailKey)) {
+                emailMap.set(emailKey, p)
+              } else {
+                const existing = emailMap.get(emailKey)!
+                // Prefer participant with GitHub link
+                if (p.githubLink && !existing.githubLink) {
+                  emailMap.set(emailKey, p)
+                }
+              }
+            })
+            const uniqueParticipants = Array.from(emailMap.values())
             
             const hasGithubLink = uniqueParticipants.some(p => p.githubLink)
             const teamStatus = hasGithubLink ? 'submitted' : 'pending'

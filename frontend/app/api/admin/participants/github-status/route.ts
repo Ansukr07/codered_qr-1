@@ -60,46 +60,80 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        // Combine participants from both sources, deduplicating by email and team
+        // Normalize and combine participants from both sources
+        // Strategy: Use email (normalized) + teamId (normalized) as unique key
         const participantMap = new Map<string, any>();
         
-        // Add MongoDB participants (use email+teamId as key for deduplication)
+        // Helper function to normalize email and teamId
+        const normalizeEmail = (email: string | null | undefined): string | null => {
+            if (!email) return null;
+            return email.trim().toLowerCase();
+        };
+        
+        const normalizeTeamId = (teamId: string | null | undefined): string | null => {
+            if (!teamId) return null;
+            return teamId.trim();
+        };
+        
+        // Add MongoDB participants
         mongoParticipants.forEach(p => {
+            const normalizedEmail = normalizeEmail(p.email);
+            const normalizedTeamId = normalizeTeamId(p.teamId);
             const hasLink = p.githubLink && p.githubLink.trim() && p.githubLink.trim().length > 0;
-            const key = `${p.email || p._id.toString()}_${p.teamId || 'no-team'}`;
+            
+            // Use normalized email+teamId as key, fallback to _id if no email
+            const key = normalizedEmail 
+                ? `${normalizedEmail}_${normalizedTeamId || 'no-team'}`
+                : `${p._id.toString()}_${normalizedTeamId || 'no-team'}`;
             
             if (!participantMap.has(key)) {
                 participantMap.set(key, {
                     _id: p._id.toString(),
                     name: p.name,
-                    email: p.email || null,
-                    teamId: p.teamId || null,
+                    email: normalizedEmail,
+                    teamId: normalizedTeamId,
                     githubLink: hasLink ? p.githubLink.trim() : null,
                     status: hasLink ? 'submitted' : 'pending',
                     createdAt: p.createdAt
                 });
+            } else {
+                // Update existing if this one has a GitHub link and existing doesn't
+                const existing = participantMap.get(key);
+                if (hasLink && !existing.githubLink) {
+                    existing.githubLink = p.githubLink.trim();
+                    existing.status = 'submitted';
+                }
             }
         });
         
-        // Add/update with Supabase participants (deduplicate by email+teamId)
+        // Add/update with Supabase participants
         supabaseParticipants.forEach(p => {
+            const normalizedEmail = normalizeEmail(p.email);
+            const normalizedTeamId = normalizeTeamId(p.team_id);
             const hasLink = p.github_link && p.github_link.trim() && p.github_link.trim().length > 0;
-            const key = `${p.email || p.id}_${p.team_id || 'no-team'}`;
             
-            // If participant exists, prefer Supabase github_link if it exists
+            // Use normalized email+teamId as key, fallback to id if no email
+            const key = normalizedEmail 
+                ? `${normalizedEmail}_${normalizedTeamId || 'no-team'}`
+                : `${p.id}_${normalizedTeamId || 'no-team'}`;
+            
             if (participantMap.has(key)) {
+                // Update existing participant - prefer Supabase github_link
                 const existing = participantMap.get(key);
                 if (hasLink) {
                     existing.githubLink = p.github_link.trim();
                     existing.status = 'submitted';
                 }
+                // Update name/email if Supabase has better data
+                if (p.name && !existing.name) existing.name = p.name;
+                if (normalizedEmail && !existing.email) existing.email = normalizedEmail;
             } else {
-                // Only add if not already in map
+                // Add new participant
                 participantMap.set(key, {
                     _id: p.id,
                     name: p.name,
-                    email: p.email || null,
-                    teamId: p.team_id || null,
+                    email: normalizedEmail,
+                    teamId: normalizedTeamId,
                     githubLink: hasLink ? p.github_link.trim() : null,
                     status: hasLink ? 'submitted' : 'pending',
                     createdAt: p.created_at ? new Date(p.created_at) : new Date()
@@ -107,16 +141,25 @@ export async function GET(request: NextRequest) {
             }
         });
 
-        // Deduplicate by email within same team (remove exact duplicates)
-        const deduplicated = new Map<string, any>();
-        participantMap.forEach((participant, key) => {
-            const dedupKey = `${participant.email?.toLowerCase() || participant._id}_${participant.teamId || 'no-team'}`;
-            if (!deduplicated.has(dedupKey)) {
-                deduplicated.set(dedupKey, participant);
+        // Final deduplication pass: ensure no duplicates by email+teamId
+        const finalMap = new Map<string, any>();
+        participantMap.forEach((participant) => {
+            const finalKey = participant.email 
+                ? `${participant.email}_${participant.teamId || 'no-team'}`
+                : `${participant._id}_${participant.teamId || 'no-team'}`;
+            
+            if (!finalMap.has(finalKey)) {
+                finalMap.set(finalKey, participant);
+            } else {
+                // If duplicate found, prefer the one with GitHub link
+                const existing = finalMap.get(finalKey);
+                if (participant.githubLink && !existing.githubLink) {
+                    finalMap.set(finalKey, participant);
+                }
             }
         });
 
-        const githubStatus = Array.from(deduplicated.values());
+        const githubStatus = Array.from(finalMap.values());
 
         const stats = {
             total: githubStatus.length,
