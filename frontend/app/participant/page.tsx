@@ -91,8 +91,6 @@ export default function ParticipantDashboard() {
         }
         window.addEventListener('githubLinkUpdated', handleGithubUpdate)
 
-        fetchGithubLink()
-
         const fetchTransactions = async () => {
             try {
                 const res = await fetch('/api/transactions')
@@ -128,24 +126,6 @@ export default function ParticipantDashboard() {
                 console.error('Failed to fetch announcements:', error)
             }
         }
-
-        const fetchGithubLink = async () => {
-            try {
-                const res = await fetch('/api/participant/github')
-                if (res.ok) {
-                    const data = await res.json()
-                    setHasGithubLink(!!data.githubLink)
-                }
-            } catch (error) {
-                console.error('Failed to fetch GitHub link:', error)
-            }
-        }
-
-        // Listen for GitHub link updates
-        const handleGithubUpdate = () => {
-            fetchGithubLink()
-        }
-        window.addEventListener('githubLinkUpdated', handleGithubUpdate)
 
         if (user && user.role === 'participant') {
             fetchUserData()
