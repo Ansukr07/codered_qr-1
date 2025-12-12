@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy, Map, MapPinned, Calendar, Github, Lock } from 'lucide-react'
+import { QrCode, LogOut, Package, History, HelpCircle, Send, Megaphone, Trophy, Map, MapPinned, Calendar, Github, Lock, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
@@ -51,6 +51,7 @@ export default function ParticipantDashboard() {
     const [helpPriority, setHelpPriority] = useState('medium')
     const [submitting, setSubmitting] = useState(false)
     const [announcements, setAnnouncements] = useState<Announcement[]>([])
+    const [hasGithubLink, setHasGithubLink] = useState(false)
 
     useEffect(() => {
         if (!loading && (!user || user.role !== 'participant')) {
@@ -71,6 +72,26 @@ export default function ParticipantDashboard() {
                 console.error('Failed to fetch user data:', error)
             }
         }
+
+        const fetchGithubLink = async () => {
+            try {
+                const res = await fetch('/api/participant/github')
+                if (res.ok) {
+                    const data = await res.json()
+                    setHasGithubLink(!!data.githubLink)
+                }
+            } catch (error) {
+                console.error('Failed to fetch GitHub link:', error)
+            }
+        }
+
+        // Listen for GitHub link updates
+        const handleGithubUpdate = () => {
+            fetchGithubLink()
+        }
+        window.addEventListener('githubLinkUpdated', handleGithubUpdate)
+
+        fetchGithubLink()
 
         const fetchTransactions = async () => {
             try {
@@ -108,11 +129,34 @@ export default function ParticipantDashboard() {
             }
         }
 
+        const fetchGithubLink = async () => {
+            try {
+                const res = await fetch('/api/participant/github')
+                if (res.ok) {
+                    const data = await res.json()
+                    setHasGithubLink(!!data.githubLink)
+                }
+            } catch (error) {
+                console.error('Failed to fetch GitHub link:', error)
+            }
+        }
+
+        // Listen for GitHub link updates
+        const handleGithubUpdate = () => {
+            fetchGithubLink()
+        }
+        window.addEventListener('githubLinkUpdated', handleGithubUpdate)
+
         if (user && user.role === 'participant') {
             fetchUserData()
             fetchTransactions()
             fetchHelpRequests()
             fetchAnnouncements()
+            fetchGithubLink()
+        }
+
+        return () => {
+            window.removeEventListener('githubLinkUpdated', handleGithubUpdate)
         }
     }, [user])
 
@@ -207,10 +251,13 @@ export default function ParticipantDashboard() {
                                 </Button>
                             </Link>
                             <Link href="/participant/github">
-                                <Button variant="secondary" size="sm" className="h-9 md:h-10">
+                                <Button variant="secondary" size="sm" className="h-9 md:h-10 relative">
                                     <Github className="mr-2 h-4 w-4" />
                                     <span className="hidden md:inline">GitHub</span>
                                     <span className="md:hidden">GitHub</span>
+                                    {hasGithubLink && (
+                                        <CheckCircle2 className="absolute -top-1 -right-1 h-4 w-4 text-green-500 bg-background rounded-full" />
+                                    )}
                                 </Button>
                             </Link>
                             <Button onClick={() => logout()} variant="outline" size="sm" className="text-foreground h-9 md:h-10">

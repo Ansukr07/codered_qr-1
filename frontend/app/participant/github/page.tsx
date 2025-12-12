@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/contexts/AuthContext'
 import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { toast } from 'sonner'
 
 export default function ParticipantGitHubPage() {
@@ -19,6 +20,7 @@ export default function ParticipantGitHubPage() {
     const [isLoading, setIsLoading] = useState(false)
     const [currentGithubLink, setCurrentGithubLink] = useState<string | null>(null)
     const [isFetching, setIsFetching] = useState(true)
+    const [showConfirmation, setShowConfirmation] = useState(false)
 
     useEffect(() => {
         if (!loading && (!user || user.role !== 'participant')) {
@@ -76,7 +78,9 @@ export default function ParticipantGitHubPage() {
 
             if (res.ok) {
                 setCurrentGithubLink(githubLink.trim())
-                toast.success('GitHub repository link updated successfully')
+                setShowConfirmation(true)
+                // Trigger event to update navbar
+                window.dispatchEvent(new CustomEvent('githubLinkUpdated'))
             } else {
                 toast.error(data.message || 'Failed to update GitHub link')
             }
@@ -201,6 +205,45 @@ export default function ParticipantGitHubPage() {
                     </Card>
                 )}
             </div>
+
+            {/* Confirmation Dialog */}
+            <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2">
+                            <CheckCircle2 className="h-5 w-5 text-green-500" />
+                            Repository Submitted Successfully!
+                        </DialogTitle>
+                        <DialogDescription>
+                            Your GitHub repository link has been submitted and is now visible to administrators.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4">
+                        {currentGithubLink && (
+                            <div className="p-3 bg-secondary rounded-lg">
+                                <p className="text-sm font-medium mb-1">Repository Link:</p>
+                                <a
+                                    href={currentGithubLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm text-blue-500 hover:underline break-all flex items-center gap-1"
+                                >
+                                    {currentGithubLink}
+                                    <ExternalLink className="h-3 w-3" />
+                                </a>
+                            </div>
+                        )}
+                    </div>
+                    <DialogFooter>
+                        <Button onClick={() => {
+                            setShowConfirmation(false)
+                            router.push('/participant')
+                        }}>
+                            Return to Dashboard
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
