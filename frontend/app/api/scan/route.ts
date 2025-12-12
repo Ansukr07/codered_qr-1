@@ -63,10 +63,18 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        if (!resource_id) {
+            return NextResponse.json(
+                { message: 'Resource ID is required' },
+                { status: 400 }
+            );
+        }
+
         const resource = await Resource.findById(resource_id);
         if (!resource) {
+            console.error(`Resource not found with ID: ${resource_id}`);
             return NextResponse.json(
-                { message: 'Resource not found' },
+                { message: 'Resource not found. Please ensure the resource exists in the database.' },
                 { status: 404 }
             );
         }

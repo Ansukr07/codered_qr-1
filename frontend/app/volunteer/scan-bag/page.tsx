@@ -35,13 +35,31 @@ export default function ScanBagPage() {
   const fetchBagResource = async () => {
     try {
       const res = await fetch('/api/resources')
+      if (!res.ok) {
+        throw new Error(`Failed to fetch resources: ${res.status}`)
+      }
       const data = await res.json()
       const bagResource = data.resources.find((r: any) =>
         r.name.toLowerCase().includes('bag') || r.name.toLowerCase().includes('sleep')
       )
+      
+      if (!bagResource) {
+        console.error('Sleeping bag resource not found in database')
+        toast({
+          title: 'Resource Not Found',
+          description: 'Sleeping bag resource does not exist. Please create it in the admin panel.',
+          variant: 'destructive',
+        })
+      }
+      
       setResource(bagResource)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to fetch resources:', error)
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to fetch resources',
+        variant: 'destructive',
+      })
     }
   }
 
