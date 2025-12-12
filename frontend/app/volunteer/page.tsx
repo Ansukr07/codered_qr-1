@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone, ClipboardList } from 'lucide-react'
+import { Utensils, Package, BedDouble, HandHelping, TrendingUp, ChevronRight, Search, Megaphone, ClipboardList, Coffee } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -97,10 +97,12 @@ export default function VolunteerDashboard() {
   const foodResources = resources.filter(r => r.name.toLowerCase().includes('lunch') || r.name.toLowerCase().includes('dinner') || r.name.toLowerCase().includes('breakfast') || r.name.toLowerCase().includes('food'))
   const bagResources = resources.filter(r => r.name.toLowerCase().includes('bag') || r.name.toLowerCase().includes('sleep'))
   const chillResources = resources.filter(r => r.name.toLowerCase().includes('chill'))
+  const coffeeResources = resources.filter(r => r.category === 'coffee' || r.name.toLowerCase().includes('coffee'))
 
   const totalFood = foodResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalBags = bagResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalChill = chillResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
+  const totalCoffee = coffeeResources.reduce((sum, r) => sum + r.distributedQuantity, 0)
   const totalHelp = helpRequests.length
 
   // Deduplicate and aggregate resources by name
@@ -156,6 +158,16 @@ export default function VolunteerDashboard() {
       bgColor: 'bg-purple-500/10',
       count: totalChill,
       resources: chillResources
+    },
+    {
+      title: 'Coffee',
+      description: 'Scan for coffee (Max 3 per participant)',
+      icon: Coffee,
+      href: '/volunteer/scan-coffee',
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10',
+      count: totalCoffee,
+      resources: coffeeResources
     },
     {
       title: 'Help Request',

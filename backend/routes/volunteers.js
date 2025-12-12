@@ -46,11 +46,30 @@ router.get('/resource-status/:resourceId', requireAuth, requireRole('volunteer',
             .sort({ timestamp: -1 });
         console.log(`Found ${transactions.length} transactions for this resource`);
 
-        // Create a map of userId -> transaction for quick lookup
+        // Check if this is coffee (allows multiple claims)
+        const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
+        const maxClaims = isCoffee ? 3 : 1;
+
+        // Create a map of userId -> transactions and count claims
         const transactionMap = new Map();
+        const claimCountMap = new Map();
+        
         transactions.forEach(t => {
-            if (t.userId && !transactionMap.has(t.userId._id.toString())) {
-                transactionMap.set(t.userId._id.toString(), t);
+            if (t.userId && t.action === 'claim') {
+                const userId = t.userId._id.toString();
+                
+                // Count claims for each user
+                claimCountMap.set(userId, (claimCountMap.get(userId) || 0) + 1);
+                
+                // Store the most recent transaction
+                if (!transactionMap.has(userId)) {
+                    transactionMap.set(userId, t);
+                } else {
+                    const existing = transactionMap.get(userId);
+                    if (new Date(t.timestamp) > new Date(existing.timestamp)) {
+                        transactionMap.set(userId, t);
+                    }
+                }
             }
         });
 
@@ -61,15 +80,18 @@ router.get('/resource-status/:resourceId', requireAuth, requireRole('volunteer',
         allParticipants.forEach(participant => {
             const participantId = participant._id.toString();
             const transaction = transactionMap.get(participantId);
+            const claimCount = claimCountMap.get(participantId) || 0;
 
-            if (transaction) {
+            if (transaction && claimCount > 0) {
                 completed.push({
                     _id: participant._id,
                     name: participant.name,
                     email: participant.email,
                     teamId: participant.teamId,
                     timestamp: transaction.timestamp,
-                    volunteer: transaction.volunteerId ? transaction.volunteerId.name : 'Unknown'
+                    volunteer: transaction.volunteerId ? transaction.volunteerId.name : 'Unknown',
+                    claimCount: claimCount,
+                    maxClaims: maxClaims
                 });
             } else {
                 pending.push({
@@ -77,7 +99,9 @@ router.get('/resource-status/:resourceId', requireAuth, requireRole('volunteer',
                     name: participant.name,
                     email: participant.email,
                     teamId: participant.teamId,
-                    qrCode: participant.qrCode
+                    qrCode: participant.qrCode,
+                    claimCount: 0,
+                    maxClaims: maxClaims
                 });
             }
         });

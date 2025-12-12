@@ -41,24 +41,57 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const existingTransaction = await Transaction.findOne({
+        // Check if this is coffee (allows multiple claims)
+        const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
+        const maxClaims = isCoffee ? 3 : 1;
+
+        // Count existing claim transactions for this user and resource
+        const claimCount = await Transaction.countDocuments({
             userId: userRecord._id,
             resourceId: resource._id,
-        }).populate('volunteerId', 'name');
+            action: 'claim'
+        });
 
-        if (existingTransaction) {
+        // Get the most recent transaction for display
+        const lastTransaction = await Transaction.findOne({
+            userId: userRecord._id,
+            resourceId: resource._id,
+            action: 'claim'
+        }).sort({ timestamp: -1 }).populate('volunteerId', 'name');
+
+        if (claimCount >= maxClaims) {
             return NextResponse.json({
-                status: 'claimed',
-                message: `Already claimed: ${resource.name}`,
+                status: 'limit_reached',
+                message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.`,
                 member: {
                     name: userRecord.name,
                     teamId: userRecord.teamId,
                     email: userRecord.email
                 },
-                transaction: {
-                    timestamp: existingTransaction.timestamp,
-                    volunteerName: existingTransaction.volunteerId ? (existingTransaction.volunteerId as any).name : 'Unknown'
-                }
+                claimCount,
+                maxClaims,
+                transaction: lastTransaction ? {
+                    timestamp: lastTransaction.timestamp,
+                    volunteerName: lastTransaction.volunteerId ? (lastTransaction.volunteerId as any).name : 'Unknown'
+                } : undefined
+            });
+        }
+
+        if (claimCount > 0) {
+            return NextResponse.json({
+                status: 'claimed',
+                message: `Already claimed: ${resource.name}. This participant can claim up to ${maxClaims} times.`,
+                member: {
+                    name: userRecord.name,
+                    teamId: userRecord.teamId,
+                    email: userRecord.email
+                },
+                claimCount,
+                maxClaims,
+                transaction: lastTransaction ? {
+                    timestamp: lastTransaction.timestamp,
+                    volunteerName: lastTransaction.volunteerId ? (lastTransaction.volunteerId as any).name : 'Unknown'
+                } : undefined
             });
         }
 
@@ -69,7 +102,9 @@ export async function POST(request: NextRequest) {
                 name: userRecord.name,
                 teamId: userRecord.teamId,
                 email: userRecord.email
-            }
+            },
+            claimCount: 0,
+            maxClaims
         });
     } catch (error: any) {
         return NextResponse.json(

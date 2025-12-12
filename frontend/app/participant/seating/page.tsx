@@ -147,22 +147,6 @@ export default function SeatingPage() {
                             </div>
                         )}
                     </div>
-
-                    {/* Legend / Info */}
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-[#1e1e2e]/50 border border-[#2a2a35]">
-                            <span className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></span>
-                            <span>Selected Team Zone</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-[#1e1e2e]/50 border border-[#2a2a35]">
-                            <span className="w-3 h-3 rounded-full bg-[#3c1414]"></span>
-                            <span>Occupied Zones</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-[#1e1e2e]/50 border border-[#2a2a35]">
-                            <span className="w-3 h-3 rounded-full bg-[#15151a] border border-[#2a2a35]"></span>
-                            <span>Available / Unassigned</span>
-                        </div>
-                    </div>
                 </main>
             </div>
         </div>

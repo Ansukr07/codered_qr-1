@@ -26,6 +26,8 @@ interface Participant {
     timestamp?: string
     volunteer?: string
     qrCode?: string
+    claimCount?: number
+    maxClaims?: number
 }
 
 interface Stats {
@@ -160,6 +162,7 @@ export default function ResourceTracking() {
             food: { bg: 'bg-orange-500/10', text: 'text-orange-500' },
             'sleeping-bag': { bg: 'bg-blue-500/10', text: 'text-blue-500' },
             'chill-room': { bg: 'bg-purple-500/10', text: 'text-purple-500' },
+            coffee: { bg: 'bg-amber-500/10', text: 'text-amber-500' },
             other: { bg: 'bg-gray-500/10', text: 'text-gray-500' }
         }
         return colors[category] || colors.other
@@ -351,6 +354,11 @@ export default function ResourceTracking() {
                                                                 Team: {participant.teamId}
                                                             </Badge>
                                                         )}
+                                                        {participant.claimCount !== undefined && participant.maxClaims !== undefined && participant.maxClaims > 1 && (
+                                                            <Badge variant="secondary" className="text-xs mt-1 ml-1">
+                                                                Consumed: {participant.claimCount}/{participant.maxClaims}
+                                                            </Badge>
+                                                        )}
                                                     </div>
                                                     <div className="text-right">
                                                         <p className="text-xs text-green-600 font-medium">
@@ -391,6 +399,11 @@ export default function ResourceTracking() {
                                                         {participant.teamId && (
                                                             <Badge variant="outline" className="text-xs mt-1">
                                                                 Team: {participant.teamId}
+                                                            </Badge>
+                                                        )}
+                                                        {participant.claimCount !== undefined && participant.maxClaims !== undefined && participant.maxClaims > 1 && (
+                                                            <Badge variant="secondary" className="text-xs mt-1 ml-1">
+                                                                Consumed: {participant.claimCount}/{participant.maxClaims}
                                                             </Badge>
                                                         )}
                                                     </div>

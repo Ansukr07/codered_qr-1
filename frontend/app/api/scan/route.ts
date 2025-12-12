@@ -49,14 +49,21 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const existingTransaction = await Transaction.findOne({
+        // For coffee, allow multiple claims (up to 3)
+        // For other resources, only allow one claim
+        const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
+        const maxClaims = isCoffee ? 3 : 1;
+
+        // Count existing claim transactions for this user and resource
+        const claimCount = await Transaction.countDocuments({
             userId: userRecord._id,
             resourceId: resource._id,
+            action: 'claim'
         });
 
-        if (existingTransaction) {
+        if (claimCount >= maxClaims) {
             return NextResponse.json(
-                { message: `Already claimed: ${resource.name}. This resource was already distributed to this participant.` },
+                { message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.` },
                 { status: 400 }
             );
         }

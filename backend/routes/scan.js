@@ -26,14 +26,21 @@ router.post('/', requireAuth, requireRole('volunteer', 'admin'), async (req, res
             return res.status(400).json({ message: 'Resource out of stock' });
         }
 
-        const existingTransaction = await Transaction.findOne({
+        // For coffee, allow multiple claims (up to 3)
+        // For other resources, only allow one claim
+        const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
+        const maxClaims = isCoffee ? 3 : 1;
+
+        // Count existing claim transactions for this user and resource
+        const claimCount = await Transaction.countDocuments({
             userId: user._id,
             resourceId: resource._id,
+            action: 'claim'
         });
 
-        if (existingTransaction) {
+        if (claimCount >= maxClaims) {
             return res.status(400).json({
-                message: `Already claimed: ${resource.name}. This resource was already distributed to this participant.`
+                message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.`
             });
         }
 
@@ -71,24 +78,57 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
             return res.status(404).json({ message: 'Resource not found' });
         }
 
-        const existingTransaction = await Transaction.findOne({
+        // Check if this is coffee (allows multiple claims)
+        const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
+        const maxClaims = isCoffee ? 3 : 1;
+
+        // Count existing claim transactions for this user and resource
+        const claimCount = await Transaction.countDocuments({
             userId: user._id,
             resourceId: resource._id,
-        }).populate('volunteerId', 'name');
+            action: 'claim'
+        });
 
-        if (existingTransaction) {
+        // Get the most recent transaction for display
+        const lastTransaction = await Transaction.findOne({
+            userId: user._id,
+            resourceId: resource._id,
+            action: 'claim'
+        }).sort({ timestamp: -1 }).populate('volunteerId', 'name');
+
+        if (claimCount >= maxClaims) {
             return res.status(200).json({
-                status: 'claimed',
-                message: `Already claimed: ${resource.name}`,
+                status: 'limit_reached',
+                message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.`,
                 member: {
                     name: user.name,
                     teamId: user.teamId,
                     email: user.email
                 },
-                transaction: {
-                    timestamp: existingTransaction.timestamp,
-                    volunteerName: existingTransaction.volunteerId ? existingTransaction.volunteerId.name : 'Unknown'
-                }
+                claimCount,
+                maxClaims,
+                transaction: lastTransaction ? {
+                    timestamp: lastTransaction.timestamp,
+                    volunteerName: lastTransaction.volunteerId ? lastTransaction.volunteerId.name : 'Unknown'
+                } : undefined
+            });
+        }
+
+        if (claimCount > 0) {
+            return res.status(200).json({
+                status: 'claimed',
+                message: `Already claimed: ${resource.name}. This participant can claim up to ${maxClaims} times.`,
+                member: {
+                    name: user.name,
+                    teamId: user.teamId,
+                    email: user.email
+                },
+                claimCount,
+                maxClaims,
+                transaction: lastTransaction ? {
+                    timestamp: lastTransaction.timestamp,
+                    volunteerName: lastTransaction.volunteerId ? lastTransaction.volunteerId.name : 'Unknown'
+                } : undefined
             });
         }
 
@@ -99,7 +139,9 @@ router.post('/validate', requireAuth, requireRole('volunteer', 'admin'), async (
                 name: user.name,
                 teamId: user.teamId,
                 email: user.email
-            }
+            },
+            claimCount: 0,
+            maxClaims
         });
 
     } catch (error) {
