@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Camera, CheckCircle2, XCircle, ArrowLeft, BedDouble, Package, PackageCheck } from 'lucide-react'
 import Link from 'next/link'
 import { Html5Qrcode } from 'html5-qrcode'
+import { startCameraWithFallback, requestCameraPermission, isCameraAvailable } from '@/lib/camera-utils'
 import { useToast } from '@/hooks/use-toast'
 import { extractIdFromQr } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -72,23 +73,20 @@ export default function ScanBagPage() {
         try {
           html5Qrcode = new Html5Qrcode('qr-reader-bag')
 
-          await html5Qrcode.start(
-            { facingMode: "environment" },
-            {
-              fps: 10,
-              qrbox: { width: 250, height: 250 },
-              aspectRatio: 1.0
-            },
-            (decodedText: string) => {
+          await startCameraWithFallback(html5Qrcode, {
+            elementId: 'qr-reader-bag',
+            onScanSuccess: (decodedText: string) => {
               onScanSuccess(decodedText)
             },
-            (errorMessage: string) => {
+            onScanError: (errorMessage: string) => {
               // Ignore continuous scan errors
               if (errorMessage && !errorMessage.includes('NotFoundException')) {
                 console.log('Scan error:', errorMessage)
               }
-            }
-          )
+            },
+            fps: 10,
+            qrbox: { width: 250, height: 250 }
+          })
 
           console.log('✅ Scanner started successfully')
         } catch (error: any) {
@@ -191,12 +189,10 @@ export default function ScanBagPage() {
   }
 
   const handleStartScan = async () => {
-    // Check if camera is available
     try {
-      const devices = await navigator.mediaDevices.enumerateDevices()
-      const hasCamera = devices.some(device => device.kind === 'videoinput')
-
-      if (!hasCamera) {
+      // Check if camera is available
+      const cameraAvailable = await isCameraAvailable()
+      if (!cameraAvailable) {
         toast({
           title: 'No Camera Found',
           description: 'No camera device detected. Please connect a camera and try again.',
@@ -205,26 +201,15 @@ export default function ScanBagPage() {
         return
       }
 
-      // Request camera permissions
-      try {
-        await navigator.mediaDevices.getUserMedia({ video: true })
-      } catch (permError: any) {
-        if (permError.name === 'NotAllowedError' || permError.name === 'PermissionDeniedError') {
-          toast({
-            title: 'Camera Permission Denied',
-            description: 'Please allow camera access in your browser settings and try again.',
-            variant: 'destructive',
-          })
-          return
-        } else if (permError.name === 'NotFoundError' || permError.name === 'DevicesNotFoundError') {
-          toast({
-            title: 'No Camera Found',
-            description: 'No camera device found. Please connect a camera and try again.',
-            variant: 'destructive',
-          })
-          return
-        }
-        throw permError
+      // Request camera permissions explicitly (helps with Android)
+      const hasPermission = await requestCameraPermission()
+      if (!hasPermission) {
+        toast({
+          title: 'Camera Permission Denied',
+          description: 'Please allow camera access in your browser settings and try again.',
+          variant: 'destructive',
+        })
+        return
       }
 
       setScanning(true)

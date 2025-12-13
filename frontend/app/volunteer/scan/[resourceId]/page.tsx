@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Camera, CheckCircle2, XCircle, ArrowLeft, Package } from 'lucide-react'
 import Link from 'next/link'
-import { Html5QrcodeScanner } from 'html5-qrcode'
+import { Html5Qrcode } from 'html5-qrcode'
 import { useToast } from '@/hooks/use-toast'
+import { startCameraWithFallback, requestCameraPermission, isCameraAvailable } from '@/lib/camera-utils'
 
 interface Resource {
     _id: string
@@ -45,16 +46,44 @@ export default function DynamicScanPage() {
 
     useEffect(() => {
         if (scanning) {
-            const scanner = new Html5QrcodeScanner(
-                'qr-reader-dynamic',
-                { fps: 10, qrbox: 250 },
-                false
-            )
+            let html5Qrcode: any = null
 
-            scanner.render(onScanSuccess, onScanError)
+            const startScanning = async () => {
+                try {
+                    html5Qrcode = new Html5Qrcode('qr-reader-dynamic')
+
+                    await startCameraWithFallback(html5Qrcode, {
+                        elementId: 'qr-reader-dynamic',
+                        onScanSuccess: (decodedText: string) => {
+                            onScanSuccess(decodedText)
+                        },
+                        onScanError: (errorMessage: string) => {
+                            onScanError(errorMessage)
+                        },
+                        fps: 10,
+                        qrbox: { width: 250, height: 250 }
+                    })
+
+                    console.log('✅ Scanner started successfully')
+                } catch (error: any) {
+                    console.error('Scanner start error:', error)
+                    toast({
+                        title: 'Camera Error',
+                        description: error.message || 'Unable to access camera. Please check permissions and try again.',
+                        variant: 'destructive',
+                    })
+                    setScanning(false)
+                }
+            }
+
+            startScanning()
 
             return () => {
-                scanner.clear().catch(console.error)
+                if (html5Qrcode && html5Qrcode.isScanning) {
+                    html5Qrcode.stop().catch((err: any) => {
+                        console.error('Error stopping scanner:', err)
+                    })
+                }
             }
         }
     }, [scanning])

@@ -17,6 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { extractIdFromQr } from '@/lib/utils'
+import { startCameraWithFallback, requestCameraPermission, isCameraAvailable } from '@/lib/camera-utils'
 
 interface Resource {
   _id: string
@@ -86,23 +87,20 @@ export default function ScanFoodPage() {
         try {
           html5Qrcode = new Html5Qrcode('qr-reader-food')
 
-          await html5Qrcode.start(
-            { facingMode: "environment" },
-            {
-              fps: 10,
-              qrbox: { width: 250, height: 250 },
-              aspectRatio: 1.0
-            },
-            (decodedText: string) => {
+          await startCameraWithFallback(html5Qrcode, {
+            elementId: 'qr-reader-food',
+            onScanSuccess: (decodedText: string) => {
               onScanSuccess(decodedText)
             },
-            (errorMessage: string) => {
+            onScanError: (errorMessage: string) => {
               // Ignore continuous scan errors
               if (errorMessage && !errorMessage.includes('NotFoundException')) {
                 console.log('Scan error:', errorMessage)
               }
-            }
-          )
+            },
+            fps: 10,
+            qrbox: { width: 250, height: 250 }
+          })
 
           console.log('✅ Scanner started successfully')
         } catch (error: any) {
@@ -111,7 +109,7 @@ export default function ScanFoodPage() {
           setScanning(false)
           toast({
             title: 'Camera Error',
-            description: error.message || 'Unable to access camera. Please check permissions.',
+            description: error.message || 'Unable to access camera. Please check permissions and try again.',
             variant: 'destructive',
           })
         }
@@ -276,12 +274,10 @@ export default function ScanFoodPage() {
   }
 
   const handleStartScan = async () => {
-    // Check if camera is available
     try {
-      const devices = await navigator.mediaDevices.enumerateDevices()
-      const hasCamera = devices.some(device => device.kind === 'videoinput')
-
-      if (!hasCamera) {
+      // Check if camera is available
+      const cameraAvailable = await isCameraAvailable()
+      if (!cameraAvailable) {
         toast({
           title: 'No Camera Found',
           description: 'No camera device detected. Please connect a camera and try again.',
@@ -290,26 +286,15 @@ export default function ScanFoodPage() {
         return
       }
 
-      // Request camera permissions
-      try {
-        await navigator.mediaDevices.getUserMedia({ video: true })
-      } catch (permError: any) {
-        if (permError.name === 'NotAllowedError' || permError.name === 'PermissionDeniedError') {
-          toast({
-            title: 'Camera Permission Denied',
-            description: 'Please allow camera access in your browser settings and try again.',
-            variant: 'destructive',
-          })
-          return
-        } else if (permError.name === 'NotFoundError' || permError.name === 'DevicesNotFoundError') {
-          toast({
-            title: 'No Camera Found',
-            description: 'No camera device found. Please connect a camera and try again.',
-            variant: 'destructive',
-          })
-          return
-        }
-        throw permError
+      // Request camera permissions explicitly (helps with Android)
+      const hasPermission = await requestCameraPermission()
+      if (!hasPermission) {
+        toast({
+          title: 'Camera Permission Denied',
+          description: 'Please allow camera access in your browser settings and try again.',
+          variant: 'destructive',
+        })
+        return
       }
 
       setScanning(true)
