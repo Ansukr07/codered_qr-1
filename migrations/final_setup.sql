@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID,
     resource_id UUID REFERENCES resources(id),
-    volunteer_id UUID,
+    volunteer_id UUID REFERENCES volunteers(id),
     action VARCHAR(20) NOT NULL,
     timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
