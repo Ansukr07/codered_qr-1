@@ -5,9 +5,17 @@ import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, ExternalLink, Loader2, GitCommit, Star, GitFork, RefreshCw } from 'lucide-react'
+import { Github, ExternalLink, Loader2, GitCommit, Star, GitFork, RefreshCw, Calendar, User } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAuth } from '@/contexts/AuthContext'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface GitHubParticipant {
   _id: string
@@ -38,12 +46,26 @@ interface GitHubStatus {
   }
 }
 
+interface Commit {
+  sha: string
+  message: string
+  author: string
+  date: string
+  url: string
+}
+
 export default function GitHubPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const [githubStatus, setGithubStatus] = useState<GitHubStatus | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [repoStats, setRepoStats] = useState<Map<string, GitHubStats>>(new Map())
+
+  // Commits Modal State
+  const [selectedRepo, setSelectedRepo] = useState<string | null>(null)
+  const [commits, setCommits] = useState<Commit[]>([])
+  const [isCommitsLoading, setIsCommitsLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
@@ -69,19 +91,18 @@ export default function GitHubPage() {
       })
       if (res.ok) {
         const data = await res.json()
-        console.log('GitHub status fetched:', data.stats, 'participants:', data.participants.length)
         setGithubStatus(data)
-        
+
         // Fetch stats for all repositories
         const statsMap = new Map<string, GitHubStats>()
         const uniqueRepos = new Set<string>()
-        
+
         data.participants.forEach((p: GitHubParticipant) => {
           if (p.githubLink && p.githubLink.trim()) {
             uniqueRepos.add(p.githubLink.trim())
           }
         })
-        
+
         // Fetch stats for each unique repository
         const statsPromises = Array.from(uniqueRepos).map(async (repoUrl) => {
           try {
@@ -99,7 +120,7 @@ export default function GitHubPage() {
             console.error(`Error fetching stats for ${repoUrl}:`, error)
           }
         })
-        
+
         await Promise.all(statsPromises)
         setRepoStats(statsMap)
       } else {
@@ -112,6 +133,28 @@ export default function GitHubPage() {
       toast.error('Failed to fetch GitHub status')
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleViewCommits = async (repoUrl: string) => {
+    setSelectedRepo(repoUrl)
+    setIsModalOpen(true)
+    setIsCommitsLoading(true)
+    setCommits([])
+
+    try {
+      const res = await fetch(`/api/github/commits?url=${encodeURIComponent(repoUrl)}`)
+      if (res.ok) {
+        const data = await res.json()
+        setCommits(data.commits)
+      } else {
+        toast.error('Failed to fetch commits')
+      }
+    } catch (error) {
+      console.error('Error fetching commits:', error)
+      toast.error('Failed to fetch commits')
+    } finally {
+      setIsCommitsLoading(false)
     }
   }
 
@@ -128,7 +171,7 @@ export default function GitHubPage() {
   if (githubStatus) {
     githubStatus.participants.forEach(participant => {
       const teamId = participant.teamId || 'Individual'
-      
+
       if (!teamMap.has(teamId)) {
         teamMap.set(teamId, [])
       }
@@ -150,10 +193,10 @@ export default function GitHubPage() {
               {githubStatus.stats.submitted}/{githubStatus.stats.total} Teams Connected
             </Badge>
           )}
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={fetchGithubStatus} 
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={fetchGithubStatus}
             disabled={isLoading}
             className="gap-2"
           >
@@ -175,7 +218,7 @@ export default function GitHubPage() {
               // Keep first occurrence of each email
               return arr.findIndex(p => p.email === participant.email) === index
             })
-            
+
             const hasGithubLink = uniqueParticipants.some(p => p.githubLink)
             const teamStatus = hasGithubLink ? 'submitted' : 'pending'
             const githubLink = uniqueParticipants.find(p => p.githubLink)?.githubLink || null
@@ -211,9 +254,9 @@ export default function GitHubPage() {
                           >
                             {githubLink}
                           </a>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
+                          <Button
+                            variant="ghost"
+                            size="sm"
                             className="h-6 px-2"
                             onClick={() => window.open(githubLink, '_blank')}
                           >
@@ -224,10 +267,13 @@ export default function GitHubPage() {
                         {/* Stats - Large and Centered */}
                         {stats ? (
                           <div className="flex items-center justify-center gap-8 pt-4">
-                            <div className="flex flex-col items-center gap-2">
+                            <div
+                              className="flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity p-2 rounded-lg hover:bg-muted/50"
+                              onClick={() => handleViewCommits(githubLink)}
+                            >
                               <GitCommit className="h-6 w-6 text-muted-foreground" />
                               <span className="text-4xl font-bold text-foreground">{stats.commits || 0}</span>
-                              <span className="text-sm text-muted-foreground">Commits</span>
+                              <span className="text-sm text-muted-foreground group-hover:underline">Commits</span>
                             </div>
                             <div className="flex flex-col items-center gap-2">
                               <Star className="h-6 w-6 text-muted-foreground" />
@@ -276,6 +322,60 @@ export default function GitHubPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Commits Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <GitCommit className="h-5 w-5" />
+              Recent Commits
+            </DialogTitle>
+            <DialogDescription className="break-all">
+              Viewing commits for {selectedRepo}
+            </DialogDescription>
+          </DialogHeader>
+
+          <ScrollArea className="h-[60vh] pr-4">
+            {isCommitsLoading ? (
+              <div className="flex flex-col items-center justify-center h-full gap-4">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <p className="text-sm text-muted-foreground">Loading commits...</p>
+              </div>
+            ) : commits.length > 0 ? (
+              <div className="space-y-4">
+                {commits.map((commit) => (
+                  <div key={commit.sha} className="p-4 border rounded-lg bg-card/50 hover:bg-card/80 transition-colors">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <p className="font-medium text-sm text-foreground">{commit.message}</p>
+                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <User className="h-3 w-3" />
+                            {commit.author}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            {new Date(commit.date).toLocaleDateString()} {new Date(commit.date).toLocaleTimeString()}
+                          </div>
+                        </div>
+                      </div>
+                      <Button variant="outline" size="sm" className="h-6 text-xs" onClick={() => window.open(commit.url, '_blank')}>
+                        View
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
+                <GitCommit className="h-12 w-12 mb-2 opacity-50" />
+                <p>No commits found</p>
+              </div>
+            )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

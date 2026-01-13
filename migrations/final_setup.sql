@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS participants (
     track VARCHAR(50),
     hall VARCHAR(100),
     seat_number VARCHAR(50),
+    github_link VARCHAR(255),
     is_email_verified BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -125,7 +126,7 @@ CREATE TABLE IF NOT EXISTS help_requests (
     category VARCHAR(50) DEFAULT 'general',
     priority VARCHAR(20) DEFAULT 'medium',
     status VARCHAR(20) DEFAULT 'pending',
-    resolved_by UUID,
+    resolved_by UUID REFERENCES admins(id),
     resolved_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
