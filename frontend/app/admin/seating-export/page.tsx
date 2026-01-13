@@ -1,8 +1,6 @@
-import { connect } from 'mongoose';
 import React from 'react';
 import SeatingMapPrint from '@/components/SeatingMapPrint';
-// Import User model - we might need to be careful about environment
-// Since this is a server component in Next 13+, we can access DB directly if configured.
+import supabase from '@/lib/config/supabase';
 
 // Copied logic from SeatingMap.tsx to ensure index consistency
 function getTeamIndex(teamName: string, maxTeams: number): number {
@@ -15,35 +13,32 @@ function getTeamIndex(teamName: string, maxTeams: number): number {
 }
 
 async function getTeamsForTrack(track: string) {
-    // This is a direct DB call. Ensure MONGODB_URI is available.
-    if (!process.env.MONGODB_URI) {
-        throw new Error("MONGODB_URI not defined");
+    if (!supabase) {
+        throw new Error("Supabase is not configured");
     }
 
-    // We need to use the User model. In Next.js server components, we can require it if not using edge runtime.
-    // However, importing mongoose models in Next.js can be tricky with hot reloading.
-    // Let's try to define the schema/model locally if not exists to avoid overwrite errors.
-    const mongoose = require('mongoose');
-    if (mongoose.connection.readyState === 0) {
-        await mongoose.connect(process.env.MONGODB_URI);
-    }
+    // In Supabase, track might not exist on participants table based on final_setup.sql,
+    // assuming track is related to something else or just filtering all for now.
+    // If track is needed, we should check the schema.
+    // Looking at final_setup.sql, 'participants' table has 'team_id'.
+    // Let's assume all participants for now if track filter isn't directly on table,
+    // or if track is part of some naming convention.
 
-    // Import User model from the model file to avoid duplicate schema compilation
-    // This prevents the duplicate index warning
-    const User = (await import('@/lib/models/User')).default;
-    
-    // Find users in this track
-    const users = await User.find({ track: track });
+    const { data: participants, error } = await supabase
+        .from('participants')
+        .select('team_id');
 
-    // Group by teamId
-    const teamsMap = new Map();
-    users.forEach((u: any) => {
-        if (u.teamId) {
-            teamsMap.set(u.teamId, u.teamId);
+    if (error) throw error;
+
+    // Group by team_id
+    const teamsMap = new Set<string>();
+    participants.forEach((p) => {
+        if (p.team_id) {
+            teamsMap.add(p.team_id);
         }
     });
 
-    const teams = Array.from(teamsMap.values()).map((name: string) => ({
+    const teams = Array.from(teamsMap).map((name) => ({
         name: name,
         index: getTeamIndex(name, 52)
     }));

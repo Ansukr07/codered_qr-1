@@ -1,16 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import mongoose from 'mongoose';
-import HelpRequest from '@/lib/models/HelpRequest';
-import { requireAuth, requireRole } from '@/lib/middleware/rbac';
-
-// Connect to MongoDB if not already connected
-async function connectDB() {
-    if (mongoose.connections[0].readyState) return;
-    const mongoUri = process.env.MONGODB_URI;
-    if (mongoUri) {
-        await mongoose.connect(mongoUri);
-    }
-}
+import supabase from '@/lib/config/supabase';
+import { requireRole } from '@/lib/middleware/rbac';
 
 // Resolve help request (volunteer/admin only)
 export async function PATCH(
@@ -18,48 +8,54 @@ export async function PATCH(
     { params }: { params: { id: string } }
 ) {
     try {
-        await connectDB();
-        
+        if (!supabase) {
+            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
+        }
+
         const authResult = requireRole(request, ['volunteer', 'admin']);
         if (authResult instanceof NextResponse) {
             return authResult;
         }
         const { user } = authResult;
 
-        const helpRequest = await HelpRequest.findById(params.id);
+        const { data: helpRequest, error: fetchError } = await supabase
+            .from('help_requests')
+            .select('*')
+            .eq('id', params.id)
+            .single();
 
-        if (!helpRequest) {
-            return NextResponse.json(
-                { message: 'Help request not found' },
-                { status: 404 }
-            );
+        if (fetchError || !helpRequest) {
+            return NextResponse.json({ message: 'Help request not found' }, { status: 404 });
         }
 
         if (helpRequest.status === 'resolved') {
-            return NextResponse.json(
-                { message: 'Request already resolved' },
-                { status: 400 }
-            );
+            return NextResponse.json({ message: 'Request already resolved' }, { status: 400 });
         }
 
-        helpRequest.status = 'resolved';
-        helpRequest.resolvedBy = user.userId;
-        helpRequest.resolvedAt = new Date();
+        const { data: updatedRequest, error: updateError } = await supabase
+            .from('help_requests')
+            .update({
+                status: 'resolved',
+                resolved_by: user.userId,
+                resolved_at: new Date().toISOString()
+            })
+            .eq('id', params.id)
+            .select(`
+                *,
+                participants:user_id (id, name, email, team_id),
+                volunteers:resolved_by (id, name)
+            `)
+            .single();
 
-        await helpRequest.save();
-        await helpRequest.populate('userId', 'name email teamId');
-        await helpRequest.populate('resolvedBy', 'name');
+        if (updateError) throw updateError;
 
         return NextResponse.json({
             message: 'Help request resolved successfully',
-            helpRequest
+            helpRequest: updatedRequest
         });
     } catch (error: any) {
         console.error('Resolve help request error:', error);
-        return NextResponse.json(
-            { message: 'Server error' },
-            { status: 500 }
-        );
+        return NextResponse.json({ message: 'Server error' }, { status: 500 });
     }
 }
 

@@ -1,23 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import mongoose from 'mongoose';
-import User from '@/lib/models/User';
-import Resource from '@/lib/models/Resource';
-import Transaction from '@/lib/models/Transaction';
-import { requireAuth, requireRole } from '@/lib/middleware/rbac';
-
-// Connect to MongoDB if not already connected
-async function connectDB() {
-    if (mongoose.connections[0].readyState) return;
-    const mongoUri = process.env.MONGODB_URI;
-    if (mongoUri) {
-        await mongoose.connect(mongoUri);
-    }
-}
+import supabase from '@/lib/config/supabase';
+import { requireRole } from '@/lib/middleware/rbac';
 
 export async function POST(request: NextRequest) {
     try {
-        await connectDB();
-        
+        if (!supabase) {
+            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
+        }
+
         const authResult = requireRole(request, ['volunteer', 'admin']);
         if (authResult instanceof NextResponse) {
             return authResult;
@@ -25,131 +15,125 @@ export async function POST(request: NextRequest) {
 
         const { qr_code, resource_id } = await request.json();
 
-        // Normalize QR code: trim whitespace and handle URL format
+        // Normalize QR code
         let normalizedQrCode = qr_code ? qr_code.trim() : '';
-        
-        // Extract ID from URL if present (e.g., "https://example.com/verify?id=CR-T75-P01")
         if (normalizedQrCode.includes('http') || normalizedQrCode.includes('?')) {
             try {
                 const url = new URL(normalizedQrCode);
                 const idParam = url.searchParams.get('id');
-                if (idParam) {
-                    normalizedQrCode = idParam.trim();
-                }
+                if (idParam) normalizedQrCode = idParam.trim();
             } catch (e) {
-                // If URL parsing fails, try to extract manually
                 const idMatch = normalizedQrCode.match(/[?&]id=([^&]+)/);
-                if (idMatch) {
-                    normalizedQrCode = idMatch[1].trim();
-                }
+                if (idMatch) normalizedQrCode = idMatch[1].trim();
             }
         }
 
-        // Try exact match first
-        let userRecord = await User.findOne({ qrCode: normalizedQrCode });
-        
-        // If not found, try case-insensitive match
-        if (!userRecord) {
-            userRecord = await User.findOne({ 
-                qrCode: { $regex: new RegExp(`^${normalizedQrCode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
-            });
-        }
-        
-        if (!userRecord) {
-            return NextResponse.json(
-                { message: 'Invalid QR Code' },
-                { status: 404 }
-            );
+        // 1. Find participant in Supabase
+        const { data: userRecord, error: uError } = await supabase
+            .from('participants')
+            .select('*')
+            .ilike('qr_code', normalizedQrCode) // case-insensitive
+            .single();
+
+        if (uError || !userRecord) {
+            return NextResponse.json({ message: 'Invalid QR Code' }, { status: 404 });
         }
 
-        const resource = await Resource.findById(resource_id);
-        if (!resource) {
-            return NextResponse.json(
-                { message: 'Resource not found' },
-                { status: 404 }
-            );
+        // 2. Find resource
+        const { data: resource, error: rError } = await supabase
+            .from('resources')
+            .select('*')
+            .eq('id', resource_id)
+            .single();
+
+        if (rError || !resource) {
+            return NextResponse.json({ message: 'Resource not found' }, { status: 404 });
         }
 
-        // Check if this is coffee (allows multiple claims)
+        // 3. Check claim status
         const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
         const maxClaims = isCoffee ? 3 : 1;
 
-        // Count existing claim transactions for this user and resource
-        const claimCount = await Transaction.countDocuments({
-            userId: userRecord._id,
-            resourceId: resource._id,
-            action: 'claim'
-        });
+        const { count: claimCount, error: cError } = await supabase
+            .from('transactions')
+            .select('*', { count: 'exact', head: true })
+            .eq('user_id', userRecord.id)
+            .eq('resource_id', resource.id)
+            .eq('action', 'claim');
 
-        // Get the most recent transaction for display
-        const lastTransaction = await Transaction.findOne({
-            userId: userRecord._id,
-            resourceId: resource._id,
-            action: 'claim'
-        }).sort({ timestamp: -1 }).populate('volunteerId', 'name');
+        if (cError) throw cError;
 
-        // If max claims reached, return limit_reached
-        if (claimCount >= maxClaims) {
+        const { data: lastTransaction, error: ltError } = await supabase
+            .from('transactions')
+            .select(`
+                *,
+                volunteers:volunteer_id (name)
+            `)
+            .eq('user_id', userRecord.id)
+            .eq('resource_id', resource.id)
+            .eq('action', 'claim')
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+        if (ltError) throw ltError;
+
+        if (claimCount !== null && claimCount >= maxClaims) {
             return NextResponse.json({
                 status: 'limit_reached',
                 message: `Maximum limit reached: ${resource.name}. This participant has already claimed ${claimCount} out of ${maxClaims} allowed.`,
                 member: {
                     name: userRecord.name,
-                    teamId: userRecord.teamId,
+                    teamId: userRecord.team_id,
                     email: userRecord.email
                 },
                 claimCount,
                 maxClaims,
                 transaction: lastTransaction ? {
-                    timestamp: lastTransaction.timestamp,
-                    volunteerName: lastTransaction.volunteerId ? (lastTransaction.volunteerId as any).name : 'Unknown'
+                    timestamp: lastTransaction.created_at,
+                    volunteerName: lastTransaction.volunteers ? (lastTransaction.volunteers as any).name : 'Unknown'
                 } : undefined
             });
         }
 
-        // For coffee (multi-claim), if claimCount > 0 but < maxClaims, still allow scanning
-        // For other resources (single-claim), if claimCount > 0, block scanning
-        if (claimCount > 0 && !isCoffee) {
+        if (claimCount !== null && claimCount > 0 && !isCoffee) {
             return NextResponse.json({
                 status: 'claimed',
                 message: `Already claimed: ${resource.name}. This resource can only be claimed once.`,
                 member: {
                     name: userRecord.name,
-                    teamId: userRecord.teamId,
+                    teamId: userRecord.team_id,
                     email: userRecord.email
                 },
                 claimCount,
                 maxClaims,
                 transaction: lastTransaction ? {
-                    timestamp: lastTransaction.timestamp,
-                    volunteerName: lastTransaction.volunteerId ? (lastTransaction.volunteerId as any).name : 'Unknown'
+                    timestamp: lastTransaction.created_at,
+                    volunteerName: lastTransaction.volunteers ? (lastTransaction.volunteers as any).name : 'Unknown'
                 } : undefined
             });
         }
 
-        // For coffee with existing claims (but under max), or first-time claims, allow
         return NextResponse.json({
             status: 'allowed',
-            message: claimCount > 0 
-                ? `Ready to claim (${claimCount}/${maxClaims} already claimed).` 
+            message: (claimCount || 0) > 0
+                ? `Ready to claim (${claimCount}/${maxClaims} already claimed).`
                 : 'Ready to claim',
             member: {
                 name: userRecord.name,
-                teamId: userRecord.teamId,
+                teamId: userRecord.team_id,
                 email: userRecord.email
             },
-            claimCount,
+            claimCount: claimCount || 0,
             maxClaims,
             transaction: lastTransaction ? {
-                timestamp: lastTransaction.timestamp,
-                volunteerName: lastTransaction.volunteerId ? (lastTransaction.volunteerId as any).name : 'Unknown'
+                timestamp: lastTransaction.created_at,
+                volunteerName: lastTransaction.volunteers ? (lastTransaction.volunteers as any).name : 'Unknown'
             } : undefined
         });
     } catch (error: any) {
-        return NextResponse.json(
-            { message: error.message },
-            { status: 500 }
-        );
+        console.error('Scan validation error:', error);
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 

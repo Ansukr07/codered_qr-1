@@ -1,26 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import mongoose from 'mongoose';
-import User from '@/lib/models/User';
-import Resource from '@/lib/models/Resource';
-import Transaction from '@/lib/models/Transaction';
-import { requireAuth, requireRole } from '@/lib/middleware/rbac';
-
-// Connect to MongoDB if not already connected
-async function connectDB() {
-    if (mongoose.connections[0].readyState) return;
-    const mongoUri = process.env.MONGODB_URI;
-    if (mongoUri) {
-        await mongoose.connect(mongoUri);
-    }
-}
+import supabase from '@/lib/config/supabase';
+import { requireRole } from '@/lib/middleware/rbac';
 
 export async function GET(
     request: NextRequest,
     { params }: { params: { resourceId: string } }
 ) {
     try {
-        await connectDB();
-        
+        if (!supabase) {
+            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
+        }
+
         const authResult = requireRole(request, ['volunteer', 'admin']);
         if (authResult instanceof NextResponse) {
             return authResult;
@@ -30,114 +20,98 @@ export async function GET(
         const searchParams = request.nextUrl.searchParams;
         const search = searchParams.get('search');
 
-        console.log(`Fetching resource status for resourceId: ${resourceId}`);
+        // 1. Get the resource
+        const { data: resource, error: rError } = await supabase
+            .from('resources')
+            .select('*')
+            .eq('id', resourceId)
+            .single();
 
-        // Get the resource
-        const resource = await Resource.findById(resourceId);
-        if (!resource) {
-            console.log('Resource not found');
-            return NextResponse.json(
-                { message: 'Resource not found' },
-                { status: 404 }
-            );
+        if (rError || !resource) {
+            return NextResponse.json({ message: 'Resource not found' }, { status: 404 });
         }
-        console.log('Resource found:', resource.name);
 
-        // Get all participants
-        let allParticipants = await User.find({ role: 'participant' }).select('name email teamId qrCode');
-        console.log(`Found ${allParticipants.length} total participants`);
-
-        // Apply search filter if provided
+        // 2. Get all participants
+        let query = supabase.from('participants').select('id, name, email, team_id, qr_code');
         if (search) {
-            const searchLower = search.toLowerCase();
-            allParticipants = allParticipants.filter(p =>
-                p.name.toLowerCase().includes(searchLower) ||
-                (p.email && p.email.toLowerCase().includes(searchLower)) ||
-                (p.teamId && p.teamId.toLowerCase().includes(searchLower))
-            );
-            console.log(`After search filter: ${allParticipants.length} participants`);
+            query = query.or(`name.ilike.%${search}%,email.ilike.%${search}%,team_id.ilike.%${search}%`);
         }
+        const { data: allParticipants, error: pError } = await query;
+        if (pError) throw pError;
 
-        // Get all transactions for this resource
-        const transactions = await Transaction.find({ resourceId })
-            .populate('userId', 'name email teamId')
-            .populate('volunteerId', 'name')
-            .sort({ timestamp: -1 });
-        console.log(`Found ${transactions.length} transactions for this resource`);
+        // 3. Get all transactions for this resource
+        const { data: transactions, error: tError } = await supabase
+            .from('transactions')
+            .select(`
+                *,
+                participants:user_id (id, name, email, team_id),
+                volunteers:volunteer_id (name)
+            `)
+            .eq('resource_id', resourceId)
+            .order('created_at', { ascending: false });
 
-        // Check if this is coffee (allows multiple claims)
+        if (tError) throw tError;
+
+        // Process transactions
         const isCoffee = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee');
         const maxClaims = isCoffee ? 3 : 1;
 
-        // Create a map of userId -> transactions and count claims
         const transactionMap = new Map();
         const claimCountMap = new Map();
-        
+
         transactions.forEach(t => {
-            if (t.userId && t.action === 'claim') {
-                const userId = (t.userId as any)._id.toString();
-                
-                // Count claims for each user
+            if (t.user_id && t.action === 'claim') {
+                const userId = t.user_id;
                 claimCountMap.set(userId, (claimCountMap.get(userId) || 0) + 1);
-                
-                // Store the most recent transaction
+
                 if (!transactionMap.has(userId)) {
                     transactionMap.set(userId, t);
-                } else {
-                    const existing = transactionMap.get(userId);
-                    if (new Date(t.timestamp) > new Date(existing.timestamp)) {
-                        transactionMap.set(userId, t);
-                    }
                 }
             }
         });
 
-        // Separate participants into completed and pending
+        // Separate participants
         const completed: any[] = [];
         const pending: any[] = [];
 
         allParticipants.forEach(participant => {
-            const participantId = participant._id.toString();
+            const participantId = participant.id;
             const transaction = transactionMap.get(participantId);
             const claimCount = claimCountMap.get(participantId) || 0;
 
             if (transaction && claimCount > 0) {
                 completed.push({
-                    _id: participant._id.toString(),
+                    _id: participant.id,
                     name: participant.name,
                     email: participant.email || '',
-                    teamId: participant.teamId || '',
-                    timestamp: transaction.timestamp,
-                    volunteer: transaction.volunteerId ? (transaction.volunteerId as any).name : 'Unknown',
-                    claimCount: claimCount,
-                    maxClaims: maxClaims
+                    teamId: participant.team_id || '',
+                    timestamp: transaction.created_at,
+                    volunteer: transaction.volunteers ? (transaction.volunteers as any).name : 'Unknown',
+                    claimCount,
+                    maxClaims
                 });
             } else {
                 pending.push({
-                    _id: participant._id.toString(),
+                    _id: participant.id,
                     name: participant.name,
                     email: participant.email || '',
-                    teamId: participant.teamId || '',
-                    qrCode: participant.qrCode,
+                    teamId: participant.team_id || '',
+                    qrCode: participant.qr_code,
                     claimCount: 0,
-                    maxClaims: maxClaims
+                    maxClaims
                 });
             }
         });
 
-        // Calculate statistics
         const stats = {
             total: allParticipants.length,
             completed: completed.length,
             pending: pending.length
         };
 
-        console.log('Stats:', stats);
-        console.log(`Returning ${completed.length} completed and ${pending.length} pending`);
-
         return NextResponse.json({
             resource: {
-                _id: resource._id.toString(),
+                _id: resource.id,
                 name: resource.name,
                 category: resource.category
             },
@@ -145,13 +119,9 @@ export async function GET(
             completed,
             pending
         });
-
     } catch (error: any) {
         console.error('Resource status error:', error);
-        return NextResponse.json(
-            { message: error.message },
-            { status: 500 }
-        );
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 

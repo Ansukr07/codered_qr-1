@@ -1,81 +1,75 @@
 import { NextRequest, NextResponse } from 'next/server';
-import mongoose from 'mongoose';
-import Announcement from '@/lib/models/Announcement';
+import supabase from '@/lib/config/supabase';
 import { requireAuth, requireRole } from '@/lib/middleware/rbac';
-
-// Connect to MongoDB if not already connected
-async function connectDB() {
-    if (mongoose.connections[0].readyState) return;
-    const mongoUri = process.env.MONGODB_URI;
-    if (mongoUri) {
-        await mongoose.connect(mongoUri);
-    }
-}
 
 // Get Announcements (Filtered by audience) - All authenticated users
 export async function GET(request: NextRequest) {
     try {
-        await connectDB();
-        
+        if (!supabase) {
+            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
+        }
+
         const authResult = requireAuth(request);
         if (authResult instanceof NextResponse) {
             return authResult;
         }
         const { user } = authResult;
 
-        let query: any = {};
+        let query = supabase.from('announcements').select('*');
 
         if (user.role === 'admin') {
-            // Admin sees all announcements
-            query = {};
+            // Admin sees all
         } else if (user.role === 'volunteer') {
-            // Volunteers see 'all' and 'volunteers'
-            query = { audience: { $in: ['all', 'volunteers'] } };
+            query = query.in('audience', ['all', 'volunteers']);
         } else if (user.role === 'participant') {
-            // Participants see 'all' and 'participants'
-            query = { audience: { $in: ['all', 'participants'] } };
+            query = query.in('audience', ['all', 'participants']);
         } else {
-            // Default: no announcements
-            query = { audience: 'none' };
+            return NextResponse.json({ announcements: [] });
         }
 
-        const announcements = await Announcement.find(query).sort({ createdAt: -1 });
+        const { data: announcements, error } = await query.order('created_at', { ascending: false });
+        if (error) throw error;
+
         return NextResponse.json({ announcements });
     } catch (error: any) {
-        return NextResponse.json(
-            { message: error.message },
-            { status: 500 }
-        );
+        console.error('Get announcements error:', error);
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 
 // Create Announcement (Admin only)
 export async function POST(request: NextRequest) {
     try {
-        await connectDB();
-        
+        if (!supabase) {
+            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
+        }
+
         const authResult = requireRole(request, ['admin']);
         if (authResult instanceof NextResponse) {
             return authResult;
         }
 
         const { title, message, priority, audience } = await request.json();
-        const announcement = await Announcement.create({
-            title,
-            message,
-            priority,
-            audience
-        });
-        
+        const { data: announcement, error } = await supabase
+            .from('announcements')
+            .insert({
+                title,
+                message,
+                priority: priority || 'medium',
+                audience: audience || 'all'
+            })
+            .select()
+            .single();
+
+        if (error) throw error;
+
         return NextResponse.json(
             { message: 'Announcement created', announcement },
             { status: 201 }
         );
     } catch (error: any) {
-        return NextResponse.json(
-            { message: error.message },
-            { status: 500 }
-        );
+        console.error('Create announcement error:', error);
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 
