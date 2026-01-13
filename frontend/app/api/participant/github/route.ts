@@ -41,9 +41,17 @@ export async function PUT(request: NextRequest) {
             }
         }
 
+        // Retrieve access token from cookie (set during callback)
+        const accessToken = request.cookies.get('github_token')?.value;
+
+        const updateData: any = { github_link: trimmedLink };
+        if (accessToken) {
+            updateData.github_access_token = accessToken;
+        }
+
         const { data: participant, error } = await supabase
             .from('participants')
-            .update({ github_link: trimmedLink })
+            .update(updateData)
             .eq('id', user.userId)
             .select()
             .single();

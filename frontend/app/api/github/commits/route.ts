@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import supabase from '@/lib/config/supabase';
 
 /**
  * Fetch recent commits for a GitHub repository
+ * Supports private repositories by looking up the participant's saved access token
  */
 export async function GET(request: NextRequest) {
     try {
@@ -27,6 +29,23 @@ export async function GET(request: NextRequest) {
         const [, owner, repo] = match;
         const repoName = repo.replace(/\.git$/, '');
 
+        // 1. Look up the participant who owns this repo link to get their access token
+        // Use normalized search (trim whitespace)
+        let accessToken: string | null = null;
+
+        if (supabase) {
+            const { data: participant, error } = await supabase
+                .from('participants')
+                .select('github_access_token')
+                .eq('github_link', repoUrl.trim())
+                .limit(1)
+                .single();
+
+            if (!error && participant && participant.github_access_token) {
+                accessToken = participant.github_access_token;
+            }
+        }
+
         // Fetch commits from GitHub API
         const githubApiUrl = `https://api.github.com/repos/${owner}/${repoName}/commits?per_page=10`;
 
@@ -35,18 +54,31 @@ export async function GET(request: NextRequest) {
             'User-Agent': 'CodeRed-Portal'
         };
 
-        // Use Basic Auth with Client ID/Secret to increase rate limits if available
-        const clientId = process.env.GITHUB_CLIENT_ID;
-        const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+        if (accessToken) {
+            // Use Participant's Token (Access to Private Repos)
+            headers['Authorization'] = `token ${accessToken}`;
+            console.log('Using Participant Access Token for commit fetch');
+        } else {
+            // Fallback: Use App Client ID/Secret (Public Repos only, higher rate limit)
+            const clientId = process.env.GITHUB_CLIENT_ID;
+            const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
-        if (clientId && clientSecret) {
-            const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-            headers['Authorization'] = `Basic ${auth}`;
+            if (clientId && clientSecret) {
+                const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+                headers['Authorization'] = `Basic ${auth}`;
+                console.log('Using App Basic Auth (Public only)');
+            }
         }
 
         const response = await fetch(githubApiUrl, { headers });
 
         if (!response.ok) {
+            if (response.status === 404) {
+                return NextResponse.json(
+                    { message: 'Repository not found or is private (and no valid token found)' },
+                    { status: 404 }
+                );
+            }
             return NextResponse.json(
                 { message: `GitHub API error: ${response.statusText}` },
                 { status: response.status }
