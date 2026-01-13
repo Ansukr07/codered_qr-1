@@ -1,7 +1,8 @@
 /**
  * Script to create a volunteer with hardcoded credentials
  * Email: vol@vol.in
- * Password: volcom@1999
+ * Email: vol@vol.in
+ * Password: Use SMTP_VOLUNTEER_PASS from .env
  */
 
 const mongoose = require('mongoose');
@@ -38,35 +39,35 @@ async function createVolunteer() {
         console.log('Connected to MongoDB\n');
 
         const email = 'vol@vol.in';
-        const password = 'volcom@1999';
+        const password = process.env.SMTP_VOLUNTEER_PASS || 'change-me-in-env';
         const name = 'Volunteer User';
 
         // Check if volunteer already exists
         const existingVolunteer = await Volunteer.findOne({ email: email.toLowerCase() });
-        
+
         if (existingVolunteer) {
             console.log('✓ Volunteer already exists with email:', email);
             console.log('Updating password...');
-            
+
             const hashedPassword = await bcrypt.hash(password, 10);
             existingVolunteer.password = hashedPassword;
             existingVolunteer.name = name;
             await existingVolunteer.save();
-            
+
             console.log('✓ Volunteer password updated successfully');
         } else {
             console.log('Creating new volunteer...');
-            
+
             const hashedPassword = await bcrypt.hash(password, 10);
             const qrCode = `VOL-${Date.now()}`;
-            
+
             const volunteer = await Volunteer.create({
                 name,
                 email: email.toLowerCase(),
                 password: hashedPassword,
                 qrCode,
             });
-            
+
             console.log('✓ Volunteer created successfully:');
             console.log('  Email:', email);
             console.log('  Password:', password);

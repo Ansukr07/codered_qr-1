@@ -16,7 +16,7 @@ async function verify() {
         body: JSON.stringify({
             name: 'Admin User',
             email: 'admin@test.com',
-            password: 'password123',
+            password: 'test-password-123',
             role: 'admin',
         }),
     });
@@ -34,7 +34,7 @@ async function verify() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             email: 'admin@test.com',
-            password: 'password123',
+            password: 'test-password-123',
         }),
     });
     const loginData: any = await loginRes.json();

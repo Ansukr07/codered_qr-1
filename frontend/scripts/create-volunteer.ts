@@ -13,7 +13,7 @@ async function createVolunteer() {
             body: JSON.stringify({
                 name: 'Demo Volunteer',
                 email: 'volunteer@demo.com',
-                password: 'volunteer123',
+                password: process.env.DEMO_VOLUNTEER_PASSWORD || 'volunteer123',
                 role: 'volunteer'
             })
         });
