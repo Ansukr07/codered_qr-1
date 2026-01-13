@@ -39,15 +39,39 @@ export async function PUT(request: NextRequest) {
                     { status: 400 }
                 );
             }
+
+            // Verify repository is PUBLIC
+            const match = trimmedLink.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+            if (match) {
+                const [, owner, repo] = match;
+                const repoName = repo.replace(/\.git$/, '');
+
+                // Check visibility using public API (no auth)
+                const checkUrl = `https://api.github.com/repos/${owner}/${repoName}`;
+                const checkResponse = await fetch(checkUrl, {
+                    headers: { 'User-Agent': 'CodeRed-Portal' }
+                });
+
+                if (!checkResponse.ok) {
+                    if (checkResponse.status === 404) {
+                        return NextResponse.json(
+                            { message: 'Repository is Private or Not Found. Only Public repositories are allowed.' },
+                            { status: 400 }
+                        );
+                    }
+                    // Ignore other errors (rate limits etc) and allow proceeding with warning logged
+                    console.warn(`Could not verify public visibility for ${trimmedLink}: ${checkResponse.status}`);
+                }
+            }
         }
 
         // Retrieve access token from cookie (set during callback)
-        const accessToken = request.cookies.get('github_token')?.value;
+        // We do NOT save it anymore as we only allow public repos
+        // const accessToken = request.cookies.get('github_token')?.value;
 
         const updateData: any = { github_link: trimmedLink };
-        if (accessToken) {
-            updateData.github_access_token = accessToken;
-        }
+        // Clean up any existing token in DB for this user for security compliance with "Public Only" rule
+        updateData.github_access_token = null;
 
         const { data: participant, error } = await supabase
             .from('participants')

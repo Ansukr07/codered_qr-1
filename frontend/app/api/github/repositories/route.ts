@@ -31,16 +31,18 @@ export async function GET(request: NextRequest) {
         const repos = await reposResponse.json();
 
         // Format repositories for frontend
-        const formattedRepos = repos.map((repo: any) => ({
-            id: repo.id,
-            name: repo.name,
-            fullName: repo.full_name,
-            url: repo.html_url,
-            description: repo.description,
-            private: repo.private,
-            updatedAt: repo.updated_at,
-            defaultBranch: repo.default_branch,
-        }));
+        const formattedRepos = repos
+            .filter((repo: any) => !repo.private) // Filter out private repositories
+            .map((repo: any) => ({
+                id: repo.id,
+                name: repo.name,
+                fullName: repo.full_name,
+                url: repo.html_url,
+                description: repo.description,
+                private: repo.private,
+                updatedAt: repo.updated_at,
+                defaultBranch: repo.default_branch,
+            }));
 
         return NextResponse.json({ repositories: formattedRepos });
     } catch (error: any) {
