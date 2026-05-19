@@ -43,7 +43,7 @@ export default function AdminLayout({
             {children}
           </div>
         </main>
-      </div> //sidebar type shit
+      </div>
     </div>
   )
 }

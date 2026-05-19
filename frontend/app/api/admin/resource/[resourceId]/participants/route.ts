@@ -4,7 +4,7 @@ import { requireRole } from '@/lib/middleware/rbac';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { resourceId: string } }
+    context: { params: Promise<{ resourceId: string }> }
 ) {
     try {
         if (!supabase) {
@@ -16,7 +16,8 @@ export async function GET(
             return authResult;
         }
 
-        const { resourceId } = params;
+        // In Next.js 15+, `params` is async and must be awaited.
+        const { resourceId } = await context.params;
 
         // 1. Get resource
         const { data: resource, error: rError } = await supabase
@@ -55,8 +56,11 @@ export async function GET(
         const maxClaims = isCoffee ? 3 : 1;
 
         const userClaimMap = new Map();
-        transactions.forEach(t => {
-            if (t.user_id) {
+        transactions.forEach((t: any) => {
+            // Skip orphan transactions whose participant row was deleted; the
+            // join would return `null` for `participants` and accessing
+            // .name/.email below would crash this route.
+            if (t.user_id && t.participants) {
                 if (!userClaimMap.has(t.user_id)) {
                     userClaimMap.set(t.user_id, []);
                 }
@@ -66,13 +70,15 @@ export async function GET(
 
         const completed = Array.from(userClaimMap.entries()).map(([userId, txs]: [string, any[]]) => {
             const latestTx = txs[0]; // Already ordered by created_at desc
+            const p = latestTx.participants || {};
+            const v = latestTx.volunteers || null;
             return {
-                name: latestTx.participants.name,
-                email: latestTx.participants.email,
-                teamId: latestTx.participants.team_id,
-                githubLink: latestTx.participants.github_link,
+                name: p.name,
+                email: p.email,
+                teamId: p.team_id,
+                githubLink: p.github_link,
                 timestamp: latestTx.created_at,
-                volunteer: latestTx.volunteers ? latestTx.volunteers.name : 'Unknown',
+                volunteer: v ? v.name : 'Unknown',
                 claimCount: txs.length,
                 maxClaims: maxClaims
             };

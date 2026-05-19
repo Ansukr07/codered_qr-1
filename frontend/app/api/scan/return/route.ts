@@ -23,12 +23,28 @@ export async function POST(request: NextRequest) {
             normalizedQrCode = url.searchParams.get('id') || normalizedQrCode;
         }
 
-        // 1. Get Participant
-        const { data: participant, error: pError } = await supabase
-            .from('participants')
-            .select('*')
-            .or(`qr_code.eq.${normalizedQrCode},participant_id.eq.${normalizedQrCode}`)
-            .single();
+        // 1. Get Participant. Two scoped lookups avoid the PostgREST `.or()`
+        // parsing pitfalls when the QR contains commas, periods, etc.
+        let participant: any = null;
+        let pError: any = null;
+        {
+            const { data, error } = await supabase
+                .from('participants')
+                .select('*')
+                .eq('qr_code', normalizedQrCode)
+                .maybeSingle();
+            participant = data;
+            pError = error;
+        }
+        if (!participant) {
+            const { data, error } = await supabase
+                .from('participants')
+                .select('*')
+                .eq('participant_id', normalizedQrCode)
+                .maybeSingle();
+            participant = data;
+            pError = error;
+        }
 
         if (pError || !participant) {
             return NextResponse.json({ message: 'Invalid QR Code' }, { status: 404 });

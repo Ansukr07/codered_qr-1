@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const XLSX = require('xlsx');
 require('dotenv').config();
 const path = require('path');
-const User = require('../models/User');
+const User = require('../backend/models/User');
 
 async function exportToExcel() {
     try {

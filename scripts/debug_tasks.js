@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
-const Task = require('../models/Task');
+const Task = require('../backend/models/Task');
 
 const connectDB = async () => {
     try {

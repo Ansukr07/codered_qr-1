@@ -71,10 +71,15 @@ export default function ScanBagPage() {
 
       const startScanning = async () => {
         try {
-          html5Qrcode = new Html5Qrcode('qr-reader-bag')
+          // The DOM id mirrors the active tab so the scanner attaches to
+          // the visible element (issue vs return). Both tabs cannot mount
+          // simultaneously, but using a unique id per mode avoids any
+          // chance of the scanner targeting the wrong (hidden) <div>.
+          const elementId = mode === 'return' ? 'qr-reader-bag-return' : 'qr-reader-bag-issue'
+          html5Qrcode = new Html5Qrcode(elementId)
 
           await startCameraWithFallback(html5Qrcode, {
-            elementId: 'qr-reader-bag',
+            elementId,
             onScanSuccess: (decodedText: string) => {
               onScanSuccess(decodedText)
             },
@@ -283,7 +288,7 @@ export default function ScanBagPage() {
                   </div>
                 )}
                 {scanning && !cameraError && (
-                  <div id="qr-reader-bag" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
+                  <div id="qr-reader-bag-issue" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
                 )}
                 {result && (
                   <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/90">
@@ -370,7 +375,7 @@ export default function ScanBagPage() {
                   </div>
                 )}
                 {scanning && !cameraError && (
-                  <div id="qr-reader-bag" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
+                  <div id="qr-reader-bag-return" className="w-full h-full absolute inset-0" style={{ zIndex: 1, backgroundColor: '#000' }}></div>
                 )}
                 {result && (
                   <div className="absolute inset-0 flex items-center justify-center z-20 bg-background/90">

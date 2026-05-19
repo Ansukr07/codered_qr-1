@@ -30,7 +30,17 @@ export async function GET(request: NextRequest) {
         const { data: announcements, error } = await query.order('created_at', { ascending: false });
         if (error) throw error;
 
-        return NextResponse.json({ announcements });
+        // The frontend (admin, volunteer, participant pages) reads `_id` and
+        // `createdAt`. Without this mapping, every <li> would share `key={undefined}`
+        // and timestamps would render as "Invalid Date".
+        const mapped = (announcements || []).map((a: any) => ({
+            ...a,
+            _id: a.id,
+            createdAt: a.created_at,
+            updatedAt: a.updated_at,
+        }));
+
+        return NextResponse.json({ announcements: mapped });
     } catch (error: any) {
         console.error('Get announcements error:', error);
         return NextResponse.json({ message: error.message }, { status: 500 });
@@ -50,6 +60,11 @@ export async function POST(request: NextRequest) {
         }
 
         const { title, message, priority, audience } = await request.json();
+
+        if (!title || !message) {
+            return NextResponse.json({ message: 'Title and message are required' }, { status: 400 });
+        }
+
         const { data: announcement, error } = await supabase
             .from('announcements')
             .insert({
@@ -63,8 +78,17 @@ export async function POST(request: NextRequest) {
 
         if (error) throw error;
 
+        const mappedAnnouncement = announcement
+            ? {
+                  ...announcement,
+                  _id: (announcement as any).id,
+                  createdAt: (announcement as any).created_at,
+                  updatedAt: (announcement as any).updated_at,
+              }
+            : announcement;
+
         return NextResponse.json(
-            { message: 'Announcement created', announcement },
+            { message: 'Announcement created', announcement: mappedAnnouncement },
             { status: 201 }
         );
     } catch (error: any) {

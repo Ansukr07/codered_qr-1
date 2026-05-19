@@ -7,7 +7,7 @@ const envPath = path.join(__dirname, '../.env');
 console.log('Loading .env from:', envPath);
 dotenv.config({ path: envPath });
 
-const User = require('../models/User');
+const User = require('../backend/models/User');
 
 const connectDB = async () => {
     try {

@@ -217,24 +217,6 @@ export default function AdminDashboard() {
     }
   } | null>(null)
 
-  useEffect(() => {
-    if (user && user.role === 'admin') {
-      fetchAdminData()
-      fetchGithubStatus()
-    }
-  }, [user])
-
-  // Refresh GitHub status periodically
-  useEffect(() => {
-    if (user && user.role === 'admin') {
-      const interval = setInterval(() => {
-        fetchGithubStatus()
-      }, 30000) // Refresh every 30 seconds
-
-      return () => clearInterval(interval)
-    }
-  }, [user])
-
   const fetchGithubStatus = async () => {
     try {
       const res = await fetch('/api/admin/participants/github-status', {

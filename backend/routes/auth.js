@@ -14,9 +14,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 // Register
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password, role, teamId } = req.body;
+        const { name, email, password, teamId } = req.body;
 
-        const existingUser = await User.findOne({ email });
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'Name, email and password are required' });
+        }
+
+        const normalizedEmail = String(email).toLowerCase().trim();
+
+        const existingUser = await User.findOne({ email: normalizedEmail });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
@@ -24,16 +30,21 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const qrCode = uuidv4();
 
+        // Self-registration is locked to the `participant` role to prevent
+        // privilege escalation via the request body. Admins/volunteers must be
+        // created by an authenticated admin via the create-user endpoint.
         const user = await User.create({
             name,
-            email,
+            email: normalizedEmail,
             password: hashedPassword,
-            role: role || 'participant',
+            role: 'participant',
             teamId,
             qrCode,
         });
 
-        res.status(201).json({ message: 'User created successfully', user });
+        // Never echo password hash back.
+        const { password: _pw, ...safeUser } = user.toObject();
+        res.status(201).json({ message: 'User created successfully', user: safeUser });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -4,7 +4,7 @@ import { requireRole } from '@/lib/middleware/rbac';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { resourceId: string } }
+    context: { params: Promise<{ resourceId: string }> }
 ) {
     try {
         if (!supabase) {
@@ -16,7 +16,8 @@ export async function GET(
             return authResult;
         }
 
-        const { resourceId } = params;
+        // In Next.js 15+, `params` is async and must be awaited.
+        const { resourceId } = await context.params;
         const searchParams = request.nextUrl.searchParams;
         const search = searchParams.get('search');
 
@@ -31,13 +32,35 @@ export async function GET(
             return NextResponse.json({ message: 'Resource not found' }, { status: 404 });
         }
 
-        // 2. Get all participants
-        let query = supabase.from('participants').select('id, name, email, team_id, qr_code');
+        // 2. Get all participants. When a search term is supplied, run three
+        // separate ilike queries and merge — using `.or()` with the raw search
+        // string would mangle the PostgREST filter if the user typed a comma,
+        // period, or parenthesis, and is technically a small injection vector.
+        let allParticipants: Array<any> = [];
         if (search) {
-            query = query.or(`name.ilike.%${search}%,email.ilike.%${search}%,team_id.ilike.%${search}%`);
+            const pattern = `%${search}%`;
+            const [byName, byEmail, byTeam] = await Promise.all([
+                supabase.from('participants').select('id, name, email, team_id, qr_code').ilike('name', pattern),
+                supabase.from('participants').select('id, name, email, team_id, qr_code').ilike('email', pattern),
+                supabase.from('participants').select('id, name, email, team_id, qr_code').ilike('team_id', pattern),
+            ]);
+
+            if (byName.error || byEmail.error || byTeam.error) {
+                throw byName.error || byEmail.error || byTeam.error;
+            }
+
+            const dedup = new Map<string, any>();
+            [...(byName.data || []), ...(byEmail.data || []), ...(byTeam.data || [])].forEach((p: any) => {
+                if (p && !dedup.has(p.id)) dedup.set(p.id, p);
+            });
+            allParticipants = Array.from(dedup.values());
+        } else {
+            const { data, error } = await supabase
+                .from('participants')
+                .select('id, name, email, team_id, qr_code');
+            if (error) throw error;
+            allParticipants = data || [];
         }
-        const { data: allParticipants, error: pError } = await query;
-        if (pError) throw pError;
 
         // 3. Get all transactions for this resource
         const { data: transactions, error: tError } = await supabase

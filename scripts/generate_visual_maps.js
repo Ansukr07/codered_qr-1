@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
-const User = require('../models/User');
+const User = require('../backend/models/User');
 
 const OUTPUT_DIR = path.resolve(__dirname, '../../generated_maps');
 if (!fs.existsSync(OUTPUT_DIR)) {

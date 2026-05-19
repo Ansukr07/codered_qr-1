@@ -23,7 +23,7 @@ if (fs.existsSync(envLocalPath)) {
 
 const mongoose = require('mongoose');
 const readline = require('readline');
-const User = require('../models/User');
+const User = require('../backend/models/User');
 
 const MAPPING_FILE = path.join(__dirname, 'email_qrcode_mapping.json');
 const OUTPUT_SQL = path.join(__dirname, 'supabase_insert_unmatched.sql');

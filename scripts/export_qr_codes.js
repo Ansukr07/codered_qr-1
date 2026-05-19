@@ -1,6 +1,6 @@
 require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const mongoose = require('mongoose');
-const User = require('../models/User');
+const User = require('../backend/models/User');
 const fs = require('fs');
 const path = require('path');
 

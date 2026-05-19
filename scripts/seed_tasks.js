@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Task = require('../models/Task');
+const Task = require('../backend/models/Task');
 const path = require('path');
 
 dotenv.config({ path: path.join(__dirname, '..', '.env') });

@@ -28,14 +28,32 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // 1. Find participant in Supabase
-        const { data: userRecord, error: uError } = await supabase
-            .from('participants')
-            .select('*')
-            .ilike('qr_code', normalizedQrCode) // case-insensitive
-            .single();
+        // 1. Find participant in Supabase. Match against either qr_code or
+        // participant_id so this endpoint stays in sync with /api/scan and
+        // /api/scan/return — earlier this route only checked qr_code, so
+        // participants with only a participant_id QR were rejected here even
+        // though the actual claim/return endpoints would accept them.
+        // Two scoped lookups avoid PostgREST `.or()` parsing pitfalls when
+        // the QR contains commas, periods, or other special characters.
+        let userRecord: any = null;
+        {
+            const { data } = await supabase
+                .from('participants')
+                .select('*')
+                .eq('qr_code', normalizedQrCode)
+                .maybeSingle();
+            userRecord = data;
+        }
+        if (!userRecord) {
+            const { data } = await supabase
+                .from('participants')
+                .select('*')
+                .eq('participant_id', normalizedQrCode)
+                .maybeSingle();
+            userRecord = data;
+        }
 
-        if (uError || !userRecord) {
+        if (!userRecord) {
             return NextResponse.json({ message: 'Invalid QR Code' }, { status: 404 });
         }
 

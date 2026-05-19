@@ -25,7 +25,7 @@ if (fs.existsSync(envLocalPath)) {
     dotenv.config();
 }
 
-const Volunteer = require('../models/Volunteer');
+const Volunteer = require('../backend/models/Volunteer');
 
 async function createVolunteer() {
     try {

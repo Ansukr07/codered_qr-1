@@ -8,10 +8,10 @@ console.log('Loading .env from:', envPath);
 dotenv.config({ path: envPath });
 
 // Import models
-const User = require('../models/User');
-const Transaction = require('../models/Transaction');
-const Submission = require('../models/Submission');
-const HelpRequest = require('../models/HelpRequest');
+const User = require('../backend/models/User');
+const Transaction = require('../backend/models/Transaction');
+const Submission = require('../backend/models/Submission');
+const HelpRequest = require('../backend/models/HelpRequest');
 
 const connectDB = async () => {
     try {

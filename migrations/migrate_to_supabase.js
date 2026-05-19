@@ -26,7 +26,7 @@ if (fs.existsSync(envLocalPath)) {
 
 const mongoose = require('mongoose');
 const csv = require('csv-parser');
-const User = require('../models/User');
+const User = require('../backend/models/User');
 
 // Configuration
 const CSV_FILE = path.join(__dirname, '../../CODE RED 3.0 Final Round Registration (Responses) - Form Responses 1.csv');

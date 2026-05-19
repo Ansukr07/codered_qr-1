@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
-const User = require('../models/User');
-const Transaction = require('../models/Transaction');
-const HelpRequest = require('../models/HelpRequest');
+const User = require('../backend/models/User');
+const Transaction = require('../backend/models/Transaction');
+const HelpRequest = require('../backend/models/HelpRequest');
 
 // Load env vars
 dotenv.config({ path: path.join(__dirname, '../.env') });

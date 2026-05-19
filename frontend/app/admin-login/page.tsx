@@ -37,24 +37,9 @@ export default function AdminLoginPage() {
     setError('')
 
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, role: 'admin' })
-      })
-
-      const data = await res.json()
-      
-      if (!res.ok) {
-        throw new Error(data.message || 'Authentication failed')
-      }
-
-      // Check if user is an admin
-      if (data.user && data.user.role !== 'admin') {
-        throw new Error('Access denied. This portal is only for administrators.')
-      }
-
-      // If successful, login will redirect to /admin
+      // `login` from the auth context handles the API call, sets cookies,
+      // refreshes the user, and redirects. Calling fetch separately first
+      // resulted in two login requests per submit.
       await login(email, password, 'admin')
     } catch (err: any) {
       setError(err.message || 'Authentication failed')
