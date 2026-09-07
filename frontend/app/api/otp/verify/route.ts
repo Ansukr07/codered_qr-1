@@ -22,8 +22,9 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        const normalizedEmail = String(email).trim().toLowerCase();
         const { data: authData, error: otpError } = await supabase.auth.verifyOtp({
-            email: email.toLowerCase(),
+            email: normalizedEmail,
             token: otp,
             type: 'email'
         });
@@ -35,22 +36,20 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Find participant in Supabase
-        const { data: participant, error: participantError } = await supabase
-            .from('participants')
-            .select('*')
-            .eq('email', email.toLowerCase())
-            .single();
+        const [{ data: participant }, { data: admin }, { data: volunteer }] = await Promise.all([
+            supabase.from('participants').select('*').eq('email', normalizedEmail).maybeSingle(),
+            supabase.from('admins').select('id, name, email').eq('email', normalizedEmail).maybeSingle(),
+            supabase.from('volunteers').select('id, name, email, qr_code').eq('email', normalizedEmail).maybeSingle(),
+        ]);
 
-        if (participantError || !participant) {
-            return NextResponse.json(
-                { message: 'Participant not found' },
-                { status: 404 }
-            );
+        const account = participant || admin || volunteer;
+        if (!account) {
+            return NextResponse.json({ message: 'Registered account not found' }, { status: 404 });
         }
 
-        // Mark email as verified if not already
-        if (!participant.is_email_verified) {
+        const role = participant ? 'participant' : admin ? 'admin' : 'volunteer';
+
+        if (participant && !participant.is_email_verified) {
             await supabase
                 .from('participants')
                 .update({ is_email_verified: true })
@@ -64,10 +63,10 @@ export async function POST(request: NextRequest) {
 
         const token = jwt.sign(
             {
-                userId: participant.id,
-                role: 'participant',
-                name: participant.name,
-                email: participant.email
+                userId: account.id,
+                role,
+                name: account.name,
+                email: account.email
             },
             JWT_SECRET,
             { expiresIn: '1d' }
@@ -76,10 +75,11 @@ export async function POST(request: NextRequest) {
         const response = NextResponse.json({
             message: 'Login successful',
             user: {
-                name: participant.name,
-                role: 'participant',
-                email: participant.email,
-                participantId: participant.participant_id
+                name: account.name,
+                role,
+                email: account.email,
+                ...(participant ? { participantId: participant.participant_id } : {}),
+                ...(volunteer ? { qrCode: volunteer.qr_code } : {})
             }
         });
 

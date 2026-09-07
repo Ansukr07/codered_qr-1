@@ -19,24 +19,24 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Check if participant exists with this email in Supabase
-        const { data: participant, error: participantError } = await supabase
-            .from('participants')
-            .select('*')
-            .eq('email', email.toLowerCase())
-            .single();
+        const normalizedEmail = String(email).trim().toLowerCase();
+        const [{ data: participant }, { data: admin }, { data: volunteer }] = await Promise.all([
+            supabase.from('participants').select('id').eq('email', normalizedEmail).maybeSingle(),
+            supabase.from('admins').select('id').eq('email', normalizedEmail).maybeSingle(),
+            supabase.from('volunteers').select('id').eq('email', normalizedEmail).maybeSingle(),
+        ]);
 
-        if (participantError || !participant) {
+        if (!participant && !admin && !volunteer) {
             return NextResponse.json(
-                { message: 'No participant found with this email' },
+                { message: 'No registered CodeRed account found with this email' },
                 { status: 404 }
             );
         }
 
         // Supabase Auth owns OTP generation, rate limiting, expiry, and email delivery.
         const { error: otpError } = await supabase.auth.signInWithOtp({
-            email: email.toLowerCase(),
-            // The participant table is checked above, so only known participants
+            email: normalizedEmail,
+            // The application tables are checked above, so only registered users
             // can create a Supabase Auth identity through this endpoint.
             options: { shouldCreateUser: true }
         });
@@ -58,4 +58,3 @@ export async function POST(request: NextRequest) {
         );
     }
 }
-
