@@ -4,7 +4,6 @@ const http = require('http');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const connectDB = require('./config/db');
 const path = require('path');
 const fs = require('fs');
 
@@ -21,8 +20,6 @@ if (fs.existsSync(envLocalPath)) {
 } else {
     dotenv.config(); // Will show error if not found
 }
-
-connectDB();
 
 const app = express();
 

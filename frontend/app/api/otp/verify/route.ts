@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import supabase from '@/lib/config/supabase';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function POST(request: NextRequest) {
     try {
@@ -22,17 +22,13 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Find valid OTP in Supabase
-        const { data: otpRecord, error: otpError } = await supabase
-            .from('otps')
-            .select('*')
-            .eq('email', email.toLowerCase())
-            .eq('otp', otp)
-            .eq('is_used', false)
-            .gt('expires_at', new Date().toISOString())
-            .single();
+        const { data: authData, error: otpError } = await supabase.auth.verifyOtp({
+            email: email.toLowerCase(),
+            token: otp,
+            type: 'email'
+        });
 
-        if (otpError || !otpRecord) {
+        if (otpError || !authData.user) {
             return NextResponse.json(
                 { message: 'Invalid or expired OTP' },
                 { status: 401 }
@@ -53,12 +49,6 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Mark OTP as used
-        await supabase
-            .from('otps')
-            .update({ is_used: true })
-            .eq('id', otpRecord.id);
-
         // Mark email as verified if not already
         if (!participant.is_email_verified) {
             await supabase
@@ -68,6 +58,10 @@ export async function POST(request: NextRequest) {
         }
 
         // Generate JWT token
+        if (!JWT_SECRET) {
+            throw new Error('JWT_SECRET is required in production');
+        }
+
         const token = jwt.sign(
             {
                 userId: participant.id,
@@ -98,6 +92,17 @@ export async function POST(request: NextRequest) {
             sameSite: 'lax',
         });
 
+        // Keep the Supabase session available for future server-side Auth calls.
+        if (authData.session?.access_token) {
+            response.cookies.set('sb-access-token', authData.session.access_token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: authData.session.expires_in || 3600,
+                path: '/',
+                sameSite: 'lax'
+            });
+        }
+
         return response;
     } catch (error: any) {
         console.error('OTP verification error:', error);
@@ -107,6 +112,3 @@ export async function POST(request: NextRequest) {
         );
     }
 }
-
-
-

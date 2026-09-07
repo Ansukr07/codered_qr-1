@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export interface AuthUser {
     userId: string;
@@ -22,6 +22,7 @@ export function getAuthUser(request: NextRequest): AuthUser | null {
             return null;
         }
 
+        if (!JWT_SECRET) return null;
         // Verify and decode token
         const decoded = jwt.verify(token, JWT_SECRET) as AuthUser;
         return decoded;
@@ -48,6 +49,5 @@ export function requireAuth(request: NextRequest): { user: AuthUser } | NextResp
     
     return { user };
 }
-
 
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import supabase from '@/lib/config/supabase';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function GET(request: NextRequest) {
     const token = request.cookies.get('token')?.value;
@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
+        if (!JWT_SECRET) return NextResponse.json({ message: 'Server authentication is not configured' }, { status: 500 });
         const decoded = jwt.verify(token, JWT_SECRET) as any;
 
         if (!supabase) {
@@ -97,5 +98,4 @@ export async function GET(request: NextRequest) {
         );
     }
 }
-
 

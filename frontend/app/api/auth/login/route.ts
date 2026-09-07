@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import supabase from '@/lib/config/supabase';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function POST(request: NextRequest) {
     try {
@@ -70,6 +70,10 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        if (!JWT_SECRET) {
+            return NextResponse.json({ message: 'JWT_SECRET is not configured' }, { status: 500 });
+        }
+
         // 4. Generate JWT Token
         const token = jwt.sign(
             { 
@@ -109,5 +113,4 @@ export async function POST(request: NextRequest) {
         );
     }
 }
-
 

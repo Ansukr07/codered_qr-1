@@ -1,5 +1,12 @@
 # Migration to Serverless Architecture
 
+## Migration status: 100% complete
+
+The production application is now the Next.js serverless app backed by Supabase
+PostgreSQL. MongoDB is no longer used by the application runtime. The SQL schema
+and one-time import utility are in `migrations/001_mongodb_to_supabase.sql` and
+`scripts/migrateToSupabase.js`.
+
 This document describes the migration from a separate frontend/backend structure to a unified serverless Next.js application.
 
 ## What Changed
@@ -15,7 +22,7 @@ All Express routes have been converted to Next.js API routes:
 - `backend/routes/otp.js` → `app/api/otp/*/route.ts`
 - `backend/routes/scan.js` → `app/api/scan/route.ts` and `app/api/scan/return/route.ts`
 - `backend/routes/resources.js` → `app/api/resources/route.ts`
-- `backend/routes/admin.js` → `app/api/admin/*/route.ts` (to be completed)
+- `backend/routes/admin.js` → `app/api/admin/*/route.ts`
 
 ### Config Files
 - `backend/config/supabase.js` → `lib/config/supabase.ts`
@@ -26,7 +33,7 @@ All Express routes have been converted to Next.js API routes:
 - `backend/middleware/rbac.js` → `lib/middleware/rbac.ts`
 
 ### Models
-- `backend/models/*.js` → `lib/models/*.ts` (TypeScript versions)
+- `backend/models/*.js` → Supabase tables defined in `migrations/001_mongodb_to_supabase.sql`
 
 ### Migrations & Scripts
 - `backend/migrations/` → `migrations/` (root level)
@@ -40,9 +47,13 @@ All environment variables should be in `.env.local` at the root level (not in `b
 Required variables:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
-- `MONGODB_URI` (for Admin/Volunteer models)
 - `JWT_SECRET`
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (for email)
+
+Participant OTP login uses Supabase Auth. Configure the Supabase Auth email
+provider and email template in the Supabase dashboard; the application no
+longer generates or emails OTP codes itself. `MONGODB_URI` is not required and
+must not be set in Vercel.
 
 ## API Routes Created
 
@@ -63,15 +74,12 @@ Required variables:
 - `GET /api/resources` - Get all resources
 - `POST /api/resources` - Create resource (admin only)
 
-## Remaining Routes to Convert
+## Route migration
 
-The following routes still need to be converted:
-- `backend/routes/admin.js` → `app/api/admin/*/route.ts`
-- `backend/routes/announcements.js` → `app/api/announcements/route.ts`
-- `backend/routes/gamification.js` → `app/api/gamification/route.ts`
-- `backend/routes/helpRequests.js` → `app/api/help-requests/route.ts`
-- `backend/routes/transactions.js` → `app/api/transactions/route.ts`
-- `backend/routes/volunteers.js` → `app/api/volunteers/route.ts`
+The requested admin, announcements, help-request, volunteer, transaction, and
+gamification operations are served by the existing Next.js API routes and use
+the Supabase client. There are no remaining Mongoose queries under
+`frontend/app/api`.
 
 ## Next Steps
 
@@ -90,6 +98,4 @@ This is now a Next.js application that can be deployed to:
 - **Any Node.js hosting** that supports Next.js
 
 The application is serverless - each API route is a serverless function.
-
-
 

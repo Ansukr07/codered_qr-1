@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import supabase from '@/lib/config/supabase';
-import { sendOTPEmail } from '@/lib/config/email';
 
 export async function POST(request: NextRequest) {
     try {
@@ -34,51 +33,23 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Generate 6-digit OTP
-        const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
-        const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-
-        // Invalidate any existing OTPs for this email
-        await supabase
-            .from('otps')
-            .update({ is_used: true })
-            .eq('email', email.toLowerCase())
-            .eq('is_used', false);
-
-        // Create new OTP in Supabase
-        const { error: otpError } = await supabase
-            .from('otps')
-            .insert({
-                email: email.toLowerCase(),
-                otp: otpCode,
-                expires_at: expiresAt.toISOString(),
-                is_used: false
-            });
+        // Supabase Auth owns OTP generation, rate limiting, expiry, and email delivery.
+        const { error: otpError } = await supabase.auth.signInWithOtp({
+            email: email.toLowerCase(),
+            // The participant table is checked above, so only known participants
+            // can create a Supabase Auth identity through this endpoint.
+            options: { shouldCreateUser: true }
+        });
 
         if (otpError) {
-            console.error('Error creating OTP:', otpError);
+            console.error('Supabase Auth OTP error:', otpError);
             return NextResponse.json(
-                { message: 'Failed to generate OTP' },
+                { message: 'Failed to send OTP' },
                 { status: 500 }
             );
         }
 
-        // Send OTP via email
-        const emailResult = await sendOTPEmail(email, otpCode, participant.name);
-        
-        // In development, also return OTP in response for testing
-        const response: any = {
-            message: emailResult.success 
-                ? 'OTP sent to your email' 
-                : 'OTP generated (email failed, check console)',
-        };
-
-        // Only include OTP in response for development
-        if (process.env.NODE_ENV === 'development') {
-            response.otp = otpCode;
-        }
-
-        return NextResponse.json(response);
+        return NextResponse.json({ message: 'OTP sent to your email' });
     } catch (error: any) {
         console.error('OTP generation error:', error);
         return NextResponse.json(
@@ -87,6 +58,4 @@ export async function POST(request: NextRequest) {
         );
     }
 }
-
-
 
