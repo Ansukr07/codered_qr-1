@@ -5,15 +5,18 @@ import { requireAuth, requireRole } from '@/lib/middleware/rbac';
 // Get Announcements (Filtered by audience) - All authenticated users
 export async function GET(request: NextRequest) {
     try {
-        if (!supabase) {
-            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
-        }
-
         const authResult = requireAuth(request);
         if (authResult instanceof NextResponse) {
             return authResult;
         }
         const { user } = authResult;
+
+        if (user.userId === '00000000-0000-0000-0000-000000000001' || user.email === 'demo.participant@codered.local') {
+            return NextResponse.json({ announcements: [{ id: 'demo-announcement', _id: 'demo-announcement', title: 'Demo airwaves online', message: 'This local adventure is running without a database connection.', audience: 'participants', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }] });
+        }
+        if (!supabase) {
+            return NextResponse.json({ message: 'Database connection error' }, { status: 500 });
+        }
 
         let query = supabase.from('announcements').select('*');
 
@@ -96,4 +99,3 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
-

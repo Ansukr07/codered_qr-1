@@ -1,102 +1,57 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { ArrowLeft, QrCode } from 'lucide-react'
 import Link from 'next/link'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { useAuth } from '@/contexts/AuthContext'
 import QRCodeSVG from 'react-qr-code'
+import { ArrowLeft, CheckCircle2, Maximize2, ShieldCheck, Sparkles } from 'lucide-react'
+import { useAuth } from '@/contexts/AuthContext'
+import { PixelAvatar } from '@/components/game/PixelAvatar'
 
-export default function ParticipantQRPage() {
-    const { user, loading } = useAuth()
-    const router = useRouter()
-    const [qrCode, setQrCode] = useState('')
+type PassData = {
+  name: string
+  qrCode: string
+  teamId?: string
+  participantId?: string
+  track?: string
+  avatarKey?: string
+}
 
-    useEffect(() => {
-        if (!loading && (!user || user.role !== 'participant')) {
-            router.push('/login')
-        }
-    }, [user, loading, router])
+export default function ParticipantPassPage() {
+  const { user } = useAuth()
+  const [pass, setPass] = useState<PassData | null>(null)
+  const [fullscreen, setFullscreen] = useState(false)
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const res = await fetch('/api/auth/me')
-                if (res.ok) {
-                    const data = await res.json()
-                    setQrCode(data.user.qrCode || '')
-                }
-            } catch (error) {
-                console.error('Failed to fetch user data:', error)
-            }
-        }
+  useEffect(() => {
+    fetch('/api/auth/me').then((response) => response.json()).then(({ user: current }) => {
+      if (current) setPass({
+        name: current.name,
+        qrCode: current.qrCode,
+        teamId: current.teamId,
+        participantId: current.participantId,
+        track: current.track,
+        avatarKey: current.avatarKey,
+      })
+    })
+  }, [])
 
-        if (user && user.role === 'participant') {
-            fetchUserData()
-        }
-    }, [user])
+  if (!pass?.qrCode) return <div className="game-loading">PRINTING EVENT PASS...</div>
 
-    if (loading || !user) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p>Loading...</p>
-            </div>
-        )
-    }
+  if (fullscreen) return <div className="pass-fullscreen" onClick={() => setFullscreen(false)}>
+    <div className="pass-fullscreen-qr"><QRCodeSVG value={pass.qrCode} size={290} level="H"/></div>
+    <h1>{pass.name}</h1><p>{pass.participantId}</p><span>TAP ANYWHERE TO CLOSE</span>
+  </div>
 
-    return (
-        <div className="min-h-screen bg-background relative">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
-
-            <div className="relative z-10 p-6">
-                <div className="max-w-md mx-auto space-y-6">
-                    {/* Header */}
-                    <div className="flex items-center gap-4">
-                        <Link href="/participant">
-                            <Button variant="default" size="icon">
-                                <ArrowLeft className="h-4 w-4 text-white" />
-                            </Button>
-                        </Link>
-                        <div>
-                            <h1 className="text-2xl font-bold text-foreground">Your QR Code</h1>
-                            <p className="text-muted-foreground">Show this to volunteers</p>
-                        </div>
-                    </div>
-
-                    <Card className="border-2 border-primary/20 shadow-lg">
-                        <CardHeader className="text-center">
-                            <CardTitle className="flex items-center justify-center gap-2">
-                                <QrCode className="h-6 w-6 text-primary" />
-                                {user.name}
-                            </CardTitle>
-                            <CardDescription>
-                                {user.email}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center space-y-6 pb-8">
-                            {qrCode ? (
-                                <>
-                                    <div className="p-6 bg-white rounded-xl shadow-inner">
-                                        <QRCodeSVG value={qrCode} size={250} level="H" />
-                                    </div>
-                                    <div className="text-center space-y-1">
-                                        <p className="text-sm text-muted-foreground font-mono bg-secondary/50 px-3 py-1 rounded">
-                                            {qrCode}
-                                        </p>
-                                        <p className="text-xs text-muted-foreground mt-2">
-                                            Scan this code to claim food, kits, and access areas.
-                                        </p>
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="py-12 text-muted-foreground">Loading QR code...</div>
-                            )}
-                        </CardContent>
-                    </Card>
-                </div>
-            </div>
-        </div>
-    )
+  return <div className="game-stack pass-page">
+    <div className="page-heading"><div><p className="eyebrow">INVENTORY · KEY ITEM</p><h1>Event pass</h1><p>Use this QR for meals, sleeping bags, attendance, and access checkpoints.</p></div><Link href="/participant" className="pixel-button secondary"><ArrowLeft/> BASE</Link></div>
+    <section className="event-pass pixel-panel">
+      <div className="pass-stripe"><span>CODERED</span><b>4.0</b><small>OFFICIAL PARTICIPANT PASS</small></div>
+      <div className="pass-identity"><PixelAvatar avatarKey={pass.avatarKey} size="lg"/><div><p className="eyebrow">PASS HOLDER</p><h2>{pass.name}</h2><p>{pass.participantId || 'PARTICIPANT'}</p></div><ShieldCheck className="pass-shield"/></div>
+      <div className="pass-body">
+        <button className="pass-qr" onClick={() => setFullscreen(true)} aria-label="Enlarge QR code"><QRCodeSVG value={pass.qrCode} size={220} level="H"/><span><Maximize2/> TAP TO ENLARGE</span></button>
+        <div className="pass-details"><div><small>TEAM</small><strong>{pass.teamId || '—'}</strong></div><div><small>TRACK</small><strong>{pass.track || 'MAIN'}</strong></div><div><small>STATUS</small><strong className="verified"><CheckCircle2/> VERIFIED</strong></div><div className="pass-note"><Sparkles/><p>Present this screen to a volunteer. Keep brightness high and avoid screenshots of another participant’s pass.</p></div></div>
+      </div>
+      <div className="pass-footer"><span>VALID · CODERED 4.0</span><span>{pass.qrCode.slice(0, 8).toUpperCase()}</span></div>
+    </section>
+    <p className="pass-help">This operational pass is private. Your networking QR lives under <Link href="/participant/profile">Player Card</Link>.</p>
+  </div>
 }

@@ -9,14 +9,28 @@ export async function GET(request: NextRequest) {
 
     if (!token) {
         return NextResponse.json(
-            { message: 'Not authenticated' },
-            { status: 401 }
+            { user: null, authenticated: false },
+            { status: 200 }
         );
     }
 
     try {
         if (!JWT_SECRET) return NextResponse.json({ message: 'Server authentication is not configured' }, { status: 500 });
         const decoded = jwt.verify(token, JWT_SECRET) as any;
+
+        if (decoded.demo === true && decoded.userId === '00000000-0000-0000-0000-000000000001') {
+            return NextResponse.json({ user: {
+                userId: decoded.userId,
+                name: 'Demo Participant',
+                email: 'demo.participant@codered.local',
+                role: 'participant',
+                onboardingCompleted: true,
+                avatarKey: 'byte',
+                username: 'demo-player',
+                teamId: 'DEMO-TEAM',
+                participantId: 'DEMO-PLAYER',
+            } });
+        }
 
         if (!supabase) {
             return NextResponse.json(
@@ -77,7 +91,23 @@ export async function GET(request: NextRequest) {
                     participantId: participant.participant_id,
                     track: participant.track,
                     hall: participant.hall,
-                    seatNumber: participant.seat_number
+                    seatNumber: participant.seat_number,
+                    onboardingCompleted: participant.onboarding_completed === true && Boolean(participant.github_profile || participant.linkedin_url || participant.portfolio_url),
+                    avatarKey: participant.avatar_key || 'byte',
+                    username: participant.username || null
+                };
+            } else if (process.env.NODE_ENV !== 'production' && error?.message?.toLowerCase().includes('fetch failed')) {
+                // Local development fallback: the JWT was already verified with
+                // JWT_SECRET, so preserve the existing session while Supabase is
+                // temporarily unreachable. Production always requires the DB.
+                userData = {
+                    userId: decoded.userId,
+                    name: decoded.name || 'Participant',
+                    email: decoded.email,
+                    role: 'participant',
+                    onboardingCompleted: true,
+                    avatarKey: 'byte',
+                    username: null,
                 };
             }
         }
@@ -98,4 +128,3 @@ export async function GET(request: NextRequest) {
         );
     }
 }
-

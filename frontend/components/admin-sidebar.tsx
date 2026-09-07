@@ -43,6 +43,11 @@ const sidebarItems = [
     title: "GitHub Status",
     href: "/admin/github",
     icon: Github
+  },
+  {
+    title: "Quest Verification",
+    href: "/volunteer/quests",
+    icon: ClipboardList
   }
 ]
 

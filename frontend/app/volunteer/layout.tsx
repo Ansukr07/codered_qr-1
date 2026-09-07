@@ -3,7 +3,8 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { Code2, LogOut } from 'lucide-react'
+import { Code2, LogOut, ScrollText } from 'lucide-react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export default function VolunteerLayout({
@@ -49,6 +50,7 @@ export default function VolunteerLayout({
                   <p className="text-xs text-muted-foreground">Volunteer Portal</p>
                 </div>
               </div>
+              <Link href="/volunteer/quests" className="ml-auto mr-3 flex items-center gap-2 text-sm font-semibold text-primary"><ScrollText className="h-4 w-4"/> Quest desk</Link>
               <Button 
                 variant="ghost" 
                 size="sm" 

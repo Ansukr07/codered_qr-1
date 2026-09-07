@@ -78,7 +78,12 @@ export async function POST(request: NextRequest) {
                 name: account.name,
                 role,
                 email: account.email,
-                ...(participant ? { participantId: participant.participant_id } : {}),
+                ...(participant ? {
+                    participantId: participant.participant_id,
+                    onboardingCompleted: participant.onboarding_completed === true && Boolean(participant.github_profile || participant.linkedin_url || participant.portfolio_url),
+                    avatarKey: participant.avatar_key || 'byte',
+                    username: participant.username || null
+                } : {}),
                 ...(volunteer ? { qrCode: volunteer.qr_code } : {})
             }
         });

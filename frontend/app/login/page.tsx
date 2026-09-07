@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/contexts/AuthContext'
+import Link from 'next/link'
 
 export default function LoginPage() {
   const { user, loading, refreshUser } = useAuth()
@@ -27,7 +28,7 @@ export default function LoginPage() {
       } else if (user.role === 'volunteer') {
         router.push('/volunteer')
       } else if (user.role === 'participant') {
-        router.push('/participant')
+        router.replace(user.onboardingCompleted ? '/participant' : '/participant/onboarding')
       }
     }
   }, [user, loading, router])
@@ -84,7 +85,9 @@ export default function LoginPage() {
 
       // Refresh user data and redirect
       await refreshUser()
-      router.push('/participant')
+      router.replace(data.user?.role === 'participant' && !data.user?.onboardingCompleted
+        ? '/participant/onboarding'
+        : '/participant')
     } catch (err: any) {
       setError(err.message || 'Invalid OTP')
     } finally {
@@ -131,7 +134,7 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
           <CardDescription>
-            Sign in to Code Red 3.0 Dashboard
+            Sign in to the CODERED 4.0 adventure
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -237,6 +240,7 @@ export default function LoginPage() {
             </form>
           )}
         </CardContent>
+        {process.env.NODE_ENV !== 'production' && <CardFooter className="justify-center border-t border-border/50 pt-5"><Link href="/demo-login" className="text-sm font-semibold text-primary hover:underline">Use local demo participant →</Link></CardFooter>}
       </Card>
     </div>
   )

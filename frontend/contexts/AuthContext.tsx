@@ -8,6 +8,12 @@ interface User {
     name: string
     role: 'admin' | 'volunteer' | 'participant'
     email?: string
+    onboardingCompleted?: boolean
+    avatarKey?: string
+    username?: string
+    teamId?: string
+    participantId?: string
+    track?: string
 }
 
 interface AuthContextType {
@@ -68,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else if (userData.role === 'volunteer') {
             router.push('/volunteer')
         } else {
-            router.push('/participant')
+            router.push(userData.onboardingCompleted ? '/participant' : '/participant/onboarding')
         }
     }
 
