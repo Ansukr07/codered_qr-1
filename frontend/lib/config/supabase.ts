@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-let supabase: ReturnType<typeof createClient> | null = null;
+let supabase: any = null;
 
 if (!supabaseUrl || !supabaseServiceKey) {
     console.error('⚠️  Supabase credentials not found in environment variables');
@@ -12,7 +12,10 @@ if (!supabaseUrl || !supabaseServiceKey) {
 } else {
     // Create Supabase client with service role key for server-side operations
     try {
-        supabase = createClient(supabaseUrl, supabaseServiceKey, {
+        // Replace `any` with generated Supabase Database types when the schema
+        // is checked in. Until then this boundary avoids false `never` errors
+        // across the existing route handlers.
+        supabase = createClient<any>(supabaseUrl, supabaseServiceKey, {
             auth: {
                 autoRefreshToken: false,
                 persistSession: false
@@ -25,6 +28,3 @@ if (!supabaseUrl || !supabaseServiceKey) {
 }
 
 export default supabase;
-
-
-

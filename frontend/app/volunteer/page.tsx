@@ -15,6 +15,7 @@ interface Resource {
   totalQuantity: number
   distributedQuantity: number
   type: string
+  category?: string
 }
 
 interface HelpRequest {
@@ -125,7 +126,7 @@ export default function VolunteerDashboard() {
 
   const filteredResources = uniqueResources.filter(resource =>
     resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    resource.type.toLowerCase().includes(searchQuery.toLowerCase())
+    (resource.type || resource.category || '').toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   const scanOptions = [

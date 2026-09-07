@@ -77,7 +77,7 @@ export default function ScanChillPage() {
 
       return () => {
         if (html5Qrcode && html5Qrcode.isScanning) {
-          html5Qrcode.stop().catch((err: any) => {
+          Promise.resolve().then(() => html5Qrcode.stop()).catch((err: any) => {
             console.error('Error stopping scanner:', err)
           })
         }
@@ -124,8 +124,6 @@ export default function ScanChillPage() {
           description: 'Chill room access granted',
         })
         fetchChillResource() // Refresh counts
-        // Reset state to allow re-scanning
-        setLastScannedCode('')
         // Restart scanner after a short delay
         setTimeout(() => {
           setResult(null)

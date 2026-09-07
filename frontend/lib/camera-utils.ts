@@ -21,7 +21,7 @@ export async function startCameraWithFallback(
   const { elementId, onScanSuccess, onScanError, fps = 10, qrbox = { width: 250, height: 250 } } = config
 
   // Strategy 1: Try environment (back camera) first
-  const strategies = [
+  const strategies: Array<{ facingMode?: string | { exact: string }; deviceId?: { exact: string } }> = [
     { facingMode: 'environment' },
     { facingMode: 'user' },
     { facingMode: { exact: 'environment' } },
@@ -146,4 +146,3 @@ export async function isCameraAvailable(): Promise<boolean> {
     return false
   }
 }
-

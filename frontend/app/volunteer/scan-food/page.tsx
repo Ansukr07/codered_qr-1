@@ -119,7 +119,7 @@ export default function ScanFoodPage() {
 
       return () => {
         if (html5Qrcode && html5Qrcode.isScanning) {
-          html5Qrcode.stop().catch((err: any) => {
+          Promise.resolve().then(() => html5Qrcode.stop()).catch((err: any) => {
             console.error('Error stopping scanner:', err)
           })
         }
