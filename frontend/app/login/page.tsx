@@ -201,11 +201,12 @@ export default function LoginPage() {
                   <Input
                     id="otp"
                     type="text"
-                    placeholder="Enter 6-digit OTP"
+                    placeholder="Enter OTP code"
                     value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 8))}
                     required
-                    maxLength={6}
+                    minLength={6}
+                    maxLength={8}
                     className="bg-secondary/50 border-border/50 pl-10 text-center text-lg tracking-widest"
                   />
                 </div>
@@ -220,7 +221,7 @@ export default function LoginPage() {
                 </div>
               )}
 
-              <Button type="submit" className="w-full" disabled={isLoading || otp.length !== 6}>
+              <Button type="submit" className="w-full" disabled={isLoading || otp.length < 6 || otp.length > 8}>
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
