@@ -3,6 +3,12 @@
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- All resource scanners write participant IDs. Correct legacy installations
+-- whose transaction foreign key still targets the old users table.
+ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_user_id_fkey;
+ALTER TABLE transactions ADD CONSTRAINT transactions_user_id_fkey
+  FOREIGN KEY (user_id) REFERENCES participants(id) ON DELETE CASCADE NOT VALID;
+
 CREATE TABLE IF NOT EXISTS participant_tags (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   participant_id UUID NOT NULL REFERENCES participants(id) ON DELETE CASCADE,

@@ -16,6 +16,12 @@ export async function POST(request: NextRequest) {
     p_tag_hash: hashNfcToken(token), p_resource_id: resourceId, p_volunteer_id: auth.user.userId, p_action: action, p_request_id: requestId,
   })
   if (error) {
+    if (error.message.includes('transactions_user_id_fkey')) {
+      return NextResponse.json(
+        { message: 'Resource tracking setup is incomplete. Ask an administrator to apply database migration 005.' },
+        { status: 503 },
+      )
+    }
     const known = ['Badge is inactive','Resource not found','Claim limit reached','Resource out of stock','No active claim to return']
     const message = known.find(item => error.message.includes(item)) || 'Could not record this resource action.'
     return NextResponse.json({ message }, { status: message === 'Badge is inactive' ? 410 : 409 })
