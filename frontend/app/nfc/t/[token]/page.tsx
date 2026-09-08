@@ -20,33 +20,37 @@ export default function NfcTagPage() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [result, setResult] = useState('')
+  const [actionError, setActionError] = useState('')
   const returnTo = useMemo(() => `/nfc/t/${encodeURIComponent(token)}`, [token])
 
-  useEffect(() => {
-    fetch(`/api/nfc/tags/${encodeURIComponent(token)}`, { cache: 'no-store' })
-      .then(async response => { const body = await response.json(); if (!response.ok) throw new Error(body.message); setData(body) })
-      .catch(cause => setError(cause.message || 'Could not read this badge.'))
-  }, [token])
+  async function loadBadge() {
+    const response = await fetch(`/api/nfc/tags/${encodeURIComponent(token)}`, { cache: 'no-store' })
+    const body = await response.json().catch(() => ({}))
+    if (!response.ok) throw new Error(body.message || 'Could not read this badge.')
+    setData(body)
+  }
+
+  useEffect(() => { loadBadge().catch(cause => setError(cause.message || 'Could not read this badge.')) }, [token])
 
   async function connect() {
-    setBusy(true); setResult('')
+    setBusy(true); setResult(''); setActionError('')
     const requestId = crypto.randomUUID()
     try {
       const response = await fetch('/api/nfc/connect', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ token, requestId }) })
-      const body = await response.json()
+      const body = await response.json().catch(() => ({}))
       if (!response.ok) throw new Error(body.message)
       setResult(body.message)
-    } catch (cause:any) { setResult(cause.message || 'Could not connect.') }
+    } catch (cause:any) { setActionError(cause.message || 'Could not connect.') }
     finally { setBusy(false) }
   }
 
   async function resourceAction(resourceId:string, action:'claim'|'return') {
     if (!confirm(`${action === 'claim' ? 'Issue' : 'Return'} this resource for ${data?.participant.name}?`)) return
-    setBusy(true); setResult('')
+    setBusy(true); setResult(''); setActionError('')
     try {
       const response = await fetch('/api/nfc/volunteer-action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ token, resourceId, action, requestId:crypto.randomUUID() }) })
-      const body = await response.json(); if (!response.ok) throw new Error(body.message); setResult(body.message)
-    } catch (cause:any) { setResult(cause.message || 'Could not record this action.') }
+      const body = await response.json().catch(() => ({})); if (!response.ok) throw new Error(body.message || 'Could not record this action.'); setResult(body.message); await loadBadge()
+    } catch (cause:any) { setActionError(cause.message || 'Could not record this action.') }
     finally { setBusy(false) }
   }
 
@@ -63,8 +67,8 @@ export default function NfcTagPage() {
     {data.participant.participantId&&<p className="nfc-id"><ShieldCheck/> {data.participant.participantId}</p>}
     {data.participant.bio&&<p>{data.participant.bio}</p>}
     {!data.authenticated?<div className="nfc-action-box"><UserRound/><h2>Sign in to continue</h2><p>Your login will return you to this badge.</p><Link className="pixel-button" href={`/login?returnTo=${encodeURIComponent(returnTo)}`}>SIGN IN</Link></div>
-    :data.viewerRole==='participant'?<div className="nfc-action-box"><Users/><h2>{data.isSelf?'This is your badge':'Add to your network'}</h2>{data.isSelf?<p>Share this badge with another participant.</p>:<button className="pixel-button" onClick={connect} disabled={busy||Boolean(result)}>{busy?'CONNECTING...':result?<><Check/> CONNECTED</>:'CONNECT'}</button>}{result&&<p role="status" className="connected-toast">{result}</p>}</div>
-    :data.viewerRole==='volunteer'?<div className="nfc-action-box nfc-volunteer-actions"><ShieldCheck/><h2>Volunteer actions</h2><p>Confirm the participant above, then issue or return a resource.</p>{data.resources?.length?<div className="nfc-resource-list">{data.resources.map(resource=><div key={resource.id}><span><b>{resource.name}</b><small>{resource.distributed_quantity}/{resource.total_quantity} issued</small></span><button disabled={busy} onClick={()=>resourceAction(resource.id,'claim')}>ISSUE</button><button disabled={busy} onClick={()=>resourceAction(resource.id,'return')}>RETURN</button></div>)}</div>:<p>No resources are configured.</p>}{result&&<p role="status" className="connected-toast">{result}</p>}<Link href="/volunteer">OPEN VOLUNTEER DASHBOARD</Link></div>:<div className="nfc-action-box"><ShieldCheck/><h2>Administrator view</h2><p>Badge identity confirmed. Resource distribution requires a volunteer account for a clear audit trail.</p><Link href="/admin/nfc">OPEN NFC BADGE STATION</Link></div>}
+    :data.viewerRole==='participant'?<div className="nfc-action-box"><Users/><h2>{data.isSelf?'This is your badge':'Add to your network'}</h2>{data.isSelf?<p>Share this badge with another participant.</p>:<button className="pixel-button" onClick={connect} disabled={busy||Boolean(result)}>{busy?'CONNECTING...':result?<><Check/> CONNECTED</>:'CONNECT'}</button>}{result&&<p role="status" className="connected-toast">{result}</p>}{actionError&&<p role="alert" className="game-error">{actionError}</p>}</div>
+    :data.viewerRole==='volunteer'?<div className="nfc-action-box nfc-volunteer-actions"><ShieldCheck/><h2>Volunteer actions</h2><p>Confirm the participant above, then issue or return a resource.</p>{data.resources?.length?<div className="nfc-resource-list">{data.resources.map(resource=><div key={resource.id}><span><b>{resource.name}</b><small>{resource.distributed_quantity}/{resource.total_quantity} issued</small></span><button disabled={busy} onClick={()=>resourceAction(resource.id,'claim')}>ISSUE</button><button disabled={busy} onClick={()=>resourceAction(resource.id,'return')}>RETURN</button></div>)}</div>:<p>No resources are configured.</p>}{result&&<p role="status" className="connected-toast">{result}</p>}{actionError&&<p role="alert" className="game-error">{actionError}</p>}<Link href="/volunteer">OPEN VOLUNTEER DASHBOARD</Link></div>:<div className="nfc-action-box"><ShieldCheck/><h2>Administrator view</h2><p>Badge identity confirmed. Resource distribution requires a volunteer account for a clear audit trail.</p><Link href="/admin/nfc">OPEN NFC BADGE STATION</Link></div>}
     {!!links.length&&<div className="public-links">{links.map(({url,label,icon:Icon})=><a key={label} href={url} target="_blank" rel="noreferrer"><Icon/><span><b>{label}</b><small>Open profile</small></span><i>↗</i></a>)}</div>}
     <p className="nfc-safety">Confirm the name and participant ID before issuing event resources.</p>
   </section></main>

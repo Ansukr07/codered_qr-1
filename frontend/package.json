@@ -7,6 +7,7 @@
     "dev": "next dev",
     "lint": "eslint .",
     "test:nfc": "tsx scripts/test-nfc.ts",
+    "test:nfc-api": "tsx --env-file=.env.local scripts/test-nfc-api.ts",
     "seed:nfc-demo": "tsx --env-file=.env.local scripts/seed-nfc-demo-accounts.ts",
     "start": "next start"
   },

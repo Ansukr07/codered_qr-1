@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import supabase from '@/lib/config/supabase'
 import { requireRole } from '@/lib/middleware/rbac'
-import { decryptNfcToken } from '@/lib/nfc'
+import { decryptNfcToken, publicAppOrigin } from '@/lib/nfc'
 
 export async function GET(request: NextRequest) {
   if (!supabase) return NextResponse.json({ message: 'Database unavailable.' }, { status: 503 })
@@ -12,6 +12,6 @@ export async function GET(request: NextRequest) {
   if (!tag) return NextResponse.json({ tag: null })
   try {
     const token = decryptNfcToken(tag.public_token_ciphertext)
-    return NextResponse.json({ tag: { url: `${new URL(request.url).origin}/nfc/t/${token}`, tokenHint: tag.token_hint, assignedAt: tag.assigned_at } })
+    return NextResponse.json({ tag: { url: `${publicAppOrigin(request.url)}/nfc/t/${token}`, tokenHint: tag.token_hint, assignedAt: tag.assigned_at } })
   } catch { return NextResponse.json({ message: 'Badge configuration needs administrator attention.' }, { status: 500 }) }
 }

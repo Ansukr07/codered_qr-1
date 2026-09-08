@@ -12,19 +12,25 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
   const { data: tag, error } = await supabase
     .from('participant_tags')
-    .select('id,status,token_hint,participant_id,participants(id,name,username,bio,avatar_key,team_id,track,participant_id,github_profile,linkedin_url,portfolio_url,onboarding_completed)')
+    .select('id,status,token_hint,participant_id')
     .eq('public_token_hash', hashNfcToken(token))
     .maybeSingle()
 
   if (error) return NextResponse.json({ message: 'Could not read this badge.' }, { status: 500 })
   if (!tag || tag.status !== 'active') return NextResponse.json({ message: 'This badge is inactive. Please visit the help desk.' }, { status: 410 })
 
-  const participant = Array.isArray(tag.participants) ? tag.participants[0] : tag.participants
+  const { data: participant, error: participantError } = await supabase
+    .from('participants')
+    .select('id,name,username,bio,avatar_key,team_id,track,participant_id,github_profile,linkedin_url,portfolio_url,onboarding_completed')
+    .eq('id', tag.participant_id)
+    .maybeSingle()
+  if (participantError) return NextResponse.json({ message: 'Could not read the participant assigned to this badge.' }, { status: 500 })
   if (!participant) return NextResponse.json({ message: 'This badge is not assigned.' }, { status: 404 })
   const user = getAuthUser(request)
   let resources: any[] = []
   if (user?.role === 'volunteer') {
-    const { data } = await supabase.from('resources').select('id,name,category,total_quantity,distributed_quantity').order('name')
+    const { data, error: resourcesError } = await supabase.from('resources').select('id,name,category,total_quantity,distributed_quantity').order('name')
+    if (resourcesError) return NextResponse.json({ message: 'Could not load volunteer resources.' }, { status: 500 })
     resources = data || []
   }
   const response = NextResponse.json({

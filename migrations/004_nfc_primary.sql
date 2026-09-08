@@ -8,6 +8,9 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_user_id_fkey;
 ALTER TABLE transactions ADD CONSTRAINT transactions_user_id_fkey
   FOREIGN KEY (user_id) REFERENCES participants(id) ON DELETE CASCADE NOT VALID;
+ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_volunteer_id_fkey;
+ALTER TABLE transactions ADD CONSTRAINT transactions_volunteer_id_fkey
+  FOREIGN KEY (volunteer_id) REFERENCES volunteers(id) ON DELETE RESTRICT NOT VALID;
 
 CREATE TABLE IF NOT EXISTS participant_tags (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

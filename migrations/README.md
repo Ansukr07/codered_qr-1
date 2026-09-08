@@ -38,7 +38,7 @@ For an existing Supabase deployment, run these files in numeric order after the 
 3. `004_nfc_primary.sql`
 4. `005_fix_transaction_participant_fk.sql` (required if `004` was already run before the FK fix)
 
-The NFC migration creates tag assignment, mutual connections, audit events, and the atomic resource-action function used by Vercel serverless routes. Migration `005` repairs the legacy `transactions.user_id` relationship so both NFC and QR scanners can write participant resource transactions.
+The NFC migration creates tag assignment, mutual connections, audit events, and the atomic resource-action function used by Vercel serverless routes. Migration `005` repairs the legacy transaction relationships to participants and volunteers so both NFC and QR scanners can write participant resource transactions.
 
 ### Step 1: Create Supabase Database Schema
 

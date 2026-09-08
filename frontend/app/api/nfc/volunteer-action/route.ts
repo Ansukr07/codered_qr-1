@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import supabase from '@/lib/config/supabase'
 import { requireRole } from '@/lib/middleware/rbac'
-import { hashNfcToken, hasTrustedOrigin, isValidNfcToken } from '@/lib/nfc'
+import { hashNfcToken, hasTrustedOrigin, isValidNfcToken, isValidUuid } from '@/lib/nfc'
 
 export async function POST(request: NextRequest) {
   if (!hasTrustedOrigin(request)) return NextResponse.json({ message: 'Untrusted request origin.' }, { status: 403 })
@@ -9,14 +9,14 @@ export async function POST(request: NextRequest) {
   const auth = requireRole(request, ['volunteer'])
   if (auth instanceof NextResponse) return auth
   const { token, resourceId, action, requestId } = await request.json().catch(() => ({}))
-  if (!isValidNfcToken(token || '') || !resourceId || !['claim','return'].includes(action) || !/^[0-9a-f-]{36}$/i.test(requestId || '')) {
+  if (!isValidNfcToken(token || '') || !isValidUuid(resourceId) || !['claim','return'].includes(action) || !isValidUuid(requestId)) {
     return NextResponse.json({ message: 'Invalid NFC action request.' }, { status: 400 })
   }
   const { data, error } = await supabase.rpc('process_nfc_resource_action', {
     p_tag_hash: hashNfcToken(token), p_resource_id: resourceId, p_volunteer_id: auth.user.userId, p_action: action, p_request_id: requestId,
   })
   if (error) {
-    if (error.message.includes('transactions_user_id_fkey')) {
+    if (error.message.includes('transactions_user_id_fkey') || error.message.includes('transactions_volunteer_id_fkey')) {
       return NextResponse.json(
         { message: 'Resource tracking setup is incomplete. Ask an administrator to apply database migration 005.' },
         { status: 503 },

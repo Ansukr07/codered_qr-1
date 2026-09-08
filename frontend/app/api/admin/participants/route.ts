@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
             name: p.name,
             email: p.email,
             teamId: p.team_id,
+            participantId: p.participant_id,
             qrCode: p.qr_code,
             githubLink: p.github_link || null,
             resourcesClaimed: transactionCounts[p.id] || 0,
@@ -49,5 +50,4 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
-
 
