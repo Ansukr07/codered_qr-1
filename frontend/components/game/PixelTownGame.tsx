@@ -32,6 +32,21 @@ function drawCharacter(ctx: CanvasRenderingContext2D, x: number, y: number, colo
   if (label) { ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#fff8dc'; ctx.fillText(label, x * TILE + TILE / 2, py - 4) }
 }
 
+function drawTree(ctx: CanvasRenderingContext2D, x: number, y: number) {
+  const px = x * TILE, py = y * TILE
+  ctx.fillStyle = '#7b4f38'; ctx.fillRect(px + 14, py + 17, 5, 13)
+  ctx.fillStyle = '#226b45'; ctx.fillRect(px + 7, py + 8, 20, 17)
+  ctx.fillStyle = '#2f8e50'; ctx.fillRect(px + 10, py + 3, 15, 15)
+  ctx.fillStyle = '#4bb967'; ctx.fillRect(px + 13, py + 1, 8, 8)
+}
+
+function drawPond(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, tick: number) {
+  ctx.fillStyle = '#377aa1'; ctx.fillRect(x * TILE, y * TILE, w * TILE, h * TILE)
+  ctx.fillStyle = '#62c5d5'; ctx.fillRect((x + 1) * TILE, (y + 1) * TILE, (w - 2) * TILE, (h - 2) * TILE)
+  ctx.fillStyle = '#d9f2dc'
+  for (let i = 0; i < 4; i++) ctx.fillRect((x + 1 + ((i * 3 + tick) % Math.max(2, w - 2))) * TILE, (y + 1 + i % Math.max(1, h - 1)) * TILE + 8, 7, 2)
+}
+
 export function PixelTownGame({ quests, states, onInteract }: { quests: Quest[]; states: string[]; onInteract: (quest: Quest) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [player, setPlayer] = useState({ x: 15, y: 17 })
@@ -84,6 +99,17 @@ export function PixelTownGame({ quests, states, onInteract }: { quests: Quest[];
         ctx.fillStyle = road ? '#e5d9b8' : '#55b96a'; ctx.fillRect(x * TILE, y * TILE, TILE, TILE)
         ctx.fillStyle = road ? '#d1c39e' : '#43a75c'; ctx.fillRect(x * TILE + 2, y * TILE + 2, 2, 2)
       }
+      // Hand-authored landmarks keep the town readable at a glance.
+      drawPond(ctx, 22, 2, 5, 4, Math.floor(frame.current / 18) % 4)
+      drawPond(ctx, 2, 14, 4, 3, Math.floor(frame.current / 18) % 4)
+      ;[[1, 5], [4, 5], [8, 3], [20, 4], [27, 4], [1, 12], [10, 16], [20, 16], [27, 16], [28, 7], [7, 7]].forEach(([x, y]) => drawTree(ctx, x, y))
+      // Flowers and path markers add the small-scale texture of a handheld RPG map.
+      for (let i = 0; i < 18; i++) {
+        const fx = (i * 7 + 3) % 28, fy = (i * 11 + 4) % 18
+        if (!isBlocked(fx, fy)) { ctx.fillStyle = i % 2 ? '#f7d45c' : '#f1839b'; ctx.fillRect(fx * TILE + 12, fy * TILE + 12, 4, 4) }
+      }
+      ctx.fillStyle = '#d9a24e'; ctx.fillRect(6 * TILE, 7 * TILE, 3 * TILE, 8); ctx.fillStyle = '#8b4e38'; ctx.fillRect(7 * TILE, 8 * TILE, 4, 12); ctx.fillRect(8 * TILE, 8 * TILE, 4, 12)
+      ctx.fillStyle = '#fff0c5'; ctx.fillRect(12 * TILE, 16 * TILE, 6 * TILE, TILE); ctx.strokeStyle = '#7a563c'; ctx.strokeRect(12 * TILE, 16 * TILE, 6 * TILE, TILE); ctx.fillStyle = '#7a563c'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center'; ctx.fillText('WELCOME, TRAINER', 15 * TILE, 16 * TILE + 20)
       const building = (x: number, y: number, w: number, h: number, roof: string, name: string) => { ctx.fillStyle = '#fff0c5'; ctx.fillRect(x*TILE,y*TILE,w*TILE,h*TILE);ctx.fillStyle=roof;ctx.fillRect(x*TILE,y*TILE,w*TILE,10);ctx.fillStyle='#9cdbef';ctx.fillRect((x+1)*TILE,(y+1)*TILE,18,13);ctx.fillStyle='#17213a';ctx.font='bold 7px monospace';ctx.textAlign='center';ctx.fillText(name,(x+w/2)*TILE,(y+h)*TILE-5) }
       building(11, 2, 8, 5, '#e65757', 'QUEST HALL'); building(3, 9, 7, 4, '#5c8df2', 'GUILD'); building(21, 9, 6, 4, '#e8b844', 'MARKET')
       ctx.fillStyle='#3e9b59';ctx.fillRect(1*TILE,1*TILE,4*TILE,3*TILE);ctx.fillStyle='#2d8150';ctx.font='bold 8px monospace';ctx.textAlign='center';ctx.fillText('PARK',(3)*TILE,3*TILE)
