@@ -83,6 +83,7 @@ CREATE TABLE participant_tags (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   participant_id uuid NOT NULL REFERENCES participants(id) ON DELETE CASCADE,
   public_token_hash text NOT NULL UNIQUE,
+  public_token_ciphertext text NOT NULL,
   token_hint text NOT NULL,
   status text NOT NULL DEFAULT 'active'
     CHECK (status IN ('unassigned', 'active', 'lost', 'revoked', 'replaced')),
@@ -122,7 +123,7 @@ CREATE TABLE participant_connections (
 );
 ```
 
-Store only a SHA-256/HMAC hash of the public token in the database. Generate at least 128 random bits; do not use participant IDs, email addresses, team IDs, sequential numbers, or usernames as tag secrets. Keep a short non-secret `token_hint` for badge support.
+Use the SHA-256 hash for all tag lookups and store an AES-256-GCM encrypted copy only so an authenticated participant can regenerate the identical backup QR. Generate at least 128 random bits; do not use participant IDs, email addresses, team IDs, sequential numbers, or usernames as tag secrets. Keep a short non-secret `token_hint` for badge support. Configure a stable `NFC_TOKEN_ENCRYPTION_KEY` before issuing production tags; changing it invalidates backup-QR recovery but does not invalidate physical tags.
 
 The partial uniqueness requirement for one active tag should be implemented as:
 

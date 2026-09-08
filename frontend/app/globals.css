@@ -36,6 +36,13 @@
   --radius: 0.75rem;
 }
 
+/* NFC badge landing: deliberately independent of role dashboards so it opens
+   quickly and remains legible from a volunteer's hand-held phone. */
+.nfc-world{min-height:100dvh;display:grid;place-items:center;padding:24px;background:#7db5f5;color:#17213a;background-image:linear-gradient(135deg,rgba(255,255,255,.12) 25%,transparent 25%),linear-gradient(315deg,rgba(255,255,255,.12) 25%,transparent 25%);background-size:32px 32px}
+.nfc-card{width:min(100%,520px);padding:28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.nfc-card h1{font-size:clamp(2rem,8vw,3.2rem);line-height:.95;margin:0}.nfc-card>p{margin:0}.nfc-status{align-self:stretch;display:flex;align-items:center;gap:9px;border-bottom:2px dashed #17213a;padding-bottom:12px;font-family:var(--font-mono,monospace);font-size:.72rem;letter-spacing:.08em}.nfc-status svg{color:#e94e55}.nfc-status b{margin-left:auto;color:#16724d}.nfc-id{display:flex;align-items:center;gap:7px;font-family:monospace;font-weight:800}.nfc-action-box{align-self:stretch;margin-top:8px;padding:18px;border:2px solid #17213a;background:#fff8dc;box-shadow:4px 4px 0 #17213a;display:flex;flex-direction:column;align-items:center;gap:9px}.nfc-action-box h2,.nfc-action-box p{margin:0}.nfc-action-box>svg{color:#e94e55}.nfc-safety{font:700 .7rem/1.4 monospace;opacity:.68}.nfc-error{width:min(100%,460px);padding:32px;text-align:center}.nfc-error>svg{width:52px;height:52px;color:#e94e55}.nfc-resource-list{width:100%;display:grid;gap:8px;text-align:left}.nfc-resource-list>div{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:7px;padding:9px;border:2px solid #17213a;background:#fff}.nfc-resource-list span{display:flex;min-width:0;flex-direction:column}.nfc-resource-list b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nfc-resource-list small{font:600 .65rem monospace;opacity:.65}.nfc-resource-list button{border:2px solid #17213a;background:#ef5559;padding:7px 8px;font:800 .63rem monospace;box-shadow:2px 2px 0 #17213a}.nfc-resource-list button+button{background:#ffd65e}.nfc-resource-list button:disabled{opacity:.55}.nfc-volunteer-actions>a{font:800 .7rem monospace;text-decoration:underline}
+@media(max-width:560px){.nfc-world{padding:12px}.nfc-card{padding:20px}.nfc-status{font-size:.62rem}}
+
 /* QR Scanner Styles - Properly aligned and proportioned */
 #qr-reader-bag,
 #qr-reader-food,

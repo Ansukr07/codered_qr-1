@@ -19,10 +19,20 @@ export default function LoginPage() {
   const [otp, setOtp] = useState('')
   const [error, setError] = useState('')
   const [otpSent, setOtpSent] = useState(false)
+  const [returnTo, setReturnTo] = useState('')
+  const [returnToReady, setReturnToReady] = useState(false)
+
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('returnTo') || ''
+    // Only permit local absolute paths; never turn login into an open redirect.
+    if (requested.startsWith('/') && !requested.startsWith('//')) setReturnTo(requested)
+    setReturnToReady(true)
+  }, [])
 
   // Redirect if already authenticated
   useEffect(() => {
-    if (!loading && user) {
+    if (returnToReady && !loading && user) {
+      if (returnTo) return router.replace(returnTo)
       if (user.role === 'admin') {
         router.push('/admin')
       } else if (user.role === 'volunteer') {
@@ -31,7 +41,7 @@ export default function LoginPage() {
         router.replace(user.onboardingCompleted ? '/participant' : '/participant/onboarding')
       }
     }
-  }, [user, loading, router])
+  }, [user, loading, router, returnTo, returnToReady])
 
   const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -85,9 +95,9 @@ export default function LoginPage() {
 
       // Refresh user data and redirect
       await refreshUser()
-      router.replace(data.user?.role === 'participant' && !data.user?.onboardingCompleted
+      router.replace(returnTo || (data.user?.role === 'participant' && !data.user?.onboardingCompleted
         ? '/participant/onboarding'
-        : '/participant')
+        : data.user?.role === 'volunteer' ? '/volunteer' : data.user?.role === 'admin' ? '/admin' : '/participant'))
     } catch (err: any) {
       setError(err.message || 'Invalid OTP')
     } finally {

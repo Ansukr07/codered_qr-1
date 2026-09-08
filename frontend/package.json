@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
+    "test:nfc": "tsx scripts/test-nfc.ts",
     "start": "next start"
   },
   "dependencies": {

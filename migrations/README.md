@@ -29,6 +29,16 @@ CODE RED 3.0 Final Round Registration (Responses) - Form Responses 1.csv
 
 ## Migration Steps
 
+### CODERED 4.0 incremental migrations
+
+For an existing Supabase deployment, run these files in numeric order after the base schema:
+
+1. `002_codered_4_game_layer.sql`
+2. `003_networking_scans.sql`
+3. `004_nfc_primary.sql`
+
+The NFC migration creates tag assignment, mutual connections, audit events, and the atomic resource-action function used by Vercel serverless routes.
+
 ### Step 1: Create Supabase Database Schema
 
 1. Go to your Supabase project dashboard
@@ -112,4 +122,3 @@ Check your `MONGODB_URI` in `.env` file
 - Check if names in CSV match names in MongoDB exactly
 - Use the fix script to manually map unmatched entries
 - Consider fuzzy matching improvements
-

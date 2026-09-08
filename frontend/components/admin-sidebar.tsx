@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Users, UserPlus, Megaphone, HelpCircle, Github, LogOut, Code2, ClipboardList, BedDouble } from 'lucide-react'
+import { LayoutDashboard, Users, UserPlus, Megaphone, HelpCircle, Github, LogOut, ClipboardList, BedDouble, Nfc } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useAuth } from '@/contexts/AuthContext'
@@ -17,6 +17,11 @@ const sidebarItems = [
     title: "Participants",
     href: "/admin/participants",
     icon: Users
+  },
+  {
+    title: "NFC Badges",
+    href: "/admin/nfc",
+    icon: Nfc
   },
   {
     title: "User Management",
@@ -65,7 +70,7 @@ export function AdminSidebar() {
       <div className="flex h-16 items-center border-b border-border/40 px-6">
         <div className="flex items-center gap-2">
           <img src="/logo.png" alt="Codered Logo" className="w-8 h-8 object-contain" />
-          <span className="font-bold text-lg text-primary">Code Red 3.0</span>
+          <span className="font-bold text-lg text-primary">CodeRed 4.0</span>
         </div>
       </div>
 
