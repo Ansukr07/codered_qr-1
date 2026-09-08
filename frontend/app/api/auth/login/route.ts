@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const emailLower = email.toLowerCase();
+        const emailLower = String(email).toLowerCase().trim();
 
         // 1. Check if Supabase is initialized
         if (!supabase) {
@@ -35,7 +35,9 @@ export async function POST(request: NextRequest) {
                 .from('admins')
                 .select('*')
                 .eq('email', emailLower)
-                .single();
+                .maybeSingle();
+
+            if (adminError) console.error('Admin login lookup failed:', adminError.message);
 
             if (admin && !adminError) {
                 const isMatch = await bcrypt.compare(password, admin.password);
@@ -52,7 +54,9 @@ export async function POST(request: NextRequest) {
                 .from('volunteers')
                 .select('*')
                 .eq('email', emailLower)
-                .single();
+                .maybeSingle();
+
+            if (volunteerError) console.error('Volunteer login lookup failed:', volunteerError.message);
 
             if (volunteer && !volunteerError) {
                 const isMatch = await bcrypt.compare(password, volunteer.password);
@@ -113,4 +117,3 @@ export async function POST(request: NextRequest) {
         );
     }
 }
-
