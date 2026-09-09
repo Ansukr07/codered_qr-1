@@ -19,7 +19,7 @@ interface User {
 interface AuthContextType {
     user: User | null
     loading: boolean
-    login: (email: string, password: string, role?: string) => Promise<void>
+    login: (email: string, password: string, role?: string, returnTo?: string) => Promise<void>
     register: (name: string, email: string, password: string, role: string, teamId?: string) => Promise<any>
     logout: (redirectPath?: string) => Promise<void>
     refreshUser: () => Promise<void>
@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const refreshUser = async () => {
         try {
-            const res = await fetch('/api/auth/me')
+            const res = await fetch('/api/auth/me', { cache: 'no-store' })
             if (res.ok) {
                 const data = await res.json()
                 setUser(data.user)
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         refreshUser()
     }, [])
 
-    const login = async (email: string, password: string, role?: string) => {
+    const login = async (email: string, password: string, role?: string, returnTo?: string) => {
         const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -72,7 +72,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (userData.role === 'admin') {
             router.push('/admin')
         } else if (userData.role === 'volunteer') {
-            router.push('/volunteer')
+            const safeReturnTo = returnTo?.startsWith('/volunteer/') && !returnTo.startsWith('//')
+                ? returnTo
+                : '/volunteer'
+            router.push(safeReturnTo)
         } else {
             router.push(userData.onboardingCompleted ? '/participant' : '/participant/onboarding')
         }

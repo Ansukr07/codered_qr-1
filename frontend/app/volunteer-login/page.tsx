@@ -17,11 +17,19 @@ export default function VolunteerLoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
+  const getSafeReturnPath = () => {
+    if (typeof window === 'undefined') return '/volunteer'
+    const requestedPath = new URLSearchParams(window.location.search).get('returnTo')
+    return requestedPath?.startsWith('/volunteer/') && !requestedPath.startsWith('//')
+      ? requestedPath
+      : '/volunteer'
+  }
+
   // Redirect if already authenticated
   useEffect(() => {
     if (!loading && user) {
       if (user.role === 'volunteer') {
-        router.push('/volunteer')
+        router.replace(getSafeReturnPath())
       } else if (user.role === 'admin') {
         router.push('/admin')
       } else if (user.role === 'participant') {
@@ -39,7 +47,7 @@ export default function VolunteerLoginPage() {
       // `login` from the auth context handles the API call, sets cookies,
       // refreshes the user, and redirects. Calling fetch separately first
       // resulted in two login requests per submit.
-      await login(email, password, 'volunteer')
+      await login(email, password, 'volunteer', getSafeReturnPath())
     } catch (err: any) {
       setError(err.message || 'Authentication failed')
     } finally {
@@ -141,4 +149,3 @@ export default function VolunteerLoginPage() {
     </div>
   )
 }
-

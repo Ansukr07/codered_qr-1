@@ -43,13 +43,25 @@ export async function GET(request: NextRequest) {
 
         // 1. Fetch data based on role
         if (decoded.role === 'admin') {
-            const { data: admin, error } = await supabase
+            let { data: admin } = await supabase
                 .from('admins')
                 .select('id, name, email')
                 .eq('id', decoded.userId)
-                .single();
+                .maybeSingle();
 
-            if (admin && !error) {
+            // A deployment may still hold a valid cookie created before demo
+            // accounts were reseeded. Recover the account using the email that
+            // is already protected by the signed JWT, then return its current ID.
+            if (!admin && decoded.email) {
+                const result = await supabase
+                    .from('admins')
+                    .select('id, name, email')
+                    .ilike('email', decoded.email)
+                    .maybeSingle();
+                admin = result.data;
+            }
+
+            if (admin) {
                 userData = {
                     userId: admin.id,
                     name: admin.name,
@@ -58,13 +70,22 @@ export async function GET(request: NextRequest) {
                 };
             }
         } else if (decoded.role === 'volunteer') {
-            const { data: volunteer, error } = await supabase
+            let { data: volunteer } = await supabase
                 .from('volunteers')
                 .select('id, name, email, qr_code')
                 .eq('id', decoded.userId)
-                .single();
+                .maybeSingle();
 
-            if (volunteer && !error) {
+            if (!volunteer && decoded.email) {
+                const result = await supabase
+                    .from('volunteers')
+                    .select('id, name, email, qr_code')
+                    .ilike('email', decoded.email)
+                    .maybeSingle();
+                volunteer = result.data;
+            }
+
+            if (volunteer) {
                 userData = {
                     userId: volunteer.id,
                     name: volunteer.name,
