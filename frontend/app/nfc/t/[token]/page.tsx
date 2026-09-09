@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { Check, Github, Link as LinkIcon, Linkedin, Loader2, Nfc, ShieldCheck, UserRound, Users } from 'lucide-react'
+import { Check, Github, Link as LinkIcon, Linkedin, Loader2, LogOut, Nfc, ShieldCheck, UserRound, Users } from 'lucide-react'
 import { PixelAvatar } from '@/components/game/PixelAvatar'
+import { useAuth } from '@/contexts/AuthContext'
 
 type TagData = {
   authenticated: boolean
@@ -15,6 +16,7 @@ type TagData = {
 }
 
 export default function NfcTagPage() {
+  const { logout } = useAuth()
   const { token } = useParams<{ token: string }>()
   const [data, setData] = useState<TagData | null>(null)
   const [error, setError] = useState('')
@@ -70,6 +72,7 @@ export default function NfcTagPage() {
     :data.viewerRole==='participant'?<div className="nfc-action-box"><Users/><h2>{data.isSelf?'This is your badge':'Add to your network'}</h2>{data.isSelf?<p>Share this badge with another participant.</p>:<button className="pixel-button" onClick={connect} disabled={busy||Boolean(result)}>{busy?'CONNECTING...':result?<><Check/> CONNECTED</>:'CONNECT'}</button>}{result&&<p role="status" className="connected-toast">{result}</p>}{actionError&&<p role="alert" className="game-error">{actionError}</p>}</div>
     :data.viewerRole==='volunteer'?<div className="nfc-action-box nfc-volunteer-actions"><ShieldCheck/><h2>Volunteer actions</h2><p>Confirm the participant above, then issue or return a resource.</p>{data.resources?.length?<div className="nfc-resource-list">{data.resources.map(resource=><div key={resource.id}><span><b>{resource.name}</b><small>{resource.distributed_quantity}/{resource.total_quantity} issued</small></span><button disabled={busy} onClick={()=>resourceAction(resource.id,'claim')}>ISSUE</button><button disabled={busy} onClick={()=>resourceAction(resource.id,'return')}>RETURN</button></div>)}</div>:<p>No resources are configured.</p>}{result&&<p role="status" className="connected-toast">{result}</p>}{actionError&&<p role="alert" className="game-error">{actionError}</p>}<Link href="/volunteer">OPEN VOLUNTEER DASHBOARD</Link></div>:<div className="nfc-action-box"><ShieldCheck/><h2>Administrator view</h2><p>Badge identity confirmed. Resource distribution requires a volunteer account for a clear audit trail.</p><Link href="/admin/nfc">OPEN NFC BADGE STATION</Link></div>}
     {!!links.length&&<div className="public-links">{links.map(({url,label,icon:Icon})=><a key={label} href={url} target="_blank" rel="noreferrer"><Icon/><span><b>{label}</b><small>Open profile</small></span><i>↗</i></a>)}</div>}
+    {data.authenticated&&<button type="button" className="nfc-logout" onClick={()=>void logout(data.viewerRole==='admin'?'/admin-login':data.viewerRole==='volunteer'?'/volunteer-login':'/login')}><LogOut/> LOG OUT</button>}
     <p className="nfc-safety">Confirm the name and participant ID before issuing event resources.</p>
   </section></main>
 }
