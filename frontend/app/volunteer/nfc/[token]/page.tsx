@@ -38,11 +38,13 @@ export default function VolunteerNfcPage(){
   const[error,setError]=useState('')
 
   const load=useCallback(async()=>{
-    const response=await fetch(`/api/nfc/tags/${encodeURIComponent(token)}`,{cache:'no-store'})
-    const body=await response.json().catch(()=>({}))
-    if(!response.ok)throw new Error(body.message||'Could not read this NFC badge.')
-    if(body.viewerRole!=='volunteer')throw new Error('A volunteer login is required to assign resources.')
-    setData(body)
+    for(let attempt=0;attempt<2;attempt+=1){
+      const response=await fetch(`/api/nfc/tags/${encodeURIComponent(token)}`,{cache:'no-store'})
+      const body=await response.json().catch(()=>({}))
+      if(response.ok){if(body.viewerRole!=='volunteer')throw new Error('A volunteer login is required to assign resources.');setData(body);return}
+      if(attempt===0&&[404,500,503].includes(response.status)){await new Promise(resolve=>setTimeout(resolve,400));continue}
+      throw new Error(body.message||'Could not read this NFC badge.')
+    }
   },[token])
 
   useEffect(()=>{setLoading(true);load().catch(cause=>setError(cause.message||'Could not load volunteer resources.')).finally(()=>setLoading(false))},[load])

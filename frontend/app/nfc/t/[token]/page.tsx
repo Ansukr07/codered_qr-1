@@ -26,10 +26,16 @@ export default function NfcTagPage() {
   const returnTo = useMemo(() => `/nfc/t/${encodeURIComponent(token)}`, [token])
 
   async function loadBadge() {
-    const response = await fetch(`/api/nfc/tags/${encodeURIComponent(token)}`, { cache: 'no-store' })
-    const body = await response.json().catch(() => ({}))
-    if (!response.ok) throw new Error(body.message || 'Could not read this badge.')
-    setData(body)
+    for (let attempt=0;attempt<2;attempt+=1) {
+      const response = await fetch(`/api/nfc/tags/${encodeURIComponent(token)}`, { cache: 'no-store' })
+      const body = await response.json().catch(() => ({}))
+      if (response.ok) { setData(body); return }
+      if (attempt===0 && [404,500,503].includes(response.status)) {
+        await new Promise(resolve=>setTimeout(resolve,400))
+        continue
+      }
+      throw new Error(body.message || 'Could not read this badge.')
+    }
   }
 
   useEffect(() => { loadBadge().catch(cause => setError(cause.message || 'Could not read this badge.')) }, [token])

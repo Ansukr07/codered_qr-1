@@ -5,19 +5,30 @@ import { hashNfcToken, isValidNfcToken, safePublicUrl } from '@/lib/nfc'
 
 export const dynamic = 'force-dynamic'
 
+const wait = (milliseconds:number) => new Promise(resolve => setTimeout(resolve, milliseconds))
+
+async function findTag(tokenHash:string) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const result = await supabase.from('participant_tags')
+      .select('id,status,token_hint,participant_id')
+      .eq('public_token_hash', tokenHash)
+      .maybeSingle()
+    if (result.error || result.data || attempt === 2) return result
+    await wait(attempt === 0 ? 150 : 350)
+  }
+  return { data:null, error:null }
+}
+
 export async function GET(request: NextRequest, { params }: { params: Promise<{ token: string }> }) {
   if (!supabase) return NextResponse.json({ message: 'Database unavailable.' }, { status: 503 })
   const { token } = await params
   if (!isValidNfcToken(token)) return NextResponse.json({ message: 'This badge link is invalid.' }, { status: 400 })
 
-  const { data: tag, error } = await supabase
-    .from('participant_tags')
-    .select('id,status,token_hint,participant_id')
-    .eq('public_token_hash', hashNfcToken(token))
-    .maybeSingle()
+  const { data: tag, error } = await findTag(hashNfcToken(token))
 
   if (error) return NextResponse.json({ message: 'Could not read this badge.' }, { status: 500 })
-  if (!tag || tag.status !== 'active') return NextResponse.json({ message: 'This badge is inactive. Please visit the help desk.' }, { status: 410 })
+  if (!tag) return NextResponse.json({ message: 'This badge is not recognized. Tap it again or ask the help desk to verify it.' }, { status: 404 })
+  if (tag.status !== 'active') return NextResponse.json({ message: 'This badge is inactive. Please visit the help desk.' }, { status: 410 })
 
   const { data: participant, error: participantError } = await supabase
     .from('participants')
