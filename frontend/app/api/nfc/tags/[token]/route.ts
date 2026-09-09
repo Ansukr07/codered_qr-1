@@ -31,7 +31,32 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (user?.role === 'volunteer') {
     const { data, error: resourcesError } = await supabase.from('resources').select('id,name,category,total_quantity,distributed_quantity').order('name')
     if (resourcesError) return NextResponse.json({ message: 'Could not load volunteer resources.' }, { status: 500 })
-    resources = data || []
+    const participantIds = [participant.id]
+    if (participant.team_id) {
+      const { data: teammates, error: teammatesError } = await supabase.from('participants').select('id').eq('team_id', participant.team_id)
+      if (teammatesError) return NextResponse.json({ message: 'Could not load the participant team.' }, { status: 500 })
+      participantIds.splice(0, participantIds.length, ...(teammates || []).map((member:any) => member.id))
+    }
+    const { data: transactions, error: transactionsError } = await supabase.from('transactions')
+      .select('user_id,resource_id,action').in('user_id', participantIds).in('action', ['claim', 'return'])
+    if (transactionsError) return NextResponse.json({ message: 'Could not load current resource assignments.' }, { status: 500 })
+    resources = (data || []).map((resource:any) => {
+      const teamScoped = resource.category === 'accommodation' || resource.name.toLowerCase().includes('bag')
+      const relevant = (transactions || []).filter((transaction:any) => transaction.resource_id === resource.id && (teamScoped || transaction.user_id === participant.id))
+      const claimCount = relevant.filter((transaction:any) => transaction.action === 'claim').length
+      const returnCount = relevant.filter((transaction:any) => transaction.action === 'return').length
+      const activeQuantity = Math.max(0, claimCount - returnCount)
+      const claimLimit = resource.category === 'coffee' || resource.name.toLowerCase().includes('coffee') ? 3 : 1
+      return {
+        ...resource,
+        claim_count: claimCount,
+        active_quantity: activeQuantity,
+        claim_limit: claimLimit,
+        can_issue: claimCount < claimLimit && resource.distributed_quantity < resource.total_quantity,
+        can_return: activeQuantity > 0,
+        team_scoped: teamScoped,
+      }
+    })
   }
   const response = NextResponse.json({
     authenticated: Boolean(user),
