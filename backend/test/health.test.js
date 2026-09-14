@@ -54,3 +54,16 @@ test('networking statistics require authentication',async()=>{
     assert.deepEqual(await response.json(),{message:'Not authenticated'});
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('quest submissions and review queues require authentication',async()=>{
+  const server=createApp().listen(0);
+  try{
+    const {port}=server.address();
+    const [quests,reviews]=await Promise.all([
+      fetch(`http://127.0.0.1:${port}/api/quests`),
+      fetch(`http://127.0.0.1:${port}/api/quests/submissions`),
+    ]);
+    assert.equal(quests.status,401);
+    assert.equal(reviews.status,401);
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
