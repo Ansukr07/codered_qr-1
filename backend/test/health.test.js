@@ -4,6 +4,7 @@ process.env.SUPABASE_URL ||= 'https://example.supabase.co';
 process.env.SUPABASE_SERVICE_ROLE_KEY ||= 'test-service-role-key';
 process.env.JWT_SECRET ||= 'test-jwt-secret-that-is-long-enough-for-tests';
 const {createApp}=require('../src/app');
+const {createToken,decryptToken,encryptToken,hashToken}=require('../src/nfc');
 
 test('health endpoint identifies the Supabase API',async()=>{
   const server=createApp().listen(0);
@@ -66,4 +67,18 @@ test('quest submissions and review queues require authentication',async()=>{
     assert.equal(quests.status,401);
     assert.equal(reviews.status,401);
   }finally{await new Promise(resolve=>server.close(resolve));}
+});
+
+test('NFC tokens encrypt reversibly without storing their plaintext hash input',()=>{
+  const token=createToken();const encrypted=encryptToken(token);
+  assert.match(token,/^[A-Za-z0-9_-]{32}$/);
+  assert.notEqual(encrypted,token);
+  assert.equal(decryptToken(encrypted),token);
+  assert.equal(hashToken(token).length,64);
+});
+
+test('NFC administration requires authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const response=await fetch(`http://127.0.0.1:${port}/api/admin/nfc/tags`);assert.equal(response.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
 });
