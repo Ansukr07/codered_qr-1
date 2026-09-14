@@ -82,3 +82,9 @@ test('NFC administration requires authentication',async()=>{
   try{const {port}=server.address();const response=await fetch(`http://127.0.0.1:${port}/api/admin/nfc/tags`);assert.equal(response.status,401);}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('announcements and help queues require authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const [radio,help]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/operations/announcements`),fetch(`http://127.0.0.1:${port}/api/operations/help`)]);assert.equal(radio.status,401);assert.equal(help.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});
