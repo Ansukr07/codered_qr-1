@@ -101,3 +101,9 @@ test('participant event and leaderboard endpoints require authentication',async(
   try{const {port}=server.address();const [event,leaderboard]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/participants/event`),fetch(`http://127.0.0.1:${port}/api/participants/leaderboard`)]);assert.equal(event.status,401);assert.equal(leaderboard.status,401);}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('staff account administration requires authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const [list,create]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/admin/staff`),fetch(`http://127.0.0.1:${port}/api/admin/staff`,{method:'POST',headers:{'content-type':'application/json'},body:'{}'})]);assert.equal(list.status,401);assert.equal(create.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});
