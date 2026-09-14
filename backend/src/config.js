@@ -10,4 +10,6 @@ module.exports = {
   nodeEnv:process.env.NODE_ENV || 'development',
   clientOrigins:(process.env.CLIENT_ORIGINS || 'http://localhost:5173').split(',').map(v=>v.trim()).filter(Boolean),
   supabaseUrl:required('SUPABASE_URL'), supabaseServiceRoleKey:required('SUPABASE_SERVICE_ROLE_KEY'), jwtSecret:required('JWT_SECRET'),
+  nfcEncryptionKey:process.env.NFC_TOKEN_ENCRYPTION_KEY?.trim() || required('JWT_SECRET'),
+  publicAppUrl:(process.env.PUBLIC_APP_URL || 'http://localhost:5173').replace(/\/$/,''),
 };

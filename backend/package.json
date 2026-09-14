@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check src/app.js && node --check src/routes/auth.js && node --check src/routes/participants.js",
+    "check": "node --check server.js && node --check src/app.js && node --check src/routes/auth.js && node --check src/routes/participants.js && node --check src/routes/nfc.js",
     "test": "node --test"
   },
   "keywords": [],
@@ -18,13 +18,8 @@
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "csv-parser": "^3.2.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "multer": "^2.0.2",
-    "nodemailer": "^7.0.11",
-    "pg": "^8.16.3",
-    "uuid": "^13.0.0"
+    "jsonwebtoken": "^9.0.2"
   }
 }
