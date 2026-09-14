@@ -24,3 +24,23 @@ test('unknown routes return structured JSON',async()=>{
     assert.deepEqual(await response.json(),{message:'Endpoint not found'});
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('invalid NFC tokens are rejected before database access',async()=>{
+  const server=createApp().listen(0);
+  try{
+    const {port}=server.address();
+    const response=await fetch(`http://127.0.0.1:${port}/api/nfc/tags/not-a-token`);
+    assert.equal(response.status,400);
+    assert.deepEqual(await response.json(),{message:'This badge link is invalid'});
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
+
+test('volunteer resource actions require authentication',async()=>{
+  const server=createApp().listen(0);
+  try{
+    const {port}=server.address();
+    const response=await fetch(`http://127.0.0.1:${port}/api/nfc/volunteer-action`,{method:'POST',headers:{'content-type':'application/json'},body:'{}'});
+    assert.equal(response.status,401);
+    assert.deepEqual(await response.json(),{message:'Not authenticated'});
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
