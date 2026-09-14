@@ -44,3 +44,13 @@ test('volunteer resource actions require authentication',async()=>{
     assert.deepEqual(await response.json(),{message:'Not authenticated'});
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('networking statistics require authentication',async()=>{
+  const server=createApp().listen(0);
+  try{
+    const {port}=server.address();
+    const response=await fetch(`http://127.0.0.1:${port}/api/network/stats`);
+    assert.equal(response.status,401);
+    assert.deepEqual(await response.json(),{message:'Not authenticated'});
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
