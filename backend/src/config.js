@@ -12,4 +12,5 @@ module.exports = {
   supabaseUrl:required('SUPABASE_URL'), supabaseServiceRoleKey:required('SUPABASE_SERVICE_ROLE_KEY'), jwtSecret:required('JWT_SECRET'),
   nfcEncryptionKey:process.env.NFC_TOKEN_ENCRYPTION_KEY?.trim() || required('JWT_SECRET'),
   publicAppUrl:(process.env.PUBLIC_APP_URL || 'http://localhost:5173').replace(/\/$/,''),
+  submissionsOpen:process.env.SUBMISSIONS_OPEN==='true',
 };

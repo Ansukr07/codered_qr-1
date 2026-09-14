@@ -5,6 +5,7 @@ process.env.SUPABASE_SERVICE_ROLE_KEY ||= 'test-service-role-key';
 process.env.JWT_SECRET ||= 'test-jwt-secret-that-is-long-enough-for-tests';
 const {createApp}=require('../src/app');
 const {createToken,decryptToken,encryptToken,hashToken}=require('../src/nfc');
+const jwt=require('jsonwebtoken');
 
 test('health endpoint identifies the Supabase API',async()=>{
   const server=createApp().listen(0);
@@ -86,5 +87,11 @@ test('NFC administration requires authentication',async()=>{
 test('announcements and help queues require authentication',async()=>{
   const server=createApp().listen(0);
   try{const {port}=server.address();const [radio,help]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/operations/announcements`),fetch(`http://127.0.0.1:${port}/api/operations/help`)]);assert.equal(radio.status,401);assert.equal(help.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});
+
+test('repository writes stay locked until explicitly enabled',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const token=jwt.sign({userId:'00000000-0000-4000-8000-000000000001',role:'participant',email:'test@example.com'},process.env.JWT_SECRET);const response=await fetch(`http://127.0.0.1:${port}/api/participants/repository`,{method:'PUT',headers:{'content-type':'application/json','cookie':`token=${token}`},body:JSON.stringify({githubLink:'https://github.com/example/project'})});assert.equal(response.status,423);assert.deepEqual(await response.json(),{message:'Project submissions are currently locked'});}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
