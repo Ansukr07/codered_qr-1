@@ -29,12 +29,12 @@ The browser never receives the Supabase service-role key. All privileged databas
 
 ## Deployment
 
-Deploy the React client and Express API as separate services/domains. Configure:
+Deploy the React client and Express API as separate Vercel projects. Configure:
 
-- API: `CLIENT_ORIGINS=https://your-react-domain`, Supabase variables, and `JWT_SECRET`.
-- Client: `VITE_API_URL=https://your-api-domain`.
+- API: `CLIENT_ORIGINS=https://your-react-domain`, Supabase variables, `JWT_SECRET`, `NFC_TOKEN_ENCRYPTION_KEY`, and `PUBLIC_APP_URL`.
+- Client: leave `VITE_API_URL` empty and set server-only `API_ORIGIN=https://your-api-project.vercel.app`.
 
-Because cookies cross domains in that arrangement, production uses `Secure; SameSite=None`. Prefer sibling custom domains such as `portal.codered.example` and `api.codered.example`. Add both preview and production client origins explicitly when testing previews.
+The client includes a same-origin `/api` serverless proxy. The browser therefore stores a first-party portal cookie instead of a third-party API cookie, avoiding Safari's cross-site cookie restrictions when both projects use separate `vercel.app` domains. The local Vite server applies the same pattern by proxying `/api` to port 5000. Add preview and production client origins explicitly to `CLIENT_ORIGINS`.
 
 ## Migration sequence
 

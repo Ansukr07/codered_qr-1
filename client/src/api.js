@@ -1,4 +1,4 @@
-const base=(import.meta.env.VITE_API_URL||'http://localhost:5000').replace(/\/$/,'');
+const base=(import.meta.env.VITE_API_URL||'').replace(/\/$/,'');
 export async function api(path,options={}){
   const isForm=options.body instanceof FormData;
   const response=await fetch(`${base}${path}`,{credentials:'include',...options,headers:{...(options.body&&!isForm?{'Content-Type':'application/json'}:{}),...options.headers}});
