@@ -95,3 +95,9 @@ test('repository writes stay locked until explicitly enabled',async()=>{
   try{const {port}=server.address();const token=jwt.sign({userId:'00000000-0000-4000-8000-000000000001',role:'participant',email:'test@example.com'},process.env.JWT_SECRET);const response=await fetch(`http://127.0.0.1:${port}/api/participants/repository`,{method:'PUT',headers:{'content-type':'application/json','cookie':`token=${token}`},body:JSON.stringify({githubLink:'https://github.com/example/project'})});assert.equal(response.status,423);assert.deepEqual(await response.json(),{message:'Project submissions are currently locked'});}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('participant event and leaderboard endpoints require authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const [event,leaderboard]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/participants/event`),fetch(`http://127.0.0.1:${port}/api/participants/leaderboard`)]);assert.equal(event.status,401);assert.equal(leaderboard.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});
