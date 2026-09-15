@@ -13,6 +13,7 @@ const Loading=()=> <main className="center"><div className="panel">Loading sessi
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
 function RoleGuard({role,children}){const {user,loading}=useAuth();if(loading)return <Loading/>;const returnTo=encodeURIComponent(`${window.location.pathname}${window.location.search}`);return user?.role===role?children:<Navigate to={`/staff-login?role=${role}&returnTo=${returnTo}`} replace/>;}
 function StaffGuard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return ['volunteer','admin'].includes(user?.role)?children:<Navigate to="/staff-login" replace/>;}
+function ParticipantGuard({children,allowOnboarding=false}){const {user,loading}=useAuth();if(loading)return <Loading/>;if(user?.role!=='participant')return <Navigate to="/login" replace/>;if(!allowOnboarding&&!user.onboardingCompleted)return <Navigate to="/profile" replace/>;return children;}
 function App(){return <Routes>
   <Route path="/login" element={<Login/>}/><Route path="/staff-login" element={<StaffLogin/>}/>
   <Route path="/p/:username" element={<PublicProfile/>}/><Route path="/nfc/t/:token" element={<NfcProfile/>}/>
@@ -24,10 +25,10 @@ function App(){return <Routes>
   <Route path="/admin/staff" element={<RoleGuard role="admin"><StaffManagement/></RoleGuard>}/>
   <Route path="/admin/participants/:id" element={<RoleGuard role="admin"><ParticipantDetail/></RoleGuard>}/>
   <Route path="/admin/repositories" element={<RoleGuard role="admin"><RepositoryAudit/></RoleGuard>}/>
-  <Route path="/" element={<Guard><Dashboard/></Guard>}/><Route path="/profile" element={<Guard><Profile/></Guard>}/><Route path="/network" element={<Guard><Network/></Guard>}/><Route path="/quests" element={<Guard><Quests/></Guard>}/>
+  <Route path="/" element={<Guard><Dashboard/></Guard>}/><Route path="/profile" element={<ParticipantGuard allowOnboarding><Profile/></ParticipantGuard>}/><Route path="/network" element={<ParticipantGuard><Network/></ParticipantGuard>}/><Route path="/quests" element={<ParticipantGuard><Quests/></ParticipantGuard>}/>
   <Route path="/operations" element={<Guard><Operations/></Guard>}/>
-  <Route path="/repository" element={<Guard><Repository/></Guard>}/>
-  <Route path="/event" element={<Guard><EventInfo/></Guard>}/><Route path="/leaderboard" element={<Guard><Leaderboard/></Guard>}/>
+  <Route path="/repository" element={<ParticipantGuard><Repository/></ParticipantGuard>}/>
+  <Route path="/event" element={<ParticipantGuard><EventInfo/></ParticipantGuard>}/><Route path="/leaderboard" element={<ParticipantGuard><Leaderboard/></ParticipantGuard>}/>
   <Route path="*" element={<Navigate to="/" replace/>}/>
 </Routes>}
 createRoot(document.getElementById('root')).render(<React.StrictMode><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></React.StrictMode>);
