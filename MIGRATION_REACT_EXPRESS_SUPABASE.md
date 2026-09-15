@@ -9,7 +9,7 @@
 
 The browser never receives the Supabase service-role key. All privileged database operations go through Express.
 
-## Implemented in phase 1
+## Implemented
 
 - Supabase-only Express application factory and health endpoint.
 - Participant email OTP generation and verification.
@@ -18,6 +18,12 @@ The browser never receives the Supabase service-role key. All privileged databas
 - Participant profile retrieval and validated profile updates.
 - React login, protected dashboard, logout, and onboarding/profile editor.
 - Explicit origin allowlist and credentialed CORS.
+- NFC issue/recovery/revocation, role-aware NFC resolution, participant connections, and QR backup scanning.
+- Quest proof submission through private Supabase Storage and staff verification.
+- Announcements, help requests, resource issuing/returns, live resource tracking, and CSV exports.
+- Participant event assignment, configurable schedule, leaderboard, and repository submission.
+- Admin overview, participant roster/detail, staff management, repository audit, and NFC administration.
+- Same-origin Vercel API proxy for first-party Safari-compatible session cookies.
 
 ## Local development
 
@@ -38,14 +44,23 @@ The client includes a same-origin `/api` serverless proxy. The browser therefore
 
 ## Migration sequence
 
-1. Authentication and participant profile — phase 1 complete.
-2. NFC token resolution, connection creation, and volunteer resource actions.
-3. Participant networking/profile card and scan analytics.
-4. Quests, proof upload to Supabase Storage, and volunteer verification.
-5. Resource tracking, help desk, announcements, GitHub, seating, and admin tools.
-6. Route parity tests, production pilot, traffic cutover, then remove Next.js routes.
+1. Authentication and participant profile — complete.
+2. NFC token resolution, connection creation, and volunteer resource actions — complete.
+3. Participant networking/profile card, scan analytics, and QR backup — complete.
+4. Quests, proof upload to Supabase Storage, and volunteer verification — complete.
+5. Resource tracking, help desk, announcements, GitHub, seating, and admin tools — complete for the new stack.
+6. Production pilot and traffic cutover — pending. Keep `frontend/` as rollback until the pilot passes.
 
 Each phase must migrate its server routes and React screens together. Do not point the new React UI at the old Next.js `/api` implementation.
+
+## Verification gates
+
+- `cd backend && npm run check && npm test`
+- `cd client && npm run build`
+- Optional live read-only API check: set `SMOKE_PARTICIPANT_ID` and `SMOKE_PARTICIPANT_EMAIL` in `backend/.env.local`, then run `npm run smoke:live`.
+- Pilot participant OTP, onboarding, NFC/QR connection, volunteer issue/return, quest approval, and admin exports on the deployed HTTPS domains before traffic cutover.
+
+The API includes compatibility fallbacks for deployments where `participants.github_link` is absent; in that case repository submission uses `github_profile`. Resource APIs intentionally use only columns present in the deployed schema.
 
 ## Security action required
 
