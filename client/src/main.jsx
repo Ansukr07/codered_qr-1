@@ -10,7 +10,8 @@ import {ResourceTracking} from './pages/ResourceTracking';
 import {RepositoryAudit} from './pages/RepositoryAudit';
 import {QrScanner} from './pages/QrScanner';
 import {ParticipantRoster} from './pages/ParticipantRoster';
-import './styles.css';import './nfc.css';
+import {CampusMap} from './pages/CampusMap';
+import './styles.css';import './nfc.css';import './map.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
 function RoleGuard({role,children}){const {user,loading}=useAuth();if(loading)return <Loading/>;const returnTo=encodeURIComponent(`${window.location.pathname}${window.location.search}`);return user?.role===role?children:<Navigate to={`/staff-login?role=${role}&returnTo=${returnTo}`} replace/>;}
@@ -32,6 +33,7 @@ function App(){return <Routes>
   <Route path="/operations" element={<Guard><Operations/></Guard>}/>
   <Route path="/repository" element={<ParticipantGuard><Repository/></ParticipantGuard>}/>
   <Route path="/event" element={<ParticipantGuard><EventInfo/></ParticipantGuard>}/><Route path="/leaderboard" element={<ParticipantGuard><Leaderboard/></ParticipantGuard>}/>
+  <Route path="/campus-map" element={<ParticipantGuard><CampusMap/></ParticipantGuard>}/>
   <Route path="/scan" element={<ParticipantGuard><QrScanner/></ParticipantGuard>}/>
   <Route path="*" element={<Navigate to="/" replace/>}/>
 </Routes>}
