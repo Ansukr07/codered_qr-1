@@ -11,6 +11,7 @@ import {RepositoryAudit} from './pages/RepositoryAudit';
 import {QrScanner} from './pages/QrScanner';
 import {ParticipantRoster} from './pages/ParticipantRoster';
 import {CampusMap} from './pages/CampusMap';
+import {ErrorBoundary} from './ErrorBoundary';
 import './styles.css';import './nfc.css';import './map.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
@@ -37,4 +38,4 @@ function App(){return <Routes>
   <Route path="/scan" element={<ParticipantGuard><QrScanner/></ParticipantGuard>}/>
   <Route path="*" element={<Navigate to="/" replace/>}/>
 </Routes>}
-createRoot(document.getElementById('root')).render(<React.StrictMode><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></React.StrictMode>);
+createRoot(document.getElementById('root')).render(<React.StrictMode><ErrorBoundary><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></ErrorBoundary></React.StrictMode>);
