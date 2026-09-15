@@ -60,6 +60,22 @@ test('Vercel API rewrite preserves POST methods and nested auth routes',async()=
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
 
+test('OTP verification accepts six to eight digits but rejects shorter and longer input',async()=>{
+  const db=require('../src/db');
+  const previous=db.auth.verifyOtp;
+  const seen=[];
+  db.auth.verifyOtp=async({token})=>{seen.push(token);return {error:new Error('Invalid test code')};};
+  const server=createApp().listen(0);
+  try{
+    const {port}=server.address();
+    for(const [code,status] of [['12345',400],['123456',401],['12345678',401],['123456789',400]]){
+      const response=await fetch(`http://127.0.0.1:${port}/api/auth/otp/verify`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:'test@example.com',otp:code})});
+      assert.equal(response.status,status);
+    }
+    assert.deepEqual(seen,['123456','12345678']);
+  }finally{db.auth.verifyOtp=previous;await new Promise(resolve=>server.close(resolve));}
+});
+
 test('unknown routes return structured JSON',async()=>{
   const server=createApp().listen(0);
   try{
