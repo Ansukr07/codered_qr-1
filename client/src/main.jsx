@@ -9,6 +9,7 @@ import {ParticipantDetail} from './pages/ParticipantDetail';
 import {ResourceTracking} from './pages/ResourceTracking';
 import {RepositoryAudit} from './pages/RepositoryAudit';
 import {QrScanner} from './pages/QrScanner';
+import {ParticipantRoster} from './pages/ParticipantRoster';
 import './styles.css';import './nfc.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
@@ -26,6 +27,7 @@ function App(){return <Routes>
   <Route path="/admin/staff" element={<RoleGuard role="admin"><StaffManagement/></RoleGuard>}/>
   <Route path="/admin/participants/:id" element={<RoleGuard role="admin"><ParticipantDetail/></RoleGuard>}/>
   <Route path="/admin/repositories" element={<RoleGuard role="admin"><RepositoryAudit/></RoleGuard>}/>
+  <Route path="/admin/participants" element={<RoleGuard role="admin"><ParticipantRoster/></RoleGuard>}/>
   <Route path="/" element={<Guard><Dashboard/></Guard>}/><Route path="/profile" element={<ParticipantGuard allowOnboarding><Profile/></ParticipantGuard>}/><Route path="/network" element={<ParticipantGuard><Network/></ParticipantGuard>}/><Route path="/quests" element={<ParticipantGuard><Quests/></ParticipantGuard>}/>
   <Route path="/operations" element={<Guard><Operations/></Guard>}/>
   <Route path="/repository" element={<ParticipantGuard><Repository/></ParticipantGuard>}/>

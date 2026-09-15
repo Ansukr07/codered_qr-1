@@ -131,3 +131,9 @@ test('staff sessions cannot enter participant-only APIs',async()=>{
   try{const {port}=server.address();const token=jwt.sign({userId:'00000000-0000-4000-8000-000000000001',role:'volunteer',email:'staff@example.com'},process.env.JWT_SECRET);const response=await fetch(`http://127.0.0.1:${port}/api/participants/me`,{headers:{cookie:`token=${token}`}});assert.equal(response.status,403);assert.deepEqual(await response.json(),{message:'Participant access required'});}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('participant roster requires administrator authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const response=await fetch(`http://127.0.0.1:${port}/api/admin/roster`);assert.equal(response.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});
