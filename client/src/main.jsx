@@ -6,6 +6,7 @@ import {Login} from './pages/Login';import {Dashboard} from './pages/Dashboard';
 import {EventInfo} from './pages/EventInfo';import {Leaderboard} from './pages/Leaderboard';
 import {StaffManagement} from './pages/StaffManagement';
 import {ParticipantDetail} from './pages/ParticipantDetail';
+import {ResourceTracking} from './pages/ResourceTracking';
 import './styles.css';import './nfc.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
@@ -16,6 +17,7 @@ function App(){return <Routes>
   <Route path="/p/:username" element={<PublicProfile/>}/><Route path="/nfc/t/:token" element={<NfcProfile/>}/>
   <Route path="/volunteer/nfc/:token" element={<RoleGuard role="volunteer"><VolunteerNfc/></RoleGuard>}/>
   <Route path="/volunteer/quests" element={<StaffGuard><QuestReview/></StaffGuard>}/>
+  <Route path="/staff/resources" element={<StaffGuard><ResourceTracking/></StaffGuard>}/>
   <Route path="/admin/nfc" element={<RoleGuard role="admin"><AdminNfc/></RoleGuard>}/>
   <Route path="/admin/overview" element={<RoleGuard role="admin"><AdminOverview/></RoleGuard>}/>
   <Route path="/admin/staff" element={<RoleGuard role="admin"><StaffManagement/></RoleGuard>}/>
