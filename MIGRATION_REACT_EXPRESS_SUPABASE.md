@@ -2,8 +2,9 @@
 
 ## Target architecture
 
-- `client/`: React 18 SPA built with Vite and React Router.
-- `backend/`: Express API. It owns authorization, validation, privileged Supabase access, and HTTP-only application sessions.
+- `client/`: React 18 SPA built with Vite and React Router; static output is served by one Vercel project.
+- `api/[...path].js`: the same project's serverless `/api/*` function, running the Express application from `backend/src/`.
+- `backend/`: Express route implementation. It owns authorization, validation, privileged Supabase access, and HTTP-only application sessions; it is not deployed as a separate project.
 - Supabase: the only database and participant OTP provider. MongoDB/Mongoose are not part of the target.
 - `frontend/`: current Next.js production application, retained temporarily as a rollback/reference implementation.
 
@@ -23,7 +24,7 @@ The browser never receives the Supabase service-role key. All privileged databas
 - Announcements, help requests, resource issuing/returns, live resource tracking, and CSV exports.
 - Participant event assignment, configurable schedule, leaderboard, and repository submission.
 - Admin overview, participant roster/detail, staff management, repository audit, and NFC administration.
-- Same-origin Vercel API proxy for first-party Safari-compatible session cookies.
+- Same-origin Vercel serverless API for first-party Safari-compatible session cookies; no API proxy or second backend deployment.
 
 ## Local development
 
@@ -35,22 +36,19 @@ The browser never receives the Supabase service-role key. All privileged databas
 
 ## Deployment
 
-Deploy the React client and Express API as separate Vercel projects. Configure:
+Deploy **one Vercel project** from the repository root (Root Directory blank/`.`). Set the framework preset to Other, or use the checked-in root `vercel.json`. Its install command installs the `backend/` and `client/` packages; its build command builds Vite to `client/dist`. The root `api/[...path].js` runs Express as a Vercel Function on the same origin. The filesystem route takes precedence over the SPA fallback, so `/api/*` never returns `index.html`.
 
-- API: `CLIENT_ORIGINS=https://your-react-domain`, Supabase variables, `JWT_SECRET`, `NFC_TOKEN_ENCRYPTION_KEY`, and `PUBLIC_APP_URL`.
-- Client: leave `VITE_API_URL` empty and set server-only `API_ORIGIN=https://your-api-project.vercel.app`.
+Configure the **single project's server-side** environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `JWT_SECRET`, `NFC_TOKEN_ENCRYPTION_KEY`, `PUBLIC_APP_URL=https://your-portal-domain`, `CLIENT_ORIGINS=https://your-portal-domain`, `NODE_ENV=production`, and optional `SUBMISSIONS_OPEN` / `EVENT_SCHEDULE_JSON`. Leave `VITE_API_URL` empty. Do not set `API_ORIGIN` or expose any service-role key with `VITE_`/`NEXT_PUBLIC_`.
 
-Set each Vercel project's Root Directory explicitly: `backend` for the API project and `client` for the React project. The backend uses `api/[...path].js` so `/api/*` reaches Express without a path-rewriting shim. The client uses its own `api/[...path].js` as the first-party proxy.
-
-After both projects deploy, verify the wiring from the repository root:
+After deployment, verify the site from the repository root:
 
 ```bash
-npm run verify:deployment -- https://your-react-domain https://your-api-project.vercel.app
+npm run verify:deployment -- https://your-portal-domain
 ```
 
-This fails if the client URL still serves the legacy Next.js application, either health endpoint is unavailable, the same-origin proxy is misconfigured, or the Express security headers are absent. The current `codered-participant-portal.vercel.app` production domain still serves the legacy Next.js app; point it at the `client/` Vercel project only after the authenticated pilot passes.
+This fails if the URL still serves the legacy Next.js application, the same-project serverless health endpoint is unavailable, the SPA deep link fails, or the Express security headers are absent. The current `codered-participant-portal.vercel.app` production domain still serves the legacy Next.js app; switch its project to the repository-root build only after a pilot deployment passes.
 
-The client includes a same-origin `/api` serverless proxy. The browser therefore stores a first-party portal cookie instead of a third-party API cookie, avoiding Safari's cross-site cookie restrictions when both projects use separate `vercel.app` domains. The local Vite server applies the same pattern by proxying `/api` to port 5000. Add preview and production client origins explicitly to `CLIENT_ORIGINS`.
+The browser calls `/api` on its own domain and stores a first-party portal cookie, avoiding Safari cross-site cookie restrictions. Local Vite development still forwards `/api` to the Express process on port 5000; this local forwarding is not part of the Vercel deployment. Add preview and production origins to `CLIENT_ORIGINS` if direct cross-origin requests are needed.
 
 ## Migration sequence
 
@@ -69,7 +67,7 @@ Each phase must migrate its server routes and React screens together. Do not poi
 - `cd client && npm run build`
 - GitHub Actions runs both gates for changes under `backend/` or `client/` on pull requests and pushes to `main`.
 - Optional live read-only API check: set `SMOKE_PARTICIPANT_ID` and `SMOKE_PARTICIPANT_EMAIL` in `backend/.env.local`, then run `npm run smoke:live`.
-- With both local development servers running, `npm run smoke:proxy` in `backend/` verifies the Vite SPA deep-link and authenticated client → Express → Supabase proxy path.
+- With both local development servers running, `npm run smoke:proxy` in `backend/` verifies the Vite SPA deep-link and authenticated client → Express → Supabase local development path.
 - Pilot participant OTP, onboarding, NFC/QR connection, volunteer issue/return, quest approval, and admin exports on the deployed HTTPS domains before traffic cutover.
 
 The API includes compatibility fallbacks for deployments where `participants.github_link` is absent; in that case repository submission uses `github_profile`. Resource APIs intentionally use only columns present in the deployed schema.

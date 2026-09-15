@@ -6,11 +6,17 @@ on:
     paths:
       - "client/**"
       - "backend/**"
+      - "api/**"
+      - "vercel.json"
+      - "scripts/check-react-deployment.js"
       - ".github/workflows/react-express-ci.yml"
   pull_request:
     paths:
       - "client/**"
       - "backend/**"
+      - "api/**"
+      - "vercel.json"
+      - "scripts/check-react-deployment.js"
       - ".github/workflows/react-express-ci.yml"
 
 permissions:

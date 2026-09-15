@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-const client=(process.argv[2]||'').replace(/\/$/,'');
-const api=(process.argv[3]||'').replace(/\/$/,'');
-if(!/^https:\/\//.test(client)||!/^https:\/\//.test(api)){
-  console.error('Usage: node scripts/check-react-deployment.js https://client.example https://api.example');
+const site=(process.argv[2]||'').replace(/\/$/,'');
+if(!/^https:\/\//.test(site)||process.argv[3]){
+  console.error('Usage: node scripts/check-react-deployment.js https://portal.example');
   process.exit(2);
 }
 let failures=0;
@@ -22,16 +21,16 @@ const health=async(response,body)=>{
   return null;
 };
 (async()=>{
-  await check('React client',`${client}/`,async(response,body)=>{
+  await check('React client',`${site}/`,async(response,body)=>{
     if(response.status!==200)return `HTTP ${response.status}`;
     if(/\/_next\/|X-Nextjs/i.test(body))return 'legacy Next.js application is still deployed';
     if(!body.includes('CodeRed Participant Portal'))return 'Vite client title was not found';
     if(!body.includes('name="viewport"'))return 'mobile viewport metadata is missing';
     return null;
   });
-  await check('Direct Express API',`${api}/api/health`,health);
-  await check('Client same-origin API proxy',`${client}/api/health`,health);
-  await check('Express security headers',`${api}/api/health`,async response=>response.headers.get('x-content-type-options')==='nosniff'?null:'security headers are missing');
+  await check('Same-project serverless API',`${site}/api/health`,health);
+  await check('Serverless API security headers',`${site}/api/health`,async response=>response.headers.get('x-content-type-options')==='nosniff'?null:'security headers are missing');
+  await check('SPA deep link',`${site}/login`,async(response,body)=>response.status===200&&body.includes('CodeRed Participant Portal')?null:`HTTP ${response.status} or missing React shell`);
   if(failures){console.error(`\n${failures} deployment check${failures===1?'':'s'} failed.`);process.exitCode=1;}
   else console.log('\nDeployment wiring is ready for the authenticated pilot.');
 })();

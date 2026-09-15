@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check api/index.js && node --check api/[...path].js && node --check scripts/smoke-live.js && node --check scripts/smoke-proxy.js && node --check src/app.js && node --check src/routes/auth.js && node --check src/routes/participants.js && node --check src/routes/nfc.js && node --check src/routes/network.js && node --check src/routes/quests.js && node --check src/routes/admin.js && node --check src/routes/operations.js",
+    "check": "node --check server.js && node --check ../api/[...path].js && node --check scripts/smoke-live.js && node --check scripts/smoke-proxy.js && node --check src/app.js && node --check src/routes/auth.js && node --check src/routes/participants.js && node --check src/routes/nfc.js && node --check src/routes/network.js && node --check src/routes/quests.js && node --check src/routes/admin.js && node --check src/routes/operations.js",
     "test": "node --test",
     "smoke:live": "node scripts/smoke-live.js",
     "smoke:proxy": "node scripts/smoke-proxy.js"

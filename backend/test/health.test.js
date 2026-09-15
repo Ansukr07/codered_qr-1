@@ -4,6 +4,7 @@ process.env.SUPABASE_URL ||= 'https://example.supabase.co';
 process.env.SUPABASE_SERVICE_ROLE_KEY ||= 'test-service-role-key';
 process.env.JWT_SECRET ||= 'test-jwt-secret-that-is-long-enough-for-tests';
 const {createApp}=require('../src/app');
+const serverlessApp=require('../../api/[...path].js');
 const {createToken,decryptToken,encryptToken,hashToken}=require('../src/nfc');
 const jwt=require('jsonwebtoken');
 
@@ -15,6 +16,16 @@ test('health endpoint identifies the Supabase API',async()=>{
     assert.equal(response.status,200);
     assert.equal(response.headers.get('x-content-type-options'),'nosniff');
     assert.equal(response.headers.get('x-powered-by'),null);
+    assert.deepEqual(await response.json(),{status:'ok',database:'supabase'});
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
+
+test('same-project Vercel function exposes Express without an external proxy',async()=>{
+  const server=serverlessApp.listen(0);
+  try{
+    const {port}=server.address();
+    const response=await fetch(`http://127.0.0.1:${port}/api/health`);
+    assert.equal(response.status,200);
     assert.deepEqual(await response.json(),{status:'ok',database:'supabase'});
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
