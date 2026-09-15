@@ -26,9 +26,9 @@ function BadgeStation({tagState,participantId}){
     try{await navigator.clipboard.writeText(tag.url);setNotice('Badge link copied.');}
     catch{setNotice('Copy the badge link from the field below.');}
   }
-  const title=tagState.status==='loading'?'Checking your event pass.':tagState.status==='error'?'Your badge could not load.':tag?'Your badge, ready to tap.':'Waiting for your NFC tag.';
+  const title=tagState.status==='loading'?'Checking your event pass.':tagState.status==='error'?'Your badge could not load.':tag?'Your badge link is assigned.':'Waiting for your NFC tag.';
   return <section className="dash-pass" aria-labelledby="pass-title">
-    <div className="dash-pass-top"><span className="dash-kicker">01 / YOUR EVENT PASS</span><span className="dash-pass-status">{tagState.status==='loading'?'CHECKING':tag?'NFC READY':tagState.status==='error'?'CHECK FAILED':'AWAITING TAG'}</span></div>
+    <div className="dash-pass-top"><span className="dash-kicker">01 / YOUR EVENT PASS</span><span className="dash-pass-status">{tagState.status==='loading'?'CHECKING':tag?'TAG ASSIGNED':tagState.status==='error'?'CHECK FAILED':'AWAITING TAG'}</span></div>
     <div className="dash-pass-body"><div className="dash-pass-copy"><h2 id="pass-title">{title}</h2><p>Tap your physical NFC badge at the volunteer desk for event resources. If a phone cannot read it, show your QR backup.</p><div className="dash-id"><small>PARTICIPANT ID</small><strong>{participantId}</strong></div>
       {tagState.status==='loading'&&<p className="dash-feedback" role="status">Checking your badge assignment…</p>}
       {tagState.status==='error'&&<div className="dash-feedback dash-warning" role="alert"><p>Could not load your badge. {tagState.error}</p><button className="dash-retry" onClick={tagState.retry}>Try again</button></div>}
