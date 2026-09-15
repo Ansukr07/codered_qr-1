@@ -12,7 +12,7 @@ import {QrScanner} from './pages/QrScanner';
 import {ParticipantRoster} from './pages/ParticipantRoster';
 import {CampusMap} from './pages/CampusMap';
 import {ErrorBoundary} from './ErrorBoundary';
-import './styles.css';import './nfc.css';import './map.css';
+import './styles.css';import './nfc.css';import './map.css';import './dashboard.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
 function RoleGuard({role,children}){const {user,loading}=useAuth();if(loading)return <Loading/>;const returnTo=encodeURIComponent(`${window.location.pathname}${window.location.search}`);return user?.role===role?children:<Navigate to={`/staff-login?role=${role}&returnTo=${returnTo}`} replace/>;}
