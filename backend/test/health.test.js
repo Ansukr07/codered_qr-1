@@ -33,6 +33,20 @@ test('same-project Vercel function exposes Express without an external proxy',as
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
 
+test('the portal origin is allowed while unrelated origins remain blocked',async()=>{
+  const server=createApp().listen(0);
+  try{
+    const {port}=server.address();
+    const base=`http://127.0.0.1:${port}`;
+    const firstParty=await fetch(`${base}/api/auth/me`,{headers:{origin:base}});
+    assert.equal(firstParty.status,401);
+    assert.equal(firstParty.headers.get('access-control-allow-origin'),base);
+    const unrelated=await fetch(`${base}/api/auth/me`,{headers:{origin:'https://other.example'}});
+    assert.equal(unrelated.status,403);
+    assert.deepEqual(await unrelated.json(),{message:'Origin not allowed'});
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
+
 test('Vercel API rewrite preserves POST methods and nested auth routes',async()=>{
   const server=require('node:http').createServer((req,res)=>{
     req.query={route:'auth/otp/generate'};

@@ -29,6 +29,12 @@ const health=async(response,body)=>{
     return null;
   });
   await check('Same-project serverless API',`${site}/api/health`,health);
+  await check('First-party CORS on auth check',`${site}/api/auth/me`,async(response,body)=>{
+    if(response.status!==401)return `expected unauthenticated HTTP 401, got ${response.status}`;
+    if(response.headers.get('access-control-allow-origin')!==site)return 'portal origin was not allowed';
+    try{return JSON.parse(body).message==='Not authenticated'?null:'unexpected auth response';}
+    catch{return 'response is not JSON';}
+  },{headers:{origin:site}});
   await check('OTP POST route (invalid payload only)',`${site}/api/auth/otp/generate`,async(response,body)=>{
     if(response.status!==400)return `expected validation HTTP 400, got ${response.status}`;
     try{return JSON.parse(body).message==='Email is required'?null:'unexpected validation response';}
