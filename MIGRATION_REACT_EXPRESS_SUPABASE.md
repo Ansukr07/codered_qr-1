@@ -67,6 +67,7 @@ Each phase must migrate its server routes and React screens together. Do not poi
 
 - `cd backend && npm run check && npm test`
 - `cd client && npm run build`
+- GitHub Actions runs both gates for changes under `backend/` or `client/` on pull requests and pushes to `main`.
 - Optional live read-only API check: set `SMOKE_PARTICIPANT_ID` and `SMOKE_PARTICIPANT_EMAIL` in `backend/.env.local`, then run `npm run smoke:live`.
 - With both local development servers running, `npm run smoke:proxy` in `backend/` verifies the Vite SPA deep-link and authenticated client → Express → Supabase proxy path.
 - Pilot participant OTP, onboarding, NFC/QR connection, volunteer issue/return, quest approval, and admin exports on the deployed HTTPS domains before traffic cutover.
