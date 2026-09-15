@@ -13,6 +13,8 @@ test('health endpoint identifies the Supabase API',async()=>{
     const {port}=server.address();
     const response=await fetch(`http://127.0.0.1:${port}/api/health`);
     assert.equal(response.status,200);
+    assert.equal(response.headers.get('x-content-type-options'),'nosniff');
+    assert.equal(response.headers.get('x-powered-by'),null);
     assert.deepEqual(await response.json(),{status:'ok',database:'supabase'});
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
