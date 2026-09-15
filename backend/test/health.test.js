@@ -119,3 +119,9 @@ test('resource tracking requires staff authentication',async()=>{
   try{const {port}=server.address();const [resources,activity]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/operations/resources`),fetch(`http://127.0.0.1:${port}/api/operations/resources/00000000-0000-4000-8000-000000000001/activity`)]);assert.equal(resources.status,401);assert.equal(activity.status,401);}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('repository audit requires administrator authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const response=await fetch(`http://127.0.0.1:${port}/api/admin/repositories`);assert.equal(response.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});

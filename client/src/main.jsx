@@ -7,6 +7,7 @@ import {EventInfo} from './pages/EventInfo';import {Leaderboard} from './pages/L
 import {StaffManagement} from './pages/StaffManagement';
 import {ParticipantDetail} from './pages/ParticipantDetail';
 import {ResourceTracking} from './pages/ResourceTracking';
+import {RepositoryAudit} from './pages/RepositoryAudit';
 import './styles.css';import './nfc.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
@@ -22,6 +23,7 @@ function App(){return <Routes>
   <Route path="/admin/overview" element={<RoleGuard role="admin"><AdminOverview/></RoleGuard>}/>
   <Route path="/admin/staff" element={<RoleGuard role="admin"><StaffManagement/></RoleGuard>}/>
   <Route path="/admin/participants/:id" element={<RoleGuard role="admin"><ParticipantDetail/></RoleGuard>}/>
+  <Route path="/admin/repositories" element={<RoleGuard role="admin"><RepositoryAudit/></RoleGuard>}/>
   <Route path="/" element={<Guard><Dashboard/></Guard>}/><Route path="/profile" element={<Guard><Profile/></Guard>}/><Route path="/network" element={<Guard><Network/></Guard>}/><Route path="/quests" element={<Guard><Quests/></Guard>}/>
   <Route path="/operations" element={<Guard><Operations/></Guard>}/>
   <Route path="/repository" element={<Guard><Repository/></Guard>}/>
