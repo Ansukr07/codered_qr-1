@@ -14,7 +14,7 @@ export interface RoomNode {
 }
 
 interface CampusFloorMapProps {
-    floorNumber: 3 | 4;
+    floorNumber: 2 | 3 | 4;
     data: RoomNode[];
 }
 
@@ -140,8 +140,8 @@ const CampusFloorMap: React.FC<CampusFloorMapProps> = ({ floorNumber, data }) =>
                                     justifyContent: 'center',
                                     textAlign: 'center',
                                     color: 'rgba(255,255,255,0.95)',
-                                    fontSize: node.type === 'lab' || node.type === 'office' ? '16px' : '14px',
-                                    fontWeight: node.type === 'lab' || node.type === 'office' ? '800' : '500',
+                                    fontSize: node.type === 'lab' || node.type === 'office' || node.type === 'common' ? '16px' : '14px',
+                                    fontWeight: node.type === 'lab' || node.type === 'office' || node.type === 'common' ? '800' : '500',
                                     lineHeight: '1.2',
                                     padding: '4px',
                                     wordWrap: 'break-word',

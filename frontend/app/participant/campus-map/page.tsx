@@ -11,6 +11,45 @@ import CampusFloorMap, { RoomNode } from '@/components/CampusFloorMap'
 
 // --- Data Constants ---
 
+const FLOOR_2_DATA: RoomNode[] = [
+    // --- Left Wing: BSN Auditorium + Lifts + Stairs ---
+    { id: '2-bsn-vertical', label: 'BSN AUDITORIUM', type: 'common', x: 20, y: 150, width: 80, height: 300, verticalText: true },
+    { id: '2-bsn-horizontal', label: 'BSN AUDITORIUM', type: 'common', x: 100, y: 370, width: 280, height: 80 },
+    { id: '2-lift-l', label: 'LIFT', type: 'lift', x: 100, y: 180, width: 50, height: 50 },
+    { id: '2-wash-g', label: '', type: 'washroom', x: 100, y: 100, width: 80, height: 80 },
+    { id: '2-stair-l', label: 'Stairs', type: 'stairs', x: 180, y: 50, width: 100, height: 100, specialMark: 'X' },
+
+    // --- Middle Top (Layout design preserved, labels unmentioned for now) ---
+    { id: '201', label: '', type: 'classroom', x: 280, y: 150, width: 120, height: 80 },
+    { id: '202', label: '', type: 'classroom', x: 400, y: 150, width: 100, height: 80 },
+    { id: '203', label: '', type: 'classroom', x: 500, y: 150, width: 100, height: 80 },
+    { id: '204', label: '', type: 'classroom', x: 600, y: 150, width: 100, height: 80 },
+    { id: '205', label: '', type: 'classroom', x: 700, y: 150, width: 100, height: 80 },
+    { id: '206', label: '', type: 'classroom', x: 800, y: 150, width: 200, height: 80 },
+
+    // --- Middle Bottom ---
+    { id: '210', label: '', type: 'classroom', x: 380, y: 370, width: 300, height: 80 },
+    // Middle stairs
+    { id: '2-stair-m', label: 'Stairs', type: 'stairs', x: 680, y: 450, width: 60, height: 80 },
+    { id: '209', label: '', type: 'classroom', x: 740, y: 370, width: 100, height: 80 },
+    { id: '208', label: '', type: 'classroom', x: 840, y: 370, width: 100, height: 80 },
+    { id: '2-teach-4', label: '', type: 'office', x: 940, y: 370, width: 290, height: 80 },
+
+    // --- Gates ---
+    { id: '2-gate-l', label: '', type: 'utility', x: 180, y: 150, width: 100, height: 20 },
+    { id: '2-gate-r', label: '', type: 'utility', x: 1050, y: 150, width: 100, height: 20 },
+
+    // --- Right Wing ---
+    { id: '2-water', label: '', type: 'water', x: 1000, y: 150, width: 50, height: 50 },
+    { id: '2-stair-r', label: 'Stairs', type: 'stairs', x: 1050, y: 50, width: 100, height: 100, specialMark: 'X' },
+    { id: '2-wash-b', label: '', type: 'washroom', x: 1150, y: 120, width: 80, height: 50 },
+    { id: '2-lift-r', label: 'LIFT', type: 'lift', x: 1150, y: 170, width: 80, height: 50 },
+    { id: '2-place', label: '', type: 'office', x: 1230, y: 180, width: 80, height: 270, verticalText: true },
+
+    // --- Corridors ---
+    { id: '2-corr-main', label: '', type: 'corridor', x: 180, y: 230, width: 970, height: 140 },
+];
+
 const FLOOR_3_DATA: RoomNode[] = [
     // --- Left Wing ---
     { id: '3-teach-vertical', label: 'Teachers Cabin', type: 'office', x: 20, y: 150, width: 80, height: 300 },
@@ -96,7 +135,7 @@ const FLOOR_4_DATA: RoomNode[] = [
 export default function CampusMapPage() {
     const { user, loading } = useAuth()
     const router = useRouter()
-    const [activeFloor, setActiveFloor] = useState<3 | 4>(3)
+    const [activeFloor, setActiveFloor] = useState<2 | 3 | 4>(2)
 
     // Redirect if not logged in
     useEffect(() => {
@@ -137,7 +176,7 @@ export default function CampusMapPage() {
                                 Campus Map
                             </h1>
                             <p className="text-sm text-muted-foreground">
-                                View layout for 3rd and 4th floors
+                                View layout for 2nd, 3rd, and 4th floors
                             </p>
                         </div>
                     </div>
@@ -145,8 +184,17 @@ export default function CampusMapPage() {
                     {/* Floor Toggle Buttons */}
                     <div className="flex bg-[#1e1e2e] p-1 rounded-lg border border-[#2a2a35]">
                         <button
+                            onClick={() => setActiveFloor(2)}
+                            className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 2
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
+                                }`}
+                        >
+                            2nd Floor
+                        </button>
+                        <button
                             onClick={() => setActiveFloor(3)}
-                            className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 3
+                            className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 3
                                 ? 'bg-blue-600 text-white shadow-lg'
                                 : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
                                 }`}
@@ -155,7 +203,7 @@ export default function CampusMapPage() {
                         </button>
                         <button
                             onClick={() => setActiveFloor(4)}
-                            className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 4
+                            className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeFloor === 4
                                 ? 'bg-blue-600 text-white shadow-lg'
                                 : 'text-muted-foreground hover:text-white hover:bg-[#2a2a35]'
                                 }`}
@@ -170,20 +218,23 @@ export default function CampusMapPage() {
                     <div className="w-full h-full border border-[#2a2a35] rounded-2xl p-4 bg-[#13131a]/50 backdrop-blur-sm shadow-xl relative overflow-hidden flex items-center justify-center">
                         <CampusFloorMap
                             floorNumber={activeFloor}
-                            data={activeFloor === 3 ? FLOOR_3_DATA : FLOOR_4_DATA}
+                            data={activeFloor === 2 ? FLOOR_2_DATA : activeFloor === 3 ? FLOOR_3_DATA : FLOOR_4_DATA}
                         />
 
                         {/* Floating Floor Indicator */}
                         <div className="absolute bottom-6 right-6 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 flex items-center gap-2 pointer-events-none">
                             <Layers className="h-4 w-4 text-blue-400" />
                             <span className="font-mono font-bold text-white">
-                                {activeFloor === 3 ? '3RD FLOOR' : '4TH FLOOR'}
+                                {activeFloor === 2 ? '2ND FLOOR' : activeFloor === 3 ? '3RD FLOOR' : '4TH FLOOR'}
                             </span>
                         </div>
                     </div>
 
                     {/* Legend / Info */}
                     <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted-foreground justify-center">
+                        <div className="flex items-center gap-2">
+                            <span className="w-3 h-3 bg-purple-500/20 border border-purple-500/50 rounded"></span> Auditorium
+                        </div>
                         <div className="flex items-center gap-2">
                             <span className="w-3 h-3 bg-red-500/20 border border-red-500/60 rounded"></span> Lab
                         </div>
