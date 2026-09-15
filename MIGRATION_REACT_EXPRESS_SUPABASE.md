@@ -42,6 +42,14 @@ Deploy the React client and Express API as separate Vercel projects. Configure:
 
 Set each Vercel project's Root Directory explicitly: `backend` for the API project and `client` for the React project. The backend uses `api/[...path].js` so `/api/*` reaches Express without a path-rewriting shim. The client uses its own `api/[...path].js` as the first-party proxy.
 
+After both projects deploy, verify the wiring from the repository root:
+
+```bash
+npm run verify:deployment -- https://your-react-domain https://your-api-project.vercel.app
+```
+
+This fails if the client URL still serves the legacy Next.js application, either health endpoint is unavailable, the same-origin proxy is misconfigured, or the Express security headers are absent. The current `codered-participant-portal.vercel.app` production domain still serves the legacy Next.js app; point it at the `client/` Vercel project only after the authenticated pilot passes.
+
 The client includes a same-origin `/api` serverless proxy. The browser therefore stores a first-party portal cookie instead of a third-party API cookie, avoiding Safari's cross-site cookie restrictions when both projects use separate `vercel.app` domains. The local Vite server applies the same pattern by proxying `/api` to port 5000. Add preview and production client origins explicitly to `CLIENT_ORIGINS`.
 
 ## Migration sequence

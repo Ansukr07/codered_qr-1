@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "verify:deployment": "node scripts/check-react-deployment.js"
+  },
   "dependencies": {
     "puppeteer": "^24.32.1",
     "xlsx": "^0.18.5"
