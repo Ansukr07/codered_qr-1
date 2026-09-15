@@ -5,9 +5,9 @@ if(!/^https:\/\//.test(site)||process.argv[3]){
   process.exit(2);
 }
 let failures=0;
-async function check(label,url,verify){
+async function check(label,url,verify,options={}){
   try{
-    const response=await fetch(url,{redirect:'manual',headers:{accept:'application/json,text/html'}});
+    const response=await fetch(url,{redirect:'manual',headers:{accept:'application/json,text/html',...options.headers},...options});
     const body=await response.text();
     const problem=await verify(response,body);
     if(problem){failures++;console.error(`FAIL  ${label}: ${problem}`);}
@@ -29,6 +29,11 @@ const health=async(response,body)=>{
     return null;
   });
   await check('Same-project serverless API',`${site}/api/health`,health);
+  await check('OTP POST route (invalid payload only)',`${site}/api/auth/otp/generate`,async(response,body)=>{
+    if(response.status!==400)return `expected validation HTTP 400, got ${response.status}`;
+    try{return JSON.parse(body).message==='Email is required'?null:'unexpected validation response';}
+    catch{return 'response is not JSON';}
+  },{method:'POST',headers:{'content-type':'application/json'},body:'{}'});
   await check('Serverless API security headers',`${site}/api/health`,async response=>response.headers.get('x-content-type-options')==='nosniff'?null:'security headers are missing');
   await check('SPA deep link',`${site}/login`,async(response,body)=>response.status===200&&body.includes('CodeRed Participant Portal')?null:`HTTP ${response.status} or missing React shell`);
   if(failures){console.error(`\n${failures} deployment check${failures===1?'':'s'} failed.`);process.exitCode=1;}

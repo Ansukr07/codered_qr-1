@@ -4,7 +4,7 @@ process.env.SUPABASE_URL ||= 'https://example.supabase.co';
 process.env.SUPABASE_SERVICE_ROLE_KEY ||= 'test-service-role-key';
 process.env.JWT_SECRET ||= 'test-jwt-secret-that-is-long-enough-for-tests';
 const {createApp}=require('../src/app');
-const serverlessApp=require('../../api/[...path].js');
+const serverlessHandler=require('../../api/index.js');
 const {createToken,decryptToken,encryptToken,hashToken}=require('../src/nfc');
 const jwt=require('jsonwebtoken');
 
@@ -21,12 +21,28 @@ test('health endpoint identifies the Supabase API',async()=>{
 });
 
 test('same-project Vercel function exposes Express without an external proxy',async()=>{
-  const server=serverlessApp.listen(0);
+  const server=require('node:http').createServer((req,res)=>{
+    req.query={route:'health'};
+    serverlessHandler(req,res);
+  }).listen(0);
   try{
     const {port}=server.address();
-    const response=await fetch(`http://127.0.0.1:${port}/api/health`);
+    const response=await fetch(`http://127.0.0.1:${port}/api/index.js?route=health`);
     assert.equal(response.status,200);
     assert.deepEqual(await response.json(),{status:'ok',database:'supabase'});
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});
+
+test('Vercel API rewrite preserves POST methods and nested auth routes',async()=>{
+  const server=require('node:http').createServer((req,res)=>{
+    req.query={route:'auth/otp/generate'};
+    serverlessHandler(req,res);
+  }).listen(0);
+  try{
+    const {port}=server.address();
+    const response=await fetch(`http://127.0.0.1:${port}/api/index.js?route=auth/otp/generate`,{method:'POST',headers:{'content-type':'application/json'},body:'{}'});
+    assert.equal(response.status,400);
+    assert.deepEqual(await response.json(),{message:'Email is required'});
   }finally{await new Promise(resolve=>server.close(resolve));}
 });
 

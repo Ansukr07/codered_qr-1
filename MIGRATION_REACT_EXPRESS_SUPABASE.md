@@ -3,7 +3,7 @@
 ## Target architecture
 
 - `client/`: React 18 SPA built with Vite and React Router; static output is served by one Vercel project.
-- `api/[...path].js`: the same project's serverless `/api/*` function, running the Express application from `backend/src/`.
+- `api/index.js`: the same project's serverless `/api/*` function, running the Express application from `backend/src/`. An explicit `/api/(.*)` Vercel route sends requests here before the SPA fallback.
 - `backend/`: Express route implementation. It owns authorization, validation, privileged Supabase access, and HTTP-only application sessions; it is not deployed as a separate project.
 - Supabase: the only database and participant OTP provider. MongoDB/Mongoose are not part of the target.
 - `frontend/`: current Next.js production application, retained temporarily as a rollback/reference implementation.
@@ -36,7 +36,7 @@ The browser never receives the Supabase service-role key. All privileged databas
 
 ## Deployment
 
-Deploy **one Vercel project** from the repository root (Root Directory blank/`.`). Set the framework preset to Other, or use the checked-in root `vercel.json`. Its install command installs the `backend/` and `client/` packages; its build command builds Vite to `client/dist`. The root `api/[...path].js` runs Express as a Vercel Function on the same origin. The filesystem route takes precedence over the SPA fallback, so `/api/*` never returns `index.html`.
+Deploy **one Vercel project** from the repository root (Root Directory blank/`.`). Set the framework preset to Other, or use the checked-in root `vercel.json`. Its install command installs the `backend/` and `client/` packages; its build command builds Vite to `client/dist`. The explicit API route takes precedence over the filesystem and SPA fallback, so `/api/*` reaches Express instead of returning `index.html`.
 
 Configure the **single project's server-side** environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `JWT_SECRET`, `NFC_TOKEN_ENCRYPTION_KEY`, `PUBLIC_APP_URL=https://your-portal-domain`, `CLIENT_ORIGINS=https://your-portal-domain`, `NODE_ENV=production`, and optional `SUBMISSIONS_OPEN` / `EVENT_SCHEDULE_JSON`. Leave `VITE_API_URL` empty. Do not set `API_ORIGIN` or expose any service-role key with `VITE_`/`NEXT_PUBLIC_`.
 

@@ -5,6 +5,7 @@
   "buildCommand": "npm run build --prefix client",
   "outputDirectory": "client/dist",
   "routes": [
+    {"src": "/api/(.*)", "dest": "/api/index.js?route=$1"},
     {"handle": "filesystem"},
     {"src": "/.*", "dest": "/index.html"}
   ]
