@@ -40,6 +40,8 @@ Deploy the React client and Express API as separate Vercel projects. Configure:
 - API: `CLIENT_ORIGINS=https://your-react-domain`, Supabase variables, `JWT_SECRET`, `NFC_TOKEN_ENCRYPTION_KEY`, and `PUBLIC_APP_URL`.
 - Client: leave `VITE_API_URL` empty and set server-only `API_ORIGIN=https://your-api-project.vercel.app`.
 
+Set each Vercel project's Root Directory explicitly: `backend` for the API project and `client` for the React project. The backend uses `api/[...path].js` so `/api/*` reaches Express without a path-rewriting shim. The client uses its own `api/[...path].js` as the first-party proxy.
+
 The client includes a same-origin `/api` serverless proxy. The browser therefore stores a first-party portal cookie instead of a third-party API cookie, avoiding Safari's cross-site cookie restrictions when both projects use separate `vercel.app` domains. The local Vite server applies the same pattern by proxying `/api` to port 5000. Add preview and production client origins explicitly to `CLIENT_ORIGINS`.
 
 ## Migration sequence
