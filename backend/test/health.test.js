@@ -107,3 +107,9 @@ test('staff account administration requires authentication',async()=>{
   try{const {port}=server.address();const [list,create]=await Promise.all([fetch(`http://127.0.0.1:${port}/api/admin/staff`),fetch(`http://127.0.0.1:${port}/api/admin/staff`,{method:'POST',headers:{'content-type':'application/json'},body:'{}'})]);assert.equal(list.status,401);assert.equal(create.status,401);}
   finally{await new Promise(resolve=>server.close(resolve));}
 });
+
+test('participant detail requires administrator authentication',async()=>{
+  const server=createApp().listen(0);
+  try{const {port}=server.address();const response=await fetch(`http://127.0.0.1:${port}/api/admin/participants/00000000-0000-4000-8000-000000000001`);assert.equal(response.status,401);}
+  finally{await new Promise(resolve=>server.close(resolve));}
+});
