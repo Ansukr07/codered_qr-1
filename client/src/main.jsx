@@ -8,6 +8,7 @@ import {StaffManagement} from './pages/StaffManagement';
 import {ParticipantDetail} from './pages/ParticipantDetail';
 import {ResourceTracking} from './pages/ResourceTracking';
 import {RepositoryAudit} from './pages/RepositoryAudit';
+import {QrScanner} from './pages/QrScanner';
 import './styles.css';import './nfc.css';
 const Loading=()=> <main className="center"><div className="panel">Loading session…</div></main>;
 function Guard({children}){const {user,loading}=useAuth();if(loading)return <Loading/>;return user?children:<Navigate to="/login" replace/>;}
@@ -29,6 +30,7 @@ function App(){return <Routes>
   <Route path="/operations" element={<Guard><Operations/></Guard>}/>
   <Route path="/repository" element={<ParticipantGuard><Repository/></ParticipantGuard>}/>
   <Route path="/event" element={<ParticipantGuard><EventInfo/></ParticipantGuard>}/><Route path="/leaderboard" element={<ParticipantGuard><Leaderboard/></ParticipantGuard>}/>
+  <Route path="/scan" element={<ParticipantGuard><QrScanner/></ParticipantGuard>}/>
   <Route path="*" element={<Navigate to="/" replace/>}/>
 </Routes>}
 createRoot(document.getElementById('root')).render(<React.StrictMode><BrowserRouter><AuthProvider><App/></AuthProvider></BrowserRouter></React.StrictMode>);
